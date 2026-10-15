@@ -1,0 +1,2740 @@
+<?xml version='1.0' encoding='utf-8'?>
+<concurrency-golden source-sha256="bfe8a15c1776cf346fb4a81d967d3ca7861db38c71d40cd561e7514f0e4836d4" prepared-at="2026-10-09T14:40:41.340811+00:00">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <cases>
+    <case id="counter|atomic_commit|CAP=0|SEQ=AABB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">0</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=0|SEQ=AABB</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "A2",
+  "B1",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">AABB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=0|SEQ=AABB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">0</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=0|SEQ=AABB</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "A2",
+  "B1",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">AABB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=0|SEQ=BBAA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">0</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=0|SEQ=BBAA</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "B2",
+  "A1",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BBAA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=0|SEQ=BBAA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">0</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=0|SEQ=BBAA</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "B2",
+  "A1",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BBAA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=1|SEQ=AABB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=1|SEQ=AABB</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "A2",
+  "B1",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">AABB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=1|SEQ=AABB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=1|SEQ=AABB</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "A2",
+  "B1",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">AABB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=1|SEQ=ABBA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=1|SEQ=ABBA</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "B1",
+  "B2",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">ABBA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=1|SEQ=ABBA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=1|SEQ=ABBA</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "B1",
+  "B2",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">ABBA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=1|SEQ=BAAB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=1|SEQ=BAAB</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "A1",
+  "A2",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BAAB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=1|SEQ=BAAB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=1|SEQ=BAAB</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "A1",
+  "A2",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BAAB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=1|SEQ=BBAA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=1|SEQ=BBAA</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "B2",
+  "A1",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BBAA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=1|SEQ=BBAA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">1</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=1|SEQ=BBAA</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "B2",
+  "A1",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BBAA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=2|SEQ=AABB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=2|SEQ=AABB</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "A2",
+  "B1",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">AABB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=2|SEQ=AABB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=2|SEQ=AABB</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "A2",
+  "B1",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 1
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">AABB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=2|SEQ=ABAB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=2|SEQ=ABAB</field>
+      <field name="context_switches" kind="json">3</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "B1",
+  "A2",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">2</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">ABAB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=2|SEQ=ABAB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=2|SEQ=ABAB</field>
+      <field name="context_switches" kind="json">3</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "B1",
+  "A2",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">2</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">ABAB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=2|SEQ=ABBA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=2|SEQ=ABBA</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "B1",
+  "B2",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">ABBA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=2|SEQ=ABBA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=2|SEQ=ABBA</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "A1",
+  "B1",
+  "B2",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">ABBA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=2|SEQ=BAAB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=2|SEQ=BAAB</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "A1",
+  "A2",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BAAB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=2|SEQ=BAAB">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=2|SEQ=BAAB</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "A1",
+  "A2",
+  "B2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BAAB</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=2|SEQ=BABA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=2|SEQ=BABA</field>
+      <field name="context_switches" kind="json">3</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "A1",
+  "B2",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">2</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BABA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=2|SEQ=BABA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=2|SEQ=BABA</field>
+      <field name="context_switches" kind="json">3</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "A1",
+  "B2",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 0,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 0,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">2</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  0,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BABA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="counter|atomic_commit|CAP=2|SEQ=BBAA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|atomic_commit|CAP=2|SEQ=BBAA</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "B2",
+  "A1",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">atomic_commit</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BBAA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="counter|split_rw|CAP=2|SEQ=BBAA">
+      <field name="campaign" kind="string">counter</field>
+      <field name="cap" kind="json">2</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">counter|split_rw|CAP=2|SEQ=BBAA</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "B1",
+  "B2",
+  "A1",
+  "A2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "counter": 0,
+    "locals": {
+      "B": 0
+    },
+    "op": "read",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "B": 0
+    },
+    "op": "write",
+    "thread": "B"
+  },
+  {
+    "counter": 1,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "read",
+    "thread": "A"
+  },
+  {
+    "counter": 2,
+    "locals": {
+      "A": 1,
+      "B": 0
+    },
+    "op": "write",
+    "thread": "A"
+  }
+]</field>
+      <field name="policy" kind="string">split_rw</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_counters" kind="json">[
+  0,
+  1,
+  1,
+  2
+]</field>
+      <field name="schedule" kind="string">BBAA</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="queue|actual_queue|SEQ=PPCC">
+      <field name="campaign" kind="string">queue</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">queue|actual_queue|SEQ=PPCC</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="enabled_on_reference" kind="json">[
+  true,
+  true,
+  true,
+  true
+]</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "P1",
+  "P2",
+  "C1",
+  "C2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "op": "enqueue",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "publish",
+    "pop_result": null,
+    "published_nonempty": true,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "wait_readable",
+    "pop_result": null,
+    "published_nonempty": true,
+    "thread": "C"
+  },
+  {
+    "items": [],
+    "op": "try_pop",
+    "pop_result": "item",
+    "published_nonempty": true,
+    "thread": "C"
+  }
+]</field>
+      <field name="policy" kind="string">actual_queue</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  }
+]</field>
+      <field name="schedule" kind="string">PPCC</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="queue|stale_empty|SEQ=PPCC">
+      <field name="campaign" kind="string">queue</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">queue|stale_empty|SEQ=PPCC</field>
+      <field name="context_switches" kind="json">1</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="enabled_on_reference" kind="json">[
+  true,
+  true,
+  true,
+  true
+]</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "P1",
+  "P2",
+  "C1",
+  "C2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "op": "enqueue",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "publish",
+    "pop_result": null,
+    "published_nonempty": true,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "wait_readable",
+    "pop_result": null,
+    "published_nonempty": true,
+    "thread": "C"
+  },
+  {
+    "items": [],
+    "op": "try_pop",
+    "pop_result": "item",
+    "published_nonempty": true,
+    "thread": "C"
+  }
+]</field>
+      <field name="policy" kind="string">stale_empty</field>
+      <field name="preemptions" kind="json">0</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  }
+]</field>
+      <field name="schedule" kind="string">PPCC</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="queue|actual_queue|SEQ=PCPC">
+      <field name="campaign" kind="string">queue</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">queue|actual_queue|SEQ=PCPC</field>
+      <field name="context_switches" kind="json">3</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="enabled_on_reference" kind="json">[
+  true,
+  true,
+  true,
+  true
+]</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "P1",
+  "C1",
+  "P2",
+  "C2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "op": "enqueue",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "wait_readable",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "C"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "publish",
+    "pop_result": null,
+    "published_nonempty": true,
+    "thread": "P"
+  },
+  {
+    "items": [],
+    "op": "try_pop",
+    "pop_result": "item",
+    "published_nonempty": true,
+    "thread": "C"
+  }
+]</field>
+      <field name="policy" kind="string">actual_queue</field>
+      <field name="preemptions" kind="json">2</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  }
+]</field>
+      <field name="schedule" kind="string">PCPC</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="queue|stale_empty|SEQ=PCPC">
+      <field name="campaign" kind="string">queue</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">queue|stale_empty|SEQ=PCPC</field>
+      <field name="context_switches" kind="json">3</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="enabled_on_reference" kind="json">[
+  true,
+  true,
+  true,
+  true
+]</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "P1",
+  "C1",
+  "P2",
+  "C2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "op": "enqueue",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "wait_readable",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "C"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "publish",
+    "pop_result": null,
+    "published_nonempty": true,
+    "thread": "P"
+  },
+  {
+    "items": [],
+    "op": "try_pop",
+    "pop_result": "item",
+    "published_nonempty": true,
+    "thread": "C"
+  }
+]</field>
+      <field name="policy" kind="string">stale_empty</field>
+      <field name="preemptions" kind="json">2</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  }
+]</field>
+      <field name="schedule" kind="string">PCPC</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="queue|actual_queue|SEQ=PCCP">
+      <field name="campaign" kind="string">queue</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">queue|actual_queue|SEQ=PCCP</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="enabled_on_reference" kind="json">[
+  true,
+  true,
+  true,
+  true
+]</field>
+      <field name="failing_checkpoints" kind="json">[]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="local_steps" kind="json">[
+  "P1",
+  "C1",
+  "C2",
+  "P2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "op": "enqueue",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "wait_readable",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "C"
+  },
+  {
+    "items": [],
+    "op": "try_pop",
+    "pop_result": "item",
+    "published_nonempty": false,
+    "thread": "C"
+  },
+  {
+    "items": [],
+    "op": "publish",
+    "pop_result": "item",
+    "published_nonempty": false,
+    "thread": "P"
+  }
+]</field>
+      <field name="policy" kind="string">actual_queue</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  }
+]</field>
+      <field name="schedule" kind="string">PCCP</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="queue|stale_empty|SEQ=PCCP">
+      <field name="campaign" kind="string">queue</field>
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">queue|stale_empty|SEQ=PCCP</field>
+      <field name="context_switches" kind="json">2</field>
+      <field name="contract" kind="string">v1</field>
+      <field name="enabled_on_reference" kind="json">[
+  true,
+  true,
+  true,
+  true
+]</field>
+      <field name="failing_checkpoints" kind="json">[
+  3,
+  4
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="local_steps" kind="json">[
+  "P1",
+  "C1",
+  "C2",
+  "P2"
+]</field>
+      <field name="observed_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "op": "enqueue",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "P"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "wait_readable",
+    "pop_result": null,
+    "published_nonempty": false,
+    "thread": "C"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "try_pop",
+    "pop_result": "EMPTY",
+    "published_nonempty": false,
+    "thread": "C"
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "op": "publish",
+    "pop_result": "EMPTY",
+    "published_nonempty": true,
+    "thread": "P"
+  }
+]</field>
+      <field name="policy" kind="string">stale_empty</field>
+      <field name="preemptions" kind="json">1</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [
+      "item"
+    ],
+    "pop_result": null
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  },
+  {
+    "items": [],
+    "pop_result": "item"
+  }
+]</field>
+      <field name="schedule" kind="string">PCCP</field>
+      <field name="schema" kind="string">d6.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+  </cases>
+  <exploration origin="original explore.py own formulas, no Framework/SUT/oracle import">{
+  "counter": {
+    "campaign": "counter",
+    "expression_equals_prefix_count_on_all_16": true,
+    "kept_rows": [
+      [
+        "atomic_commit",
+        0,
+        "AABB"
+      ],
+      [
+        "atomic_commit",
+        0,
+        "BBAA"
+      ],
+      [
+        "atomic_commit",
+        1,
+        "AABB"
+      ],
+      [
+        "atomic_commit",
+        1,
+        "ABBA"
+      ],
+      [
+        "atomic_commit",
+        1,
+        "BAAB"
+      ],
+      [
+        "atomic_commit",
+        1,
+        "BBAA"
+      ],
+      [
+        "atomic_commit",
+        2,
+        "AABB"
+      ],
+      [
+        "atomic_commit",
+        2,
+        "ABAB"
+      ],
+      [
+        "atomic_commit",
+        2,
+        "ABBA"
+      ],
+      [
+        "atomic_commit",
+        2,
+        "BAAB"
+      ],
+      [
+        "atomic_commit",
+        2,
+        "BABA"
+      ],
+      [
+        "atomic_commit",
+        2,
+        "BBAA"
+      ],
+      [
+        "split_rw",
+        0,
+        "AABB"
+      ],
+      [
+        "split_rw",
+        0,
+        "BBAA"
+      ],
+      [
+        "split_rw",
+        1,
+        "AABB"
+      ],
+      [
+        "split_rw",
+        1,
+        "ABBA"
+      ],
+      [
+        "split_rw",
+        1,
+        "BAAB"
+      ],
+      [
+        "split_rw",
+        1,
+        "BBAA"
+      ],
+      [
+        "split_rw",
+        2,
+        "AABB"
+      ],
+      [
+        "split_rw",
+        2,
+        "ABAB"
+      ],
+      [
+        "split_rw",
+        2,
+        "ABBA"
+      ],
+      [
+        "split_rw",
+        2,
+        "BAAB"
+      ],
+      [
+        "split_rw",
+        2,
+        "BABA"
+      ],
+      [
+        "split_rw",
+        2,
+        "BBAA"
+      ]
+    ],
+    "note": "before execution; independent of the SUT and runtime",
+    "schedules_by_cap": {
+      "0": [
+        "AABB",
+        "BBAA"
+      ],
+      "1": [
+        "AABB",
+        "ABBA",
+        "BAAB",
+        "BBAA"
+      ],
+      "2": [
+        "AABB",
+        "ABAB",
+        "ABBA",
+        "BAAB",
+        "BABA",
+        "BBAA"
+      ]
+    },
+    "schema": "d6.precheck/v1",
+    "truth_table": {
+      "overlap": 16,
+      "per_rule": {
+        "preemption_cap": 28,
+        "two_each": 60
+      },
+      "raw": 96,
+      "sequential": [
+        96,
+        36,
+        24
+      ],
+      "unique_removals": 72
+    },
+    "words": {
+      "AAAA": {
+        "context_switches": 0,
+        "expression": 0,
+        "prefix_preemptions": 0,
+        "two_each": false
+      },
+      "AAAB": {
+        "context_switches": 1,
+        "expression": 0,
+        "prefix_preemptions": 0,
+        "two_each": false
+      },
+      "AABA": {
+        "context_switches": 2,
+        "expression": 1,
+        "prefix_preemptions": 1,
+        "two_each": false
+      },
+      "AABB": {
+        "context_switches": 1,
+        "expression": 0,
+        "prefix_preemptions": 0,
+        "two_each": true
+      },
+      "ABAA": {
+        "context_switches": 2,
+        "expression": 2,
+        "prefix_preemptions": 2,
+        "two_each": false
+      },
+      "ABAB": {
+        "context_switches": 3,
+        "expression": 2,
+        "prefix_preemptions": 2,
+        "two_each": true
+      },
+      "ABBA": {
+        "context_switches": 2,
+        "expression": 1,
+        "prefix_preemptions": 1,
+        "two_each": true
+      },
+      "ABBB": {
+        "context_switches": 1,
+        "expression": 1,
+        "prefix_preemptions": 1,
+        "two_each": false
+      },
+      "BAAA": {
+        "context_switches": 1,
+        "expression": 1,
+        "prefix_preemptions": 1,
+        "two_each": false
+      },
+      "BAAB": {
+        "context_switches": 2,
+        "expression": 1,
+        "prefix_preemptions": 1,
+        "two_each": true
+      },
+      "BABA": {
+        "context_switches": 3,
+        "expression": 2,
+        "prefix_preemptions": 2,
+        "two_each": true
+      },
+      "BABB": {
+        "context_switches": 2,
+        "expression": 2,
+        "prefix_preemptions": 2,
+        "two_each": false
+      },
+      "BBAA": {
+        "context_switches": 1,
+        "expression": 0,
+        "prefix_preemptions": 0,
+        "two_each": true
+      },
+      "BBAB": {
+        "context_switches": 2,
+        "expression": 1,
+        "prefix_preemptions": 1,
+        "two_each": false
+      },
+      "BBBA": {
+        "context_switches": 1,
+        "expression": 0,
+        "prefix_preemptions": 0,
+        "two_each": false
+      },
+      "BBBB": {
+        "context_switches": 0,
+        "expression": 0,
+        "prefix_preemptions": 0,
+        "two_each": false
+      }
+    }
+  },
+  "queue": {
+    "bonds_retain_exactly_feasible": true,
+    "campaign": "queue",
+    "feasible": [
+      "PCCP",
+      "PCPC",
+      "PPCC"
+    ],
+    "feasible_equals_first_letter_P": true,
+    "infeasible_two_each": {
+      "CCPP": 1,
+      "CPCP": 1,
+      "CPPC": 1
+    },
+    "kept_rows": [
+      [
+        "actual_queue",
+        null,
+        "PCCP"
+      ],
+      [
+        "actual_queue",
+        null,
+        "PCPC"
+      ],
+      [
+        "actual_queue",
+        null,
+        "PPCC"
+      ],
+      [
+        "stale_empty",
+        null,
+        "PCCP"
+      ],
+      [
+        "stale_empty",
+        null,
+        "PCPC"
+      ],
+      [
+        "stale_empty",
+        null,
+        "PPCC"
+      ]
+    ],
+    "note": "before execution; independent of the SUT and runtime",
+    "schema": "d6.precheck/v1",
+    "truth_table": {
+      "overlap": 10,
+      "per_rule": {
+        "producer_first": 16,
+        "two_each": 20
+      },
+      "raw": 32,
+      "sequential": [
+        32,
+        12,
+        6
+      ],
+      "unique_removals": 26
+    },
+    "words": {
+      "CCCC": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "CCCP": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "CCPC": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "CCPP": {
+        "detail": 1,
+        "status": "disabled"
+      },
+      "CPCC": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "CPCP": {
+        "detail": 1,
+        "status": "disabled"
+      },
+      "CPPC": {
+        "detail": 1,
+        "status": "disabled"
+      },
+      "CPPP": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "PCCC": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "PCCP": {
+        "detail": null,
+        "status": "feasible"
+      },
+      "PCPC": {
+        "detail": null,
+        "status": "feasible"
+      },
+      "PCPP": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "PPCC": {
+        "detail": null,
+        "status": "feasible"
+      },
+      "PPCP": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "PPPC": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      },
+      "PPPP": {
+        "detail": "not two steps per thread",
+        "status": "malformed"
+      }
+    }
+  }
+}</exploration>
+  <analysis origin="original verify.py observed aggregation/witness formulas over frozen independent predictions">{
+  "counter": {
+    "by_policy": {
+      "atomic_commit": {
+        "PASS": 12
+      },
+      "split_rw": {
+        "DOMAIN_FAIL": 6,
+        "PASS": 6
+      }
+    },
+    "campaign": "counter",
+    "extra": {
+      "distinct_schedules_overall": 6,
+      "per_cap": {
+        "0": {
+          "PASS": 4
+        },
+        "1": {
+          "DOMAIN_FAIL": 2,
+          "PASS": 6
+        },
+        "2": {
+          "DOMAIN_FAIL": 4,
+          "PASS": 8
+        }
+      },
+      "per_cap_distinct_schedules": {
+        "0": 2,
+        "1": 4,
+        "2": 6
+      }
+    },
+    "totals": {
+      "DOMAIN_FAIL": 6,
+      "PASS": 18
+    },
+    "witnesses": [
+      {
+        "case_id": "counter|split_rw|CAP=2|SEQ=ABAB",
+        "context_switches": 3,
+        "failing_checkpoints": [
+          4
+        ],
+        "label": "split_rw_CAP2_ABAB",
+        "observed_trace": [
+          {
+            "counter": 0,
+            "locals": {
+              "A": 0
+            },
+            "op": "read",
+            "thread": "A"
+          },
+          {
+            "counter": 0,
+            "locals": {
+              "A": 0,
+              "B": 0
+            },
+            "op": "read",
+            "thread": "B"
+          },
+          {
+            "counter": 1,
+            "locals": {
+              "A": 0,
+              "B": 0
+            },
+            "op": "write",
+            "thread": "A"
+          },
+          {
+            "counter": 1,
+            "locals": {
+              "A": 0,
+              "B": 0
+            },
+            "op": "write",
+            "thread": "B"
+          }
+        ],
+        "preemptions": 2,
+        "schedule": "ABAB",
+        "verdict": "DOMAIN_FAIL"
+      },
+      {
+        "case_id": "counter|atomic_commit|CAP=2|SEQ=ABAB",
+        "context_switches": 3,
+        "failing_checkpoints": [],
+        "label": "atomic_commit_CAP2_ABAB",
+        "observed_trace": [
+          {
+            "counter": 0,
+            "locals": {
+              "A": 0
+            },
+            "op": "read",
+            "thread": "A"
+          },
+          {
+            "counter": 0,
+            "locals": {
+              "A": 0,
+              "B": 0
+            },
+            "op": "read",
+            "thread": "B"
+          },
+          {
+            "counter": 1,
+            "locals": {
+              "A": 0,
+              "B": 0
+            },
+            "op": "write",
+            "thread": "A"
+          },
+          {
+            "counter": 2,
+            "locals": {
+              "A": 0,
+              "B": 0
+            },
+            "op": "write",
+            "thread": "B"
+          }
+        ],
+        "preemptions": 2,
+        "schedule": "ABAB",
+        "verdict": "PASS"
+      },
+      {
+        "case_id": "counter|split_rw|CAP=0|SEQ=AABB",
+        "context_switches": 1,
+        "failing_checkpoints": [],
+        "label": "serial_control_split_rw_CAP0_AABB",
+        "observed_trace": [
+          {
+            "counter": 0,
+            "locals": {
+              "A": 0
+            },
+            "op": "read",
+            "thread": "A"
+          },
+          {
+            "counter": 1,
+            "locals": {
+              "A": 0
+            },
+            "op": "write",
+            "thread": "A"
+          },
+          {
+            "counter": 1,
+            "locals": {
+              "A": 0,
+              "B": 1
+            },
+            "op": "read",
+            "thread": "B"
+          },
+          {
+            "counter": 2,
+            "locals": {
+              "A": 0,
+              "B": 1
+            },
+            "op": "write",
+            "thread": "B"
+          }
+        ],
+        "preemptions": 0,
+        "schedule": "AABB",
+        "verdict": "PASS"
+      }
+    ]
+  },
+  "queue": {
+    "by_policy": {
+      "actual_queue": {
+        "PASS": 3
+      },
+      "stale_empty": {
+        "DOMAIN_FAIL": 1,
+        "PASS": 2
+      }
+    },
+    "campaign": "queue",
+    "extra": {},
+    "totals": {
+      "DOMAIN_FAIL": 1,
+      "PASS": 5
+    },
+    "witnesses": [
+      {
+        "case_id": "queue|stale_empty|SEQ=PCCP",
+        "context_switches": 2,
+        "failing_checkpoints": [
+          3,
+          4
+        ],
+        "label": "stale_empty_PCCP",
+        "observed_trace": [
+          {
+            "items": [
+              "item"
+            ],
+            "op": "enqueue",
+            "pop_result": null,
+            "published_nonempty": false,
+            "thread": "P"
+          },
+          {
+            "items": [
+              "item"
+            ],
+            "op": "wait_readable",
+            "pop_result": null,
+            "published_nonempty": false,
+            "thread": "C"
+          },
+          {
+            "items": [
+              "item"
+            ],
+            "op": "try_pop",
+            "pop_result": "EMPTY",
+            "published_nonempty": false,
+            "thread": "C"
+          },
+          {
+            "items": [
+              "item"
+            ],
+            "op": "publish",
+            "pop_result": "EMPTY",
+            "published_nonempty": true,
+            "thread": "P"
+          }
+        ],
+        "preemptions": 1,
+        "schedule": "PCCP",
+        "verdict": "DOMAIN_FAIL"
+      },
+      {
+        "case_id": "queue|actual_queue|SEQ=PCCP",
+        "context_switches": 2,
+        "failing_checkpoints": [],
+        "label": "actual_queue_PCCP",
+        "observed_trace": [
+          {
+            "items": [
+              "item"
+            ],
+            "op": "enqueue",
+            "pop_result": null,
+            "published_nonempty": false,
+            "thread": "P"
+          },
+          {
+            "items": [
+              "item"
+            ],
+            "op": "wait_readable",
+            "pop_result": null,
+            "published_nonempty": false,
+            "thread": "C"
+          },
+          {
+            "items": [],
+            "op": "try_pop",
+            "pop_result": "item",
+            "published_nonempty": false,
+            "thread": "C"
+          },
+          {
+            "items": [],
+            "op": "publish",
+            "pop_result": "item",
+            "published_nonempty": false,
+            "thread": "P"
+          }
+        ],
+        "preemptions": 1,
+        "schedule": "PCCP",
+        "verdict": "PASS"
+      }
+    ]
+  }
+}</analysis>
+</concurrency-golden>

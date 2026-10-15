@@ -1,0 +1,177 @@
+{
+  "commit": "8d5aa2d48a605521f783d1787a42fc9a5ebfc7a9",
+  "families": {
+    "Climate": [
+      "Radar",
+      "WeatherStation",
+      "OceanBuoy",
+      "Satellite",
+      "Lidar"
+    ],
+    "Mobility": [
+      "Trajectory",
+      "TrafficFlow",
+      "Transit",
+      "Micromobility"
+    ],
+    "Energy": [
+      "Solar",
+      "Wind",
+      "GridLoad",
+      "Storage"
+    ],
+    "OpenData": [
+      "CivicSensors",
+      "AirQuality",
+      "WaterLevel"
+    ],
+    "Research": [
+      "Materials",
+      "Genomics",
+      "Astronomy",
+      "Robotics"
+    ],
+    "Industrial": [
+      "Vibration",
+      "Thermal",
+      "Acoustic"
+    ]
+  },
+  "queryParams": [
+    "accessKey",
+    "scanScope",
+    "groupSeries",
+    "DatasetFamily",
+    "SignalClassList",
+    "SignalJoin",
+    "AccessTier",
+    "QualityTier",
+    "CaptureTimeStart",
+    "CaptureTimeEnd",
+    "SourceTimestamp",
+    "IndexedTimestamp",
+    "ExcludeRestricted",
+    "complianceLock",
+    "AssetKind",
+    "encoding",
+    "geometry",
+    "custodianId",
+    "contributorTag",
+    "labelPattern",
+    "notesPattern",
+    "exactMatch",
+    "provisional",
+    "responseFormat",
+    "offsetStart",
+    "offsetEnd",
+    "sortBy"
+  ],
+  "quality": [
+    "bronze",
+    "bronze-plus",
+    "silver",
+    "silver-plus",
+    "gold",
+    "gold-plus",
+    "platinum",
+    "platinum-plus",
+    "diamond"
+  ],
+  "encodings": [
+    "csv",
+    "parquet",
+    "zarr"
+  ],
+  "rules": {
+    "R_OBLIGATORY_LOCATOR": "locator is mandatory",
+    "R_OBLIGATORY_ACCESS_KEY": "accessKey is mandatory",
+    "R_SIGNAL_BY_FAMILY": "each SignalClassList entry must belong to DatasetFamily",
+    "R_SORT_SIGNAL_SUBSET": "sortBy may only use signals present in SignalClassList",
+    "R_INDEXED_XOR_PROVISIONAL": "IndexedTimestamp cannot be present with provisional",
+    "R_CAPTURE_RANGE": "CaptureTimeEnd must be greater than or equal to CaptureTimeStart",
+    "R_OFFSET_RANGE": "offsetEnd must be greater than or equal to offsetStart",
+    "R_ZARR_QUALITY": "zarr requires geometry and QualityTier of at least gold when specified",
+    "R_VOLUME_MIN_ENCODING": "volumetric geometry requires parquet or zarr encoding",
+    "R_MARKUP_NO_ARCHIVE": "markup responseFormat forbids archive scanScope",
+    "R_EXACT_NO_APPROXIMATE": "exactMatch enabled forbids contributorTag and notesPattern",
+    "R_PROVISIONAL_PREVIEW": "provisional enabled requires AssetKind preview",
+    "R_QUALITY_NEEDS_ACCESS": "QualityTier requires AccessTier",
+    "R_RESTRICTED_CUSTODIAN": "restricted custodian forbids ExcludeRestricted enabled",
+    "R_COMPLIANCE_LOCK": "complianceLock enabled forbids restricted records",
+    "R_OPEN_ACCESS": "OpenData requires public/community access and tabular geometry"
+  },
+  "records": [
+    {
+      "id": 6101,
+      "label": "North Ridge Radar Sweep",
+      "family": "Climate",
+      "signal": "Radar",
+      "accessTier": "partner",
+      "quality": "platinum",
+      "encoding": "zarr",
+      "geometry": "volumetric",
+      "assetKind": "dataset",
+      "custodianId": 120
+    },
+    {
+      "id": 6102,
+      "label": "Harbor Buoy Window",
+      "family": "Climate",
+      "signal": "OceanBuoy",
+      "accessTier": "restricted",
+      "quality": "gold-plus",
+      "encoding": "parquet",
+      "geometry": "tabular",
+      "assetKind": "dataset",
+      "custodianId": 70011
+    },
+    {
+      "id": 6201,
+      "label": "Regional Grid Load",
+      "family": "Energy",
+      "signal": "GridLoad",
+      "accessTier": "public",
+      "quality": "gold",
+      "encoding": "parquet",
+      "geometry": "tabular",
+      "assetKind": "sample",
+      "custodianId": 73
+    },
+    {
+      "id": 6301,
+      "label": "City Air Sensor Pack",
+      "family": "OpenData",
+      "signal": "AirQuality",
+      "accessTier": "public",
+      "quality": "silver",
+      "encoding": "csv",
+      "geometry": "tabular",
+      "assetKind": "collection",
+      "custodianId": 31
+    },
+    {
+      "id": 6401,
+      "label": "Alloy Fatigue Run",
+      "family": "Research",
+      "signal": "Materials",
+      "accessTier": "community",
+      "quality": "platinum-plus",
+      "encoding": "zarr",
+      "geometry": "tabular",
+      "assetKind": "sample",
+      "custodianId": 44
+    },
+    {
+      "id": 6109,
+      "label": "North Ridge Radar Preview",
+      "family": "Climate",
+      "signal": "Radar",
+      "accessTier": "partner",
+      "quality": "gold",
+      "encoding": "parquet",
+      "geometry": "tabular",
+      "assetKind": "preview",
+      "custodianId": 120
+    }
+  ]
+}

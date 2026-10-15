@@ -1,0 +1,113 @@
+{
+  "license": "LicenseRef-BUSL-1.1",
+  "author": "Yurii Baranov",
+  "id": "quote",
+  "version": "d73618f70f5c5c75de51c85aab8cf71e69c37ce97acdbddffb88df3676a6bee6",
+  "title": "Original local proposal task: quote",
+  "context": "PriceQuote engine: base = unit*qty, then a discount, a tax percent and rounding are applied (the ORDER of those three is not fixed). Optional loyalty (extra 10% off) and coupon (flat -20) may apply. Invariants that MUST hold: total >= 0 (you never pay the customer) and total stays within a sane ceiling. Edge cases: a discount larger than the price, zero/negative quantity, an order of operations that drives the running total negative.",
+  "source": "Combinatorics-Framework-QA-edition/generator_trunk/llm_loop/llm_in_the_loop.py",
+  "source_line": 57,
+  "slots": [
+    {
+      "sheet": "FRAME",
+      "key": "frame",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "public class Quote {\n    public static int FW_VAR = 0;\n    public static int FW_CUSTOM_VAR = 0;\n    static long unit = 100, qty = 1, discount = 0, taxPct = 0, base = 0;\n    static long applyDiscount(long b){ return b - discount; }\n    static long applyTax(long b){ return b + b * taxPct / 100; }\n    static long round10(long b){ return (b / 10) * 10; }\n    public static void main(String[] args){\n"
+      ]
+    },
+    {
+      "sheet": "QTY",
+      "key": "qty",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "role": "qty",
+      "count": 3,
+      "prefix": "        qty = ",
+      "suffix": ";\n",
+      "context": "order line quantity in units"
+    },
+    {
+      "sheet": "DISCOUNT",
+      "key": "discount",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "role": "discount",
+      "count": 3,
+      "prefix": "        discount = ",
+      "suffix": ";\n",
+      "context": "absolute money discount taken off the line"
+    },
+    {
+      "sheet": "TAX",
+      "key": "taxPct",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "role": "taxPct",
+      "count": 3,
+      "prefix": "        taxPct = ",
+      "suffix": ";\n",
+      "context": "tax percent applied to the base"
+    },
+    {
+      "sheet": "COMPUTE",
+      "key": "compute",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "        base = unit * qty;\n"
+      ]
+    },
+    {
+      "sheet": "OPS",
+      "key": "ops",
+      "verb": "FW_Permut",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "        base = applyDiscount(base);\n",
+        "        base = applyTax(base);\n",
+        "        base = round10(base);\n"
+      ]
+    },
+    {
+      "sheet": "FLAGS",
+      "key": "flags",
+      "verb": "FW_Subsets",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "        base = base - base / 10;\n",
+        "        base = base - 20;\n"
+      ]
+    },
+    {
+      "sheet": "VERDICT",
+      "key": "verdict",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "        long total = base;\n        long ceiling = unit * (qty < 0 ? -qty : qty) * 2 + 1000;\n        boolean negative = total < 0;\n        boolean absurd = total > ceiling;\n        FW_VAR = (negative || absurd) ? 1 : 0;\n        FW_CUSTOM_VAR = FW_VAR;\n        System.out.println(\"FW_VAR=\" + FW_VAR + \" total=\" + total + \" qty=\" + qty\n                + \" discount=\" + discount + \" taxPct=\" + taxPct);\n    }\n}\n"
+      ]
+    }
+  ],
+  "args": [
+    "mode=llm_quote"
+  ],
+  "goals": [
+    "bugs_found"
+  ],
+  "custom_vars": [
+    {
+      "code": 2,
+      "msg": "invariant broken (total<0 or absurd)"
+    }
+  ]
+}

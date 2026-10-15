@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+
+<compatibility version="1" policy="no-silent-capability-loss">
+  <mapping id="C01" legacy="Core DB dictionaries and FW metadata" target="fw-input fw-store" action="REPLACE" status="specified-not-implemented">Parse pure immutable model; store dictionaries, sheet maps, exit codes and templates in RunSession.</mapping>
+  <mapping id="C02" legacy="Core SQL joins/intermediates/final/optional tables" target="fw-plan fw-store fw-generation" action="REPLACE" status="specified-not-implemented">Execute typed join/filter/group/concat operators over byte row sources; preserve bag/order semantics and implicit Cartesian axes. No SQL interpreter.</mapping>
+  <mapping id="C03" legacy="Reader COPY, JDBC, handshakes, loose files, shards and gRPC" target="fw-generation fw-execution" action="REPLACE" status="specified-not-implemented">Pass typed bounded candidates directly. Support legacy artifacts as explicit import/export where useful, not required internal transport.</mapping>
+  <mapping id="C04" legacy="Python generator, constraints, bundle CLI/launcher and orchestration" target="fw-input fw-plan fw-constraints fw-campaign fw-app" action="PORT" status="specified-not-implemented">Reimplement DSL, options, FW_Seq, aliases, compile/preview, policy, repeats, resume, adaptive phases and artifact identities in Java.</mapping>
+  <mapping id="C05" legacy="Generator Qt/NiceGUI/FastAPI authoring and monitoring" target="fw-desktop" action="PORT" status="specified-not-implemented">Swing editor and visualizations use shared service facade; no local web server or JavaScript runtime required.</mapping>
+  <mapping id="C06" legacy="Executor dynamic Java" target="fw-compiler fw-execution" action="ADAPT" status="specified-not-implemented">In-process JavaCompiler and typed/plugin or explicitly serialized legacy main adapter; preserve FW_VAR/FW_CUSTOM_VAR and generated source dependencies.</mapping>
+  <mapping id="C07" legacy="Executor Python and arbitrary raw Python snippets" target="fw-sut-fixtures fw-input" action="PORT_REQUIRED" status="specified-not-implemented">Java framework cannot execute arbitrary Python with no interpreter. Port each supported scenario fragment/SUT semantically; reject unported source language before generation, never treat it as Java. Author decision 2026-10-12: the core still runs no Python; the Python add-on (addons/fw-python.jar, cf.execution.sut=python) runs rendered Python candidates and the original SUT, generator and demo code with an external interpreter, as the legacy trusted-local executor did.</mapping>
+  <mapping id="C08" legacy="Executor Docker, process sandbox and remote workers" target="fw-execution" action="INCOMPATIBLE" status="specified-not-implemented">Cooperative trusted Java execution replaces throughput/cancellation behavior; do not claim OS isolation, forcible kill, per-process RSS limits or remote distribution.</mapping>
+  <mapping id="C09" legacy="Results PostgreSQL schema v2" target="fw-results" action="REPLACE" status="specified-not-implemented">Preserve immutable five-field sample identity, attempt history, domain/infrastructure split and separate counts as Java repository projections.</mapping>
+  <mapping id="C10" legacy="Analyzer algorithms, GUI and streaming" target="fw-analysis fw-desktop" action="ADAPT" status="specified-not-implemented">Preserve objective direction, constraints, scalar and multiobjective algorithms, reports, bins, sampling, top-K and seed reproducibility; record exactness.</mapping>
+  <mapping id="C11" legacy="Analyzer Python/SciPy objective subprocess" target="fw-analysis" action="PORT" status="specified-not-implemented">Pure-Java numerical optimization with typed Objective callback and numerical tolerance tests; no ProcessBuilder fallback.</mapping>
+  <mapping id="C12" legacy="LLM proposal and AI task IR/campaign tooling" target="fw-plan fw-campaign" action="PORT" status="specified-not-implemented">Typed proposal provider and task IR in Java. Baseline deterministic/local scripted provider; actual model inference requires a pure-Java in-process implementation and separately tested assets. Do not claim PyTorch/native acceleration parity.</mapping>
+  <mapping id="C13" legacy="SUT billing/order/tutor/telemetry/pricing/security pipelines" target="fw-sut-fixtures" action="PORT_REQUIRED" status="specified-not-implemented">Port deterministic functions and named defects faithfully; preserve intended defective policies for oracle demonstrations, not just successful paths.</mapping>
+  <mapping id="C14" legacy="SUT automation constructor and 3D sieve/shape geometry" target="fw-sut-fixtures" action="PORT_REQUIRED" status="specified-not-implemented">Port domain model, compiler/runtime, measurements and geometric decision functions to Java; compare tolerances and boundary geometry. UI equivalents belong to Java desktop.</mapping>
+  <mapping id="C15" legacy="SUT finance-stack ledger and external service integration" target="fw-sut-fixtures" action="PORT_REQUIRED" status="specified-not-implemented">Use Java in-memory domain ports with exact money/time/idempotency semantics; real external database/network operational testing is incompatible with strict all-in-JVM target.</mapping>
+  <mapping id="C16" legacy="SUT transformer/Torch/C++/pickle variants" target="fw-sut-fixtures" action="PORT_REQUIRED" status="specified-not-implemented">Separate pure Java inference/math/domain ports and explicit Java data import tasks; never deserialize Python pickle inside the framework or silently stub inference.</mapping>
+  <mapping id="C17" legacy="SmallUseCasesDemo D1-D15 families" target="fw-acceptance fw-sut-fixtures" action="PORT_REQUIRED" status="specified-not-implemented">Preserve fixture semantics, relational/metamorphic oracles and deliberate defect modes; import only code/config evidence and translate embedded Python scenario snippets.</mapping>
+  <mapping id="C18" legacy="File checkpoints and reports" target="fw-artifacts fw-campaign" action="ADAPT" status="specified-not-implemented">Opt-in files with version/hash/atomic snapshot, while ordinary execution stays heap-only. Existing Analyzer reporting Snapshot is not a complete resume checkpoint.</mapping>
+  <release-rule>Release reports list capability coverage and incompatible operational guarantees. Full pure-Java semantic parity requires all PORT_REQUIRED families claimed by the release to pass their gates; an unsupported diagnostic alone is not a port.</release-rule>
+</compatibility>

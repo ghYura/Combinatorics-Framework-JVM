@@ -1,0 +1,16 @@
+{
+  "sheets": {
+    "FW_Seq": [["actions", "FW_Combi(9)"]],
+    "actions": [
+      ["{\"op\":\"submit\",\"oid\":\"one\"}"],
+      ["{\"op\":\"deliver\"}"],
+      ["{\"op\":\"deliver\"}"],
+      ["{\"op\":\"deliver\"}"],
+      ["{\"op\":\"deliver\"}"],
+      ["{\"op\":\"duplicate\"}"],
+      ["{\"op\":\"restart\",\"service\":\"payment\"}"],
+      ["{\"op\":\"duplicate\"}"],
+      ["{\"op\":\"drain\"}"]
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "empty": "Send a user message and I will answer from local memory, simple reasoning, or the surrogate model.",
+  "hardware": "For an AMD FX-8320 with 32 GB RAM and weak integrated graphics, this app should stay CPU-only. The refactor uses capped context, capped output, JSON memory, lexical retrieval, streaming by chunks, and a compact sklearn surrogate with n_jobs=1. It intentionally avoids CUDA, PyTorch, llama.cpp, and large model downloads unless you add them separately. That makes latency predictable and keeps RAM use low.",
+  "help": "You can use /v1/chat/completions for chat-API-style chat, /chat for a compact local response, /memory/ingest to add notes, /memory/search to inspect local recall, /predict for numeric surrogate classification, and /bootstrap to train the classifier from the simulated oracle.",
+  "identity": "I am a local CPU-only assistant facade for this FastAPI app. I am LLM-like in API shape: chat messages in, assistant text out, optional streaming, local memory search, simple reasoning, and surrogate classification. I do not load transformer weights or require a GPU, so it is practical for an FX-8320-class CPU.",
+  "untrained": "The surrogate classifier is not trained yet. Run POST /bootstrap first, or call /predict and let the synchronous oracle provide initial labels."
+}

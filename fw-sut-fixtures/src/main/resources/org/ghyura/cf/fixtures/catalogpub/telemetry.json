@@ -1,0 +1,8 @@
+{
+  "sheets": {
+    "FW_Seq": [["DatasetFamily", "FW_Combi(1)"], ["SignalClassList", "FW_Combi(1)"], ["responseFormat", "FW_Combi(1)"]],
+    "DatasetFamily": [["Climate"], ["Energy"]],
+    "SignalClassList": [["Radar"], ["GridLoad"]],
+    "responseFormat": [["structured"], ["markup"]]
+  }
+}

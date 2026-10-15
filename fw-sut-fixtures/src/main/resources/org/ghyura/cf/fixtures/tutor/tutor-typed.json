@@ -1,0 +1,78 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "channel",
+        "FW_Combi(1)"
+      ],
+      [
+        "account",
+        "FW_Combi(1)"
+      ],
+      [
+        "payment",
+        "FW_Combi(1)"
+      ],
+      [
+        "steps",
+        "FW_Combi(3)",
+        "FW_Permut()"
+      ],
+      [
+        "duplicate_submit",
+        "FW_Optional",
+        "FW_Combi(1)"
+      ],
+      [
+        "carrier_timeout",
+        "FW_Optional",
+        "FW_Combi(1)"
+      ]
+    ],
+    "channel": [
+      [
+        "web"
+      ],
+      [
+        "mobile"
+      ]
+    ],
+    "account": [
+      [
+        "guest"
+      ],
+      [
+        "member"
+      ]
+    ],
+    "payment": [
+      [
+        "card"
+      ],
+      [
+        "wallet"
+      ]
+    ],
+    "steps": [
+      [
+        "reserve"
+      ],
+      [
+        "charge"
+      ],
+      [
+        "dispatch"
+      ]
+    ],
+    "duplicate_submit": [
+      [
+        "duplicate_submit"
+      ]
+    ],
+    "carrier_timeout": [
+      [
+        "carrier_timeout"
+      ]
+    ]
+  }
+}

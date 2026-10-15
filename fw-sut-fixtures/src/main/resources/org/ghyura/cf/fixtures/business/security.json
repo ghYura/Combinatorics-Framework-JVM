@@ -1,0 +1,18 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      ["mode", "FW_Combi(1)"],
+      ["text", "FW_Combi(1)"],
+      ["order", "FW_Combi(3)", "FW_Permut()"],
+      ["features", "FW_Combi(2)"],
+      ["rotate_key", "FW_Optional", "FW_Combi(1)"],
+      ["poison_cache", "FW_Optional", "FW_Combi(1)"]
+    ],
+    "mode": [["strict"], ["legacy"]],
+    "text": [["note SECRET-ABC end"], ["note ＳＥＣＲＥＴ-ＡＢＣ end"]],
+    "order": [["normalize"], ["redact"], ["tag"]],
+    "features": [["cache"], ["audit"]],
+    "rotate_key": [["rotate_key"]],
+    "poison_cache": [["poison_cache"]]
+  }
+}

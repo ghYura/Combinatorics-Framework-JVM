@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+
+<!--
+  Provenance of the real workbooks in this directory (gate A03 / A19 baseline).
+-->
+<corpus framework-commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b" note="byte-identical copies of the tracked .xlsx files of the reference checkout; they are the author's own inputs, used as independent baselines">
+  <workbook file="01-Combinatorics-Framework-QA-edition-generator_trunk.xlsx" source="generator_trunk/example150726.xlsx" bytes="236699" sha256="f7dc851edf4d8b3c35bc7a2c1e7608276f2a1a757da479df894d4d686b709113"/>
+  <workbook file="02-01-d1-idempotency-spec.xlsx" source="SmallUseCasesDemo/01-d1-idempotency/spec/demo.xlsx" bytes="18547" sha256="737eb154718606d16daa7c7f877e7c997260784c4a8a7b7a6f2212198b72a8b6"/>
+  <workbook file="03-02-d2-stream-boundaries-spec.xlsx" source="SmallUseCasesDemo/02-d2-stream-boundaries/spec/demo.xlsx" bytes="16845" sha256="2732addb1660b198a4b416b8a4354f0218f8af9b1866bf28c84c2583ffc2cd21"/>
+  <workbook file="04-spec-catalogue-SCA3.xlsx" source="SmallUseCasesDemo/03-d3-workflow-order/phase-c/spec/catalogue-SCA3/demo.xlsx" bytes="13735" sha256="bdfc5302158fee50bf0c8e90a825d8a3af9614d2ad728295e87232075f61e767"/>
+  <workbook file="05-spec-full.xlsx" source="SmallUseCasesDemo/03-d3-workflow-order/phase-c/spec/full/demo.xlsx" bytes="13616" sha256="e555ec5ce3999e38c86fa7c9046101e08e500983a8ea23901cdc4de6098faf4f"/>
+  <workbook file="06-spec-A.xlsx" source="SmallUseCasesDemo/03-d3-workflow-order/spec/A/demo.xlsx" bytes="15248" sha256="1daa89e1e8f7ecb4bf1ba83a229004c05488007194bf2f9ec77aa4205936f8ad"/>
+  <workbook file="07-spec-B-alt.xlsx" source="SmallUseCasesDemo/03-d3-workflow-order/spec/B-alt/demo.xlsx" bytes="14137" sha256="73993cab4b8bfa22946c62f83f613120ef45e016b68bfacb28189c05742fd298"/>
+  <workbook file="08-spec-B.xlsx" source="SmallUseCasesDemo/03-d3-workflow-order/spec/B/demo.xlsx" bytes="14074" sha256="2b656707d593a8e7e73d07addf9179bd626b39e9e7a5f2ee97497753dc464225"/>
+  <workbook file="09-spec-controls.xlsx" source="SmallUseCasesDemo/04-d4-configuration-rules/spec/controls/demo.xlsx" bytes="14101" sha256="a7cfafa1e871db1748aa111dadfa64d1bcda50d014b8f523b1e63ee363fba8b2"/>
+  <workbook file="10-spec-main.xlsx" source="SmallUseCasesDemo/04-d4-configuration-rules/spec/main/demo.xlsx" bytes="16918" sha256="f1e8617c1aeaa13d37bd856bfac64cde2765be4a2c5827510457fca7873e90db"/>
+  <workbook file="11-phase-a-spec.xlsx" source="SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/spec/demo.xlsx" bytes="14243" sha256="12624231b13313d67ebc9da4c435a9e5036f8160af4535ec10c0f5d0079df3de"/>
+  <workbook file="12-spec-B1.xlsx" source="SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/spec/B1/demo.xlsx" bytes="21462" sha256="abb17cee0eebdf496fbde6b8aab39d010d5c36685ee80c53a83079642b1e81fb"/>
+  <workbook file="13-spec-B2.xlsx" source="SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/spec/B2/demo.xlsx" bytes="23864" sha256="ef69f12946172db9252c05de86e6a05d6e2f397893ad3169a4a8f2d4d468d081"/>
+  <workbook file="14-spec-counter.xlsx" source="SmallUseCasesDemo/06-d6-concurrency-schedules/spec/counter/demo.xlsx" bytes="16824" sha256="bd25dc6529892fa56cced4c819048670404bb1c09ad6d81c872b3e6b781378f1"/>
+  <workbook file="15-spec-queue.xlsx" source="SmallUseCasesDemo/06-d6-concurrency-schedules/spec/queue/demo.xlsx" bytes="16253" sha256="922bbc7d126a2c573d59ff3572021dec08e061755a4ab4f50154b6eef27173bf"/>
+  <workbook file="16-07-d7-reduction-trees-spec.xlsx" source="SmallUseCasesDemo/07-d7-reduction-trees/spec/demo.xlsx" bytes="15008" sha256="c79bf52b60651caf4af03f1b3de34ca9ed2eef8216d80d63127ee4fdd9769f03"/>
+  <workbook file="17-08-d8-ties-and-pagination-spec.xlsx" source="SmallUseCasesDemo/08-d8-ties-and-pagination/spec/demo.xlsx" bytes="15424" sha256="570187c1257049b31632d9ddbee52ba36a90348cfcb29e0716b02542f46046a7"/>
+  <workbook file="18-09-d8-dependency-dags-spec.xlsx" source="SmallUseCasesDemo/09-d8-dependency-dags/spec/demo.xlsx" bytes="17477" sha256="4ee07b34939392de83f407870dd644f18707e2b8a67f44b3ef41953f789633aa"/>
+  <workbook file="19-10-d9-robust-portfolios-spec.xlsx" source="SmallUseCasesDemo/10-d9-robust-portfolios/spec/demo.xlsx" bytes="14439" sha256="25c1f5eee70b37bc18e7189eb8fb4f60abfb54c379e6cf3cbbbee0a3232d13cb"/>
+  <workbook file="20-11-d10-diagnostic-sensors-spec.xlsx" source="SmallUseCasesDemo/11-d10-diagnostic-sensors/spec/demo.xlsx" bytes="13506" sha256="00b8db452a334896574b899ffc8496142947416b7a6bd11a75fc7537f7efb398"/>
+  <workbook file="21-12-d11-coalition-value-spec.xlsx" source="SmallUseCasesDemo/12-d11-coalition-value/spec/demo.xlsx" bytes="12450" sha256="98236982ce3ca7cd2a62c13fae94df7432e8febb8e3efc6762831862791d3c81"/>
+  <workbook file="22-spec-classes.xlsx" source="SmallUseCasesDemo/13-d12-cyclic-patterns/spec/classes/demo.xlsx" bytes="14039" sha256="61c96626fe7b816a581f4ad355fe24775fc2a099c7e49af40993f8bdae69f844"/>
+  <workbook file="23-spec-words.xlsx" source="SmallUseCasesDemo/13-d12-cyclic-patterns/spec/words/demo.xlsx" bytes="15854" sha256="fb92298642ad950ff68a028e431b639f0aa366304c33e891b62646573873c8b1"/>
+  <workbook file="24-14-d13-tool-call-order-spec.xlsx" source="SmallUseCasesDemo/14-d13-tool-call-order/spec/demo.xlsx" bytes="17022" sha256="a17fb6b6000668e345450333eeaa0bb122dc92bca3343bfbe623c192ff1bae9d"/>
+  <workbook file="25-15-d13-composed-carriers-spec.xlsx" source="SmallUseCasesDemo/15-d13-composed-carriers/spec/demo.xlsx" bytes="22337" sha256="5581ccee8423c72d2643545447e06bd64c2f60fa41c5fcb72352f831ed12c4ac"/>
+  <workbook file="26-16-d13-agent-message-order-spec.xlsx" source="SmallUseCasesDemo/16-d13-agent-message-order/spec/demo.xlsx" bytes="18505" sha256="404e31fdb053a4d927ae2d9dcc672da85c0fd3e865b3307a4fc5f5461929342c"/>
+  <workbook file="27-17-d13-session-memory-spec.xlsx" source="SmallUseCasesDemo/17-d13-session-memory/spec/demo.xlsx" bytes="19587" sha256="9784adb129044dc6848756502791e7044c330c2559f08f07a1ca56150c33cca0"/>
+  <workbook file="28-18-d13-context-position-spec.xlsx" source="SmallUseCasesDemo/18-d13-context-position/spec/demo.xlsx" bytes="15671" sha256="5af51e5f082c289f6ee2abd47efeec300085056b00dbc77936032622f9bc89d6"/>
+  <workbook file="29-19-d14-language-processors-spec.xlsx" source="SmallUseCasesDemo/19-d14-language-processors/spec/demo.xlsx" bytes="18517" sha256="f6269ff44240e4a62126f64e869ae0a5246a3a4f717c80b9e5b59ddcbddb705b"/>
+  <workbook file="30-20-d14-sql-partitioning-spec.xlsx" source="SmallUseCasesDemo/20-d14-sql-partitioning/spec/demo.xlsx" bytes="16980" sha256="59a429b2ca447404d325131e1a18285d2dedb5ecae3cb63b91615aa1c213cddf"/>
+  <workbook file="31-21-d14-solver-relations-spec.xlsx" source="SmallUseCasesDemo/21-d14-solver-relations/spec/demo.xlsx" bytes="16633" sha256="1991e3cca27407d9480313dacf62a4d18cb8f9d66828b8f9a04e364617470253"/>
+  <workbook file="32-22-d15-fault-schedules-spec.xlsx" source="SmallUseCasesDemo/22-d15-fault-schedules/spec/demo.xlsx" bytes="25137" sha256="acfcc13e2cc4a3b69d35fd90cc4ade0d13d511672608f1a50d33870f2f779756"/>
+</corpus>

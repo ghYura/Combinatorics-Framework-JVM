@@ -1,0 +1,1930 @@
+<?xml version='1.0' encoding='utf-8'?>
+<d2-goldens origin="unchanged CPython source run_case" qa-commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b" generator-python="3.14.0" cases="480" raw="1152" excluded="672">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <source path="sut.py" sha256="45ac9d87cb06340883f3b87989adda998bcea58ec58aaac84dace8c9efe48fcd" />
+  <source path="oracle.py" sha256="a971c854b5fe41667cfbabe28e22943c7a88a66b7297d7770c5cdd6e9d6a625d" />
+  <source path="runtime.py" sha256="24c0aa84d397b4858488817e08964d127f2e00e7b1d7666c5d7f212f722825c2" />
+  <source path="spec/spec.toml" sha256="bfdcce7f09b91610117265b99f8e482808d0fcd091d1f1fe1d6f60ee440cf13c" />
+  <source path="spec/demo.constraints.json" sha256="e842c020ee8dea647ec00d75a1b0c1dbfbeb56ca04024808c4ce619db26d9ba1" />
+  <source path="architect-derived.json" sha256="43aa49f34cba14dd428600649599c2097c6155aeaa3b8a8f4c786644fca67fea" />
+  <case id="incremental|P=ascii|E=strict|M=00" adapter="incremental" payload="ascii" errors="strict" mask="0" chunks="414243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=strict|M=01" adapter="incremental" payload="ascii" errors="strict" mask="1" chunks="41 4243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=strict|M=02" adapter="incremental" payload="ascii" errors="strict" mask="2" chunks="4142 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=strict|M=03" adapter="incremental" payload="ascii" errors="strict" mask="3" chunks="41 42 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=replace|M=00" adapter="incremental" payload="ascii" errors="replace" mask="0" chunks="414243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=replace|M=01" adapter="incremental" payload="ascii" errors="replace" mask="1" chunks="41 4243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=replace|M=02" adapter="incremental" payload="ascii" errors="replace" mask="2" chunks="4142 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=ascii|E=replace|M=03" adapter="incremental" payload="ascii" errors="replace" mask="3" chunks="41 42 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=00" adapter="incremental" payload="euro" errors="strict" mask="0" chunks="41e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=01" adapter="incremental" payload="euro" errors="strict" mask="1" chunks="41 e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=02" adapter="incremental" payload="euro" errors="strict" mask="2" chunks="41e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=03" adapter="incremental" payload="euro" errors="strict" mask="3" chunks="41 e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=04" adapter="incremental" payload="euro" errors="strict" mask="4" chunks="41e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=05" adapter="incremental" payload="euro" errors="strict" mask="5" chunks="41 e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=06" adapter="incremental" payload="euro" errors="strict" mask="6" chunks="41e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=07" adapter="incremental" payload="euro" errors="strict" mask="7" chunks="41 e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=08" adapter="incremental" payload="euro" errors="strict" mask="8" chunks="41e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=09" adapter="incremental" payload="euro" errors="strict" mask="9" chunks="41 e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=0a" adapter="incremental" payload="euro" errors="strict" mask="10" chunks="41e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=0b" adapter="incremental" payload="euro" errors="strict" mask="11" chunks="41 e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=0c" adapter="incremental" payload="euro" errors="strict" mask="12" chunks="41e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=0d" adapter="incremental" payload="euro" errors="strict" mask="13" chunks="41 e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=0e" adapter="incremental" payload="euro" errors="strict" mask="14" chunks="41e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=strict|M=0f" adapter="incremental" payload="euro" errors="strict" mask="15" chunks="41 e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=00" adapter="incremental" payload="euro" errors="replace" mask="0" chunks="41e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=01" adapter="incremental" payload="euro" errors="replace" mask="1" chunks="41 e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=02" adapter="incremental" payload="euro" errors="replace" mask="2" chunks="41e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=03" adapter="incremental" payload="euro" errors="replace" mask="3" chunks="41 e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=04" adapter="incremental" payload="euro" errors="replace" mask="4" chunks="41e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=05" adapter="incremental" payload="euro" errors="replace" mask="5" chunks="41 e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=06" adapter="incremental" payload="euro" errors="replace" mask="6" chunks="41e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=07" adapter="incremental" payload="euro" errors="replace" mask="7" chunks="41 e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=08" adapter="incremental" payload="euro" errors="replace" mask="8" chunks="41e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=09" adapter="incremental" payload="euro" errors="replace" mask="9" chunks="41 e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=0a" adapter="incremental" payload="euro" errors="replace" mask="10" chunks="41e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=0b" adapter="incremental" payload="euro" errors="replace" mask="11" chunks="41 e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=0c" adapter="incremental" payload="euro" errors="replace" mask="12" chunks="41e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=0d" adapter="incremental" payload="euro" errors="replace" mask="13" chunks="41 e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=0e" adapter="incremental" payload="euro" errors="replace" mask="14" chunks="41e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=euro|E=replace|M=0f" adapter="incremental" payload="euro" errors="replace" mask="15" chunks="41 e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=00" adapter="incremental" payload="emoji" errors="strict" mask="0" chunks="f09f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=01" adapter="incremental" payload="emoji" errors="strict" mask="1" chunks="f0 9f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=02" adapter="incremental" payload="emoji" errors="strict" mask="2" chunks="f09f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=03" adapter="incremental" payload="emoji" errors="strict" mask="3" chunks="f0 9f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=04" adapter="incremental" payload="emoji" errors="strict" mask="4" chunks="f09f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=05" adapter="incremental" payload="emoji" errors="strict" mask="5" chunks="f0 9f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=06" adapter="incremental" payload="emoji" errors="strict" mask="6" chunks="f09f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=strict|M=07" adapter="incremental" payload="emoji" errors="strict" mask="7" chunks="f0 9f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=00" adapter="incremental" payload="emoji" errors="replace" mask="0" chunks="f09f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=01" adapter="incremental" payload="emoji" errors="replace" mask="1" chunks="f0 9f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=02" adapter="incremental" payload="emoji" errors="replace" mask="2" chunks="f09f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=03" adapter="incremental" payload="emoji" errors="replace" mask="3" chunks="f0 9f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=04" adapter="incremental" payload="emoji" errors="replace" mask="4" chunks="f09f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=05" adapter="incremental" payload="emoji" errors="replace" mask="5" chunks="f0 9f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=06" adapter="incremental" payload="emoji" errors="replace" mask="6" chunks="f09f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=emoji|E=replace|M=07" adapter="incremental" payload="emoji" errors="replace" mask="7" chunks="f0 9f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="incremental|P=truncated_utf8|E=strict|M=00" adapter="incremental" payload="truncated_utf8" errors="strict" mask="0" chunks="41e282" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf8|E=strict|M=01" adapter="incremental" payload="truncated_utf8" errors="strict" mask="1" chunks="41 e282" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf8|E=strict|M=02" adapter="incremental" payload="truncated_utf8" errors="strict" mask="2" chunks="41e2 82" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf8|E=strict|M=03" adapter="incremental" payload="truncated_utf8" errors="strict" mask="3" chunks="41 e2 82" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf8|E=replace|M=00" adapter="incremental" payload="truncated_utf8" errors="replace" mask="0" chunks="41e282" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf8|E=replace|M=01" adapter="incremental" payload="truncated_utf8" errors="replace" mask="1" chunks="41 e282" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf8|E=replace|M=02" adapter="incremental" payload="truncated_utf8" errors="replace" mask="2" chunks="41e2 82" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf8|E=replace|M=03" adapter="incremental" payload="truncated_utf8" errors="replace" mask="3" chunks="41 e2 82" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=00" adapter="incremental" payload="bom_utf16" errors="strict" mask="0" chunks="fffe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=01" adapter="incremental" payload="bom_utf16" errors="strict" mask="1" chunks="ff fe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=02" adapter="incremental" payload="bom_utf16" errors="strict" mask="2" chunks="fffe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=03" adapter="incremental" payload="bom_utf16" errors="strict" mask="3" chunks="ff fe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=04" adapter="incremental" payload="bom_utf16" errors="strict" mask="4" chunks="fffe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=05" adapter="incremental" payload="bom_utf16" errors="strict" mask="5" chunks="ff fe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=06" adapter="incremental" payload="bom_utf16" errors="strict" mask="6" chunks="fffe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=07" adapter="incremental" payload="bom_utf16" errors="strict" mask="7" chunks="ff fe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=08" adapter="incremental" payload="bom_utf16" errors="strict" mask="8" chunks="fffe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=09" adapter="incremental" payload="bom_utf16" errors="strict" mask="9" chunks="ff fe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=0a" adapter="incremental" payload="bom_utf16" errors="strict" mask="10" chunks="fffe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=0b" adapter="incremental" payload="bom_utf16" errors="strict" mask="11" chunks="ff fe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=0c" adapter="incremental" payload="bom_utf16" errors="strict" mask="12" chunks="fffe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=0d" adapter="incremental" payload="bom_utf16" errors="strict" mask="13" chunks="ff fe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=0e" adapter="incremental" payload="bom_utf16" errors="strict" mask="14" chunks="fffe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=0f" adapter="incremental" payload="bom_utf16" errors="strict" mask="15" chunks="ff fe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=10" adapter="incremental" payload="bom_utf16" errors="strict" mask="16" chunks="fffe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=11" adapter="incremental" payload="bom_utf16" errors="strict" mask="17" chunks="ff fe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=12" adapter="incremental" payload="bom_utf16" errors="strict" mask="18" chunks="fffe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=13" adapter="incremental" payload="bom_utf16" errors="strict" mask="19" chunks="ff fe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=14" adapter="incremental" payload="bom_utf16" errors="strict" mask="20" chunks="fffe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=15" adapter="incremental" payload="bom_utf16" errors="strict" mask="21" chunks="ff fe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=16" adapter="incremental" payload="bom_utf16" errors="strict" mask="22" chunks="fffe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=17" adapter="incremental" payload="bom_utf16" errors="strict" mask="23" chunks="ff fe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=18" adapter="incremental" payload="bom_utf16" errors="strict" mask="24" chunks="fffe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=19" adapter="incremental" payload="bom_utf16" errors="strict" mask="25" chunks="ff fe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=1a" adapter="incremental" payload="bom_utf16" errors="strict" mask="26" chunks="fffe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=1b" adapter="incremental" payload="bom_utf16" errors="strict" mask="27" chunks="ff fe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=1c" adapter="incremental" payload="bom_utf16" errors="strict" mask="28" chunks="fffe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=1d" adapter="incremental" payload="bom_utf16" errors="strict" mask="29" chunks="ff fe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=1e" adapter="incremental" payload="bom_utf16" errors="strict" mask="30" chunks="fffe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=strict|M=1f" adapter="incremental" payload="bom_utf16" errors="strict" mask="31" chunks="ff fe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=00" adapter="incremental" payload="bom_utf16" errors="replace" mask="0" chunks="fffe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=01" adapter="incremental" payload="bom_utf16" errors="replace" mask="1" chunks="ff fe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=02" adapter="incremental" payload="bom_utf16" errors="replace" mask="2" chunks="fffe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=03" adapter="incremental" payload="bom_utf16" errors="replace" mask="3" chunks="ff fe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=04" adapter="incremental" payload="bom_utf16" errors="replace" mask="4" chunks="fffe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=05" adapter="incremental" payload="bom_utf16" errors="replace" mask="5" chunks="ff fe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=06" adapter="incremental" payload="bom_utf16" errors="replace" mask="6" chunks="fffe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=07" adapter="incremental" payload="bom_utf16" errors="replace" mask="7" chunks="ff fe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=08" adapter="incremental" payload="bom_utf16" errors="replace" mask="8" chunks="fffe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=09" adapter="incremental" payload="bom_utf16" errors="replace" mask="9" chunks="ff fe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=0a" adapter="incremental" payload="bom_utf16" errors="replace" mask="10" chunks="fffe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=0b" adapter="incremental" payload="bom_utf16" errors="replace" mask="11" chunks="ff fe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=0c" adapter="incremental" payload="bom_utf16" errors="replace" mask="12" chunks="fffe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=0d" adapter="incremental" payload="bom_utf16" errors="replace" mask="13" chunks="ff fe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=0e" adapter="incremental" payload="bom_utf16" errors="replace" mask="14" chunks="fffe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=0f" adapter="incremental" payload="bom_utf16" errors="replace" mask="15" chunks="ff fe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=10" adapter="incremental" payload="bom_utf16" errors="replace" mask="16" chunks="fffe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=11" adapter="incremental" payload="bom_utf16" errors="replace" mask="17" chunks="ff fe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=12" adapter="incremental" payload="bom_utf16" errors="replace" mask="18" chunks="fffe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=13" adapter="incremental" payload="bom_utf16" errors="replace" mask="19" chunks="ff fe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=14" adapter="incremental" payload="bom_utf16" errors="replace" mask="20" chunks="fffe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=15" adapter="incremental" payload="bom_utf16" errors="replace" mask="21" chunks="ff fe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=16" adapter="incremental" payload="bom_utf16" errors="replace" mask="22" chunks="fffe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=17" adapter="incremental" payload="bom_utf16" errors="replace" mask="23" chunks="ff fe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=18" adapter="incremental" payload="bom_utf16" errors="replace" mask="24" chunks="fffe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=19" adapter="incremental" payload="bom_utf16" errors="replace" mask="25" chunks="ff fe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=1a" adapter="incremental" payload="bom_utf16" errors="replace" mask="26" chunks="fffe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=1b" adapter="incremental" payload="bom_utf16" errors="replace" mask="27" chunks="ff fe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=1c" adapter="incremental" payload="bom_utf16" errors="replace" mask="28" chunks="fffe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=1d" adapter="incremental" payload="bom_utf16" errors="replace" mask="29" chunks="ff fe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=1e" adapter="incremental" payload="bom_utf16" errors="replace" mask="30" chunks="fffe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=bom_utf16|E=replace|M=1f" adapter="incremental" payload="bom_utf16" errors="replace" mask="31" chunks="ff fe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=00" adapter="incremental" payload="truncated_utf16" errors="strict" mask="0" chunks="fffe410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=01" adapter="incremental" payload="truncated_utf16" errors="strict" mask="1" chunks="ff fe410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=02" adapter="incremental" payload="truncated_utf16" errors="strict" mask="2" chunks="fffe 410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=03" adapter="incremental" payload="truncated_utf16" errors="strict" mask="3" chunks="ff fe 410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=04" adapter="incremental" payload="truncated_utf16" errors="strict" mask="4" chunks="fffe41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=05" adapter="incremental" payload="truncated_utf16" errors="strict" mask="5" chunks="ff fe41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=06" adapter="incremental" payload="truncated_utf16" errors="strict" mask="6" chunks="fffe 41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=07" adapter="incremental" payload="truncated_utf16" errors="strict" mask="7" chunks="ff fe 41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=08" adapter="incremental" payload="truncated_utf16" errors="strict" mask="8" chunks="fffe4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=09" adapter="incremental" payload="truncated_utf16" errors="strict" mask="9" chunks="ff fe4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=0a" adapter="incremental" payload="truncated_utf16" errors="strict" mask="10" chunks="fffe 4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=0b" adapter="incremental" payload="truncated_utf16" errors="strict" mask="11" chunks="ff fe 4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=0c" adapter="incremental" payload="truncated_utf16" errors="strict" mask="12" chunks="fffe41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=0d" adapter="incremental" payload="truncated_utf16" errors="strict" mask="13" chunks="ff fe41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=0e" adapter="incremental" payload="truncated_utf16" errors="strict" mask="14" chunks="fffe 41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=strict|M=0f" adapter="incremental" payload="truncated_utf16" errors="strict" mask="15" chunks="ff fe 41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=00" adapter="incremental" payload="truncated_utf16" errors="replace" mask="0" chunks="fffe410042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=01" adapter="incremental" payload="truncated_utf16" errors="replace" mask="1" chunks="ff fe410042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=02" adapter="incremental" payload="truncated_utf16" errors="replace" mask="2" chunks="fffe 410042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=03" adapter="incremental" payload="truncated_utf16" errors="replace" mask="3" chunks="ff fe 410042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=04" adapter="incremental" payload="truncated_utf16" errors="replace" mask="4" chunks="fffe41 0042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=05" adapter="incremental" payload="truncated_utf16" errors="replace" mask="5" chunks="ff fe41 0042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=06" adapter="incremental" payload="truncated_utf16" errors="replace" mask="6" chunks="fffe 41 0042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=07" adapter="incremental" payload="truncated_utf16" errors="replace" mask="7" chunks="ff fe 41 0042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=08" adapter="incremental" payload="truncated_utf16" errors="replace" mask="8" chunks="fffe4100 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=09" adapter="incremental" payload="truncated_utf16" errors="replace" mask="9" chunks="ff fe4100 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=0a" adapter="incremental" payload="truncated_utf16" errors="replace" mask="10" chunks="fffe 4100 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=0b" adapter="incremental" payload="truncated_utf16" errors="replace" mask="11" chunks="ff fe 4100 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=0c" adapter="incremental" payload="truncated_utf16" errors="replace" mask="12" chunks="fffe41 00 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=0d" adapter="incremental" payload="truncated_utf16" errors="replace" mask="13" chunks="ff fe41 00 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=0e" adapter="incremental" payload="truncated_utf16" errors="replace" mask="14" chunks="fffe 41 00 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="incremental|P=truncated_utf16|E=replace|M=0f" adapter="incremental" payload="truncated_utf16" errors="replace" mask="15" chunks="ff fe 41 00 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=strict|M=00" adapter="per_chunk" payload="ascii" errors="strict" mask="0" chunks="414243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=strict|M=01" adapter="per_chunk" payload="ascii" errors="strict" mask="1" chunks="41 4243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=strict|M=02" adapter="per_chunk" payload="ascii" errors="strict" mask="2" chunks="4142 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=strict|M=03" adapter="per_chunk" payload="ascii" errors="strict" mask="3" chunks="41 42 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=replace|M=00" adapter="per_chunk" payload="ascii" errors="replace" mask="0" chunks="414243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=replace|M=01" adapter="per_chunk" payload="ascii" errors="replace" mask="1" chunks="41 4243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=replace|M=02" adapter="per_chunk" payload="ascii" errors="replace" mask="2" chunks="4142 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=ascii|E=replace|M=03" adapter="per_chunk" payload="ascii" errors="replace" mask="3" chunks="41 42 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=00" adapter="per_chunk" payload="euro" errors="strict" mask="0" chunks="41e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=01" adapter="per_chunk" payload="euro" errors="strict" mask="1" chunks="41 e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=02" adapter="per_chunk" payload="euro" errors="strict" mask="2" chunks="41e2 82ac42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=03" adapter="per_chunk" payload="euro" errors="strict" mask="3" chunks="41 e2 82ac42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=04" adapter="per_chunk" payload="euro" errors="strict" mask="4" chunks="41e282 ac42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=05" adapter="per_chunk" payload="euro" errors="strict" mask="5" chunks="41 e282 ac42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=06" adapter="per_chunk" payload="euro" errors="strict" mask="6" chunks="41e2 82 ac42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=07" adapter="per_chunk" payload="euro" errors="strict" mask="7" chunks="41 e2 82 ac42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=08" adapter="per_chunk" payload="euro" errors="strict" mask="8" chunks="41e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=09" adapter="per_chunk" payload="euro" errors="strict" mask="9" chunks="41 e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=0a" adapter="per_chunk" payload="euro" errors="strict" mask="10" chunks="41e2 82ac 42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=0b" adapter="per_chunk" payload="euro" errors="strict" mask="11" chunks="41 e2 82ac 42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=0c" adapter="per_chunk" payload="euro" errors="strict" mask="12" chunks="41e282 ac 42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=0d" adapter="per_chunk" payload="euro" errors="strict" mask="13" chunks="41 e282 ac 42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=0e" adapter="per_chunk" payload="euro" errors="strict" mask="14" chunks="41e2 82 ac 42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=strict|M=0f" adapter="per_chunk" payload="euro" errors="strict" mask="15" chunks="41 e2 82 ac 42" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=00" adapter="per_chunk" payload="euro" errors="replace" mask="0" chunks="41e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=01" adapter="per_chunk" payload="euro" errors="replace" mask="1" chunks="41 e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=02" adapter="per_chunk" payload="euro" errors="replace" mask="2" chunks="41e2 82ac42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=03" adapter="per_chunk" payload="euro" errors="replace" mask="3" chunks="41 e2 82ac42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=04" adapter="per_chunk" payload="euro" errors="replace" mask="4" chunks="41e282 ac42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A��B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=05" adapter="per_chunk" payload="euro" errors="replace" mask="5" chunks="41 e282 ac42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A��B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=06" adapter="per_chunk" payload="euro" errors="replace" mask="6" chunks="41e2 82 ac42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=07" adapter="per_chunk" payload="euro" errors="replace" mask="7" chunks="41 e2 82 ac42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=08" adapter="per_chunk" payload="euro" errors="replace" mask="8" chunks="41e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=09" adapter="per_chunk" payload="euro" errors="replace" mask="9" chunks="41 e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=0a" adapter="per_chunk" payload="euro" errors="replace" mask="10" chunks="41e2 82ac 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=0b" adapter="per_chunk" payload="euro" errors="replace" mask="11" chunks="41 e2 82ac 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=0c" adapter="per_chunk" payload="euro" errors="replace" mask="12" chunks="41e282 ac 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A��B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=0d" adapter="per_chunk" payload="euro" errors="replace" mask="13" chunks="41 e282 ac 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A��B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=0e" adapter="per_chunk" payload="euro" errors="replace" mask="14" chunks="41e2 82 ac 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=euro|E=replace|M=0f" adapter="per_chunk" payload="euro" errors="replace" mask="15" chunks="41 e2 82 ac 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A���B</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=00" adapter="per_chunk" payload="emoji" errors="strict" mask="0" chunks="f09f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=01" adapter="per_chunk" payload="emoji" errors="strict" mask="1" chunks="f0 9f9982" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=02" adapter="per_chunk" payload="emoji" errors="strict" mask="2" chunks="f09f 9982" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=03" adapter="per_chunk" payload="emoji" errors="strict" mask="3" chunks="f0 9f 9982" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=04" adapter="per_chunk" payload="emoji" errors="strict" mask="4" chunks="f09f99 82" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=05" adapter="per_chunk" payload="emoji" errors="strict" mask="5" chunks="f0 9f99 82" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=06" adapter="per_chunk" payload="emoji" errors="strict" mask="6" chunks="f09f 99 82" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=strict|M=07" adapter="per_chunk" payload="emoji" errors="strict" mask="7" chunks="f0 9f 99 82" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=00" adapter="per_chunk" payload="emoji" errors="replace" mask="0" chunks="f09f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=01" adapter="per_chunk" payload="emoji" errors="replace" mask="1" chunks="f0 9f9982" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">����</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=02" adapter="per_chunk" payload="emoji" errors="replace" mask="2" chunks="f09f 9982" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">���</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=03" adapter="per_chunk" payload="emoji" errors="replace" mask="3" chunks="f0 9f 9982" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">����</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=04" adapter="per_chunk" payload="emoji" errors="replace" mask="4" chunks="f09f99 82" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">��</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=05" adapter="per_chunk" payload="emoji" errors="replace" mask="5" chunks="f0 9f99 82" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">����</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=06" adapter="per_chunk" payload="emoji" errors="replace" mask="6" chunks="f09f 99 82" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">���</observed>
+  </case>
+  <case id="per_chunk|P=emoji|E=replace|M=07" adapter="per_chunk" payload="emoji" errors="replace" mask="7" chunks="f0 9f 99 82" failure-class="wrong_text">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">����</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=strict|M=00" adapter="per_chunk" payload="truncated_utf8" errors="strict" mask="0" chunks="41e282" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=strict|M=01" adapter="per_chunk" payload="truncated_utf8" errors="strict" mask="1" chunks="41 e282" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=strict|M=02" adapter="per_chunk" payload="truncated_utf8" errors="strict" mask="2" chunks="41e2 82" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=strict|M=03" adapter="per_chunk" payload="truncated_utf8" errors="strict" mask="3" chunks="41 e2 82" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=replace|M=00" adapter="per_chunk" payload="truncated_utf8" errors="replace" mask="0" chunks="41e282" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=replace|M=01" adapter="per_chunk" payload="truncated_utf8" errors="replace" mask="1" chunks="41 e282" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=replace|M=02" adapter="per_chunk" payload="truncated_utf8" errors="replace" mask="2" chunks="41e2 82" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A��</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf8|E=replace|M=03" adapter="per_chunk" payload="truncated_utf8" errors="replace" mask="3" chunks="41 e2 82" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=00" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="0" chunks="fffe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=01" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="1" chunks="ff fe4100a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=02" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="2" chunks="fffe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=03" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="3" chunks="ff fe 4100a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=04" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="4" chunks="fffe41 00a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=05" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="5" chunks="ff fe41 00a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=06" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="6" chunks="fffe 41 00a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=07" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="7" chunks="ff fe 41 00a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=08" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="8" chunks="fffe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=09" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="9" chunks="ff fe4100 a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=0a" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="10" chunks="fffe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=0b" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="11" chunks="ff fe 4100 a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=0c" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="12" chunks="fffe41 00 a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=0d" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="13" chunks="ff fe41 00 a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=0e" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="14" chunks="fffe 41 00 a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=0f" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="15" chunks="ff fe 41 00 a903" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=10" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="16" chunks="fffe4100a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=11" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="17" chunks="ff fe4100a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=12" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="18" chunks="fffe 4100a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=13" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="19" chunks="ff fe 4100a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=14" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="20" chunks="fffe41 00a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=15" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="21" chunks="ff fe41 00a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=16" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="22" chunks="fffe 41 00a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=17" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="23" chunks="ff fe 41 00a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=18" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="24" chunks="fffe4100 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=19" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="25" chunks="ff fe4100 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=1a" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="26" chunks="fffe 4100 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=1b" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="27" chunks="ff fe 4100 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=1c" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="28" chunks="fffe41 00 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=1d" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="29" chunks="ff fe41 00 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=1e" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="30" chunks="fffe 41 00 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=strict|M=1f" adapter="per_chunk" payload="bom_utf16" errors="strict" mask="31" chunks="ff fe 41 00 a9 03" failure-class="unexpected_rejection">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=00" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="0" chunks="fffe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=01" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="1" chunks="ff fe4100a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=02" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="2" chunks="fffe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=03" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="3" chunks="ff fe 4100a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">��AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=04" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="4" chunks="fffe41 00a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=05" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="5" chunks="ff fe41 00a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=06" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="6" chunks="fffe 41 00a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=07" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="7" chunks="ff fe 41 00a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">���꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=08" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="8" chunks="fffe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=09" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="9" chunks="ff fe4100 a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾�Ω</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=0a" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="10" chunks="fffe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=0b" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="11" chunks="ff fe 4100 a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">��AΩ</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=0c" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="12" chunks="fffe41 00 a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">��Ω</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=0d" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="13" chunks="ff fe41 00 a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾�Ω</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=0e" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="14" chunks="fffe 41 00 a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">��Ω</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=0f" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="15" chunks="ff fe 41 00 a903" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">����Ω</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=10" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="16" chunks="fffe4100a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=11" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="17" chunks="ff fe4100a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=12" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="18" chunks="fffe 4100a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=13" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="19" chunks="ff fe 4100a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">��A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=14" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="20" chunks="fffe41 00a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=15" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="21" chunks="ff fe41 00a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=16" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="22" chunks="fffe 41 00a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=17" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="23" chunks="ff fe 41 00a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">���꤀�</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=18" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="24" chunks="fffe4100 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=19" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="25" chunks="ff fe4100 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾���</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=1a" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="26" chunks="fffe 4100 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=1b" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="27" chunks="ff fe 4100 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">��A��</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=1c" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="28" chunks="fffe41 00 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">����</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=1d" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="29" chunks="ff fe41 00 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">�䇾���</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=1e" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="30" chunks="fffe 41 00 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">����</observed>
+  </case>
+  <case id="per_chunk|P=bom_utf16|E=replace|M=1f" adapter="per_chunk" payload="bom_utf16" errors="replace" mask="31" chunks="ff fe 41 00 a9 03" failure-class="wrong_text">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">������</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=00" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="0" chunks="fffe410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=01" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="1" chunks="ff fe410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=02" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="2" chunks="fffe 410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=03" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="3" chunks="ff fe 410042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=04" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="4" chunks="fffe41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=05" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="5" chunks="ff fe41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=06" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="6" chunks="fffe 41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=07" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="7" chunks="ff fe 41 0042" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=08" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="8" chunks="fffe4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=09" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="9" chunks="ff fe4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=0a" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="10" chunks="fffe 4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=0b" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="11" chunks="ff fe 4100 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=0c" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="12" chunks="fffe41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=0d" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="13" chunks="ff fe41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=0e" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="14" chunks="fffe 41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=strict|M=0f" adapter="per_chunk" payload="truncated_utf16" errors="strict" mask="15" chunks="ff fe 41 00 42" failure-class="none">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="false" error="UnicodeDecodeError" />
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=00" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="0" chunks="fffe410042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=01" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="1" chunks="ff fe410042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�䇾䈀</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=02" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="2" chunks="fffe 410042" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=03" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="3" chunks="ff fe 410042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">��A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=04" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="4" chunks="fffe41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�䈀</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=05" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="5" chunks="ff fe41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�䇾䈀</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=06" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="6" chunks="fffe 41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�䈀</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=07" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="7" chunks="ff fe 41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">���䈀</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=08" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="8" chunks="fffe4100 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=09" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="9" chunks="ff fe4100 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�䇾��</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=0a" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="10" chunks="fffe 4100 42" failure-class="none">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=0b" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="11" chunks="ff fe 4100 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">��A�</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=0c" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="12" chunks="fffe41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">���</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=0d" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="13" chunks="ff fe41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�䇾��</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=0e" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="14" chunks="fffe 41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">���</observed>
+  </case>
+  <case id="per_chunk|P=truncated_utf16|E=replace|M=0f" adapter="per_chunk" payload="truncated_utf16" errors="replace" mask="15" chunks="ff fe 41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">�����</observed>
+  </case>
+  <case id="no_final|P=ascii|E=strict|M=00" adapter="no_final" payload="ascii" errors="strict" mask="0" chunks="414243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=strict|M=01" adapter="no_final" payload="ascii" errors="strict" mask="1" chunks="41 4243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=strict|M=02" adapter="no_final" payload="ascii" errors="strict" mask="2" chunks="4142 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=strict|M=03" adapter="no_final" payload="ascii" errors="strict" mask="3" chunks="41 42 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=replace|M=00" adapter="no_final" payload="ascii" errors="replace" mask="0" chunks="414243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=replace|M=01" adapter="no_final" payload="ascii" errors="replace" mask="1" chunks="41 4243" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=replace|M=02" adapter="no_final" payload="ascii" errors="replace" mask="2" chunks="4142 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=ascii|E=replace|M=03" adapter="no_final" payload="ascii" errors="replace" mask="3" chunks="41 42 43" failure-class="none">
+    <reference accepted="true" error="">ABC</reference>
+    <observed accepted="true" error="">ABC</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=00" adapter="no_final" payload="euro" errors="strict" mask="0" chunks="41e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=01" adapter="no_final" payload="euro" errors="strict" mask="1" chunks="41 e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=02" adapter="no_final" payload="euro" errors="strict" mask="2" chunks="41e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=03" adapter="no_final" payload="euro" errors="strict" mask="3" chunks="41 e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=04" adapter="no_final" payload="euro" errors="strict" mask="4" chunks="41e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=05" adapter="no_final" payload="euro" errors="strict" mask="5" chunks="41 e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=06" adapter="no_final" payload="euro" errors="strict" mask="6" chunks="41e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=07" adapter="no_final" payload="euro" errors="strict" mask="7" chunks="41 e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=08" adapter="no_final" payload="euro" errors="strict" mask="8" chunks="41e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=09" adapter="no_final" payload="euro" errors="strict" mask="9" chunks="41 e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=0a" adapter="no_final" payload="euro" errors="strict" mask="10" chunks="41e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=0b" adapter="no_final" payload="euro" errors="strict" mask="11" chunks="41 e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=0c" adapter="no_final" payload="euro" errors="strict" mask="12" chunks="41e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=0d" adapter="no_final" payload="euro" errors="strict" mask="13" chunks="41 e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=0e" adapter="no_final" payload="euro" errors="strict" mask="14" chunks="41e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=strict|M=0f" adapter="no_final" payload="euro" errors="strict" mask="15" chunks="41 e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=00" adapter="no_final" payload="euro" errors="replace" mask="0" chunks="41e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=01" adapter="no_final" payload="euro" errors="replace" mask="1" chunks="41 e282ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=02" adapter="no_final" payload="euro" errors="replace" mask="2" chunks="41e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=03" adapter="no_final" payload="euro" errors="replace" mask="3" chunks="41 e2 82ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=04" adapter="no_final" payload="euro" errors="replace" mask="4" chunks="41e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=05" adapter="no_final" payload="euro" errors="replace" mask="5" chunks="41 e282 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=06" adapter="no_final" payload="euro" errors="replace" mask="6" chunks="41e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=07" adapter="no_final" payload="euro" errors="replace" mask="7" chunks="41 e2 82 ac42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=08" adapter="no_final" payload="euro" errors="replace" mask="8" chunks="41e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=09" adapter="no_final" payload="euro" errors="replace" mask="9" chunks="41 e282ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=0a" adapter="no_final" payload="euro" errors="replace" mask="10" chunks="41e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=0b" adapter="no_final" payload="euro" errors="replace" mask="11" chunks="41 e2 82ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=0c" adapter="no_final" payload="euro" errors="replace" mask="12" chunks="41e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=0d" adapter="no_final" payload="euro" errors="replace" mask="13" chunks="41 e282 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=0e" adapter="no_final" payload="euro" errors="replace" mask="14" chunks="41e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=euro|E=replace|M=0f" adapter="no_final" payload="euro" errors="replace" mask="15" chunks="41 e2 82 ac 42" failure-class="none">
+    <reference accepted="true" error="">A€B</reference>
+    <observed accepted="true" error="">A€B</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=00" adapter="no_final" payload="emoji" errors="strict" mask="0" chunks="f09f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=01" adapter="no_final" payload="emoji" errors="strict" mask="1" chunks="f0 9f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=02" adapter="no_final" payload="emoji" errors="strict" mask="2" chunks="f09f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=03" adapter="no_final" payload="emoji" errors="strict" mask="3" chunks="f0 9f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=04" adapter="no_final" payload="emoji" errors="strict" mask="4" chunks="f09f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=05" adapter="no_final" payload="emoji" errors="strict" mask="5" chunks="f0 9f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=06" adapter="no_final" payload="emoji" errors="strict" mask="6" chunks="f09f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=strict|M=07" adapter="no_final" payload="emoji" errors="strict" mask="7" chunks="f0 9f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=00" adapter="no_final" payload="emoji" errors="replace" mask="0" chunks="f09f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=01" adapter="no_final" payload="emoji" errors="replace" mask="1" chunks="f0 9f9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=02" adapter="no_final" payload="emoji" errors="replace" mask="2" chunks="f09f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=03" adapter="no_final" payload="emoji" errors="replace" mask="3" chunks="f0 9f 9982" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=04" adapter="no_final" payload="emoji" errors="replace" mask="4" chunks="f09f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=05" adapter="no_final" payload="emoji" errors="replace" mask="5" chunks="f0 9f99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=06" adapter="no_final" payload="emoji" errors="replace" mask="6" chunks="f09f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=emoji|E=replace|M=07" adapter="no_final" payload="emoji" errors="replace" mask="7" chunks="f0 9f 99 82" failure-class="none">
+    <reference accepted="true" error="">🙂</reference>
+    <observed accepted="true" error="">🙂</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=strict|M=00" adapter="no_final" payload="truncated_utf8" errors="strict" mask="0" chunks="41e282" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=strict|M=01" adapter="no_final" payload="truncated_utf8" errors="strict" mask="1" chunks="41 e282" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=strict|M=02" adapter="no_final" payload="truncated_utf8" errors="strict" mask="2" chunks="41e2 82" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=strict|M=03" adapter="no_final" payload="truncated_utf8" errors="strict" mask="3" chunks="41 e2 82" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=replace|M=00" adapter="no_final" payload="truncated_utf8" errors="replace" mask="0" chunks="41e282" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=replace|M=01" adapter="no_final" payload="truncated_utf8" errors="replace" mask="1" chunks="41 e282" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=replace|M=02" adapter="no_final" payload="truncated_utf8" errors="replace" mask="2" chunks="41e2 82" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf8|E=replace|M=03" adapter="no_final" payload="truncated_utf8" errors="replace" mask="3" chunks="41 e2 82" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=00" adapter="no_final" payload="bom_utf16" errors="strict" mask="0" chunks="fffe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=01" adapter="no_final" payload="bom_utf16" errors="strict" mask="1" chunks="ff fe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=02" adapter="no_final" payload="bom_utf16" errors="strict" mask="2" chunks="fffe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=03" adapter="no_final" payload="bom_utf16" errors="strict" mask="3" chunks="ff fe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=04" adapter="no_final" payload="bom_utf16" errors="strict" mask="4" chunks="fffe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=05" adapter="no_final" payload="bom_utf16" errors="strict" mask="5" chunks="ff fe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=06" adapter="no_final" payload="bom_utf16" errors="strict" mask="6" chunks="fffe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=07" adapter="no_final" payload="bom_utf16" errors="strict" mask="7" chunks="ff fe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=08" adapter="no_final" payload="bom_utf16" errors="strict" mask="8" chunks="fffe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=09" adapter="no_final" payload="bom_utf16" errors="strict" mask="9" chunks="ff fe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=0a" adapter="no_final" payload="bom_utf16" errors="strict" mask="10" chunks="fffe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=0b" adapter="no_final" payload="bom_utf16" errors="strict" mask="11" chunks="ff fe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=0c" adapter="no_final" payload="bom_utf16" errors="strict" mask="12" chunks="fffe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=0d" adapter="no_final" payload="bom_utf16" errors="strict" mask="13" chunks="ff fe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=0e" adapter="no_final" payload="bom_utf16" errors="strict" mask="14" chunks="fffe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=0f" adapter="no_final" payload="bom_utf16" errors="strict" mask="15" chunks="ff fe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=10" adapter="no_final" payload="bom_utf16" errors="strict" mask="16" chunks="fffe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=11" adapter="no_final" payload="bom_utf16" errors="strict" mask="17" chunks="ff fe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=12" adapter="no_final" payload="bom_utf16" errors="strict" mask="18" chunks="fffe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=13" adapter="no_final" payload="bom_utf16" errors="strict" mask="19" chunks="ff fe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=14" adapter="no_final" payload="bom_utf16" errors="strict" mask="20" chunks="fffe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=15" adapter="no_final" payload="bom_utf16" errors="strict" mask="21" chunks="ff fe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=16" adapter="no_final" payload="bom_utf16" errors="strict" mask="22" chunks="fffe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=17" adapter="no_final" payload="bom_utf16" errors="strict" mask="23" chunks="ff fe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=18" adapter="no_final" payload="bom_utf16" errors="strict" mask="24" chunks="fffe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=19" adapter="no_final" payload="bom_utf16" errors="strict" mask="25" chunks="ff fe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=1a" adapter="no_final" payload="bom_utf16" errors="strict" mask="26" chunks="fffe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=1b" adapter="no_final" payload="bom_utf16" errors="strict" mask="27" chunks="ff fe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=1c" adapter="no_final" payload="bom_utf16" errors="strict" mask="28" chunks="fffe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=1d" adapter="no_final" payload="bom_utf16" errors="strict" mask="29" chunks="ff fe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=1e" adapter="no_final" payload="bom_utf16" errors="strict" mask="30" chunks="fffe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=strict|M=1f" adapter="no_final" payload="bom_utf16" errors="strict" mask="31" chunks="ff fe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=00" adapter="no_final" payload="bom_utf16" errors="replace" mask="0" chunks="fffe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=01" adapter="no_final" payload="bom_utf16" errors="replace" mask="1" chunks="ff fe4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=02" adapter="no_final" payload="bom_utf16" errors="replace" mask="2" chunks="fffe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=03" adapter="no_final" payload="bom_utf16" errors="replace" mask="3" chunks="ff fe 4100a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=04" adapter="no_final" payload="bom_utf16" errors="replace" mask="4" chunks="fffe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=05" adapter="no_final" payload="bom_utf16" errors="replace" mask="5" chunks="ff fe41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=06" adapter="no_final" payload="bom_utf16" errors="replace" mask="6" chunks="fffe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=07" adapter="no_final" payload="bom_utf16" errors="replace" mask="7" chunks="ff fe 41 00a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=08" adapter="no_final" payload="bom_utf16" errors="replace" mask="8" chunks="fffe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=09" adapter="no_final" payload="bom_utf16" errors="replace" mask="9" chunks="ff fe4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=0a" adapter="no_final" payload="bom_utf16" errors="replace" mask="10" chunks="fffe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=0b" adapter="no_final" payload="bom_utf16" errors="replace" mask="11" chunks="ff fe 4100 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=0c" adapter="no_final" payload="bom_utf16" errors="replace" mask="12" chunks="fffe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=0d" adapter="no_final" payload="bom_utf16" errors="replace" mask="13" chunks="ff fe41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=0e" adapter="no_final" payload="bom_utf16" errors="replace" mask="14" chunks="fffe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=0f" adapter="no_final" payload="bom_utf16" errors="replace" mask="15" chunks="ff fe 41 00 a903" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=10" adapter="no_final" payload="bom_utf16" errors="replace" mask="16" chunks="fffe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=11" adapter="no_final" payload="bom_utf16" errors="replace" mask="17" chunks="ff fe4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=12" adapter="no_final" payload="bom_utf16" errors="replace" mask="18" chunks="fffe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=13" adapter="no_final" payload="bom_utf16" errors="replace" mask="19" chunks="ff fe 4100a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=14" adapter="no_final" payload="bom_utf16" errors="replace" mask="20" chunks="fffe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=15" adapter="no_final" payload="bom_utf16" errors="replace" mask="21" chunks="ff fe41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=16" adapter="no_final" payload="bom_utf16" errors="replace" mask="22" chunks="fffe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=17" adapter="no_final" payload="bom_utf16" errors="replace" mask="23" chunks="ff fe 41 00a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=18" adapter="no_final" payload="bom_utf16" errors="replace" mask="24" chunks="fffe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=19" adapter="no_final" payload="bom_utf16" errors="replace" mask="25" chunks="ff fe4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=1a" adapter="no_final" payload="bom_utf16" errors="replace" mask="26" chunks="fffe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=1b" adapter="no_final" payload="bom_utf16" errors="replace" mask="27" chunks="ff fe 4100 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=1c" adapter="no_final" payload="bom_utf16" errors="replace" mask="28" chunks="fffe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=1d" adapter="no_final" payload="bom_utf16" errors="replace" mask="29" chunks="ff fe41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=1e" adapter="no_final" payload="bom_utf16" errors="replace" mask="30" chunks="fffe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=bom_utf16|E=replace|M=1f" adapter="no_final" payload="bom_utf16" errors="replace" mask="31" chunks="ff fe 41 00 a9 03" failure-class="none">
+    <reference accepted="true" error="">AΩ</reference>
+    <observed accepted="true" error="">AΩ</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=00" adapter="no_final" payload="truncated_utf16" errors="strict" mask="0" chunks="fffe410042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=01" adapter="no_final" payload="truncated_utf16" errors="strict" mask="1" chunks="ff fe410042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=02" adapter="no_final" payload="truncated_utf16" errors="strict" mask="2" chunks="fffe 410042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=03" adapter="no_final" payload="truncated_utf16" errors="strict" mask="3" chunks="ff fe 410042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=04" adapter="no_final" payload="truncated_utf16" errors="strict" mask="4" chunks="fffe41 0042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=05" adapter="no_final" payload="truncated_utf16" errors="strict" mask="5" chunks="ff fe41 0042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=06" adapter="no_final" payload="truncated_utf16" errors="strict" mask="6" chunks="fffe 41 0042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=07" adapter="no_final" payload="truncated_utf16" errors="strict" mask="7" chunks="ff fe 41 0042" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=08" adapter="no_final" payload="truncated_utf16" errors="strict" mask="8" chunks="fffe4100 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=09" adapter="no_final" payload="truncated_utf16" errors="strict" mask="9" chunks="ff fe4100 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=0a" adapter="no_final" payload="truncated_utf16" errors="strict" mask="10" chunks="fffe 4100 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=0b" adapter="no_final" payload="truncated_utf16" errors="strict" mask="11" chunks="ff fe 4100 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=0c" adapter="no_final" payload="truncated_utf16" errors="strict" mask="12" chunks="fffe41 00 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=0d" adapter="no_final" payload="truncated_utf16" errors="strict" mask="13" chunks="ff fe41 00 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=0e" adapter="no_final" payload="truncated_utf16" errors="strict" mask="14" chunks="fffe 41 00 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=strict|M=0f" adapter="no_final" payload="truncated_utf16" errors="strict" mask="15" chunks="ff fe 41 00 42" failure-class="unexpected_acceptance">
+    <reference accepted="false" error="UnicodeDecodeError" />
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=00" adapter="no_final" payload="truncated_utf16" errors="replace" mask="0" chunks="fffe410042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=01" adapter="no_final" payload="truncated_utf16" errors="replace" mask="1" chunks="ff fe410042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=02" adapter="no_final" payload="truncated_utf16" errors="replace" mask="2" chunks="fffe 410042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=03" adapter="no_final" payload="truncated_utf16" errors="replace" mask="3" chunks="ff fe 410042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=04" adapter="no_final" payload="truncated_utf16" errors="replace" mask="4" chunks="fffe41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=05" adapter="no_final" payload="truncated_utf16" errors="replace" mask="5" chunks="ff fe41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=06" adapter="no_final" payload="truncated_utf16" errors="replace" mask="6" chunks="fffe 41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=07" adapter="no_final" payload="truncated_utf16" errors="replace" mask="7" chunks="ff fe 41 0042" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=08" adapter="no_final" payload="truncated_utf16" errors="replace" mask="8" chunks="fffe4100 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=09" adapter="no_final" payload="truncated_utf16" errors="replace" mask="9" chunks="ff fe4100 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=0a" adapter="no_final" payload="truncated_utf16" errors="replace" mask="10" chunks="fffe 4100 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=0b" adapter="no_final" payload="truncated_utf16" errors="replace" mask="11" chunks="ff fe 4100 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=0c" adapter="no_final" payload="truncated_utf16" errors="replace" mask="12" chunks="fffe41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=0d" adapter="no_final" payload="truncated_utf16" errors="replace" mask="13" chunks="ff fe41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=0e" adapter="no_final" payload="truncated_utf16" errors="replace" mask="14" chunks="fffe 41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+  <case id="no_final|P=truncated_utf16|E=replace|M=0f" adapter="no_final" payload="truncated_utf16" errors="replace" mask="15" chunks="ff fe 41 00 42" failure-class="wrong_text">
+    <reference accepted="true" error="">A�</reference>
+    <observed accepted="true" error="">A</observed>
+  </case>
+</d2-goldens>

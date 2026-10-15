@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+<feature-traceability revision="2" status="implementation-evidence-pending">
+  <feature id="CORE:CR-INPUT-01" audit="core-reader-audit.xml" source_id="CR-INPUT-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-INPUT-02" audit="core-reader-audit.xml" source_id="CR-INPUT-02" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-PLAN-01" audit="core-reader-audit.xml" source_id="CR-PLAN-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-GEN-01" audit="core-reader-audit.xml" source_id="CR-GEN-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-GEN-02" audit="core-reader-audit.xml" source_id="CR-GEN-02" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-JOIN-01" audit="core-reader-audit.xml" source_id="CR-JOIN-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-FINAL-01" audit="core-reader-audit.xml" source_id="CR-FINAL-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-FINAL-02" audit="core-reader-audit.xml" source_id="CR-FINAL-02" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-RENDER-01" audit="core-reader-audit.xml" source_id="CR-RENDER-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-LIFECYCLE-01" audit="core-reader-audit.xml" source_id="CR-LIFECYCLE-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="CORE:CR-SEED-01" audit="core-reader-audit.xml" source_id="CR-SEED-01" modules="fw-input fw-plan fw-store fw-generation" packages="M01 M02 M03" gates="A03 A04 A05" status="pending-developer-mapping" />
+  <feature id="GEN:authoring" audit="generator-audit.xml" source_id="authoring" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:workbook-controls" audit="generator-audit.xml" source_id="workbook-controls" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:combinatorial-dsl" audit="generator-audit.xml" source_id="combinatorial-dsl" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:higher-order-dataflow" audit="generator-audit.xml" source_id="higher-order-dataflow" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:cardinality-resource-planning" audit="generator-audit.xml" source_id="cardinality-resource-planning" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:coverage-reduction" audit="generator-audit.xml" source_id="coverage-reduction" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:optional-composition" audit="generator-audit.xml" source_id="optional-composition" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:constraints" audit="generator-audit.xml" source_id="constraints" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:baseline-code-storage" audit="generator-audit.xml" source_id="baseline-code-storage" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:orchestration-lifecycle" audit="generator-audit.xml" source_id="orchestration-lifecycle" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:reconciliation" audit="generator-audit.xml" source_id="reconciliation" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:repeats-scheduling" audit="generator-audit.xml" source_id="repeats-scheduling" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:adaptive-seed-loop" audit="generator-audit.xml" source_id="adaptive-seed-loop" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:configuration-capability-registry" audit="generator-audit.xml" source_id="configuration-capability-registry" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:gateway" audit="generator-audit.xml" source_id="gateway" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:operator-authoring-ui" audit="generator-audit.xml" source_id="operator-authoring-ui" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:source-decomposition" audit="generator-audit.xml" source_id="source-decomposition" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:reference-applications" audit="generator-audit.xml" source_id="reference-applications" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="GEN:diagnostics-reporting-release" audit="generator-audit.xml" source_id="diagnostics-reporting-release" modules="fw-input fw-plan fw-constraints fw-campaign fw-desktop" packages="M01 M03 M07 M08 M09" gates="A03 A05 A06 A13 A18" status="pending-developer-mapping" />
+  <feature id="AN:AN-01" audit="analyzer-sut-audit.xml" source_id="AN-01" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-02" audit="analyzer-sut-audit.xml" source_id="AN-02" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-03" audit="analyzer-sut-audit.xml" source_id="AN-03" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-04" audit="analyzer-sut-audit.xml" source_id="AN-04" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-05" audit="analyzer-sut-audit.xml" source_id="AN-05" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-06" audit="analyzer-sut-audit.xml" source_id="AN-06" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-07" audit="analyzer-sut-audit.xml" source_id="AN-07" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-08" audit="analyzer-sut-audit.xml" source_id="AN-08" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-09" audit="analyzer-sut-audit.xml" source_id="AN-09" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-10" audit="analyzer-sut-audit.xml" source_id="AN-10" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-11" audit="analyzer-sut-audit.xml" source_id="AN-11" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-12" audit="analyzer-sut-audit.xml" source_id="AN-12" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-13" audit="analyzer-sut-audit.xml" source_id="AN-13" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="AN:AN-14" audit="analyzer-sut-audit.xml" source_id="AN-14" modules="fw-analysis fw-sut-fixtures" packages="M06 M08" gates="A12 A16" status="pending-developer-mapping" />
+  <feature id="EX:EX01" audit="executor-library-audit.xml" source_id="EX01" modules="fw-algebra fw-execution fw-results" packages="M04" gates="A07 A08" status="pending-developer-mapping" />
+  <feature id="EX:EX02" audit="executor-library-audit.xml" source_id="EX02" modules="fw-algebra fw-execution fw-results" packages="M04" gates="A07" status="pending-developer-mapping" />
+  <feature id="EX:EX03" audit="executor-library-audit.xml" source_id="EX03" modules="fw-algebra fw-execution fw-results" packages="M04" gates="A07 A11" status="pending-developer-mapping" />
+  <feature id="EX:EX04" audit="executor-library-audit.xml" source_id="EX04" modules="fw-algebra fw-execution fw-results" packages="M04" gates="A07 A11" status="pending-developer-mapping" />
+  <feature id="EX:EX05" audit="executor-library-audit.xml" source_id="EX05" modules="fw-algebra fw-execution fw-results" packages="M05" gates="A08" status="pending-developer-mapping" />
+  <feature id="EX:EX06" audit="executor-library-audit.xml" source_id="EX06" modules="fw-algebra fw-execution fw-results" packages="M05" gates="A08" status="pending-developer-mapping" />
+  <feature id="EX:EX07" audit="executor-library-audit.xml" source_id="EX07" modules="fw-algebra fw-execution fw-results" packages="M05" gates="A11" status="pending-developer-mapping" />
+  <feature id="EX:EX08" audit="executor-library-audit.xml" source_id="EX08" modules="fw-algebra fw-execution fw-results" packages="M05" gates="A09 A10" status="pending-developer-mapping" />
+  <feature id="EX:EX09" audit="executor-library-audit.xml" source_id="EX09" modules="fw-algebra fw-execution fw-results" packages="M04" gates="A07 A09" status="pending-developer-mapping" />
+  <feature id="EX:EX10" audit="executor-library-audit.xml" source_id="EX10" modules="fw-algebra fw-execution fw-results" packages="M05" gates="A09 A10" status="pending-developer-mapping" />
+  <feature id="EX:CB01" audit="executor-library-audit.xml" source_id="CB01" modules="fw-algebra fw-execution fw-results" packages="M02" gates="A04" status="pending-developer-mapping" />
+  <feature id="EX:CB02" audit="executor-library-audit.xml" source_id="CB02" modules="fw-algebra fw-execution fw-results" packages="M02" gates="A04" status="pending-developer-mapping" />
+  <feature id="EX:CB03" audit="executor-library-audit.xml" source_id="CB03" modules="fw-algebra fw-execution fw-results" packages="M02" gates="A04 A05" status="pending-developer-mapping" />
+  <rule>Developer maps every feature to concrete Java files and independent test evidence before A19 closes. A family may span multiple packages; this index does not assert every audited source file has been behaviorally verified.</rule>
+</feature-traceability>

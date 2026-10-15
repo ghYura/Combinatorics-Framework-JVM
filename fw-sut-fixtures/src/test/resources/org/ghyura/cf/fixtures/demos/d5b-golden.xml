@@ -1,0 +1,9213 @@
+<?xml version='1.0' encoding='utf-8'?>
+<nested-scopes-golden origin="original verify.own_trees/own_eval and construct pure functions,from TOML values/codes;crosscheckedarchitect-derived;no SUT/oracle/runtime/harness/build/precheck/workbook execution" prepared-at="2026-10-10T00:45:57.708950+00:00" bundle-order="deterministic native expected;original contract permits any order of the eight distinct ROOT members">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <cases>
+    <case id="B1|correct|ZIP=A|CAT=A|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=A|CAT=A|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 0,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 0,
+    "y": -6
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=A|CAT=A|TAIL=N",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=A|CAT=A|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=A|CAT=A|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -3,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -3,
+    "y": -6
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=A|CAT=A|TAIL=S",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=A|CAT=M|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=A|CAT=M|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 2,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 2,
+    "y": -6
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=A|CAT=M|TAIL=N",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=A|CAT=M|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=A|CAT=M|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -5,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -5,
+    "y": -6
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=A|CAT=M|TAIL=S",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=M|CAT=A|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=M|CAT=A|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 0,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 0,
+    "y": -10
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=M|CAT=A|TAIL=N",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=M|CAT=A|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=M|CAT=A|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -3,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -3,
+    "y": -10
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=M|CAT=A|TAIL=S",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=M|CAT=M|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=M|CAT=M|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 2,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 2,
+    "y": -10
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=M|CAT=M|TAIL=N",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|correct|ZIP=M|CAT=M|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|correct|ZIP=M|CAT=M|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -5,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -5,
+    "y": -10
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=M|CAT=M|TAIL=S",
+  "verdict": "PASS"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=A|CAT=A|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=A|CAT=A|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 0,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 5,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -3
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": -5
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 5
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=A|CAT=A|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=A|CAT=A|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=A|CAT=A|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -3,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -8,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -3
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": -5
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -8
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=A|CAT=A|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=A|CAT=M|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=A|CAT=M|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 2,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 12,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -3
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -12
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 12
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=A|CAT=M|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=A|CAT=M|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=A|CAT=M|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -5,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -15,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -3
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -12
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -15
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=A|CAT=M|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=M|CAT=A|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=M|CAT=A|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 0,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 6,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -4
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -7
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 6
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=M|CAT=A|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=M|CAT=A|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=M|CAT=A|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -3,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -9,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -4
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -7
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -9
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=M|CAT=A|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=M|CAT=M|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=M|CAT=M|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 2,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 14,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -4
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -7
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -14
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 14
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=M|CAT=M|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|flatten_scope|ZIP=M|CAT=M|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|flatten_scope|ZIP=M|CAT=M|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -5,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -17,
+    "y": 5
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -4
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -7
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -14
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -17
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=M|CAT=M|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=A|CAT=A|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=A|CAT=A|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 0,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -3,
+    "y": -9
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -9
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -3
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=A|CAT=A|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=A|CAT=A|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=A|CAT=A|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -3,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 0,
+    "y": -9
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -9
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": 0
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=A|CAT=A|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=A|CAT=M|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=A|CAT=M|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 2,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -4,
+    "y": -9
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -9
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -4
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=A|CAT=M|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=A|CAT=M|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=A|CAT=M|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -5,
+    "y": -6
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 1,
+    "y": -9
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "A",
+      "value": 6
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -6
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -9
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": 1
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "A",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=A|CAT=M|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=M|CAT=A|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=M|CAT=A|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 0,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -3,
+    "y": -13
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 0
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -13
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -3
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=M|CAT=A|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=M|CAT=A|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=M|CAT=A|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -3,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 0,
+    "y": -13
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 0
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -3
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -13
+    },
+    {
+      "field": "x",
+      "op": "A",
+      "value": 3
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": 0
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "A"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=M|CAT=A|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=M|CAT=M|TAIL=N" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=M|CAT=M|TAIL=N</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": 2,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": -4,
+    "y": -13
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": 2
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -13
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "N",
+      "value": -4
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "N"
+  ],
+  "tree_id": "ZIP=M|CAT=M|TAIL=N",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B1|leak_scope|ZIP=M|CAT=M|TAIL=S" phase="B1">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B1|leak_scope|ZIP=M|CAT=M|TAIL=S</field>
+      <field name="contract" kind="string">B</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="phase" kind="string">B1</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="result" kind="json">{
+  "expected": {
+    "x": -5,
+    "y": -10
+  },
+  "input": {
+    "x": 2,
+    "y": 5
+  },
+  "observed": {
+    "x": 1,
+    "y": -13
+  },
+  "reference_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -1
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": -2
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": -5
+    }
+  ],
+  "sut_trace": [
+    {
+      "field": "y",
+      "op": "M",
+      "value": 10
+    },
+    {
+      "field": "y",
+      "op": "N",
+      "value": -10
+    },
+    {
+      "field": "y",
+      "op": "S",
+      "value": -13
+    },
+    {
+      "field": "x",
+      "op": "M",
+      "value": 4
+    },
+    {
+      "field": "x",
+      "op": "S",
+      "value": 1
+    }
+  ],
+  "tree": [
+    {
+      "children": [
+        {
+          "children": [
+            "M",
+            "N"
+          ],
+          "scope": "y"
+        }
+      ],
+      "scope": "x"
+    },
+    "S",
+    {
+      "children": [
+        "M"
+      ],
+      "scope": "x"
+    },
+    "S"
+  ],
+  "tree_id": "ZIP=M|CAT=M|TAIL=S",
+  "verdict": "DOMAIN_FAIL"
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B2|correct|BUNDLE=all8" phase="B2">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B2|correct|BUNDLE=all8</field>
+      <field name="contract" kind="string">B</field>
+      <field name="failing_trees" kind="json">[]</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_bundle"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "seal_bundle"
+  ],
+  [
+    "end_bundle"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="generation_order" kind="json">[
+  "ZIP=A|CAT=A|TAIL=N",
+  "ZIP=A|CAT=A|TAIL=S",
+  "ZIP=A|CAT=M|TAIL=N",
+  "ZIP=A|CAT=M|TAIL=S",
+  "ZIP=M|CAT=A|TAIL=N",
+  "ZIP=M|CAT=A|TAIL=S",
+  "ZIP=M|CAT=M|TAIL=N",
+  "ZIP=M|CAT=M|TAIL=S"
+]</field>
+      <field name="phase" kind="string">B2</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="results" kind="json">{
+  "ZIP=A|CAT=A|TAIL=N": {
+    "expected": {
+      "x": 0,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 0,
+      "y": -6
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=A|CAT=A|TAIL=N",
+    "verdict": "PASS"
+  },
+  "ZIP=A|CAT=A|TAIL=S": {
+    "expected": {
+      "x": -3,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -3,
+      "y": -6
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=A|CAT=A|TAIL=S",
+    "verdict": "PASS"
+  },
+  "ZIP=A|CAT=M|TAIL=N": {
+    "expected": {
+      "x": 2,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 2,
+      "y": -6
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=A|CAT=M|TAIL=N",
+    "verdict": "PASS"
+  },
+  "ZIP=A|CAT=M|TAIL=S": {
+    "expected": {
+      "x": -5,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -5,
+      "y": -6
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=A|CAT=M|TAIL=S",
+    "verdict": "PASS"
+  },
+  "ZIP=M|CAT=A|TAIL=N": {
+    "expected": {
+      "x": 0,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 0,
+      "y": -10
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=M|CAT=A|TAIL=N",
+    "verdict": "PASS"
+  },
+  "ZIP=M|CAT=A|TAIL=S": {
+    "expected": {
+      "x": -3,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -3,
+      "y": -10
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=M|CAT=A|TAIL=S",
+    "verdict": "PASS"
+  },
+  "ZIP=M|CAT=M|TAIL=N": {
+    "expected": {
+      "x": 2,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 2,
+      "y": -10
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=M|CAT=M|TAIL=N",
+    "verdict": "PASS"
+  },
+  "ZIP=M|CAT=M|TAIL=S": {
+    "expected": {
+      "x": -5,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -5,
+      "y": -10
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=M|CAT=M|TAIL=S",
+    "verdict": "PASS"
+  }
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="B2|flatten_scope|BUNDLE=all8" phase="B2">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B2|flatten_scope|BUNDLE=all8</field>
+      <field name="contract" kind="string">B</field>
+      <field name="failing_trees" kind="json">[
+  "ZIP=A|CAT=A|TAIL=N",
+  "ZIP=A|CAT=A|TAIL=S",
+  "ZIP=A|CAT=M|TAIL=N",
+  "ZIP=A|CAT=M|TAIL=S",
+  "ZIP=M|CAT=A|TAIL=N",
+  "ZIP=M|CAT=A|TAIL=S",
+  "ZIP=M|CAT=M|TAIL=N",
+  "ZIP=M|CAT=M|TAIL=S"
+]</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_bundle"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "seal_bundle"
+  ],
+  [
+    "end_bundle"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="generation_order" kind="json">[
+  "ZIP=A|CAT=A|TAIL=N",
+  "ZIP=A|CAT=A|TAIL=S",
+  "ZIP=A|CAT=M|TAIL=N",
+  "ZIP=A|CAT=M|TAIL=S",
+  "ZIP=M|CAT=A|TAIL=N",
+  "ZIP=M|CAT=A|TAIL=S",
+  "ZIP=M|CAT=M|TAIL=N",
+  "ZIP=M|CAT=M|TAIL=S"
+]</field>
+      <field name="phase" kind="string">B2</field>
+      <field name="policy" kind="string">flatten_scope</field>
+      <field name="results" kind="json">{
+  "ZIP=A|CAT=A|TAIL=N": {
+    "expected": {
+      "x": 0,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 5,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -3
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": -5
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 5
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=A|CAT=A|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=A|CAT=A|TAIL=S": {
+    "expected": {
+      "x": -3,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -8,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -3
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": -5
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -8
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=A|CAT=A|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=A|CAT=M|TAIL=N": {
+    "expected": {
+      "x": 2,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 12,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -3
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -12
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 12
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=A|CAT=M|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=A|CAT=M|TAIL=S": {
+    "expected": {
+      "x": -5,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -15,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -3
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -12
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -15
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=A|CAT=M|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=A|TAIL=N": {
+    "expected": {
+      "x": 0,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 6,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -4
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -7
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 6
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=M|CAT=A|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=A|TAIL=S": {
+    "expected": {
+      "x": -3,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -9,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -4
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -7
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -9
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=M|CAT=A|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=M|TAIL=N": {
+    "expected": {
+      "x": 2,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 14,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -4
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -7
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -14
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 14
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=M|CAT=M|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=M|TAIL=S": {
+    "expected": {
+      "x": -5,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -17,
+      "y": 5
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -4
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -7
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -14
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -17
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=M|CAT=M|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  }
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="B2|leak_scope|BUNDLE=all8" phase="B2">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">B2|leak_scope|BUNDLE=all8</field>
+      <field name="contract" kind="string">B</field>
+      <field name="failing_trees" kind="json">[
+  "ZIP=A|CAT=A|TAIL=N",
+  "ZIP=A|CAT=A|TAIL=S",
+  "ZIP=A|CAT=M|TAIL=N",
+  "ZIP=A|CAT=M|TAIL=S",
+  "ZIP=M|CAT=A|TAIL=N",
+  "ZIP=M|CAT=A|TAIL=S",
+  "ZIP=M|CAT=M|TAIL=N",
+  "ZIP=M|CAT=M|TAIL=S"
+]</field>
+      <field name="fragments" kind="json">[
+  [
+    "begin_bundle"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "A"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "begin_pipeline"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "open_scope",
+    "y"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "op",
+    "N"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "open_scope",
+    "x"
+  ],
+  [
+    "op",
+    "M"
+  ],
+  [
+    "close_scope"
+  ],
+  [
+    "op",
+    "S"
+  ],
+  [
+    "end_pipeline"
+  ],
+  [
+    "seal_bundle"
+  ],
+  [
+    "end_bundle"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="generation_order" kind="json">[
+  "ZIP=A|CAT=A|TAIL=N",
+  "ZIP=A|CAT=A|TAIL=S",
+  "ZIP=A|CAT=M|TAIL=N",
+  "ZIP=A|CAT=M|TAIL=S",
+  "ZIP=M|CAT=A|TAIL=N",
+  "ZIP=M|CAT=A|TAIL=S",
+  "ZIP=M|CAT=M|TAIL=N",
+  "ZIP=M|CAT=M|TAIL=S"
+]</field>
+      <field name="phase" kind="string">B2</field>
+      <field name="policy" kind="string">leak_scope</field>
+      <field name="results" kind="json">{
+  "ZIP=A|CAT=A|TAIL=N": {
+    "expected": {
+      "x": 0,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -3,
+      "y": -9
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -9
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -3
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=A|CAT=A|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=A|CAT=A|TAIL=S": {
+    "expected": {
+      "x": -3,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 0,
+      "y": -9
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -9
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": 0
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=A|CAT=A|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=A|CAT=M|TAIL=N": {
+    "expected": {
+      "x": 2,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -4,
+      "y": -9
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -9
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -4
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=A|CAT=M|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=A|CAT=M|TAIL=S": {
+    "expected": {
+      "x": -5,
+      "y": -6
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 1,
+      "y": -9
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "A",
+        "value": 6
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -6
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -9
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": 1
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "A",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=A|CAT=M|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=A|TAIL=N": {
+    "expected": {
+      "x": 0,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -3,
+      "y": -13
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 0
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -13
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -3
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=M|CAT=A|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=A|TAIL=S": {
+    "expected": {
+      "x": -3,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 0,
+      "y": -13
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 0
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -3
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -13
+      },
+      {
+        "field": "x",
+        "op": "A",
+        "value": 3
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": 0
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "A"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=M|CAT=A|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=M|TAIL=N": {
+    "expected": {
+      "x": 2,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": -4,
+      "y": -13
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": 2
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -13
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "N",
+        "value": -4
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "N"
+    ],
+    "tree_id": "ZIP=M|CAT=M|TAIL=N",
+    "verdict": "DOMAIN_FAIL"
+  },
+  "ZIP=M|CAT=M|TAIL=S": {
+    "expected": {
+      "x": -5,
+      "y": -10
+    },
+    "input": {
+      "x": 2,
+      "y": 5
+    },
+    "observed": {
+      "x": 1,
+      "y": -13
+    },
+    "reference_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -1
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": -2
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": -5
+      }
+    ],
+    "sut_trace": [
+      {
+        "field": "y",
+        "op": "M",
+        "value": 10
+      },
+      {
+        "field": "y",
+        "op": "N",
+        "value": -10
+      },
+      {
+        "field": "y",
+        "op": "S",
+        "value": -13
+      },
+      {
+        "field": "x",
+        "op": "M",
+        "value": 4
+      },
+      {
+        "field": "x",
+        "op": "S",
+        "value": 1
+      }
+    ],
+    "tree": [
+      {
+        "children": [
+          {
+            "children": [
+              "M",
+              "N"
+            ],
+            "scope": "y"
+          }
+        ],
+        "scope": "x"
+      },
+      "S",
+      {
+        "children": [
+          "M"
+        ],
+        "scope": "x"
+      },
+      "S"
+    ],
+    "tree_id": "ZIP=M|CAT=M|TAIL=S",
+    "verdict": "DOMAIN_FAIL"
+  }
+}</field>
+      <field name="schema" kind="string">d5b.observation/v1</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+  </cases>
+  <analyses>
+    <analyse phase="B1">{
+  "by_policy": {
+    "correct": {
+      "PASS": 8
+    },
+    "flatten_scope": {
+      "DOMAIN_FAIL": 8
+    },
+    "leak_scope": {
+      "DOMAIN_FAIL": 8
+    }
+  },
+  "totals": {
+    "DOMAIN_FAIL": 16,
+    "PASS": 8
+  },
+  "tree_evaluations": 24,
+  "witnesses": [
+    {
+      "case_id": "B1|correct|ZIP=A|CAT=A|TAIL=N",
+      "expected": {
+        "x": 0,
+        "y": -6
+      },
+      "label": "correct_AAN",
+      "observed": {
+        "x": 0,
+        "y": -6
+      },
+      "sut_trace": [
+        {
+          "field": "y",
+          "op": "A",
+          "value": 6
+        },
+        {
+          "field": "y",
+          "op": "N",
+          "value": -6
+        },
+        {
+          "field": "x",
+          "op": "S",
+          "value": -1
+        },
+        {
+          "field": "x",
+          "op": "A",
+          "value": 0
+        },
+        {
+          "field": "x",
+          "op": "N",
+          "value": 0
+        }
+      ],
+      "tree": [
+        {
+          "children": [
+            {
+              "children": [
+                "A",
+                "N"
+              ],
+              "scope": "y"
+            }
+          ],
+          "scope": "x"
+        },
+        "S",
+        {
+          "children": [
+            "A"
+          ],
+          "scope": "x"
+        },
+        "N"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "B1|flatten_scope|ZIP=A|CAT=A|TAIL=N",
+      "expected": {
+        "x": 0,
+        "y": -6
+      },
+      "label": "flatten_scope_AAN",
+      "observed": {
+        "x": 5,
+        "y": 5
+      },
+      "sut_trace": [
+        {
+          "field": "x",
+          "op": "A",
+          "value": 3
+        },
+        {
+          "field": "x",
+          "op": "N",
+          "value": -3
+        },
+        {
+          "field": "x",
+          "op": "S",
+          "value": -6
+        },
+        {
+          "field": "x",
+          "op": "A",
+          "value": -5
+        },
+        {
+          "field": "x",
+          "op": "N",
+          "value": 5
+        }
+      ],
+      "tree": [
+        {
+          "children": [
+            {
+              "children": [
+                "A",
+                "N"
+              ],
+              "scope": "y"
+            }
+          ],
+          "scope": "x"
+        },
+        "S",
+        {
+          "children": [
+            "A"
+          ],
+          "scope": "x"
+        },
+        "N"
+      ],
+      "verdict": "DOMAIN_FAIL"
+    },
+    {
+      "case_id": "B1|leak_scope|ZIP=A|CAT=A|TAIL=N",
+      "expected": {
+        "x": 0,
+        "y": -6
+      },
+      "label": "leak_scope_AAN",
+      "observed": {
+        "x": -3,
+        "y": -9
+      },
+      "sut_trace": [
+        {
+          "field": "y",
+          "op": "A",
+          "value": 6
+        },
+        {
+          "field": "y",
+          "op": "N",
+          "value": -6
+        },
+        {
+          "field": "y",
+          "op": "S",
+          "value": -9
+        },
+        {
+          "field": "x",
+          "op": "A",
+          "value": 3
+        },
+        {
+          "field": "x",
+          "op": "N",
+          "value": -3
+        }
+      ],
+      "tree": [
+        {
+          "children": [
+            {
+              "children": [
+                "A",
+                "N"
+              ],
+              "scope": "y"
+            }
+          ],
+          "scope": "x"
+        },
+        "S",
+        {
+          "children": [
+            "A"
+          ],
+          "scope": "x"
+        },
+        "N"
+      ],
+      "verdict": "DOMAIN_FAIL"
+    }
+  ]
+}</analyse>
+    <analyse phase="B2">{
+  "by_policy": {
+    "correct": {
+      "PASS": 1
+    },
+    "flatten_scope": {
+      "DOMAIN_FAIL": 1
+    },
+    "leak_scope": {
+      "DOMAIN_FAIL": 1
+    }
+  },
+  "totals": {
+    "DOMAIN_FAIL": 2,
+    "PASS": 1
+  },
+  "tree_evaluations": 24,
+  "witnesses": [
+    {
+      "case_id": "B2|correct|BUNDLE=all8",
+      "failing_trees": [],
+      "generation_order": [
+        "ZIP=A|CAT=A|TAIL=N",
+        "ZIP=A|CAT=A|TAIL=S",
+        "ZIP=A|CAT=M|TAIL=N",
+        "ZIP=A|CAT=M|TAIL=S",
+        "ZIP=M|CAT=A|TAIL=N",
+        "ZIP=M|CAT=A|TAIL=S",
+        "ZIP=M|CAT=M|TAIL=N",
+        "ZIP=M|CAT=M|TAIL=S"
+      ],
+      "label": "correct_bundle",
+      "verdict": "PASS"
+    }
+  ]
+}</analyse>
+  </analyses>
+  <constructions>
+    <construction phase="B1">{
+  "braces": {
+    "JCAT": {
+      "end": "",
+      "first": "E1",
+      "first_kind": "SHEET",
+      "multiplicity": "M:N",
+      "relation": "",
+      "second": "E3",
+      "second_kind": "SHEET",
+      "start": ""
+    },
+    "JZIP": {
+      "end": "",
+      "first": "E1",
+      "first_kind": "SHEET",
+      "multiplicity": "1:1",
+      "relation": "",
+      "second": "E2",
+      "second_kind": "SHEET",
+      "start": ""
+    },
+    "ROOT": {
+      "end": "PIPE_CLOSE",
+      "first": "JZIP",
+      "first_kind": "SHEET",
+      "multiplicity": "M:N",
+      "relation": "REL_S",
+      "second": "JCAT",
+      "second_kind": "NESTED",
+      "start": "PIPE_OPEN"
+    }
+  },
+  "data_sheets": 15,
+  "flags": {
+    "CLOSE": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "E1": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "E2": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "E3": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "HEAD": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "IMPL": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "JCAT": {
+      "reuse": true,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "JZIP": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "OPEN_X": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "PIPE_CLOSE": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "PIPE_OPEN": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "REL_S": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "ROOT": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "TAIL": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "TMP": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    }
+  },
+  "predicted_codes": {
+    "CLOSE": [
+      22
+    ],
+    "E1": [
+      23,
+      24
+    ],
+    "E2": [
+      25,
+      26,
+      27
+    ],
+    "E3": [
+      28,
+      29
+    ],
+    "HEAD": [
+      16
+    ],
+    "IMPL": [
+      17,
+      18,
+      19
+    ],
+    "JCAT": [
+      34
+    ],
+    "JZIP": [
+      33
+    ],
+    "OPEN_X": [
+      21
+    ],
+    "PIPE_CLOSE": [
+      32
+    ],
+    "PIPE_OPEN": [
+      30
+    ],
+    "REL_S": [
+      31
+    ],
+    "ROOT": [
+      35
+    ],
+    "TAIL": [
+      36
+    ],
+    "TMP": [
+      20
+    ]
+  },
+  "rewrites": [
+    {
+      "pattern": "^\\[\\[",
+      "replacement": "[[20, ",
+      "sheet": "TMP"
+    },
+    {
+      "pattern": "^\\[\\[\\d+, ",
+      "replacement": "[[21, ",
+      "sheet": "OPEN_X"
+    },
+    {
+      "pattern": "\\]\\]$",
+      "replacement": ", 22]]",
+      "sheet": "CLOSE"
+    }
+  ],
+  "rule_count": 0,
+  "structural_columns": [
+    "HEAD",
+    "IMPL",
+    "ROOT",
+    "TAIL"
+  ],
+  "tables": {
+    "E1": [
+      [
+        21,
+        23,
+        22
+      ],
+      [
+        21,
+        24,
+        22
+      ]
+    ],
+    "E2": [
+      [
+        25
+      ],
+      [
+        25,
+        26
+      ],
+      [
+        25,
+        26,
+        27
+      ],
+      [
+        25,
+        27
+      ],
+      [
+        26
+      ],
+      [
+        26,
+        27
+      ],
+      [
+        27
+      ]
+    ],
+    "E3": [
+      [
+        28
+      ],
+      [
+        29
+      ]
+    ],
+    "JCAT": [
+      [
+        21,
+        23,
+        22,
+        28
+      ],
+      [
+        21,
+        23,
+        22,
+        29
+      ],
+      [
+        21,
+        24,
+        22,
+        28
+      ],
+      [
+        21,
+        24,
+        22,
+        29
+      ]
+    ],
+    "JZIP": [
+      [
+        21,
+        25,
+        23,
+        26,
+        22,
+        27
+      ],
+      [
+        21,
+        25,
+        24,
+        26,
+        22,
+        27
+      ]
+    ],
+    "ROOT": [
+      [
+        30,
+        21,
+        25,
+        23,
+        26,
+        22,
+        27,
+        31,
+        21,
+        23,
+        22,
+        28,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        23,
+        26,
+        22,
+        27,
+        31,
+        21,
+        23,
+        22,
+        29,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        23,
+        26,
+        22,
+        27,
+        31,
+        21,
+        24,
+        22,
+        28,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        23,
+        26,
+        22,
+        27,
+        31,
+        21,
+        24,
+        22,
+        29,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        24,
+        26,
+        22,
+        27,
+        31,
+        21,
+        23,
+        22,
+        28,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        24,
+        26,
+        22,
+        27,
+        31,
+        21,
+        23,
+        22,
+        29,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        24,
+        26,
+        22,
+        27,
+        31,
+        21,
+        24,
+        22,
+        28,
+        32
+      ],
+      [
+        30,
+        21,
+        25,
+        24,
+        26,
+        22,
+        27,
+        31,
+        21,
+        24,
+        22,
+        29,
+        32
+      ]
+    ]
+  },
+  "virtual_sheets": 0
+}</construction>
+    <construction phase="B2">{
+  "braces": {
+    "BUNDLE": {
+      "end": "BUNDLE_CLOSE",
+      "first": "ROOT",
+      "first_kind": "NESTED_GROUPED",
+      "multiplicity": "M:N",
+      "relation": "",
+      "second": "SEAL",
+      "second_kind": "SHEET",
+      "start": "BUNDLE_OPEN"
+    },
+    "JCAT": {
+      "end": "",
+      "first": "E1",
+      "first_kind": "SHEET",
+      "multiplicity": "M:N",
+      "relation": "",
+      "second": "E3",
+      "second_kind": "SHEET",
+      "start": ""
+    },
+    "JZIP": {
+      "end": "",
+      "first": "E1",
+      "first_kind": "SHEET",
+      "multiplicity": "1:1",
+      "relation": "",
+      "second": "E2",
+      "second_kind": "SHEET",
+      "start": ""
+    },
+    "ROOT": {
+      "end": "PIPE_CLOSE",
+      "first": "JZIP",
+      "first_kind": "SHEET",
+      "multiplicity": "M:N",
+      "relation": "REL_S",
+      "second": "JCAT",
+      "second_kind": "NESTED",
+      "start": "PIPE_OPEN"
+    }
+  },
+  "data_sheets": 19,
+  "flags": {
+    "BUNDLE": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "BUNDLE_CLOSE": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "BUNDLE_OPEN": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "CLOSE": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "E1": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "E2": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "E3": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "HEAD": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "IMPL": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "JCAT": {
+      "reuse": true,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "JZIP": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "OPEN_X": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "PIPE_CLOSE": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "PIPE_OPEN": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "REL_S": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    },
+    "ROOT": {
+      "reuse": true,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "SEAL": {
+      "reuse": false,
+      "reuse_table_only": true,
+      "role": "EXCLUDED"
+    },
+    "TAIL": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "MANDATORY"
+    },
+    "TMP": {
+      "reuse": true,
+      "reuse_table_only": false,
+      "role": "EXCLUDED"
+    }
+  },
+  "predicted_codes": {
+    "BUNDLE": [
+      43
+    ],
+    "BUNDLE_CLOSE": [
+      42
+    ],
+    "BUNDLE_OPEN": [
+      40
+    ],
+    "CLOSE": [
+      26
+    ],
+    "E1": [
+      27,
+      28
+    ],
+    "E2": [
+      29,
+      30,
+      31
+    ],
+    "E3": [
+      32,
+      33
+    ],
+    "HEAD": [
+      20
+    ],
+    "IMPL": [
+      21,
+      22,
+      23
+    ],
+    "JCAT": [
+      38
+    ],
+    "JZIP": [
+      37
+    ],
+    "OPEN_X": [
+      25
+    ],
+    "PIPE_CLOSE": [
+      36
+    ],
+    "PIPE_OPEN": [
+      34
+    ],
+    "REL_S": [
+      35
+    ],
+    "ROOT": [
+      39
+    ],
+    "SEAL": [
+      41
+    ],
+    "TAIL": [
+      44
+    ],
+    "TMP": [
+      24
+    ]
+  },
+  "rewrites": [
+    {
+      "pattern": "^\\[\\[",
+      "replacement": "[[24, ",
+      "sheet": "TMP"
+    },
+    {
+      "pattern": "^\\[\\[\\d+, ",
+      "replacement": "[[25, ",
+      "sheet": "OPEN_X"
+    },
+    {
+      "pattern": "\\]\\]$",
+      "replacement": ", 26]]",
+      "sheet": "CLOSE"
+    }
+  ],
+  "rule_count": 0,
+  "structural_columns": [
+    "HEAD",
+    "IMPL",
+    "BUNDLE",
+    "TAIL"
+  ],
+  "tables": {
+    "BUNDLE": [
+      [
+        40,
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        32,
+        36,
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        33,
+        36,
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        32,
+        36,
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        33,
+        36,
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        32,
+        36,
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        33,
+        36,
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        32,
+        36,
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        33,
+        36,
+        41,
+        42
+      ]
+    ],
+    "E1": [
+      [
+        25,
+        27,
+        26
+      ],
+      [
+        25,
+        28,
+        26
+      ]
+    ],
+    "E2": [
+      [
+        29
+      ],
+      [
+        29,
+        30
+      ],
+      [
+        29,
+        30,
+        31
+      ],
+      [
+        29,
+        31
+      ],
+      [
+        30
+      ],
+      [
+        30,
+        31
+      ],
+      [
+        31
+      ]
+    ],
+    "E3": [
+      [
+        32
+      ],
+      [
+        33
+      ]
+    ],
+    "JCAT": [
+      [
+        25,
+        27,
+        26,
+        32
+      ],
+      [
+        25,
+        27,
+        26,
+        33
+      ],
+      [
+        25,
+        28,
+        26,
+        32
+      ],
+      [
+        25,
+        28,
+        26,
+        33
+      ]
+    ],
+    "JZIP": [
+      [
+        25,
+        29,
+        27,
+        30,
+        26,
+        31
+      ],
+      [
+        25,
+        29,
+        28,
+        30,
+        26,
+        31
+      ]
+    ],
+    "ROOT": [
+      [
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        32,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        33,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        32,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        27,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        33,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        32,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        27,
+        26,
+        33,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        32,
+        36
+      ],
+      [
+        34,
+        25,
+        29,
+        28,
+        30,
+        26,
+        31,
+        35,
+        25,
+        28,
+        26,
+        33,
+        36
+      ]
+    ],
+    "SEAL": [
+      [
+        41
+      ]
+    ]
+  },
+  "virtual_sheets": 0
+}</construction>
+  </constructions>
+  <probes>
+    <probe phase="B1">{
+  "E2_after_subsets": [
+    [],
+    [
+      25
+    ],
+    [
+      26
+    ],
+    [
+      25,
+      26
+    ],
+    [
+      27
+    ],
+    [
+      25,
+      27
+    ],
+    [
+      26,
+      27
+    ],
+    [
+      25,
+      26,
+      27
+    ]
+  ],
+  "reversed_E1": [
+    [
+      20,
+      23,
+      22
+    ],
+    [
+      20,
+      24,
+      22
+    ]
+  ],
+  "reversed_contains_TMP": true
+}</probe>
+    <probe phase="B2">{
+  "E2_after_subsets": [
+    [],
+    [
+      29
+    ],
+    [
+      30
+    ],
+    [
+      29,
+      30
+    ],
+    [
+      31
+    ],
+    [
+      29,
+      31
+    ],
+    [
+      30,
+      31
+    ],
+    [
+      29,
+      30,
+      31
+    ]
+  ],
+  "reversed_E1": [
+    [
+      24,
+      27,
+      26
+    ],
+    [
+      24,
+      28,
+      26
+    ]
+  ],
+  "reversed_contains_TMP": true
+}</probe>
+  </probes>
+  <models>
+    <model phase="B1">{
+  "E1": {
+    "23": {
+      "row": [
+        21,
+        23,
+        22
+      ],
+      "steps": [
+        "[[23]]",
+        "[[20, 23]]",
+        "[[21, 23]]",
+        "[[21, 23, 22]]"
+      ]
+    },
+    "24": {
+      "row": [
+        21,
+        24,
+        22
+      ],
+      "steps": [
+        "[[24]]",
+        "[[20, 24]]",
+        "[[21, 24]]",
+        "[[21, 24, 22]]"
+      ]
+    }
+  },
+  "E1_rows": [
+    [
+      21,
+      23,
+      22
+    ],
+    [
+      21,
+      24,
+      22
+    ]
+  ],
+  "E2": [
+    [
+      25
+    ],
+    [
+      26
+    ],
+    [
+      25,
+      26
+    ],
+    [
+      27
+    ],
+    [
+      25,
+      27
+    ],
+    [
+      26,
+      27
+    ],
+    [
+      25,
+      26,
+      27
+    ]
+  ],
+  "E2_first_pass": [
+    [],
+    [
+      25
+    ],
+    [
+      26
+    ],
+    [
+      25,
+      26
+    ],
+    [
+      27
+    ],
+    [
+      25,
+      27
+    ],
+    [
+      26,
+      27
+    ],
+    [
+      25,
+      26,
+      27
+    ]
+  ],
+  "E2_lengths": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3
+  ],
+  "E3": [
+    [
+      28
+    ],
+    [
+      29
+    ]
+  ],
+  "JCAT": [
+    [
+      21,
+      23,
+      22,
+      28
+    ],
+    [
+      21,
+      23,
+      22,
+      29
+    ],
+    [
+      21,
+      24,
+      22,
+      28
+    ],
+    [
+      21,
+      24,
+      22,
+      29
+    ]
+  ],
+  "JZIP": [
+    [
+      21,
+      25,
+      23,
+      26,
+      22,
+      27
+    ],
+    [
+      21,
+      25,
+      24,
+      26,
+      22,
+      27
+    ]
+  ],
+  "ROOT": [
+    [
+      30,
+      21,
+      25,
+      23,
+      26,
+      22,
+      27,
+      31,
+      21,
+      23,
+      22,
+      28,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      23,
+      26,
+      22,
+      27,
+      31,
+      21,
+      23,
+      22,
+      29,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      23,
+      26,
+      22,
+      27,
+      31,
+      21,
+      24,
+      22,
+      28,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      23,
+      26,
+      22,
+      27,
+      31,
+      21,
+      24,
+      22,
+      29,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      24,
+      26,
+      22,
+      27,
+      31,
+      21,
+      23,
+      22,
+      28,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      24,
+      26,
+      22,
+      27,
+      31,
+      21,
+      23,
+      22,
+      29,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      24,
+      26,
+      22,
+      27,
+      31,
+      21,
+      24,
+      22,
+      28,
+      32
+    ],
+    [
+      30,
+      21,
+      25,
+      24,
+      26,
+      22,
+      27,
+      31,
+      21,
+      24,
+      22,
+      29,
+      32
+    ]
+  ],
+  "reversed_1_2": {
+    "23": {
+      "contains_TMP": true,
+      "row": [
+        20,
+        23,
+        22
+      ],
+      "steps": [
+        "[[23]]",
+        "[[23]]",
+        "[[20, 23]]",
+        "[[20, 23, 22]]"
+      ]
+    },
+    "24": {
+      "contains_TMP": true,
+      "row": [
+        20,
+        24,
+        22
+      ],
+      "steps": [
+        "[[24]]",
+        "[[24]]",
+        "[[20, 24]]",
+        "[[20, 24, 22]]"
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "pattern": "^\\[\\[",
+      "replacement": "\"[[\" + TMP + \", \"",
+      "splice": [
+        "TMP",
+        "[[20, "
+      ]
+    },
+    {
+      "pattern": "^\\[\\[\\d+, ",
+      "replacement": "\"[[\" + OPEN_X + \", \"",
+      "splice": [
+        "OPEN_X",
+        "[[21, "
+      ]
+    },
+    {
+      "pattern": "\\]\\]$",
+      "replacement": "\", \" + CLOSE + \"]]\"",
+      "splice": [
+        "CLOSE",
+        ", 22]]"
+      ]
+    }
+  ]
+}</model>
+    <model phase="B2">{
+  "BUNDLE_length": 107,
+  "BUNDLE_members": [
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      33,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      33,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      33,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      33,
+      36
+    ]
+  ],
+  "E1": {
+    "27": {
+      "row": [
+        25,
+        27,
+        26
+      ],
+      "steps": [
+        "[[27]]",
+        "[[24, 27]]",
+        "[[25, 27]]",
+        "[[25, 27, 26]]"
+      ]
+    },
+    "28": {
+      "row": [
+        25,
+        28,
+        26
+      ],
+      "steps": [
+        "[[28]]",
+        "[[24, 28]]",
+        "[[25, 28]]",
+        "[[25, 28, 26]]"
+      ]
+    }
+  },
+  "E1_rows": [
+    [
+      25,
+      27,
+      26
+    ],
+    [
+      25,
+      28,
+      26
+    ]
+  ],
+  "E2": [
+    [
+      29
+    ],
+    [
+      30
+    ],
+    [
+      29,
+      30
+    ],
+    [
+      31
+    ],
+    [
+      29,
+      31
+    ],
+    [
+      30,
+      31
+    ],
+    [
+      29,
+      30,
+      31
+    ]
+  ],
+  "E2_first_pass": [
+    [],
+    [
+      29
+    ],
+    [
+      30
+    ],
+    [
+      29,
+      30
+    ],
+    [
+      31
+    ],
+    [
+      29,
+      31
+    ],
+    [
+      30,
+      31
+    ],
+    [
+      29,
+      30,
+      31
+    ]
+  ],
+  "E2_lengths": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3
+  ],
+  "E3": [
+    [
+      32
+    ],
+    [
+      33
+    ]
+  ],
+  "JCAT": [
+    [
+      25,
+      27,
+      26,
+      32
+    ],
+    [
+      25,
+      27,
+      26,
+      33
+    ],
+    [
+      25,
+      28,
+      26,
+      32
+    ],
+    [
+      25,
+      28,
+      26,
+      33
+    ]
+  ],
+  "JZIP": [
+    [
+      25,
+      29,
+      27,
+      30,
+      26,
+      31
+    ],
+    [
+      25,
+      29,
+      28,
+      30,
+      26,
+      31
+    ]
+  ],
+  "ROOT": [
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      33,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      27,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      33,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      27,
+      26,
+      33,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      32,
+      36
+    ],
+    [
+      34,
+      25,
+      29,
+      28,
+      30,
+      26,
+      31,
+      35,
+      25,
+      28,
+      26,
+      33,
+      36
+    ]
+  ],
+  "SEAL": [
+    [
+      41
+    ]
+  ],
+  "reversed_1_2": {
+    "27": {
+      "contains_TMP": true,
+      "row": [
+        24,
+        27,
+        26
+      ],
+      "steps": [
+        "[[27]]",
+        "[[27]]",
+        "[[24, 27]]",
+        "[[24, 27, 26]]"
+      ]
+    },
+    "28": {
+      "contains_TMP": true,
+      "row": [
+        24,
+        28,
+        26
+      ],
+      "steps": [
+        "[[28]]",
+        "[[28]]",
+        "[[24, 28]]",
+        "[[24, 28, 26]]"
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "pattern": "^\\[\\[",
+      "replacement": "\"[[\" + TMP + \", \"",
+      "splice": [
+        "TMP",
+        "[[24, "
+      ]
+    },
+    {
+      "pattern": "^\\[\\[\\d+, ",
+      "replacement": "\"[[\" + OPEN_X + \", \"",
+      "splice": [
+        "OPEN_X",
+        "[[25, "
+      ]
+    },
+    {
+      "pattern": "\\]\\]$",
+      "replacement": "\", \" + CLOSE + \"]]\"",
+      "splice": [
+        "CLOSE",
+        ", 26]]"
+      ]
+    }
+  ]
+}</model>
+  </models>
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/architect-derived.json" sha256="c82e399bcfc1996b64da126e1addfee875015eb9fbb1409272c5655836f90aac" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/build_spec.py" sha256="b633258c5547fa1dd8204b392b1c81aa891af8b6e3bb13369cdaa7408fe1bcfd" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/config/core-b.fw.properties" sha256="5b18cf99056b3b913e0c62ad32c2f28ef8e5d7cb5a3b75b623560a3ef754b2be" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/construct.py" sha256="bf783163293bad7d9a1e5daf3a11b7b680909da9cdc9ffd683d31e579eadf039" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/derive.py" sha256="cfe40b38a9b6c9b736a7df7892b151945e042a17fa71745df949da9cb8a4e630" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/oracle.py" sha256="b06ea2cd2c583de49e792e39558ad44a2ee6b741200a54396c95a30fc7fe1063" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/replay.py" sha256="4ac933e80de26dc59e8b0e1427fe92a96e9b1dfa1994a6812527f980d2fc3183" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/run_demo.py" sha256="1192789c18d0434b893a6a3a782c87500f3036b0b9e6289b6570586d16df591b" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/runtime.py" sha256="f4a9f8fe6e7dee5373436c34e73b8f15788a91a82aea695c777d13cb766d0d08" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/spec/B1/spec.toml" sha256="3fa7966c5d58c5c4dc743dd0f678faca32ded607c3334b4fe171a45afd258777" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/spec/B2/spec.toml" sha256="d72cf2559b99b4393498ec74ee57a26159113a15ccecbf05784f69838b7edf46" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/spec/build.json" sha256="053cce3b5b94a5f7b49875ac11be59be3bdfb83b09c7af70698fbc279e8a3b5c" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/sut.py" sha256="e1f4b5c65d427bb76a4f3b11679d9317157f1c487650d94aa677b434637efdeb" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/tests/test_d5b_fixture.py" sha256="626e6bdd6b08d13654fbd707b0e24c0a52edb91e08d2135a010fe46a5cebcd5e" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-b/verify.py" sha256="dccf6dbbb3d8ecc589faf2c8fb2664dfbae5951bc90d6c0dfd5bc491cd2a0fd6" />
+</nested-scopes-golden>

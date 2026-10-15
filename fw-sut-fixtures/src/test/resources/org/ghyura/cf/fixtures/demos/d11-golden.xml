@@ -1,0 +1,1056 @@
+<?xml version='1.0' encoding='utf-8'?>
+<d11-goldens origin="independent architect-derived.json" qa-commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b" cases="64">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <source path="sut.py" sha256="543dea9cbbe0ce58fa9f5310d60b84cfaa7f8f52f5518404dcc54189240f44e3" />
+  <source path="oracle.py" sha256="d3fe1fbd376e44cf2b7a007a1245102e5e4decc70aa8ea78482e4de74ab812be" />
+  <source path="runtime.py" sha256="9eb3561fa4c15aedebf7578f63ce7afd4ce170a7fb972b4d40d114c155eb05c0" />
+  <source path="allocation.py" sha256="b7022ca4afaa16e6001e468f8bc0be96d0ad25d3cab5be055e06d108477c5670" />
+  <source path="architect-derived.json" sha256="a6a0fa8cf55c2bd2d5e32b5edd76c39e6335822bdbc9ae53a6a797d86c4d4cf0" />
+  <source path="spec/spec.toml" sha256="dbe40d5d18eb4b8c3cc70389c06ea73c9ab1ba2543a9e300fe42c469cf8e6494" />
+  <case id="C=000000" mask="000000" members="" standalone="0" value="0" AB="0" ACD="0" BCD="0" />
+  <case id="C=000001" mask="000001" members="F" standalone="0" value="0" AB="0" ACD="0" BCD="0" />
+  <case id="C=000010" mask="000010" members="E" standalone="4" value="4" AB="0" ACD="0" BCD="0" />
+  <case id="C=000011" mask="000011" members="E F" standalone="4" value="4" AB="0" ACD="0" BCD="0" />
+  <case id="C=000100" mask="000100" members="D" standalone="1" value="1" AB="0" ACD="0" BCD="0" />
+  <case id="C=000101" mask="000101" members="D F" standalone="1" value="1" AB="0" ACD="0" BCD="0" />
+  <case id="C=000110" mask="000110" members="D E" standalone="5" value="5" AB="0" ACD="0" BCD="0" />
+  <case id="C=000111" mask="000111" members="D E F" standalone="5" value="5" AB="0" ACD="0" BCD="0" />
+  <case id="C=001000" mask="001000" members="C" standalone="1" value="1" AB="0" ACD="0" BCD="0" />
+  <case id="C=001001" mask="001001" members="C F" standalone="1" value="1" AB="0" ACD="0" BCD="0" />
+  <case id="C=001010" mask="001010" members="C E" standalone="5" value="5" AB="0" ACD="0" BCD="0" />
+  <case id="C=001011" mask="001011" members="C E F" standalone="5" value="5" AB="0" ACD="0" BCD="0" />
+  <case id="C=001100" mask="001100" members="C D" standalone="2" value="2" AB="0" ACD="0" BCD="0" />
+  <case id="C=001101" mask="001101" members="C D F" standalone="2" value="2" AB="0" ACD="0" BCD="0" />
+  <case id="C=001110" mask="001110" members="C D E" standalone="6" value="6" AB="0" ACD="0" BCD="0" />
+  <case id="C=001111" mask="001111" members="C D E F" standalone="6" value="6" AB="0" ACD="0" BCD="0" />
+  <case id="C=010000" mask="010000" members="B" standalone="2" value="2" AB="0" ACD="0" BCD="0" />
+  <case id="C=010001" mask="010001" members="B F" standalone="2" value="2" AB="0" ACD="0" BCD="0" />
+  <case id="C=010010" mask="010010" members="B E" standalone="6" value="6" AB="0" ACD="0" BCD="0" />
+  <case id="C=010011" mask="010011" members="B E F" standalone="6" value="6" AB="0" ACD="0" BCD="0" />
+  <case id="C=010100" mask="010100" members="B D" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=010101" mask="010101" members="B D F" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=010110" mask="010110" members="B D E" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=010111" mask="010111" members="B D E F" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=011000" mask="011000" members="B C" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=011001" mask="011001" members="B C F" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=011010" mask="011010" members="B C E" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=011011" mask="011011" members="B C E F" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=011100" mask="011100" members="B C D" standalone="4" value="9" AB="0" ACD="0" BCD="5" />
+  <case id="C=011101" mask="011101" members="B C D F" standalone="4" value="9" AB="0" ACD="0" BCD="5" />
+  <case id="C=011110" mask="011110" members="B C D E" standalone="8" value="13" AB="0" ACD="0" BCD="5" />
+  <case id="C=011111" mask="011111" members="B C D E F" standalone="8" value="13" AB="0" ACD="0" BCD="5" />
+  <case id="C=100000" mask="100000" members="A" standalone="2" value="2" AB="0" ACD="0" BCD="0" />
+  <case id="C=100001" mask="100001" members="A F" standalone="2" value="2" AB="0" ACD="0" BCD="0" />
+  <case id="C=100010" mask="100010" members="A E" standalone="6" value="6" AB="0" ACD="0" BCD="0" />
+  <case id="C=100011" mask="100011" members="A E F" standalone="6" value="6" AB="0" ACD="0" BCD="0" />
+  <case id="C=100100" mask="100100" members="A D" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=100101" mask="100101" members="A D F" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=100110" mask="100110" members="A D E" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=100111" mask="100111" members="A D E F" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=101000" mask="101000" members="A C" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=101001" mask="101001" members="A C F" standalone="3" value="3" AB="0" ACD="0" BCD="0" />
+  <case id="C=101010" mask="101010" members="A C E" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=101011" mask="101011" members="A C E F" standalone="7" value="7" AB="0" ACD="0" BCD="0" />
+  <case id="C=101100" mask="101100" members="A C D" standalone="4" value="9" AB="0" ACD="5" BCD="0" />
+  <case id="C=101101" mask="101101" members="A C D F" standalone="4" value="9" AB="0" ACD="5" BCD="0" />
+  <case id="C=101110" mask="101110" members="A C D E" standalone="8" value="13" AB="0" ACD="5" BCD="0" />
+  <case id="C=101111" mask="101111" members="A C D E F" standalone="8" value="13" AB="0" ACD="5" BCD="0" />
+  <case id="C=110000" mask="110000" members="A B" standalone="4" value="16" AB="12" ACD="0" BCD="0" />
+  <case id="C=110001" mask="110001" members="A B F" standalone="4" value="16" AB="12" ACD="0" BCD="0" />
+  <case id="C=110010" mask="110010" members="A B E" standalone="8" value="20" AB="12" ACD="0" BCD="0" />
+  <case id="C=110011" mask="110011" members="A B E F" standalone="8" value="20" AB="12" ACD="0" BCD="0" />
+  <case id="C=110100" mask="110100" members="A B D" standalone="5" value="17" AB="12" ACD="0" BCD="0" />
+  <case id="C=110101" mask="110101" members="A B D F" standalone="5" value="17" AB="12" ACD="0" BCD="0" />
+  <case id="C=110110" mask="110110" members="A B D E" standalone="9" value="21" AB="12" ACD="0" BCD="0" />
+  <case id="C=110111" mask="110111" members="A B D E F" standalone="9" value="21" AB="12" ACD="0" BCD="0" />
+  <case id="C=111000" mask="111000" members="A B C" standalone="5" value="17" AB="12" ACD="0" BCD="0" />
+  <case id="C=111001" mask="111001" members="A B C F" standalone="5" value="17" AB="12" ACD="0" BCD="0" />
+  <case id="C=111010" mask="111010" members="A B C E" standalone="9" value="21" AB="12" ACD="0" BCD="0" />
+  <case id="C=111011" mask="111011" members="A B C E F" standalone="9" value="21" AB="12" ACD="0" BCD="0" />
+  <case id="C=111100" mask="111100" members="A B C D" standalone="6" value="28" AB="12" ACD="5" BCD="5" />
+  <case id="C=111101" mask="111101" members="A B C D F" standalone="6" value="28" AB="12" ACD="5" BCD="5" />
+  <case id="C=111110" mask="111110" members="A B C D E" standalone="10" value="32" AB="12" ACD="5" BCD="5" />
+  <case id="C=111111" mask="111111" members="A B C D E F" standalone="10" value="32" AB="12" ACD="5" BCD="5" />
+  <marginal player="A" coalition="000000" n="1" d="6" value="2" />
+  <marginal player="A" coalition="000001" n="1" d="30" value="2" />
+  <marginal player="A" coalition="000010" n="1" d="30" value="2" />
+  <marginal player="A" coalition="000011" n="1" d="60" value="2" />
+  <marginal player="A" coalition="000100" n="1" d="30" value="2" />
+  <marginal player="A" coalition="000101" n="1" d="60" value="2" />
+  <marginal player="A" coalition="000110" n="1" d="60" value="2" />
+  <marginal player="A" coalition="000111" n="1" d="60" value="2" />
+  <marginal player="A" coalition="001000" n="1" d="30" value="2" />
+  <marginal player="A" coalition="001001" n="1" d="60" value="2" />
+  <marginal player="A" coalition="001010" n="1" d="60" value="2" />
+  <marginal player="A" coalition="001011" n="1" d="60" value="2" />
+  <marginal player="A" coalition="001100" n="1" d="60" value="7" />
+  <marginal player="A" coalition="001101" n="1" d="60" value="7" />
+  <marginal player="A" coalition="001110" n="1" d="60" value="7" />
+  <marginal player="A" coalition="001111" n="1" d="30" value="7" />
+  <marginal player="A" coalition="010000" n="1" d="30" value="14" />
+  <marginal player="A" coalition="010001" n="1" d="60" value="14" />
+  <marginal player="A" coalition="010010" n="1" d="60" value="14" />
+  <marginal player="A" coalition="010011" n="1" d="60" value="14" />
+  <marginal player="A" coalition="010100" n="1" d="60" value="14" />
+  <marginal player="A" coalition="010101" n="1" d="60" value="14" />
+  <marginal player="A" coalition="010110" n="1" d="60" value="14" />
+  <marginal player="A" coalition="010111" n="1" d="30" value="14" />
+  <marginal player="A" coalition="011000" n="1" d="60" value="14" />
+  <marginal player="A" coalition="011001" n="1" d="60" value="14" />
+  <marginal player="A" coalition="011010" n="1" d="60" value="14" />
+  <marginal player="A" coalition="011011" n="1" d="30" value="14" />
+  <marginal player="A" coalition="011100" n="1" d="60" value="19" />
+  <marginal player="A" coalition="011101" n="1" d="30" value="19" />
+  <marginal player="A" coalition="011110" n="1" d="30" value="19" />
+  <marginal player="A" coalition="011111" n="1" d="6" value="19" />
+  <marginal player="B" coalition="000000" n="1" d="6" value="2" />
+  <marginal player="B" coalition="000001" n="1" d="30" value="2" />
+  <marginal player="B" coalition="000010" n="1" d="30" value="2" />
+  <marginal player="B" coalition="000011" n="1" d="60" value="2" />
+  <marginal player="B" coalition="000100" n="1" d="30" value="2" />
+  <marginal player="B" coalition="000101" n="1" d="60" value="2" />
+  <marginal player="B" coalition="000110" n="1" d="60" value="2" />
+  <marginal player="B" coalition="000111" n="1" d="60" value="2" />
+  <marginal player="B" coalition="001000" n="1" d="30" value="2" />
+  <marginal player="B" coalition="001001" n="1" d="60" value="2" />
+  <marginal player="B" coalition="001010" n="1" d="60" value="2" />
+  <marginal player="B" coalition="001011" n="1" d="60" value="2" />
+  <marginal player="B" coalition="001100" n="1" d="60" value="7" />
+  <marginal player="B" coalition="001101" n="1" d="60" value="7" />
+  <marginal player="B" coalition="001110" n="1" d="60" value="7" />
+  <marginal player="B" coalition="001111" n="1" d="30" value="7" />
+  <marginal player="B" coalition="100000" n="1" d="30" value="14" />
+  <marginal player="B" coalition="100001" n="1" d="60" value="14" />
+  <marginal player="B" coalition="100010" n="1" d="60" value="14" />
+  <marginal player="B" coalition="100011" n="1" d="60" value="14" />
+  <marginal player="B" coalition="100100" n="1" d="60" value="14" />
+  <marginal player="B" coalition="100101" n="1" d="60" value="14" />
+  <marginal player="B" coalition="100110" n="1" d="60" value="14" />
+  <marginal player="B" coalition="100111" n="1" d="30" value="14" />
+  <marginal player="B" coalition="101000" n="1" d="60" value="14" />
+  <marginal player="B" coalition="101001" n="1" d="60" value="14" />
+  <marginal player="B" coalition="101010" n="1" d="60" value="14" />
+  <marginal player="B" coalition="101011" n="1" d="30" value="14" />
+  <marginal player="B" coalition="101100" n="1" d="60" value="19" />
+  <marginal player="B" coalition="101101" n="1" d="30" value="19" />
+  <marginal player="B" coalition="101110" n="1" d="30" value="19" />
+  <marginal player="B" coalition="101111" n="1" d="6" value="19" />
+  <marginal player="C" coalition="000000" n="1" d="6" value="1" />
+  <marginal player="C" coalition="000001" n="1" d="30" value="1" />
+  <marginal player="C" coalition="000010" n="1" d="30" value="1" />
+  <marginal player="C" coalition="000011" n="1" d="60" value="1" />
+  <marginal player="C" coalition="000100" n="1" d="30" value="1" />
+  <marginal player="C" coalition="000101" n="1" d="60" value="1" />
+  <marginal player="C" coalition="000110" n="1" d="60" value="1" />
+  <marginal player="C" coalition="000111" n="1" d="60" value="1" />
+  <marginal player="C" coalition="010000" n="1" d="30" value="1" />
+  <marginal player="C" coalition="010001" n="1" d="60" value="1" />
+  <marginal player="C" coalition="010010" n="1" d="60" value="1" />
+  <marginal player="C" coalition="010011" n="1" d="60" value="1" />
+  <marginal player="C" coalition="010100" n="1" d="60" value="6" />
+  <marginal player="C" coalition="010101" n="1" d="60" value="6" />
+  <marginal player="C" coalition="010110" n="1" d="60" value="6" />
+  <marginal player="C" coalition="010111" n="1" d="30" value="6" />
+  <marginal player="C" coalition="100000" n="1" d="30" value="1" />
+  <marginal player="C" coalition="100001" n="1" d="60" value="1" />
+  <marginal player="C" coalition="100010" n="1" d="60" value="1" />
+  <marginal player="C" coalition="100011" n="1" d="60" value="1" />
+  <marginal player="C" coalition="100100" n="1" d="60" value="6" />
+  <marginal player="C" coalition="100101" n="1" d="60" value="6" />
+  <marginal player="C" coalition="100110" n="1" d="60" value="6" />
+  <marginal player="C" coalition="100111" n="1" d="30" value="6" />
+  <marginal player="C" coalition="110000" n="1" d="60" value="1" />
+  <marginal player="C" coalition="110001" n="1" d="60" value="1" />
+  <marginal player="C" coalition="110010" n="1" d="60" value="1" />
+  <marginal player="C" coalition="110011" n="1" d="30" value="1" />
+  <marginal player="C" coalition="110100" n="1" d="60" value="11" />
+  <marginal player="C" coalition="110101" n="1" d="30" value="11" />
+  <marginal player="C" coalition="110110" n="1" d="30" value="11" />
+  <marginal player="C" coalition="110111" n="1" d="6" value="11" />
+  <marginal player="D" coalition="000000" n="1" d="6" value="1" />
+  <marginal player="D" coalition="000001" n="1" d="30" value="1" />
+  <marginal player="D" coalition="000010" n="1" d="30" value="1" />
+  <marginal player="D" coalition="000011" n="1" d="60" value="1" />
+  <marginal player="D" coalition="001000" n="1" d="30" value="1" />
+  <marginal player="D" coalition="001001" n="1" d="60" value="1" />
+  <marginal player="D" coalition="001010" n="1" d="60" value="1" />
+  <marginal player="D" coalition="001011" n="1" d="60" value="1" />
+  <marginal player="D" coalition="010000" n="1" d="30" value="1" />
+  <marginal player="D" coalition="010001" n="1" d="60" value="1" />
+  <marginal player="D" coalition="010010" n="1" d="60" value="1" />
+  <marginal player="D" coalition="010011" n="1" d="60" value="1" />
+  <marginal player="D" coalition="011000" n="1" d="60" value="6" />
+  <marginal player="D" coalition="011001" n="1" d="60" value="6" />
+  <marginal player="D" coalition="011010" n="1" d="60" value="6" />
+  <marginal player="D" coalition="011011" n="1" d="30" value="6" />
+  <marginal player="D" coalition="100000" n="1" d="30" value="1" />
+  <marginal player="D" coalition="100001" n="1" d="60" value="1" />
+  <marginal player="D" coalition="100010" n="1" d="60" value="1" />
+  <marginal player="D" coalition="100011" n="1" d="60" value="1" />
+  <marginal player="D" coalition="101000" n="1" d="60" value="6" />
+  <marginal player="D" coalition="101001" n="1" d="60" value="6" />
+  <marginal player="D" coalition="101010" n="1" d="60" value="6" />
+  <marginal player="D" coalition="101011" n="1" d="30" value="6" />
+  <marginal player="D" coalition="110000" n="1" d="60" value="1" />
+  <marginal player="D" coalition="110001" n="1" d="60" value="1" />
+  <marginal player="D" coalition="110010" n="1" d="60" value="1" />
+  <marginal player="D" coalition="110011" n="1" d="30" value="1" />
+  <marginal player="D" coalition="111000" n="1" d="60" value="11" />
+  <marginal player="D" coalition="111001" n="1" d="30" value="11" />
+  <marginal player="D" coalition="111010" n="1" d="30" value="11" />
+  <marginal player="D" coalition="111011" n="1" d="6" value="11" />
+  <marginal player="E" coalition="000000" n="1" d="6" value="4" />
+  <marginal player="E" coalition="000001" n="1" d="30" value="4" />
+  <marginal player="E" coalition="000100" n="1" d="30" value="4" />
+  <marginal player="E" coalition="000101" n="1" d="60" value="4" />
+  <marginal player="E" coalition="001000" n="1" d="30" value="4" />
+  <marginal player="E" coalition="001001" n="1" d="60" value="4" />
+  <marginal player="E" coalition="001100" n="1" d="60" value="4" />
+  <marginal player="E" coalition="001101" n="1" d="60" value="4" />
+  <marginal player="E" coalition="010000" n="1" d="30" value="4" />
+  <marginal player="E" coalition="010001" n="1" d="60" value="4" />
+  <marginal player="E" coalition="010100" n="1" d="60" value="4" />
+  <marginal player="E" coalition="010101" n="1" d="60" value="4" />
+  <marginal player="E" coalition="011000" n="1" d="60" value="4" />
+  <marginal player="E" coalition="011001" n="1" d="60" value="4" />
+  <marginal player="E" coalition="011100" n="1" d="60" value="4" />
+  <marginal player="E" coalition="011101" n="1" d="30" value="4" />
+  <marginal player="E" coalition="100000" n="1" d="30" value="4" />
+  <marginal player="E" coalition="100001" n="1" d="60" value="4" />
+  <marginal player="E" coalition="100100" n="1" d="60" value="4" />
+  <marginal player="E" coalition="100101" n="1" d="60" value="4" />
+  <marginal player="E" coalition="101000" n="1" d="60" value="4" />
+  <marginal player="E" coalition="101001" n="1" d="60" value="4" />
+  <marginal player="E" coalition="101100" n="1" d="60" value="4" />
+  <marginal player="E" coalition="101101" n="1" d="30" value="4" />
+  <marginal player="E" coalition="110000" n="1" d="60" value="4" />
+  <marginal player="E" coalition="110001" n="1" d="60" value="4" />
+  <marginal player="E" coalition="110100" n="1" d="60" value="4" />
+  <marginal player="E" coalition="110101" n="1" d="30" value="4" />
+  <marginal player="E" coalition="111000" n="1" d="60" value="4" />
+  <marginal player="E" coalition="111001" n="1" d="30" value="4" />
+  <marginal player="E" coalition="111100" n="1" d="30" value="4" />
+  <marginal player="E" coalition="111101" n="1" d="6" value="4" />
+  <marginal player="F" coalition="000000" n="1" d="6" value="0" />
+  <marginal player="F" coalition="000010" n="1" d="30" value="0" />
+  <marginal player="F" coalition="000100" n="1" d="30" value="0" />
+  <marginal player="F" coalition="000110" n="1" d="60" value="0" />
+  <marginal player="F" coalition="001000" n="1" d="30" value="0" />
+  <marginal player="F" coalition="001010" n="1" d="60" value="0" />
+  <marginal player="F" coalition="001100" n="1" d="60" value="0" />
+  <marginal player="F" coalition="001110" n="1" d="60" value="0" />
+  <marginal player="F" coalition="010000" n="1" d="30" value="0" />
+  <marginal player="F" coalition="010010" n="1" d="60" value="0" />
+  <marginal player="F" coalition="010100" n="1" d="60" value="0" />
+  <marginal player="F" coalition="010110" n="1" d="60" value="0" />
+  <marginal player="F" coalition="011000" n="1" d="60" value="0" />
+  <marginal player="F" coalition="011010" n="1" d="60" value="0" />
+  <marginal player="F" coalition="011100" n="1" d="60" value="0" />
+  <marginal player="F" coalition="011110" n="1" d="30" value="0" />
+  <marginal player="F" coalition="100000" n="1" d="30" value="0" />
+  <marginal player="F" coalition="100010" n="1" d="60" value="0" />
+  <marginal player="F" coalition="100100" n="1" d="60" value="0" />
+  <marginal player="F" coalition="100110" n="1" d="60" value="0" />
+  <marginal player="F" coalition="101000" n="1" d="60" value="0" />
+  <marginal player="F" coalition="101010" n="1" d="60" value="0" />
+  <marginal player="F" coalition="101100" n="1" d="60" value="0" />
+  <marginal player="F" coalition="101110" n="1" d="30" value="0" />
+  <marginal player="F" coalition="110000" n="1" d="60" value="0" />
+  <marginal player="F" coalition="110010" n="1" d="60" value="0" />
+  <marginal player="F" coalition="110100" n="1" d="60" value="0" />
+  <marginal player="F" coalition="110110" n="1" d="30" value="0" />
+  <marginal player="F" coalition="111000" n="1" d="60" value="0" />
+  <marginal player="F" coalition="111010" n="1" d="30" value="0" />
+  <marginal player="F" coalition="111100" n="1" d="30" value="0" />
+  <marginal player="F" coalition="111110" n="1" d="6" value="0" />
+  <permutation order="ABCDEF" marginals="2 14 1 11 4 0" />
+  <permutation order="ABCDFE" marginals="2 14 1 11 0 4" />
+  <permutation order="ABCEDF" marginals="2 14 1 4 11 0" />
+  <permutation order="ABCEFD" marginals="2 14 1 4 0 11" />
+  <permutation order="ABCFDE" marginals="2 14 1 0 11 4" />
+  <permutation order="ABCFED" marginals="2 14 1 0 4 11" />
+  <permutation order="ABDCEF" marginals="2 14 1 11 4 0" />
+  <permutation order="ABDCFE" marginals="2 14 1 11 0 4" />
+  <permutation order="ABDECF" marginals="2 14 1 4 11 0" />
+  <permutation order="ABDEFC" marginals="2 14 1 4 0 11" />
+  <permutation order="ABDFCE" marginals="2 14 1 0 11 4" />
+  <permutation order="ABDFEC" marginals="2 14 1 0 4 11" />
+  <permutation order="ABECDF" marginals="2 14 4 1 11 0" />
+  <permutation order="ABECFD" marginals="2 14 4 1 0 11" />
+  <permutation order="ABEDCF" marginals="2 14 4 1 11 0" />
+  <permutation order="ABEDFC" marginals="2 14 4 1 0 11" />
+  <permutation order="ABEFCD" marginals="2 14 4 0 1 11" />
+  <permutation order="ABEFDC" marginals="2 14 4 0 1 11" />
+  <permutation order="ABFCDE" marginals="2 14 0 1 11 4" />
+  <permutation order="ABFCED" marginals="2 14 0 1 4 11" />
+  <permutation order="ABFDCE" marginals="2 14 0 1 11 4" />
+  <permutation order="ABFDEC" marginals="2 14 0 1 4 11" />
+  <permutation order="ABFECD" marginals="2 14 0 4 1 11" />
+  <permutation order="ABFEDC" marginals="2 14 0 4 1 11" />
+  <permutation order="ACBDEF" marginals="2 1 14 11 4 0" />
+  <permutation order="ACBDFE" marginals="2 1 14 11 0 4" />
+  <permutation order="ACBEDF" marginals="2 1 14 4 11 0" />
+  <permutation order="ACBEFD" marginals="2 1 14 4 0 11" />
+  <permutation order="ACBFDE" marginals="2 1 14 0 11 4" />
+  <permutation order="ACBFED" marginals="2 1 14 0 4 11" />
+  <permutation order="ACDBEF" marginals="2 1 6 19 4 0" />
+  <permutation order="ACDBFE" marginals="2 1 6 19 0 4" />
+  <permutation order="ACDEBF" marginals="2 1 6 4 19 0" />
+  <permutation order="ACDEFB" marginals="2 1 6 4 0 19" />
+  <permutation order="ACDFBE" marginals="2 1 6 0 19 4" />
+  <permutation order="ACDFEB" marginals="2 1 6 0 4 19" />
+  <permutation order="ACEBDF" marginals="2 1 4 14 11 0" />
+  <permutation order="ACEBFD" marginals="2 1 4 14 0 11" />
+  <permutation order="ACEDBF" marginals="2 1 4 6 19 0" />
+  <permutation order="ACEDFB" marginals="2 1 4 6 0 19" />
+  <permutation order="ACEFBD" marginals="2 1 4 0 14 11" />
+  <permutation order="ACEFDB" marginals="2 1 4 0 6 19" />
+  <permutation order="ACFBDE" marginals="2 1 0 14 11 4" />
+  <permutation order="ACFBED" marginals="2 1 0 14 4 11" />
+  <permutation order="ACFDBE" marginals="2 1 0 6 19 4" />
+  <permutation order="ACFDEB" marginals="2 1 0 6 4 19" />
+  <permutation order="ACFEBD" marginals="2 1 0 4 14 11" />
+  <permutation order="ACFEDB" marginals="2 1 0 4 6 19" />
+  <permutation order="ADBCEF" marginals="2 1 14 11 4 0" />
+  <permutation order="ADBCFE" marginals="2 1 14 11 0 4" />
+  <permutation order="ADBECF" marginals="2 1 14 4 11 0" />
+  <permutation order="ADBEFC" marginals="2 1 14 4 0 11" />
+  <permutation order="ADBFCE" marginals="2 1 14 0 11 4" />
+  <permutation order="ADBFEC" marginals="2 1 14 0 4 11" />
+  <permutation order="ADCBEF" marginals="2 1 6 19 4 0" />
+  <permutation order="ADCBFE" marginals="2 1 6 19 0 4" />
+  <permutation order="ADCEBF" marginals="2 1 6 4 19 0" />
+  <permutation order="ADCEFB" marginals="2 1 6 4 0 19" />
+  <permutation order="ADCFBE" marginals="2 1 6 0 19 4" />
+  <permutation order="ADCFEB" marginals="2 1 6 0 4 19" />
+  <permutation order="ADEBCF" marginals="2 1 4 14 11 0" />
+  <permutation order="ADEBFC" marginals="2 1 4 14 0 11" />
+  <permutation order="ADECBF" marginals="2 1 4 6 19 0" />
+  <permutation order="ADECFB" marginals="2 1 4 6 0 19" />
+  <permutation order="ADEFBC" marginals="2 1 4 0 14 11" />
+  <permutation order="ADEFCB" marginals="2 1 4 0 6 19" />
+  <permutation order="ADFBCE" marginals="2 1 0 14 11 4" />
+  <permutation order="ADFBEC" marginals="2 1 0 14 4 11" />
+  <permutation order="ADFCBE" marginals="2 1 0 6 19 4" />
+  <permutation order="ADFCEB" marginals="2 1 0 6 4 19" />
+  <permutation order="ADFEBC" marginals="2 1 0 4 14 11" />
+  <permutation order="ADFECB" marginals="2 1 0 4 6 19" />
+  <permutation order="AEBCDF" marginals="2 4 14 1 11 0" />
+  <permutation order="AEBCFD" marginals="2 4 14 1 0 11" />
+  <permutation order="AEBDCF" marginals="2 4 14 1 11 0" />
+  <permutation order="AEBDFC" marginals="2 4 14 1 0 11" />
+  <permutation order="AEBFCD" marginals="2 4 14 0 1 11" />
+  <permutation order="AEBFDC" marginals="2 4 14 0 1 11" />
+  <permutation order="AECBDF" marginals="2 4 1 14 11 0" />
+  <permutation order="AECBFD" marginals="2 4 1 14 0 11" />
+  <permutation order="AECDBF" marginals="2 4 1 6 19 0" />
+  <permutation order="AECDFB" marginals="2 4 1 6 0 19" />
+  <permutation order="AECFBD" marginals="2 4 1 0 14 11" />
+  <permutation order="AECFDB" marginals="2 4 1 0 6 19" />
+  <permutation order="AEDBCF" marginals="2 4 1 14 11 0" />
+  <permutation order="AEDBFC" marginals="2 4 1 14 0 11" />
+  <permutation order="AEDCBF" marginals="2 4 1 6 19 0" />
+  <permutation order="AEDCFB" marginals="2 4 1 6 0 19" />
+  <permutation order="AEDFBC" marginals="2 4 1 0 14 11" />
+  <permutation order="AEDFCB" marginals="2 4 1 0 6 19" />
+  <permutation order="AEFBCD" marginals="2 4 0 14 1 11" />
+  <permutation order="AEFBDC" marginals="2 4 0 14 1 11" />
+  <permutation order="AEFCBD" marginals="2 4 0 1 14 11" />
+  <permutation order="AEFCDB" marginals="2 4 0 1 6 19" />
+  <permutation order="AEFDBC" marginals="2 4 0 1 14 11" />
+  <permutation order="AEFDCB" marginals="2 4 0 1 6 19" />
+  <permutation order="AFBCDE" marginals="2 0 14 1 11 4" />
+  <permutation order="AFBCED" marginals="2 0 14 1 4 11" />
+  <permutation order="AFBDCE" marginals="2 0 14 1 11 4" />
+  <permutation order="AFBDEC" marginals="2 0 14 1 4 11" />
+  <permutation order="AFBECD" marginals="2 0 14 4 1 11" />
+  <permutation order="AFBEDC" marginals="2 0 14 4 1 11" />
+  <permutation order="AFCBDE" marginals="2 0 1 14 11 4" />
+  <permutation order="AFCBED" marginals="2 0 1 14 4 11" />
+  <permutation order="AFCDBE" marginals="2 0 1 6 19 4" />
+  <permutation order="AFCDEB" marginals="2 0 1 6 4 19" />
+  <permutation order="AFCEBD" marginals="2 0 1 4 14 11" />
+  <permutation order="AFCEDB" marginals="2 0 1 4 6 19" />
+  <permutation order="AFDBCE" marginals="2 0 1 14 11 4" />
+  <permutation order="AFDBEC" marginals="2 0 1 14 4 11" />
+  <permutation order="AFDCBE" marginals="2 0 1 6 19 4" />
+  <permutation order="AFDCEB" marginals="2 0 1 6 4 19" />
+  <permutation order="AFDEBC" marginals="2 0 1 4 14 11" />
+  <permutation order="AFDECB" marginals="2 0 1 4 6 19" />
+  <permutation order="AFEBCD" marginals="2 0 4 14 1 11" />
+  <permutation order="AFEBDC" marginals="2 0 4 14 1 11" />
+  <permutation order="AFECBD" marginals="2 0 4 1 14 11" />
+  <permutation order="AFECDB" marginals="2 0 4 1 6 19" />
+  <permutation order="AFEDBC" marginals="2 0 4 1 14 11" />
+  <permutation order="AFEDCB" marginals="2 0 4 1 6 19" />
+  <permutation order="BACDEF" marginals="2 14 1 11 4 0" />
+  <permutation order="BACDFE" marginals="2 14 1 11 0 4" />
+  <permutation order="BACEDF" marginals="2 14 1 4 11 0" />
+  <permutation order="BACEFD" marginals="2 14 1 4 0 11" />
+  <permutation order="BACFDE" marginals="2 14 1 0 11 4" />
+  <permutation order="BACFED" marginals="2 14 1 0 4 11" />
+  <permutation order="BADCEF" marginals="2 14 1 11 4 0" />
+  <permutation order="BADCFE" marginals="2 14 1 11 0 4" />
+  <permutation order="BADECF" marginals="2 14 1 4 11 0" />
+  <permutation order="BADEFC" marginals="2 14 1 4 0 11" />
+  <permutation order="BADFCE" marginals="2 14 1 0 11 4" />
+  <permutation order="BADFEC" marginals="2 14 1 0 4 11" />
+  <permutation order="BAECDF" marginals="2 14 4 1 11 0" />
+  <permutation order="BAECFD" marginals="2 14 4 1 0 11" />
+  <permutation order="BAEDCF" marginals="2 14 4 1 11 0" />
+  <permutation order="BAEDFC" marginals="2 14 4 1 0 11" />
+  <permutation order="BAEFCD" marginals="2 14 4 0 1 11" />
+  <permutation order="BAEFDC" marginals="2 14 4 0 1 11" />
+  <permutation order="BAFCDE" marginals="2 14 0 1 11 4" />
+  <permutation order="BAFCED" marginals="2 14 0 1 4 11" />
+  <permutation order="BAFDCE" marginals="2 14 0 1 11 4" />
+  <permutation order="BAFDEC" marginals="2 14 0 1 4 11" />
+  <permutation order="BAFECD" marginals="2 14 0 4 1 11" />
+  <permutation order="BAFEDC" marginals="2 14 0 4 1 11" />
+  <permutation order="BCADEF" marginals="2 1 14 11 4 0" />
+  <permutation order="BCADFE" marginals="2 1 14 11 0 4" />
+  <permutation order="BCAEDF" marginals="2 1 14 4 11 0" />
+  <permutation order="BCAEFD" marginals="2 1 14 4 0 11" />
+  <permutation order="BCAFDE" marginals="2 1 14 0 11 4" />
+  <permutation order="BCAFED" marginals="2 1 14 0 4 11" />
+  <permutation order="BCDAEF" marginals="2 1 6 19 4 0" />
+  <permutation order="BCDAFE" marginals="2 1 6 19 0 4" />
+  <permutation order="BCDEAF" marginals="2 1 6 4 19 0" />
+  <permutation order="BCDEFA" marginals="2 1 6 4 0 19" />
+  <permutation order="BCDFAE" marginals="2 1 6 0 19 4" />
+  <permutation order="BCDFEA" marginals="2 1 6 0 4 19" />
+  <permutation order="BCEADF" marginals="2 1 4 14 11 0" />
+  <permutation order="BCEAFD" marginals="2 1 4 14 0 11" />
+  <permutation order="BCEDAF" marginals="2 1 4 6 19 0" />
+  <permutation order="BCEDFA" marginals="2 1 4 6 0 19" />
+  <permutation order="BCEFAD" marginals="2 1 4 0 14 11" />
+  <permutation order="BCEFDA" marginals="2 1 4 0 6 19" />
+  <permutation order="BCFADE" marginals="2 1 0 14 11 4" />
+  <permutation order="BCFAED" marginals="2 1 0 14 4 11" />
+  <permutation order="BCFDAE" marginals="2 1 0 6 19 4" />
+  <permutation order="BCFDEA" marginals="2 1 0 6 4 19" />
+  <permutation order="BCFEAD" marginals="2 1 0 4 14 11" />
+  <permutation order="BCFEDA" marginals="2 1 0 4 6 19" />
+  <permutation order="BDACEF" marginals="2 1 14 11 4 0" />
+  <permutation order="BDACFE" marginals="2 1 14 11 0 4" />
+  <permutation order="BDAECF" marginals="2 1 14 4 11 0" />
+  <permutation order="BDAEFC" marginals="2 1 14 4 0 11" />
+  <permutation order="BDAFCE" marginals="2 1 14 0 11 4" />
+  <permutation order="BDAFEC" marginals="2 1 14 0 4 11" />
+  <permutation order="BDCAEF" marginals="2 1 6 19 4 0" />
+  <permutation order="BDCAFE" marginals="2 1 6 19 0 4" />
+  <permutation order="BDCEAF" marginals="2 1 6 4 19 0" />
+  <permutation order="BDCEFA" marginals="2 1 6 4 0 19" />
+  <permutation order="BDCFAE" marginals="2 1 6 0 19 4" />
+  <permutation order="BDCFEA" marginals="2 1 6 0 4 19" />
+  <permutation order="BDEACF" marginals="2 1 4 14 11 0" />
+  <permutation order="BDEAFC" marginals="2 1 4 14 0 11" />
+  <permutation order="BDECAF" marginals="2 1 4 6 19 0" />
+  <permutation order="BDECFA" marginals="2 1 4 6 0 19" />
+  <permutation order="BDEFAC" marginals="2 1 4 0 14 11" />
+  <permutation order="BDEFCA" marginals="2 1 4 0 6 19" />
+  <permutation order="BDFACE" marginals="2 1 0 14 11 4" />
+  <permutation order="BDFAEC" marginals="2 1 0 14 4 11" />
+  <permutation order="BDFCAE" marginals="2 1 0 6 19 4" />
+  <permutation order="BDFCEA" marginals="2 1 0 6 4 19" />
+  <permutation order="BDFEAC" marginals="2 1 0 4 14 11" />
+  <permutation order="BDFECA" marginals="2 1 0 4 6 19" />
+  <permutation order="BEACDF" marginals="2 4 14 1 11 0" />
+  <permutation order="BEACFD" marginals="2 4 14 1 0 11" />
+  <permutation order="BEADCF" marginals="2 4 14 1 11 0" />
+  <permutation order="BEADFC" marginals="2 4 14 1 0 11" />
+  <permutation order="BEAFCD" marginals="2 4 14 0 1 11" />
+  <permutation order="BEAFDC" marginals="2 4 14 0 1 11" />
+  <permutation order="BECADF" marginals="2 4 1 14 11 0" />
+  <permutation order="BECAFD" marginals="2 4 1 14 0 11" />
+  <permutation order="BECDAF" marginals="2 4 1 6 19 0" />
+  <permutation order="BECDFA" marginals="2 4 1 6 0 19" />
+  <permutation order="BECFAD" marginals="2 4 1 0 14 11" />
+  <permutation order="BECFDA" marginals="2 4 1 0 6 19" />
+  <permutation order="BEDACF" marginals="2 4 1 14 11 0" />
+  <permutation order="BEDAFC" marginals="2 4 1 14 0 11" />
+  <permutation order="BEDCAF" marginals="2 4 1 6 19 0" />
+  <permutation order="BEDCFA" marginals="2 4 1 6 0 19" />
+  <permutation order="BEDFAC" marginals="2 4 1 0 14 11" />
+  <permutation order="BEDFCA" marginals="2 4 1 0 6 19" />
+  <permutation order="BEFACD" marginals="2 4 0 14 1 11" />
+  <permutation order="BEFADC" marginals="2 4 0 14 1 11" />
+  <permutation order="BEFCAD" marginals="2 4 0 1 14 11" />
+  <permutation order="BEFCDA" marginals="2 4 0 1 6 19" />
+  <permutation order="BEFDAC" marginals="2 4 0 1 14 11" />
+  <permutation order="BEFDCA" marginals="2 4 0 1 6 19" />
+  <permutation order="BFACDE" marginals="2 0 14 1 11 4" />
+  <permutation order="BFACED" marginals="2 0 14 1 4 11" />
+  <permutation order="BFADCE" marginals="2 0 14 1 11 4" />
+  <permutation order="BFADEC" marginals="2 0 14 1 4 11" />
+  <permutation order="BFAECD" marginals="2 0 14 4 1 11" />
+  <permutation order="BFAEDC" marginals="2 0 14 4 1 11" />
+  <permutation order="BFCADE" marginals="2 0 1 14 11 4" />
+  <permutation order="BFCAED" marginals="2 0 1 14 4 11" />
+  <permutation order="BFCDAE" marginals="2 0 1 6 19 4" />
+  <permutation order="BFCDEA" marginals="2 0 1 6 4 19" />
+  <permutation order="BFCEAD" marginals="2 0 1 4 14 11" />
+  <permutation order="BFCEDA" marginals="2 0 1 4 6 19" />
+  <permutation order="BFDACE" marginals="2 0 1 14 11 4" />
+  <permutation order="BFDAEC" marginals="2 0 1 14 4 11" />
+  <permutation order="BFDCAE" marginals="2 0 1 6 19 4" />
+  <permutation order="BFDCEA" marginals="2 0 1 6 4 19" />
+  <permutation order="BFDEAC" marginals="2 0 1 4 14 11" />
+  <permutation order="BFDECA" marginals="2 0 1 4 6 19" />
+  <permutation order="BFEACD" marginals="2 0 4 14 1 11" />
+  <permutation order="BFEADC" marginals="2 0 4 14 1 11" />
+  <permutation order="BFECAD" marginals="2 0 4 1 14 11" />
+  <permutation order="BFECDA" marginals="2 0 4 1 6 19" />
+  <permutation order="BFEDAC" marginals="2 0 4 1 14 11" />
+  <permutation order="BFEDCA" marginals="2 0 4 1 6 19" />
+  <permutation order="CABDEF" marginals="1 2 14 11 4 0" />
+  <permutation order="CABDFE" marginals="1 2 14 11 0 4" />
+  <permutation order="CABEDF" marginals="1 2 14 4 11 0" />
+  <permutation order="CABEFD" marginals="1 2 14 4 0 11" />
+  <permutation order="CABFDE" marginals="1 2 14 0 11 4" />
+  <permutation order="CABFED" marginals="1 2 14 0 4 11" />
+  <permutation order="CADBEF" marginals="1 2 6 19 4 0" />
+  <permutation order="CADBFE" marginals="1 2 6 19 0 4" />
+  <permutation order="CADEBF" marginals="1 2 6 4 19 0" />
+  <permutation order="CADEFB" marginals="1 2 6 4 0 19" />
+  <permutation order="CADFBE" marginals="1 2 6 0 19 4" />
+  <permutation order="CADFEB" marginals="1 2 6 0 4 19" />
+  <permutation order="CAEBDF" marginals="1 2 4 14 11 0" />
+  <permutation order="CAEBFD" marginals="1 2 4 14 0 11" />
+  <permutation order="CAEDBF" marginals="1 2 4 6 19 0" />
+  <permutation order="CAEDFB" marginals="1 2 4 6 0 19" />
+  <permutation order="CAEFBD" marginals="1 2 4 0 14 11" />
+  <permutation order="CAEFDB" marginals="1 2 4 0 6 19" />
+  <permutation order="CAFBDE" marginals="1 2 0 14 11 4" />
+  <permutation order="CAFBED" marginals="1 2 0 14 4 11" />
+  <permutation order="CAFDBE" marginals="1 2 0 6 19 4" />
+  <permutation order="CAFDEB" marginals="1 2 0 6 4 19" />
+  <permutation order="CAFEBD" marginals="1 2 0 4 14 11" />
+  <permutation order="CAFEDB" marginals="1 2 0 4 6 19" />
+  <permutation order="CBADEF" marginals="1 2 14 11 4 0" />
+  <permutation order="CBADFE" marginals="1 2 14 11 0 4" />
+  <permutation order="CBAEDF" marginals="1 2 14 4 11 0" />
+  <permutation order="CBAEFD" marginals="1 2 14 4 0 11" />
+  <permutation order="CBAFDE" marginals="1 2 14 0 11 4" />
+  <permutation order="CBAFED" marginals="1 2 14 0 4 11" />
+  <permutation order="CBDAEF" marginals="1 2 6 19 4 0" />
+  <permutation order="CBDAFE" marginals="1 2 6 19 0 4" />
+  <permutation order="CBDEAF" marginals="1 2 6 4 19 0" />
+  <permutation order="CBDEFA" marginals="1 2 6 4 0 19" />
+  <permutation order="CBDFAE" marginals="1 2 6 0 19 4" />
+  <permutation order="CBDFEA" marginals="1 2 6 0 4 19" />
+  <permutation order="CBEADF" marginals="1 2 4 14 11 0" />
+  <permutation order="CBEAFD" marginals="1 2 4 14 0 11" />
+  <permutation order="CBEDAF" marginals="1 2 4 6 19 0" />
+  <permutation order="CBEDFA" marginals="1 2 4 6 0 19" />
+  <permutation order="CBEFAD" marginals="1 2 4 0 14 11" />
+  <permutation order="CBEFDA" marginals="1 2 4 0 6 19" />
+  <permutation order="CBFADE" marginals="1 2 0 14 11 4" />
+  <permutation order="CBFAED" marginals="1 2 0 14 4 11" />
+  <permutation order="CBFDAE" marginals="1 2 0 6 19 4" />
+  <permutation order="CBFDEA" marginals="1 2 0 6 4 19" />
+  <permutation order="CBFEAD" marginals="1 2 0 4 14 11" />
+  <permutation order="CBFEDA" marginals="1 2 0 4 6 19" />
+  <permutation order="CDABEF" marginals="1 1 7 19 4 0" />
+  <permutation order="CDABFE" marginals="1 1 7 19 0 4" />
+  <permutation order="CDAEBF" marginals="1 1 7 4 19 0" />
+  <permutation order="CDAEFB" marginals="1 1 7 4 0 19" />
+  <permutation order="CDAFBE" marginals="1 1 7 0 19 4" />
+  <permutation order="CDAFEB" marginals="1 1 7 0 4 19" />
+  <permutation order="CDBAEF" marginals="1 1 7 19 4 0" />
+  <permutation order="CDBAFE" marginals="1 1 7 19 0 4" />
+  <permutation order="CDBEAF" marginals="1 1 7 4 19 0" />
+  <permutation order="CDBEFA" marginals="1 1 7 4 0 19" />
+  <permutation order="CDBFAE" marginals="1 1 7 0 19 4" />
+  <permutation order="CDBFEA" marginals="1 1 7 0 4 19" />
+  <permutation order="CDEABF" marginals="1 1 4 7 19 0" />
+  <permutation order="CDEAFB" marginals="1 1 4 7 0 19" />
+  <permutation order="CDEBAF" marginals="1 1 4 7 19 0" />
+  <permutation order="CDEBFA" marginals="1 1 4 7 0 19" />
+  <permutation order="CDEFAB" marginals="1 1 4 0 7 19" />
+  <permutation order="CDEFBA" marginals="1 1 4 0 7 19" />
+  <permutation order="CDFABE" marginals="1 1 0 7 19 4" />
+  <permutation order="CDFAEB" marginals="1 1 0 7 4 19" />
+  <permutation order="CDFBAE" marginals="1 1 0 7 19 4" />
+  <permutation order="CDFBEA" marginals="1 1 0 7 4 19" />
+  <permutation order="CDFEAB" marginals="1 1 0 4 7 19" />
+  <permutation order="CDFEBA" marginals="1 1 0 4 7 19" />
+  <permutation order="CEABDF" marginals="1 4 2 14 11 0" />
+  <permutation order="CEABFD" marginals="1 4 2 14 0 11" />
+  <permutation order="CEADBF" marginals="1 4 2 6 19 0" />
+  <permutation order="CEADFB" marginals="1 4 2 6 0 19" />
+  <permutation order="CEAFBD" marginals="1 4 2 0 14 11" />
+  <permutation order="CEAFDB" marginals="1 4 2 0 6 19" />
+  <permutation order="CEBADF" marginals="1 4 2 14 11 0" />
+  <permutation order="CEBAFD" marginals="1 4 2 14 0 11" />
+  <permutation order="CEBDAF" marginals="1 4 2 6 19 0" />
+  <permutation order="CEBDFA" marginals="1 4 2 6 0 19" />
+  <permutation order="CEBFAD" marginals="1 4 2 0 14 11" />
+  <permutation order="CEBFDA" marginals="1 4 2 0 6 19" />
+  <permutation order="CEDABF" marginals="1 4 1 7 19 0" />
+  <permutation order="CEDAFB" marginals="1 4 1 7 0 19" />
+  <permutation order="CEDBAF" marginals="1 4 1 7 19 0" />
+  <permutation order="CEDBFA" marginals="1 4 1 7 0 19" />
+  <permutation order="CEDFAB" marginals="1 4 1 0 7 19" />
+  <permutation order="CEDFBA" marginals="1 4 1 0 7 19" />
+  <permutation order="CEFABD" marginals="1 4 0 2 14 11" />
+  <permutation order="CEFADB" marginals="1 4 0 2 6 19" />
+  <permutation order="CEFBAD" marginals="1 4 0 2 14 11" />
+  <permutation order="CEFBDA" marginals="1 4 0 2 6 19" />
+  <permutation order="CEFDAB" marginals="1 4 0 1 7 19" />
+  <permutation order="CEFDBA" marginals="1 4 0 1 7 19" />
+  <permutation order="CFABDE" marginals="1 0 2 14 11 4" />
+  <permutation order="CFABED" marginals="1 0 2 14 4 11" />
+  <permutation order="CFADBE" marginals="1 0 2 6 19 4" />
+  <permutation order="CFADEB" marginals="1 0 2 6 4 19" />
+  <permutation order="CFAEBD" marginals="1 0 2 4 14 11" />
+  <permutation order="CFAEDB" marginals="1 0 2 4 6 19" />
+  <permutation order="CFBADE" marginals="1 0 2 14 11 4" />
+  <permutation order="CFBAED" marginals="1 0 2 14 4 11" />
+  <permutation order="CFBDAE" marginals="1 0 2 6 19 4" />
+  <permutation order="CFBDEA" marginals="1 0 2 6 4 19" />
+  <permutation order="CFBEAD" marginals="1 0 2 4 14 11" />
+  <permutation order="CFBEDA" marginals="1 0 2 4 6 19" />
+  <permutation order="CFDABE" marginals="1 0 1 7 19 4" />
+  <permutation order="CFDAEB" marginals="1 0 1 7 4 19" />
+  <permutation order="CFDBAE" marginals="1 0 1 7 19 4" />
+  <permutation order="CFDBEA" marginals="1 0 1 7 4 19" />
+  <permutation order="CFDEAB" marginals="1 0 1 4 7 19" />
+  <permutation order="CFDEBA" marginals="1 0 1 4 7 19" />
+  <permutation order="CFEABD" marginals="1 0 4 2 14 11" />
+  <permutation order="CFEADB" marginals="1 0 4 2 6 19" />
+  <permutation order="CFEBAD" marginals="1 0 4 2 14 11" />
+  <permutation order="CFEBDA" marginals="1 0 4 2 6 19" />
+  <permutation order="CFEDAB" marginals="1 0 4 1 7 19" />
+  <permutation order="CFEDBA" marginals="1 0 4 1 7 19" />
+  <permutation order="DABCEF" marginals="1 2 14 11 4 0" />
+  <permutation order="DABCFE" marginals="1 2 14 11 0 4" />
+  <permutation order="DABECF" marginals="1 2 14 4 11 0" />
+  <permutation order="DABEFC" marginals="1 2 14 4 0 11" />
+  <permutation order="DABFCE" marginals="1 2 14 0 11 4" />
+  <permutation order="DABFEC" marginals="1 2 14 0 4 11" />
+  <permutation order="DACBEF" marginals="1 2 6 19 4 0" />
+  <permutation order="DACBFE" marginals="1 2 6 19 0 4" />
+  <permutation order="DACEBF" marginals="1 2 6 4 19 0" />
+  <permutation order="DACEFB" marginals="1 2 6 4 0 19" />
+  <permutation order="DACFBE" marginals="1 2 6 0 19 4" />
+  <permutation order="DACFEB" marginals="1 2 6 0 4 19" />
+  <permutation order="DAEBCF" marginals="1 2 4 14 11 0" />
+  <permutation order="DAEBFC" marginals="1 2 4 14 0 11" />
+  <permutation order="DAECBF" marginals="1 2 4 6 19 0" />
+  <permutation order="DAECFB" marginals="1 2 4 6 0 19" />
+  <permutation order="DAEFBC" marginals="1 2 4 0 14 11" />
+  <permutation order="DAEFCB" marginals="1 2 4 0 6 19" />
+  <permutation order="DAFBCE" marginals="1 2 0 14 11 4" />
+  <permutation order="DAFBEC" marginals="1 2 0 14 4 11" />
+  <permutation order="DAFCBE" marginals="1 2 0 6 19 4" />
+  <permutation order="DAFCEB" marginals="1 2 0 6 4 19" />
+  <permutation order="DAFEBC" marginals="1 2 0 4 14 11" />
+  <permutation order="DAFECB" marginals="1 2 0 4 6 19" />
+  <permutation order="DBACEF" marginals="1 2 14 11 4 0" />
+  <permutation order="DBACFE" marginals="1 2 14 11 0 4" />
+  <permutation order="DBAECF" marginals="1 2 14 4 11 0" />
+  <permutation order="DBAEFC" marginals="1 2 14 4 0 11" />
+  <permutation order="DBAFCE" marginals="1 2 14 0 11 4" />
+  <permutation order="DBAFEC" marginals="1 2 14 0 4 11" />
+  <permutation order="DBCAEF" marginals="1 2 6 19 4 0" />
+  <permutation order="DBCAFE" marginals="1 2 6 19 0 4" />
+  <permutation order="DBCEAF" marginals="1 2 6 4 19 0" />
+  <permutation order="DBCEFA" marginals="1 2 6 4 0 19" />
+  <permutation order="DBCFAE" marginals="1 2 6 0 19 4" />
+  <permutation order="DBCFEA" marginals="1 2 6 0 4 19" />
+  <permutation order="DBEACF" marginals="1 2 4 14 11 0" />
+  <permutation order="DBEAFC" marginals="1 2 4 14 0 11" />
+  <permutation order="DBECAF" marginals="1 2 4 6 19 0" />
+  <permutation order="DBECFA" marginals="1 2 4 6 0 19" />
+  <permutation order="DBEFAC" marginals="1 2 4 0 14 11" />
+  <permutation order="DBEFCA" marginals="1 2 4 0 6 19" />
+  <permutation order="DBFACE" marginals="1 2 0 14 11 4" />
+  <permutation order="DBFAEC" marginals="1 2 0 14 4 11" />
+  <permutation order="DBFCAE" marginals="1 2 0 6 19 4" />
+  <permutation order="DBFCEA" marginals="1 2 0 6 4 19" />
+  <permutation order="DBFEAC" marginals="1 2 0 4 14 11" />
+  <permutation order="DBFECA" marginals="1 2 0 4 6 19" />
+  <permutation order="DCABEF" marginals="1 1 7 19 4 0" />
+  <permutation order="DCABFE" marginals="1 1 7 19 0 4" />
+  <permutation order="DCAEBF" marginals="1 1 7 4 19 0" />
+  <permutation order="DCAEFB" marginals="1 1 7 4 0 19" />
+  <permutation order="DCAFBE" marginals="1 1 7 0 19 4" />
+  <permutation order="DCAFEB" marginals="1 1 7 0 4 19" />
+  <permutation order="DCBAEF" marginals="1 1 7 19 4 0" />
+  <permutation order="DCBAFE" marginals="1 1 7 19 0 4" />
+  <permutation order="DCBEAF" marginals="1 1 7 4 19 0" />
+  <permutation order="DCBEFA" marginals="1 1 7 4 0 19" />
+  <permutation order="DCBFAE" marginals="1 1 7 0 19 4" />
+  <permutation order="DCBFEA" marginals="1 1 7 0 4 19" />
+  <permutation order="DCEABF" marginals="1 1 4 7 19 0" />
+  <permutation order="DCEAFB" marginals="1 1 4 7 0 19" />
+  <permutation order="DCEBAF" marginals="1 1 4 7 19 0" />
+  <permutation order="DCEBFA" marginals="1 1 4 7 0 19" />
+  <permutation order="DCEFAB" marginals="1 1 4 0 7 19" />
+  <permutation order="DCEFBA" marginals="1 1 4 0 7 19" />
+  <permutation order="DCFABE" marginals="1 1 0 7 19 4" />
+  <permutation order="DCFAEB" marginals="1 1 0 7 4 19" />
+  <permutation order="DCFBAE" marginals="1 1 0 7 19 4" />
+  <permutation order="DCFBEA" marginals="1 1 0 7 4 19" />
+  <permutation order="DCFEAB" marginals="1 1 0 4 7 19" />
+  <permutation order="DCFEBA" marginals="1 1 0 4 7 19" />
+  <permutation order="DEABCF" marginals="1 4 2 14 11 0" />
+  <permutation order="DEABFC" marginals="1 4 2 14 0 11" />
+  <permutation order="DEACBF" marginals="1 4 2 6 19 0" />
+  <permutation order="DEACFB" marginals="1 4 2 6 0 19" />
+  <permutation order="DEAFBC" marginals="1 4 2 0 14 11" />
+  <permutation order="DEAFCB" marginals="1 4 2 0 6 19" />
+  <permutation order="DEBACF" marginals="1 4 2 14 11 0" />
+  <permutation order="DEBAFC" marginals="1 4 2 14 0 11" />
+  <permutation order="DEBCAF" marginals="1 4 2 6 19 0" />
+  <permutation order="DEBCFA" marginals="1 4 2 6 0 19" />
+  <permutation order="DEBFAC" marginals="1 4 2 0 14 11" />
+  <permutation order="DEBFCA" marginals="1 4 2 0 6 19" />
+  <permutation order="DECABF" marginals="1 4 1 7 19 0" />
+  <permutation order="DECAFB" marginals="1 4 1 7 0 19" />
+  <permutation order="DECBAF" marginals="1 4 1 7 19 0" />
+  <permutation order="DECBFA" marginals="1 4 1 7 0 19" />
+  <permutation order="DECFAB" marginals="1 4 1 0 7 19" />
+  <permutation order="DECFBA" marginals="1 4 1 0 7 19" />
+  <permutation order="DEFABC" marginals="1 4 0 2 14 11" />
+  <permutation order="DEFACB" marginals="1 4 0 2 6 19" />
+  <permutation order="DEFBAC" marginals="1 4 0 2 14 11" />
+  <permutation order="DEFBCA" marginals="1 4 0 2 6 19" />
+  <permutation order="DEFCAB" marginals="1 4 0 1 7 19" />
+  <permutation order="DEFCBA" marginals="1 4 0 1 7 19" />
+  <permutation order="DFABCE" marginals="1 0 2 14 11 4" />
+  <permutation order="DFABEC" marginals="1 0 2 14 4 11" />
+  <permutation order="DFACBE" marginals="1 0 2 6 19 4" />
+  <permutation order="DFACEB" marginals="1 0 2 6 4 19" />
+  <permutation order="DFAEBC" marginals="1 0 2 4 14 11" />
+  <permutation order="DFAECB" marginals="1 0 2 4 6 19" />
+  <permutation order="DFBACE" marginals="1 0 2 14 11 4" />
+  <permutation order="DFBAEC" marginals="1 0 2 14 4 11" />
+  <permutation order="DFBCAE" marginals="1 0 2 6 19 4" />
+  <permutation order="DFBCEA" marginals="1 0 2 6 4 19" />
+  <permutation order="DFBEAC" marginals="1 0 2 4 14 11" />
+  <permutation order="DFBECA" marginals="1 0 2 4 6 19" />
+  <permutation order="DFCABE" marginals="1 0 1 7 19 4" />
+  <permutation order="DFCAEB" marginals="1 0 1 7 4 19" />
+  <permutation order="DFCBAE" marginals="1 0 1 7 19 4" />
+  <permutation order="DFCBEA" marginals="1 0 1 7 4 19" />
+  <permutation order="DFCEAB" marginals="1 0 1 4 7 19" />
+  <permutation order="DFCEBA" marginals="1 0 1 4 7 19" />
+  <permutation order="DFEABC" marginals="1 0 4 2 14 11" />
+  <permutation order="DFEACB" marginals="1 0 4 2 6 19" />
+  <permutation order="DFEBAC" marginals="1 0 4 2 14 11" />
+  <permutation order="DFEBCA" marginals="1 0 4 2 6 19" />
+  <permutation order="DFECAB" marginals="1 0 4 1 7 19" />
+  <permutation order="DFECBA" marginals="1 0 4 1 7 19" />
+  <permutation order="EABCDF" marginals="4 2 14 1 11 0" />
+  <permutation order="EABCFD" marginals="4 2 14 1 0 11" />
+  <permutation order="EABDCF" marginals="4 2 14 1 11 0" />
+  <permutation order="EABDFC" marginals="4 2 14 1 0 11" />
+  <permutation order="EABFCD" marginals="4 2 14 0 1 11" />
+  <permutation order="EABFDC" marginals="4 2 14 0 1 11" />
+  <permutation order="EACBDF" marginals="4 2 1 14 11 0" />
+  <permutation order="EACBFD" marginals="4 2 1 14 0 11" />
+  <permutation order="EACDBF" marginals="4 2 1 6 19 0" />
+  <permutation order="EACDFB" marginals="4 2 1 6 0 19" />
+  <permutation order="EACFBD" marginals="4 2 1 0 14 11" />
+  <permutation order="EACFDB" marginals="4 2 1 0 6 19" />
+  <permutation order="EADBCF" marginals="4 2 1 14 11 0" />
+  <permutation order="EADBFC" marginals="4 2 1 14 0 11" />
+  <permutation order="EADCBF" marginals="4 2 1 6 19 0" />
+  <permutation order="EADCFB" marginals="4 2 1 6 0 19" />
+  <permutation order="EADFBC" marginals="4 2 1 0 14 11" />
+  <permutation order="EADFCB" marginals="4 2 1 0 6 19" />
+  <permutation order="EAFBCD" marginals="4 2 0 14 1 11" />
+  <permutation order="EAFBDC" marginals="4 2 0 14 1 11" />
+  <permutation order="EAFCBD" marginals="4 2 0 1 14 11" />
+  <permutation order="EAFCDB" marginals="4 2 0 1 6 19" />
+  <permutation order="EAFDBC" marginals="4 2 0 1 14 11" />
+  <permutation order="EAFDCB" marginals="4 2 0 1 6 19" />
+  <permutation order="EBACDF" marginals="4 2 14 1 11 0" />
+  <permutation order="EBACFD" marginals="4 2 14 1 0 11" />
+  <permutation order="EBADCF" marginals="4 2 14 1 11 0" />
+  <permutation order="EBADFC" marginals="4 2 14 1 0 11" />
+  <permutation order="EBAFCD" marginals="4 2 14 0 1 11" />
+  <permutation order="EBAFDC" marginals="4 2 14 0 1 11" />
+  <permutation order="EBCADF" marginals="4 2 1 14 11 0" />
+  <permutation order="EBCAFD" marginals="4 2 1 14 0 11" />
+  <permutation order="EBCDAF" marginals="4 2 1 6 19 0" />
+  <permutation order="EBCDFA" marginals="4 2 1 6 0 19" />
+  <permutation order="EBCFAD" marginals="4 2 1 0 14 11" />
+  <permutation order="EBCFDA" marginals="4 2 1 0 6 19" />
+  <permutation order="EBDACF" marginals="4 2 1 14 11 0" />
+  <permutation order="EBDAFC" marginals="4 2 1 14 0 11" />
+  <permutation order="EBDCAF" marginals="4 2 1 6 19 0" />
+  <permutation order="EBDCFA" marginals="4 2 1 6 0 19" />
+  <permutation order="EBDFAC" marginals="4 2 1 0 14 11" />
+  <permutation order="EBDFCA" marginals="4 2 1 0 6 19" />
+  <permutation order="EBFACD" marginals="4 2 0 14 1 11" />
+  <permutation order="EBFADC" marginals="4 2 0 14 1 11" />
+  <permutation order="EBFCAD" marginals="4 2 0 1 14 11" />
+  <permutation order="EBFCDA" marginals="4 2 0 1 6 19" />
+  <permutation order="EBFDAC" marginals="4 2 0 1 14 11" />
+  <permutation order="EBFDCA" marginals="4 2 0 1 6 19" />
+  <permutation order="ECABDF" marginals="4 1 2 14 11 0" />
+  <permutation order="ECABFD" marginals="4 1 2 14 0 11" />
+  <permutation order="ECADBF" marginals="4 1 2 6 19 0" />
+  <permutation order="ECADFB" marginals="4 1 2 6 0 19" />
+  <permutation order="ECAFBD" marginals="4 1 2 0 14 11" />
+  <permutation order="ECAFDB" marginals="4 1 2 0 6 19" />
+  <permutation order="ECBADF" marginals="4 1 2 14 11 0" />
+  <permutation order="ECBAFD" marginals="4 1 2 14 0 11" />
+  <permutation order="ECBDAF" marginals="4 1 2 6 19 0" />
+  <permutation order="ECBDFA" marginals="4 1 2 6 0 19" />
+  <permutation order="ECBFAD" marginals="4 1 2 0 14 11" />
+  <permutation order="ECBFDA" marginals="4 1 2 0 6 19" />
+  <permutation order="ECDABF" marginals="4 1 1 7 19 0" />
+  <permutation order="ECDAFB" marginals="4 1 1 7 0 19" />
+  <permutation order="ECDBAF" marginals="4 1 1 7 19 0" />
+  <permutation order="ECDBFA" marginals="4 1 1 7 0 19" />
+  <permutation order="ECDFAB" marginals="4 1 1 0 7 19" />
+  <permutation order="ECDFBA" marginals="4 1 1 0 7 19" />
+  <permutation order="ECFABD" marginals="4 1 0 2 14 11" />
+  <permutation order="ECFADB" marginals="4 1 0 2 6 19" />
+  <permutation order="ECFBAD" marginals="4 1 0 2 14 11" />
+  <permutation order="ECFBDA" marginals="4 1 0 2 6 19" />
+  <permutation order="ECFDAB" marginals="4 1 0 1 7 19" />
+  <permutation order="ECFDBA" marginals="4 1 0 1 7 19" />
+  <permutation order="EDABCF" marginals="4 1 2 14 11 0" />
+  <permutation order="EDABFC" marginals="4 1 2 14 0 11" />
+  <permutation order="EDACBF" marginals="4 1 2 6 19 0" />
+  <permutation order="EDACFB" marginals="4 1 2 6 0 19" />
+  <permutation order="EDAFBC" marginals="4 1 2 0 14 11" />
+  <permutation order="EDAFCB" marginals="4 1 2 0 6 19" />
+  <permutation order="EDBACF" marginals="4 1 2 14 11 0" />
+  <permutation order="EDBAFC" marginals="4 1 2 14 0 11" />
+  <permutation order="EDBCAF" marginals="4 1 2 6 19 0" />
+  <permutation order="EDBCFA" marginals="4 1 2 6 0 19" />
+  <permutation order="EDBFAC" marginals="4 1 2 0 14 11" />
+  <permutation order="EDBFCA" marginals="4 1 2 0 6 19" />
+  <permutation order="EDCABF" marginals="4 1 1 7 19 0" />
+  <permutation order="EDCAFB" marginals="4 1 1 7 0 19" />
+  <permutation order="EDCBAF" marginals="4 1 1 7 19 0" />
+  <permutation order="EDCBFA" marginals="4 1 1 7 0 19" />
+  <permutation order="EDCFAB" marginals="4 1 1 0 7 19" />
+  <permutation order="EDCFBA" marginals="4 1 1 0 7 19" />
+  <permutation order="EDFABC" marginals="4 1 0 2 14 11" />
+  <permutation order="EDFACB" marginals="4 1 0 2 6 19" />
+  <permutation order="EDFBAC" marginals="4 1 0 2 14 11" />
+  <permutation order="EDFBCA" marginals="4 1 0 2 6 19" />
+  <permutation order="EDFCAB" marginals="4 1 0 1 7 19" />
+  <permutation order="EDFCBA" marginals="4 1 0 1 7 19" />
+  <permutation order="EFABCD" marginals="4 0 2 14 1 11" />
+  <permutation order="EFABDC" marginals="4 0 2 14 1 11" />
+  <permutation order="EFACBD" marginals="4 0 2 1 14 11" />
+  <permutation order="EFACDB" marginals="4 0 2 1 6 19" />
+  <permutation order="EFADBC" marginals="4 0 2 1 14 11" />
+  <permutation order="EFADCB" marginals="4 0 2 1 6 19" />
+  <permutation order="EFBACD" marginals="4 0 2 14 1 11" />
+  <permutation order="EFBADC" marginals="4 0 2 14 1 11" />
+  <permutation order="EFBCAD" marginals="4 0 2 1 14 11" />
+  <permutation order="EFBCDA" marginals="4 0 2 1 6 19" />
+  <permutation order="EFBDAC" marginals="4 0 2 1 14 11" />
+  <permutation order="EFBDCA" marginals="4 0 2 1 6 19" />
+  <permutation order="EFCABD" marginals="4 0 1 2 14 11" />
+  <permutation order="EFCADB" marginals="4 0 1 2 6 19" />
+  <permutation order="EFCBAD" marginals="4 0 1 2 14 11" />
+  <permutation order="EFCBDA" marginals="4 0 1 2 6 19" />
+  <permutation order="EFCDAB" marginals="4 0 1 1 7 19" />
+  <permutation order="EFCDBA" marginals="4 0 1 1 7 19" />
+  <permutation order="EFDABC" marginals="4 0 1 2 14 11" />
+  <permutation order="EFDACB" marginals="4 0 1 2 6 19" />
+  <permutation order="EFDBAC" marginals="4 0 1 2 14 11" />
+  <permutation order="EFDBCA" marginals="4 0 1 2 6 19" />
+  <permutation order="EFDCAB" marginals="4 0 1 1 7 19" />
+  <permutation order="EFDCBA" marginals="4 0 1 1 7 19" />
+  <permutation order="FABCDE" marginals="0 2 14 1 11 4" />
+  <permutation order="FABCED" marginals="0 2 14 1 4 11" />
+  <permutation order="FABDCE" marginals="0 2 14 1 11 4" />
+  <permutation order="FABDEC" marginals="0 2 14 1 4 11" />
+  <permutation order="FABECD" marginals="0 2 14 4 1 11" />
+  <permutation order="FABEDC" marginals="0 2 14 4 1 11" />
+  <permutation order="FACBDE" marginals="0 2 1 14 11 4" />
+  <permutation order="FACBED" marginals="0 2 1 14 4 11" />
+  <permutation order="FACDBE" marginals="0 2 1 6 19 4" />
+  <permutation order="FACDEB" marginals="0 2 1 6 4 19" />
+  <permutation order="FACEBD" marginals="0 2 1 4 14 11" />
+  <permutation order="FACEDB" marginals="0 2 1 4 6 19" />
+  <permutation order="FADBCE" marginals="0 2 1 14 11 4" />
+  <permutation order="FADBEC" marginals="0 2 1 14 4 11" />
+  <permutation order="FADCBE" marginals="0 2 1 6 19 4" />
+  <permutation order="FADCEB" marginals="0 2 1 6 4 19" />
+  <permutation order="FADEBC" marginals="0 2 1 4 14 11" />
+  <permutation order="FADECB" marginals="0 2 1 4 6 19" />
+  <permutation order="FAEBCD" marginals="0 2 4 14 1 11" />
+  <permutation order="FAEBDC" marginals="0 2 4 14 1 11" />
+  <permutation order="FAECBD" marginals="0 2 4 1 14 11" />
+  <permutation order="FAECDB" marginals="0 2 4 1 6 19" />
+  <permutation order="FAEDBC" marginals="0 2 4 1 14 11" />
+  <permutation order="FAEDCB" marginals="0 2 4 1 6 19" />
+  <permutation order="FBACDE" marginals="0 2 14 1 11 4" />
+  <permutation order="FBACED" marginals="0 2 14 1 4 11" />
+  <permutation order="FBADCE" marginals="0 2 14 1 11 4" />
+  <permutation order="FBADEC" marginals="0 2 14 1 4 11" />
+  <permutation order="FBAECD" marginals="0 2 14 4 1 11" />
+  <permutation order="FBAEDC" marginals="0 2 14 4 1 11" />
+  <permutation order="FBCADE" marginals="0 2 1 14 11 4" />
+  <permutation order="FBCAED" marginals="0 2 1 14 4 11" />
+  <permutation order="FBCDAE" marginals="0 2 1 6 19 4" />
+  <permutation order="FBCDEA" marginals="0 2 1 6 4 19" />
+  <permutation order="FBCEAD" marginals="0 2 1 4 14 11" />
+  <permutation order="FBCEDA" marginals="0 2 1 4 6 19" />
+  <permutation order="FBDACE" marginals="0 2 1 14 11 4" />
+  <permutation order="FBDAEC" marginals="0 2 1 14 4 11" />
+  <permutation order="FBDCAE" marginals="0 2 1 6 19 4" />
+  <permutation order="FBDCEA" marginals="0 2 1 6 4 19" />
+  <permutation order="FBDEAC" marginals="0 2 1 4 14 11" />
+  <permutation order="FBDECA" marginals="0 2 1 4 6 19" />
+  <permutation order="FBEACD" marginals="0 2 4 14 1 11" />
+  <permutation order="FBEADC" marginals="0 2 4 14 1 11" />
+  <permutation order="FBECAD" marginals="0 2 4 1 14 11" />
+  <permutation order="FBECDA" marginals="0 2 4 1 6 19" />
+  <permutation order="FBEDAC" marginals="0 2 4 1 14 11" />
+  <permutation order="FBEDCA" marginals="0 2 4 1 6 19" />
+  <permutation order="FCABDE" marginals="0 1 2 14 11 4" />
+  <permutation order="FCABED" marginals="0 1 2 14 4 11" />
+  <permutation order="FCADBE" marginals="0 1 2 6 19 4" />
+  <permutation order="FCADEB" marginals="0 1 2 6 4 19" />
+  <permutation order="FCAEBD" marginals="0 1 2 4 14 11" />
+  <permutation order="FCAEDB" marginals="0 1 2 4 6 19" />
+  <permutation order="FCBADE" marginals="0 1 2 14 11 4" />
+  <permutation order="FCBAED" marginals="0 1 2 14 4 11" />
+  <permutation order="FCBDAE" marginals="0 1 2 6 19 4" />
+  <permutation order="FCBDEA" marginals="0 1 2 6 4 19" />
+  <permutation order="FCBEAD" marginals="0 1 2 4 14 11" />
+  <permutation order="FCBEDA" marginals="0 1 2 4 6 19" />
+  <permutation order="FCDABE" marginals="0 1 1 7 19 4" />
+  <permutation order="FCDAEB" marginals="0 1 1 7 4 19" />
+  <permutation order="FCDBAE" marginals="0 1 1 7 19 4" />
+  <permutation order="FCDBEA" marginals="0 1 1 7 4 19" />
+  <permutation order="FCDEAB" marginals="0 1 1 4 7 19" />
+  <permutation order="FCDEBA" marginals="0 1 1 4 7 19" />
+  <permutation order="FCEABD" marginals="0 1 4 2 14 11" />
+  <permutation order="FCEADB" marginals="0 1 4 2 6 19" />
+  <permutation order="FCEBAD" marginals="0 1 4 2 14 11" />
+  <permutation order="FCEBDA" marginals="0 1 4 2 6 19" />
+  <permutation order="FCEDAB" marginals="0 1 4 1 7 19" />
+  <permutation order="FCEDBA" marginals="0 1 4 1 7 19" />
+  <permutation order="FDABCE" marginals="0 1 2 14 11 4" />
+  <permutation order="FDABEC" marginals="0 1 2 14 4 11" />
+  <permutation order="FDACBE" marginals="0 1 2 6 19 4" />
+  <permutation order="FDACEB" marginals="0 1 2 6 4 19" />
+  <permutation order="FDAEBC" marginals="0 1 2 4 14 11" />
+  <permutation order="FDAECB" marginals="0 1 2 4 6 19" />
+  <permutation order="FDBACE" marginals="0 1 2 14 11 4" />
+  <permutation order="FDBAEC" marginals="0 1 2 14 4 11" />
+  <permutation order="FDBCAE" marginals="0 1 2 6 19 4" />
+  <permutation order="FDBCEA" marginals="0 1 2 6 4 19" />
+  <permutation order="FDBEAC" marginals="0 1 2 4 14 11" />
+  <permutation order="FDBECA" marginals="0 1 2 4 6 19" />
+  <permutation order="FDCABE" marginals="0 1 1 7 19 4" />
+  <permutation order="FDCAEB" marginals="0 1 1 7 4 19" />
+  <permutation order="FDCBAE" marginals="0 1 1 7 19 4" />
+  <permutation order="FDCBEA" marginals="0 1 1 7 4 19" />
+  <permutation order="FDCEAB" marginals="0 1 1 4 7 19" />
+  <permutation order="FDCEBA" marginals="0 1 1 4 7 19" />
+  <permutation order="FDEABC" marginals="0 1 4 2 14 11" />
+  <permutation order="FDEACB" marginals="0 1 4 2 6 19" />
+  <permutation order="FDEBAC" marginals="0 1 4 2 14 11" />
+  <permutation order="FDEBCA" marginals="0 1 4 2 6 19" />
+  <permutation order="FDECAB" marginals="0 1 4 1 7 19" />
+  <permutation order="FDECBA" marginals="0 1 4 1 7 19" />
+  <permutation order="FEABCD" marginals="0 4 2 14 1 11" />
+  <permutation order="FEABDC" marginals="0 4 2 14 1 11" />
+  <permutation order="FEACBD" marginals="0 4 2 1 14 11" />
+  <permutation order="FEACDB" marginals="0 4 2 1 6 19" />
+  <permutation order="FEADBC" marginals="0 4 2 1 14 11" />
+  <permutation order="FEADCB" marginals="0 4 2 1 6 19" />
+  <permutation order="FEBACD" marginals="0 4 2 14 1 11" />
+  <permutation order="FEBADC" marginals="0 4 2 14 1 11" />
+  <permutation order="FEBCAD" marginals="0 4 2 1 14 11" />
+  <permutation order="FEBCDA" marginals="0 4 2 1 6 19" />
+  <permutation order="FEBDAC" marginals="0 4 2 1 14 11" />
+  <permutation order="FEBDCA" marginals="0 4 2 1 6 19" />
+  <permutation order="FECABD" marginals="0 4 1 2 14 11" />
+  <permutation order="FECADB" marginals="0 4 1 2 6 19" />
+  <permutation order="FECBAD" marginals="0 4 1 2 14 11" />
+  <permutation order="FECBDA" marginals="0 4 1 2 6 19" />
+  <permutation order="FECDAB" marginals="0 4 1 1 7 19" />
+  <permutation order="FECDBA" marginals="0 4 1 1 7 19" />
+  <permutation order="FEDABC" marginals="0 4 1 2 14 11" />
+  <permutation order="FEDACB" marginals="0 4 1 2 6 19" />
+  <permutation order="FEDBAC" marginals="0 4 1 2 14 11" />
+  <permutation order="FEDBCA" marginals="0 4 1 2 6 19" />
+  <permutation order="FEDCAB" marginals="0 4 1 1 7 19" />
+  <permutation order="FEDCBA" marginals="0 4 1 1 7 19" />
+  <dividend mask="000000" value="0" />
+  <dividend mask="000001" value="0" />
+  <dividend mask="000010" value="4" />
+  <dividend mask="000100" value="1" />
+  <dividend mask="001000" value="1" />
+  <dividend mask="010000" value="2" />
+  <dividend mask="100000" value="2" />
+  <dividend mask="000011" value="0" />
+  <dividend mask="000101" value="0" />
+  <dividend mask="000110" value="0" />
+  <dividend mask="001001" value="0" />
+  <dividend mask="001010" value="0" />
+  <dividend mask="001100" value="0" />
+  <dividend mask="010001" value="0" />
+  <dividend mask="010010" value="0" />
+  <dividend mask="010100" value="0" />
+  <dividend mask="011000" value="0" />
+  <dividend mask="100001" value="0" />
+  <dividend mask="100010" value="0" />
+  <dividend mask="100100" value="0" />
+  <dividend mask="101000" value="0" />
+  <dividend mask="110000" value="12" />
+  <dividend mask="000111" value="0" />
+  <dividend mask="001011" value="0" />
+  <dividend mask="001101" value="0" />
+  <dividend mask="001110" value="0" />
+  <dividend mask="010011" value="0" />
+  <dividend mask="010101" value="0" />
+  <dividend mask="010110" value="0" />
+  <dividend mask="011001" value="0" />
+  <dividend mask="011010" value="0" />
+  <dividend mask="011100" value="5" />
+  <dividend mask="100011" value="0" />
+  <dividend mask="100101" value="0" />
+  <dividend mask="100110" value="0" />
+  <dividend mask="101001" value="0" />
+  <dividend mask="101010" value="0" />
+  <dividend mask="101100" value="5" />
+  <dividend mask="110001" value="0" />
+  <dividend mask="110010" value="0" />
+  <dividend mask="110100" value="0" />
+  <dividend mask="111000" value="0" />
+  <dividend mask="001111" value="0" />
+  <dividend mask="010111" value="0" />
+  <dividend mask="011011" value="0" />
+  <dividend mask="011101" value="0" />
+  <dividend mask="011110" value="0" />
+  <dividend mask="100111" value="0" />
+  <dividend mask="101011" value="0" />
+  <dividend mask="101101" value="0" />
+  <dividend mask="101110" value="0" />
+  <dividend mask="110011" value="0" />
+  <dividend mask="110101" value="0" />
+  <dividend mask="110110" value="0" />
+  <dividend mask="111001" value="0" />
+  <dividend mask="111010" value="0" />
+  <dividend mask="111100" value="0" />
+  <dividend mask="011111" value="0" />
+  <dividend mask="101111" value="0" />
+  <dividend mask="110111" value="0" />
+  <dividend mask="111011" value="0" />
+  <dividend mask="111101" value="0" />
+  <dividend mask="111110" value="0" />
+  <dividend mask="111111" value="0" />
+  <player id="A" n="29" d="3" permutation-sum="6960" standalone="2" leave-one-out="19" uniform-n="37" uniform-d="4" />
+  <player id="B" n="29" d="3" permutation-sum="6960" standalone="2" leave-one-out="19" uniform-n="37" uniform-d="4" />
+  <player id="C" n="13" d="3" permutation-sum="3120" standalone="1" leave-one-out="11" uniform-n="7" uniform-d="2" />
+  <player id="D" n="13" d="3" permutation-sum="3120" standalone="1" leave-one-out="11" uniform-n="7" uniform-d="2" />
+  <player id="E" n="4" d="1" permutation-sum="2880" standalone="4" leave-one-out="4" uniform-n="4" uniform-d="1" />
+  <player id="F" n="0" d="1" permutation-sum="0" standalone="0" leave-one-out="0" uniform-n="0" uniform-d="1" />
+</d11-goldens>

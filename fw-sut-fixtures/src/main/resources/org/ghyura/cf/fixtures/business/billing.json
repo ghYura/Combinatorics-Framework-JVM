@@ -1,0 +1,9 @@
+{
+  "sheets": {
+    "FW_Seq": [["actions", "FW_Combi(2)"]],
+    "actions": [
+      ["{\"op\":\"refund\",\"invoice_id\":1}"],
+      ["{\"op\":\"chargeback\",\"invoice_id\":1}"]
+    ]
+  }
+}

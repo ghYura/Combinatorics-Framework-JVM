@@ -1,0 +1,612 @@
+<?xml version='1.0' encoding='utf-8'?>
+<d4-goldens origin="independent unchanged architect-derived.json and source verifier model" cases="84" qa-commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/architect-derived.json" sha256="d61391eaf82185f2e673dc4f398074a039a4a2873b5e8b5eabe8e16a89df1f98" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/sut.py" sha256="34a6170684c3503580a9bcfbf944ee19bc09e5668a1f9d2c17917404c2d8f2b8" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/oracle.py" sha256="d8db6d3116e2f95b7f9c612334e53a19d948dff50ef3eb7dcad9772d06ea7f68" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/runtime.py" sha256="08827b1cad7c2096cb8a104726cd051c4e42e7bd9c51de97636f7bcc3b1110be" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/derive.py" sha256="8c6fcbf52848de046778984b5aa6d35a41f0b83a1d0cf88a0fdd85088c754870" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/verify.py" sha256="b235ab00cbbaf9831f9be212f718c8874d7cd3ef0c07adb8eafdd5798b805da5" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/build_spec.py" sha256="d9234a4073457f35a78603cb91b6a757697883f767be9e8cf07ad691c15c0d39" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/spec/main/spec.toml" sha256="69b64bda438099d1b021e19416feb39eb7afc03c77d0b4c09ffb9b7c20bfdb56" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/04-d4-configuration-rules/spec/controls/spec.toml" sha256="c2b6071e14a32de9f56a8344be4a60a12bdd08d2dd4b36b9304ae84ef7bb7500" />
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="2" debug="0" id="main|correct|env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="2" debug="1" id="main|correct|env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+gzip" workers="2" debug="0" id="main|correct|env=dev|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+gzip" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+gzip" workers="2" debug="1" id="main|correct|env=dev|mode=batch|transport=https|features=audit+gzip|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+gzip" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=audit+gzip|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="audit+gzip" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=audit+gzip|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="1" debug="0" id="main|correct|env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="1" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="1" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="1" debug="1" id="main|correct|env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="1" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="1" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="2" debug="0" id="main|correct|env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="2" debug="1" id="main|correct|env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="https" features="cache+gzip" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+cache" workers="2" debug="0" id="main|correct|env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+cache" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+cache" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+cache" workers="2" debug="1" id="main|correct|env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+cache" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+cache" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+gzip" workers="2" debug="0" id="main|correct|env=dev|mode=batch|transport=http|features=audit+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+gzip" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=audit+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=audit+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+gzip" workers="2" debug="1" id="main|correct|env=dev|mode=batch|transport=http|features=audit+gzip|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+gzip" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=audit+gzip|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="audit+gzip" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=audit+gzip|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="1" debug="0" id="main|correct|env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="1" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="1" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="1" debug="1" id="main|correct|env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="1" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="1" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="1" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="2" debug="0" id="main|correct|env=dev|mode=batch|transport=http|features=cache+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=cache+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=cache+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="2" debug="1" id="main|correct|env=dev|mode=batch|transport=http|features=cache+gzip|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=batch|transport=http|features=cache+gzip|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="batch" transport="http" features="cache+gzip" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=batch|transport=http|features=cache+gzip|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Cache-Control" value="max-age=60" />
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="2" debug="0" id="main|correct|env=dev|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="2" debug="1" id="main|correct|env=dev|mode=live|transport=https|features=audit+gzip|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=live|transport=https|features=audit+gzip|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=live|transport=https|features=audit+gzip|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="http" features="audit+gzip" workers="2" debug="0" id="main|correct|env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="http" features="audit+gzip" workers="2" debug="0" id="main|drops_gzip|env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="http" features="audit+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="http" features="audit+gzip" workers="2" debug="1" id="main|correct|env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=1" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="http" features="audit+gzip" workers="2" debug="1" id="main|drops_gzip|env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=1" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="http://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="dev" mode="live" transport="http" features="audit+gzip" workers="2" debug="1" id="main|ignores_debug_rule|env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=1" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="http://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="prod" mode="batch" transport="https" features="audit+gzip" workers="2" debug="0" id="main|correct|env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="prod" mode="batch" transport="https" features="audit+gzip" workers="2" debug="0" id="main|drops_gzip|env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="prod" mode="batch" transport="https" features="audit+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="prod" mode="live" transport="https" features="audit+gzip" workers="2" debug="0" id="main|correct|env=prod|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="correct" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="prod" mode="live" transport="https" features="audit+gzip" workers="2" debug="0" id="main|drops_gzip|env=prod|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="drops_gzip" expected-violations="" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_headers">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="identity">
+      <header name="Content-Encoding" value="identity" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="false" payload="true" />
+  </case>
+  <case env="prod" mode="live" transport="https" features="audit+gzip" workers="2" debug="0" id="main|ignores_debug_rule|env=prod|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" phase="main" policy="ignores_debug_rule" expected-violations="" accepted="true" verdict="PASS" violations="" failure-classes="">
+    <envelope url="https://telemetry.invalid/live" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+    </envelope>
+    <transformation url="true" workers="true" headers="true" payload="true" />
+  </case>
+  <case env="prod" mode="batch" transport="http" features="audit+gzip" workers="2" debug="0" id="controls|correct|env=prod|mode=batch|transport=http|features=audit+gzip|workers=2|debug=0" phase="controls" policy="correct" expected-violations="R1" accepted="false" verdict="PASS" violations="R1" failure-classes="" />
+  <case env="prod" mode="batch" transport="http" features="audit+gzip" workers="2" debug="0" id="controls|drops_gzip|env=prod|mode=batch|transport=http|features=audit+gzip|workers=2|debug=0" phase="controls" policy="drops_gzip" expected-violations="R1" accepted="false" verdict="PASS" violations="R1" failure-classes="" />
+  <case env="prod" mode="batch" transport="http" features="audit+gzip" workers="2" debug="0" id="controls|ignores_debug_rule|env=prod|mode=batch|transport=http|features=audit+gzip|workers=2|debug=0" phase="controls" policy="ignores_debug_rule" expected-violations="R1" accepted="false" verdict="PASS" violations="R1" failure-classes="" />
+  <case env="dev" mode="live" transport="https" features="audit+cache" workers="2" debug="0" id="controls|correct|env=dev|mode=live|transport=https|features=audit+cache|workers=2|debug=0" phase="controls" policy="correct" expected-violations="R2" accepted="false" verdict="PASS" violations="R2" failure-classes="" />
+  <case env="dev" mode="live" transport="https" features="audit+cache" workers="2" debug="0" id="controls|drops_gzip|env=dev|mode=live|transport=https|features=audit+cache|workers=2|debug=0" phase="controls" policy="drops_gzip" expected-violations="R2" accepted="false" verdict="PASS" violations="R2" failure-classes="" />
+  <case env="dev" mode="live" transport="https" features="audit+cache" workers="2" debug="0" id="controls|ignores_debug_rule|env=dev|mode=live|transport=https|features=audit+cache|workers=2|debug=0" phase="controls" policy="ignores_debug_rule" expected-violations="R2" accepted="false" verdict="PASS" violations="R2" failure-classes="" />
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="1" debug="0" id="controls|correct|env=dev|mode=live|transport=https|features=audit+gzip|workers=1|debug=0" phase="controls" policy="correct" expected-violations="R3" accepted="false" verdict="PASS" violations="R3" failure-classes="" />
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="1" debug="0" id="controls|drops_gzip|env=dev|mode=live|transport=https|features=audit+gzip|workers=1|debug=0" phase="controls" policy="drops_gzip" expected-violations="R3" accepted="false" verdict="PASS" violations="R3" failure-classes="" />
+  <case env="dev" mode="live" transport="https" features="audit+gzip" workers="1" debug="0" id="controls|ignores_debug_rule|env=dev|mode=live|transport=https|features=audit+gzip|workers=1|debug=0" phase="controls" policy="ignores_debug_rule" expected-violations="R3" accepted="false" verdict="PASS" violations="R3" failure-classes="" />
+  <case env="prod" mode="batch" transport="https" features="audit+cache" workers="2" debug="0" id="controls|correct|env=prod|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" phase="controls" policy="correct" expected-violations="R4" accepted="false" verdict="PASS" violations="R4" failure-classes="" />
+  <case env="prod" mode="batch" transport="https" features="audit+cache" workers="2" debug="0" id="controls|drops_gzip|env=prod|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" phase="controls" policy="drops_gzip" expected-violations="R4" accepted="false" verdict="PASS" violations="R4" failure-classes="" />
+  <case env="prod" mode="batch" transport="https" features="audit+cache" workers="2" debug="0" id="controls|ignores_debug_rule|env=prod|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" phase="controls" policy="ignores_debug_rule" expected-violations="R4" accepted="false" verdict="PASS" violations="R4" failure-classes="" />
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="1" debug="0" id="controls|correct|env=dev|mode=batch|transport=https|features=audit+cache|workers=1|debug=0" phase="controls" policy="correct" expected-violations="R5" accepted="false" verdict="PASS" violations="R5" failure-classes="" />
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="1" debug="0" id="controls|drops_gzip|env=dev|mode=batch|transport=https|features=audit+cache|workers=1|debug=0" phase="controls" policy="drops_gzip" expected-violations="R5" accepted="false" verdict="PASS" violations="R5" failure-classes="" />
+  <case env="dev" mode="batch" transport="https" features="audit+cache" workers="1" debug="0" id="controls|ignores_debug_rule|env=dev|mode=batch|transport=https|features=audit+cache|workers=1|debug=0" phase="controls" policy="ignores_debug_rule" expected-violations="R5" accepted="false" verdict="PASS" violations="R5" failure-classes="" />
+  <case env="prod" mode="batch" transport="https" features="audit+gzip" workers="2" debug="1" id="controls|correct|env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=1" phase="controls" policy="correct" expected-violations="R6" accepted="false" verdict="PASS" violations="R6" failure-classes="" />
+  <case env="prod" mode="batch" transport="https" features="audit+gzip" workers="2" debug="1" id="controls|drops_gzip|env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=1" phase="controls" policy="drops_gzip" expected-violations="R6" accepted="false" verdict="PASS" violations="R6" failure-classes="" />
+  <case env="prod" mode="batch" transport="https" features="audit+gzip" workers="2" debug="1" id="controls|ignores_debug_rule|env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=1" phase="controls" policy="ignores_debug_rule" expected-violations="R6" accepted="true" verdict="DOMAIN_FAIL" violations="" failure-classes="wrong_acceptance">
+    <envelope url="https://telemetry.invalid/batch" workers="2" decoded-payload="7" encoding="gzip">
+      <header name="Content-Encoding" value="gzip" />
+      <header name="X-Audit" value="1" />
+      <header name="X-Debug" value="1" />
+    </envelope>
+  </case>
+  <obligation id="env=dev|debug=0" />
+  <obligation id="env=dev|debug=1" />
+  <obligation id="env=dev|features=audit+cache" />
+  <obligation id="env=dev|features=audit+gzip" />
+  <obligation id="env=dev|features=cache+gzip" />
+  <obligation id="env=dev|mode=batch" />
+  <obligation id="env=dev|mode=live" />
+  <obligation id="env=dev|transport=http" />
+  <obligation id="env=dev|transport=https" />
+  <obligation id="env=dev|workers=1" />
+  <obligation id="env=dev|workers=2" />
+  <obligation id="env=prod|debug=0" />
+  <obligation id="env=prod|features=audit+gzip" />
+  <obligation id="env=prod|mode=batch" />
+  <obligation id="env=prod|mode=live" />
+  <obligation id="env=prod|transport=https" />
+  <obligation id="env=prod|workers=2" />
+  <obligation id="features=audit+cache|debug=0" />
+  <obligation id="features=audit+cache|debug=1" />
+  <obligation id="features=audit+cache|workers=2" />
+  <obligation id="features=audit+gzip|debug=0" />
+  <obligation id="features=audit+gzip|debug=1" />
+  <obligation id="features=audit+gzip|workers=2" />
+  <obligation id="features=cache+gzip|debug=0" />
+  <obligation id="features=cache+gzip|debug=1" />
+  <obligation id="features=cache+gzip|workers=1" />
+  <obligation id="features=cache+gzip|workers=2" />
+  <obligation id="mode=batch|debug=0" />
+  <obligation id="mode=batch|debug=1" />
+  <obligation id="mode=batch|features=audit+cache" />
+  <obligation id="mode=batch|features=audit+gzip" />
+  <obligation id="mode=batch|features=cache+gzip" />
+  <obligation id="mode=batch|transport=http" />
+  <obligation id="mode=batch|transport=https" />
+  <obligation id="mode=batch|workers=1" />
+  <obligation id="mode=batch|workers=2" />
+  <obligation id="mode=live|debug=0" />
+  <obligation id="mode=live|debug=1" />
+  <obligation id="mode=live|features=audit+gzip" />
+  <obligation id="mode=live|transport=http" />
+  <obligation id="mode=live|transport=https" />
+  <obligation id="mode=live|workers=2" />
+  <obligation id="transport=https|debug=0" />
+  <obligation id="transport=https|debug=1" />
+  <obligation id="transport=https|features=audit+cache" />
+  <obligation id="transport=https|features=audit+gzip" />
+  <obligation id="transport=https|features=cache+gzip" />
+  <obligation id="transport=https|workers=1" />
+  <obligation id="transport=https|workers=2" />
+  <obligation id="transport=http|debug=0" />
+  <obligation id="transport=http|debug=1" />
+  <obligation id="transport=http|features=audit+cache" />
+  <obligation id="transport=http|features=audit+gzip" />
+  <obligation id="transport=http|features=cache+gzip" />
+  <obligation id="transport=http|workers=1" />
+  <obligation id="transport=http|workers=2" />
+  <obligation id="workers=1|debug=0" />
+  <obligation id="workers=1|debug=1" />
+  <obligation id="workers=2|debug=0" />
+  <obligation id="workers=2|debug=1" />
+  <pairwise-row key="env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=0" />
+  <pairwise-row key="env=dev|mode=batch|transport=http|features=cache+gzip|workers=1|debug=1" />
+  <pairwise-row key="env=prod|mode=live|transport=https|features=audit+gzip|workers=2|debug=0" />
+  <pairwise-row key="env=dev|mode=live|transport=http|features=audit+gzip|workers=2|debug=1" />
+  <pairwise-row key="env=dev|mode=batch|transport=https|features=cache+gzip|workers=1|debug=0" />
+  <pairwise-row key="env=dev|mode=batch|transport=https|features=audit+cache|workers=2|debug=1" />
+  <pairwise-row key="env=dev|mode=batch|transport=http|features=audit+cache|workers=2|debug=0" />
+  <pairwise-row key="env=prod|mode=batch|transport=https|features=audit+gzip|workers=2|debug=0" />
+  <pairwise-row key="env=dev|mode=batch|transport=https|features=cache+gzip|workers=2|debug=0" />
+  <counts raw_mandatory="144" raw_with_optional="288" sequential_mandatory_survivors="144 108 72 63 51 36" post_mandatory_sieve="36" reader_expanded="72" reader_retained="66" controls="18" />
+  <wrong-sieve rule="forbid gzip for both modes" removed_legal_candidates="54" remaining_candidates="12" remaining_domain_fail="0" />
+</d4-goldens>

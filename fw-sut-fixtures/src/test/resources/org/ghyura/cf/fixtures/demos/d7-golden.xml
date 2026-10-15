@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1; source-derived frozen predictions. -->
+<d7-golden commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b" source="architect-derived.json" sha256="bcb5139ac56d2dc0b53fe63ea8a769a92aaee2f6507f2b2f4856f31a8008ff37" pass="156" fail="12">
+  <source path="SmallUseCasesDemo/07-d7-reduction-trees/sut.py" sha256="1468c726416722d56f785702a7983abeedefb7383410d3b736a49754bc3edf92" />
+  <source path="SmallUseCasesDemo/07-d7-reduction-trees/oracle.py" sha256="73b3ca22207b0f19b558f71057d3a99915b0e7dd86fcda057928639e5ce5f7a6" />
+  <source path="SmallUseCasesDemo/07-d7-reduction-trees/runtime.py" sha256="2c2842f99fbe2ead73c405f09c33ad1fe98969da78025f1184566967ec69e49e" />
+  <source path="SmallUseCasesDemo/07-d7-reduction-trees/spec/spec.toml" sha256="732e62e044568a7c4228c1b7e17cdc65158b0e2ba9115b1726e6f687c625159f" />
+  <source path="SmallUseCasesDemo/07-d7-reduction-trees/architect-derived.json" sha256="bcb5139ac56d2dc0b53fe63ea8a769a92aaee2f6507f2b2f4856f31a8008ff37" />
+  <vector id="small_integers" hex="0x1.0000000000000p+0 0x1.0000000000000p+1 0x1.8000000000000p+1 0x1.0000000000000p+2 0x1.4000000000000p+2">
+    <budget policy="tree_binary64" n="0" d="1" />
+    <budget policy="flat_fsum" n="1" d="1125899906842624" />
+    <budget policy="tree_rational" n="0" d="1" />
+  </vector>
+  <vector id="cancellation" hex="0x1.0000000000000p+53 0x1.0000000000000p+0 -0x1.0000000000000p+53 0x1.0000000000000p+0 0x1.0000000000000p+0">
+    <budget policy="tree_binary64" n="1" d="4" />
+    <budget policy="flat_fsum" n="1" d="4503599627370496" />
+    <budget policy="tree_rational" n="0" d="1" />
+  </vector>
+  <vector id="swamped" hex="0x1.0000000000000p+54 0x1.0000000000000p+0 0x1.0000000000000p+0 0x1.0000000000000p+0 -0x1.0000000000000p+54">
+    <budget policy="tree_binary64" n="1" d="1" />
+    <budget policy="flat_fsum" n="1" d="4503599627370496" />
+    <budget policy="tree_rational" n="0" d="1" />
+  </vector>
+  <vector id="decimal_inputs" hex="0x1.999999999999ap-4 0x1.999999999999ap-3 0x1.3333333333333p-2 0x1.999999999999ap-2 0x1.0000000000000p-1">
+    <budget policy="tree_binary64" n="1" d="4503599627370496" />
+    <budget policy="flat_fsum" n="1" d="9007199254740992" />
+    <budget policy="tree_rational" n="0" d="1" />
+  </vector>
+  <case policy="tree_binary64" vector="small_integers" tree="((((0,1),2),3),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="((((0,1),2),3),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="((((0,1),2),3),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(((0,(1,2)),3),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(((0,(1,2)),3),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(((0,(1,2)),3),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(((0,1),(2,3)),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(((0,1),(2,3)),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(((0,1),(2,3)),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(((0,1),2),(3,4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(((0,1),2),(3,4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(((0,1),2),(3,4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="((0,((1,2),3)),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="((0,((1,2),3)),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="((0,((1,2),3)),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="((0,(1,(2,3))),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="((0,(1,(2,3))),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="((0,(1,(2,3))),4)" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="((0,(1,2)),(3,4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="((0,(1,2)),(3,4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="((0,(1,2)),(3,4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="((0,1),((2,3),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="((0,1),((2,3),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="((0,1),((2,3),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="((0,1),(2,(3,4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="((0,1),(2,(3,4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="((0,1),(2,(3,4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(0,(((1,2),3),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(0,(((1,2),3),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(0,(((1,2),3),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(0,((1,(2,3)),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(0,((1,(2,3)),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(0,((1,(2,3)),4))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(0,((1,2),(3,4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(0,((1,2),(3,4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(0,((1,2),(3,4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(0,(1,((2,3),4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(0,(1,((2,3),4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(0,(1,((2,3),4)))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="small_integers" tree="(0,(1,(2,(3,4))))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="small_integers" tree="(0,(1,(2,(3,4))))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="small_integers" tree="(0,(1,(2,(3,4))))" result_n="15" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="((((0,1),2),3),4)" result_n="2" result_d="1" error_n="1" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="cancellation" tree="((((0,1),2),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="((((0,1),2),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(((0,(1,2)),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="(((0,(1,2)),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(((0,(1,2)),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(((0,1),(2,3)),4)" result_n="2" result_d="1" error_n="1" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="cancellation" tree="(((0,1),(2,3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(((0,1),(2,3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(((0,1),2),(3,4))" result_n="2" result_d="1" error_n="1" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="cancellation" tree="(((0,1),2),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(((0,1),2),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="((0,((1,2),3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="((0,((1,2),3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="((0,((1,2),3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="((0,(1,(2,3))),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="((0,(1,(2,3))),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="((0,(1,(2,3))),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="((0,(1,2)),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="((0,(1,2)),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="((0,(1,2)),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="((0,1),((2,3),4))" result_n="2" result_d="1" error_n="1" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="cancellation" tree="((0,1),((2,3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="((0,1),((2,3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="((0,1),(2,(3,4)))" result_n="2" result_d="1" error_n="1" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="cancellation" tree="((0,1),(2,(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="((0,1),(2,(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(0,(((1,2),3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="(0,(((1,2),3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(0,(((1,2),3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(0,((1,(2,3)),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="(0,((1,(2,3)),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(0,((1,(2,3)),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(0,((1,2),(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="(0,((1,2),(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(0,((1,2),(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(0,(1,((2,3),4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="(0,(1,((2,3),4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(0,(1,((2,3),4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="cancellation" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="cancellation" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="cancellation" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="((((0,1),2),3),4)" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="((((0,1),2),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="((((0,1),2),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(((0,(1,2)),3),4)" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="(((0,(1,2)),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(((0,(1,2)),3),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(((0,1),(2,3)),4)" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="(((0,1),(2,3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(((0,1),(2,3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(((0,1),2),(3,4))" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="(((0,1),2),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(((0,1),2),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="((0,((1,2),3)),4)" result_n="4" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="((0,((1,2),3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="((0,((1,2),3)),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="((0,(1,(2,3))),4)" result_n="4" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="((0,(1,(2,3))),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="((0,(1,(2,3))),4)" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="((0,(1,2)),(3,4))" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="((0,(1,2)),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="((0,(1,2)),(3,4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="((0,1),((2,3),4))" result_n="2" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="((0,1),((2,3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="((0,1),((2,3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="((0,1),(2,(3,4)))" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="((0,1),(2,(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="((0,1),(2,(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(0,(((1,2),3),4))" result_n="4" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="(0,(((1,2),3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(0,(((1,2),3),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(0,((1,(2,3)),4))" result_n="4" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="(0,((1,(2,3)),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(0,((1,(2,3)),4))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(0,((1,2),(3,4)))" result_n="2" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="(0,((1,2),(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(0,((1,2),(3,4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(0,(1,((2,3),4)))" result_n="4" result_d="1" error_n="1" error_d="1" passed="true" />
+  <case policy="flat_fsum" vector="swamped" tree="(0,(1,((2,3),4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(0,(1,((2,3),4)))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="swamped" tree="(0,(1,(2,(3,4))))" result_n="0" result_d="1" error_n="3" error_d="1" passed="false" />
+  <case policy="flat_fsum" vector="swamped" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_rational" vector="swamped" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="1" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="((((0,1),2),3),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="((((0,1),2),3),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="((((0,1),2),3),4)" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(((0,(1,2)),3),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(((0,(1,2)),3),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(((0,(1,2)),3),4)" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(((0,1),(2,3)),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(((0,1),(2,3)),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(((0,1),(2,3)),4)" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(((0,1),2),(3,4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(((0,1),2),(3,4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(((0,1),2),(3,4))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="((0,((1,2),3)),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="((0,((1,2),3)),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="((0,((1,2),3)),4)" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="((0,(1,(2,3))),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="((0,(1,(2,3))),4)" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="((0,(1,(2,3))),4)" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="((0,(1,2)),(3,4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="((0,(1,2)),(3,4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="((0,(1,2)),(3,4))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="((0,1),((2,3),4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="((0,1),((2,3),4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="((0,1),((2,3),4))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="((0,1),(2,(3,4)))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="((0,1),(2,(3,4)))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="((0,1),(2,(3,4)))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(0,(((1,2),3),4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(0,(((1,2),3),4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(0,(((1,2),3),4))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(0,((1,(2,3)),4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(0,((1,(2,3)),4))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(0,((1,(2,3)),4))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(0,((1,2),(3,4)))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(0,((1,2),(3,4)))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(0,((1,2),(3,4)))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(0,(1,((2,3),4)))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(0,(1,((2,3),4)))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(0,(1,((2,3),4)))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+  <case policy="tree_binary64" vector="decimal_inputs" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="flat_fsum" vector="decimal_inputs" tree="(0,(1,(2,(3,4))))" result_n="3" result_d="2" error_n="1" error_d="36028797018963968" passed="true" />
+  <case policy="tree_rational" vector="decimal_inputs" tree="(0,(1,(2,(3,4))))" result_n="54043195528445953" result_d="36028797018963968" error_n="0" error_d="1" passed="true" />
+</d7-golden>

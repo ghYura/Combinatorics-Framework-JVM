@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+<independent-power-correction-controls status="frozen-before-Java-correction" cases="10" source="SUT/legacy_surrogate_apps/app2.py:543;app3.py:521">
+  <finding>Reviewfound JavaStrictMath NaN/poweroverflow canlaterbecome1 via**0,wherePython complex type remainscomplex/finalrefused orfloatingpowerraisesOverflowError. ConverselyCPythonpow absbase1/infinite exponent andbase1/NaN returns1 unlikeStrictMath. Explicitruntimeoperator correction required;initial728predictions stayunchanged. Newlywritten independent standardoperator lambdas only,noeval/compile/originalhelpers/SUTexecution.</finding>
+  <case id="0">{"text": "((-1)**0.5)**0", "value": null}</case>
+  <case id="1">{"text": "(10.0**1000)**0", "value": null}</case>
+  <case id="2">{"text": "(10.0**200*10.0**200)**0", "value": 1.0}</case>
+  <case id="3">{"text": "(-1.)**(10.0**200*10.0**200)", "value": 1.0}</case>
+  <case id="4">{"text": "1.0**(10.0**200*10.0**200)", "value": 1.0}</case>
+  <case id="5">{"text": "(-2.)**(10.0**200*10.0**200)", "value": null}</case>
+  <case id="6">{"text": "0.0**(10.0**200*10.0**200)", "value": 0.0}</case>
+  <case id="7">{"text": "(-2.)**0.0", "value": 1.0}</case>
+  <case id="8">{"text": "-0.0**-2", "value": null}</case>
+  <case id="9">{"text": "1.0**((10.0**200*10.0**200)-(10.0**200*10.0**200))", "value": 1.0}</case>
+</independent-power-correction-controls>

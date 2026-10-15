@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+<cli-contract schema="1" program="java -jar fw-app.jar">
+  <global-options>
+    <option name="--config" value="FILE" repeatable="false">Properties file with cf.* settings, UTF-8.</option>
+    <option name="--legacy-config" value="FILE" repeatable="true">Legacy fw.properties file to import below every cf.* source; repeatable, later files win; every key is reported with its disposition (revision 2, decision F6-F31).</option>
+    <option name="--set" value="KEY=VALUE" repeatable="true">Override one cf.* setting; repeatable; wins over the file and the environment.</option>
+    <option name="--workers" value="N" repeatable="false">Shortcut for --set cf.execution.workers=N.</option>
+    <option name="--repeat" value="K" repeatable="false">Shortcut for --set cf.execution.repeat.count=K.</option>
+    <option name="--seed" value="S" repeatable="false">Shortcut for --set cf.random.seed=S.</option>
+    <option name="--constraints" value="FILE" repeatable="false">Constraint sidecar to apply (params, orders, constraints; shortcut for --set cf.constraints.file=FILE); without it a scenario&apos;s companion &lt;stem&gt;.constraints.json is read.</option>
+    <option name="--format" value="text|xml" repeatable="false">Output format of the report on standard output; default text.</option>
+    <option name="--debug" repeatable="false">Print stack traces for unexpected failures.</option>
+  </global-options>
+  <commands>
+    <command name="run" owner="M04" required="">
+      <summary>Execute a scenario end to end: validate, plan, generate, execute, analyze.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario to run (XLSX, JSON, YAML or TOML).</option>
+      <option name="--out" value="PATH" repeatable="false">Write the run report artifact to PATH; enables cf.artifacts.enabled.</option>
+      <option name="--checkpoint" value="PATH" repeatable="false">Write quiescent checkpoints to PATH; enables cf.checkpoint.enabled and cf.artifacts.enabled.</option>
+      <option name="--sut" value="ID" repeatable="false">What runs the candidates: generated-java or a SUT plugin id (shortcut for --set cf.execution.sut=ID).</option>
+      <option name="--run-id" value="ID" repeatable="false">The run&apos;s name in every sample key (shortcut for --set cf.run.id=ID).</option>
+      <option name="--legacy-handoff" value="FILE" repeatable="false">Instead of a scenario, run the Java candidates of a legacy bundle.handoff/v2 hand-over (its manifest.json and loose source files); its run id and verdict mode apply unless set explicitly. Any other protocol version is refused.</option>
+    </command>
+    <command name="validate" owner="M00" required="">
+      <summary>Validate the configuration and, when one is given, a scenario, without running anything.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario to validate as well (scenario validation arrives with M01).</option>
+    </command>
+    <command name="plan" owner="M02" required="--scenario">
+      <summary>Validate a scenario and print its plan: operators, exact cardinalities with formulas and row lengths, the candidate and sample counts with how sure each is (exact, bounded, estimated, unknown), resource estimates.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario to plan.</option>
+      <option name="--scan" value="N" repeatable="false">The most candidates the exact counts may visit; default 1000000.</option>
+      <option name="--graph" value="FILE" repeatable="false">Also write the FW_Seq dependency graph as fwgen graph wrote it: Graphviz DOT when FILE ends in .dot, its JSON otherwise.</option>
+    </command>
+    <command name="candidates" owner="M03" required="--scenario">
+      <summary>Validate, plan, generate and assemble a scenario&apos;s candidates: counts (generated, excluded by rules, left out by covering selection, executable), per-rule impact and the first candidates with their ids and sources.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario to assemble.</option>
+      <option name="--limit" value="N" repeatable="false">How many candidates to show, from the first; default 10, 0 for none.</option>
+      <option name="--scan" value="N" repeatable="false">The most candidates the exact counts may visit; default 1000000.</option>
+      <option name="--export" value="DIR" repeatable="false">Also write every executable candidate as a legacy bundle.handoff/v2 hand-over into DIR, which must be new or empty: one file per candidate, or shards with --transport sharded.</option>
+      <option name="--transport" value="NAME" repeatable="false">How --export packs the candidates: loose-files (the default) or sharded.</option>
+    </command>
+    <command name="analyze" owner="M06" required="--results">
+      <summary>Analyze an exported results artifact: metrics, coverage, Pareto fronts, optimizers.</summary>
+      <option name="--results" value="FILE" repeatable="false">Results artifact to analyze.</option>
+      <option name="--coverage-format" value="jacoco|coverage-py|gcov" repeatable="false">Import existing coverage metrics; requires --coverage-report. Runs no coverage tool.</option>
+      <option name="--coverage-report" value="PATH" repeatable="false">Coverage report path relative to the working directory; {lineNo} is the physical one-based results line. Requires --coverage-format. Imported metrics override inline keys; missing/malformed reports are diagnosed.</option>
+    </command>
+    <command name="resume" owner="M07" required="--checkpoint">
+      <summary>Resume a run from an explicit checkpoint artifact.</summary>
+      <option name="--checkpoint" value="FILE" repeatable="false">Checkpoint artifact to resume from.</option>
+      <option name="--out" value="PATH" repeatable="false">Write the run report artifact to PATH.</option>
+    </command>
+    <command name="export" owner="M07" required="--input --output">
+      <summary>Convert a checkpoint artifact into a report, legacy results_v2 rows or a metrics table.</summary>
+      <option name="--input" value="FILE" repeatable="false">Checkpoint artifact to read (run --checkpoint PATH writes one).</option>
+      <option name="--output" value="FILE" repeatable="false">File to write; replaced only once complete.</option>
+      <option name="--kind" value="report|results|csv|html" repeatable="false">What to export: report (XML summary, the default), results (legacy results_v2 rows, one per attempt, CSV), csv (final samples with their metrics) or html (the run as one self-contained page with its triage findings, the legacy bundle report).</option>
+    </command>
+    <command name="score" owner="M09" required="--input">
+      <summary>Score the logical lines of a text file with the legacy analyzer&apos;s heuristic rules: a frozen corpus profile, named contributions and opt/watch/reject decisions. Runs nothing; decisions never make a sample eligible.</summary>
+      <option name="--input" value="FILE" repeatable="false">UTF-8 text to score; lines join into logical shell commands.</option>
+      <option name="--rules" value="FILE" repeatable="false">The legacy analyzer&apos;s manual rules (JSON: required/forbidden tokens, keys and regexes, token weights, expected types and signatures, line_length, numeric_ranges, optimizations).</option>
+      <option name="--min-support" value="N" repeatable="false">Lines a common token, key or number needs; default 3.</option>
+      <option name="--top-k" value="N" repeatable="false">Common tokens, keys and numbers kept; default 12.</option>
+      <option name="--opt-threshold" value="X" repeatable="false">Score from which a line is opt; default 75.</option>
+      <option name="--watch-threshold" value="X" repeatable="false">Score from which a line is watch; default 45.</option>
+      <option name="--suggest" repeatable="false">Instead of scoring, suggest goals from the first 500 lines (the legacy Auto-Analysis plan): manual-rules JSON and a cf.analysis.goals value. Never enables execution.</option>
+    </command>
+    <command name="desktop" owner="M09" required="">
+      <summary>Open the Swing desktop: validate and plan a scenario, run, pause, resume and cancel it with its progress and report, analyze results and score texts. Needs a display; refused on a headless JVM.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario to open.</option>
+    </command>
+    <command name="guif" owner="M09" required="">
+      <summary>Open the FlatLaf desktop with the shared Java workflows and the integrated Sieve constraint workbench. Needs a display; refused on a headless JVM.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario to open.</option>
+    </command>
+    <command name="decompose" owner="M09" required="--source">
+      <summary>Split a source file into byte-preserving pieces and write the fwgen spec the legacy code_decompose.py wrote: one raw slot per piece with its original text, interaction notes from shared names; rewrites added to the slots are combined and reassemble into programs. Nothing is run.</summary>
+      <option name="--source" value="FILE" repeatable="false">Source file to split.</option>
+      <option name="--lang" value="auto|java|java-heuristic|generic|py" repeatable="false">java splits the first type at the members the JDK parser finds; java-heuristic is the legacy scanner; generic splits at blank lines; py splits at the top-level statements as the legacy ast decomposition did; auto (default) picks py when the text parses as Python, else java or generic, as the legacy tool chose.</option>
+      <option name="--name" value="NAME" repeatable="false">Logical name in the spec; default the file name without extensions.</option>
+      <option name="--out" value="FILE" repeatable="false">Write the spec here and list the pieces; default standard output.</option>
+      <option name="--max-cell" value="N" repeatable="false">Split pieces longer than N characters at line ends (the spreadsheet cell holds 32767); default 0, off.</option>
+    </command>
+    <command name="triage" owner="M09" required="--input">
+      <summary>Turn a finished run&apos;s verdicts into findings: failures grouped by what distinguishes them, a minimal witness for each and the declared values that explain them, as the legacy bundle triage reported. Reads only what the run persisted; nothing is executed.</summary>
+      <option name="--input" value="PATH" repeatable="false">A checkpoint (run --checkpoint PATH writes one), a legacy run directory holding metrics.kv or executor-summary.json, or a directory with runs/RUN/ (the latest is read).</option>
+      <option name="--top" value="N" repeatable="false">How many enrichment rows the text report shows; default 12.</option>
+      <option name="--json" value="FILE" repeatable="false">Also write the legacy bundle.triage/v1 JSON report to FILE.</option>
+      <option name="--write" repeatable="false">Also write triage.json into the run directory (beside a checkpoint).</option>
+      <option name="--fail-on-findings" repeatable="false">Exit 1 (ANALYSIS_FINDINGS) after the report when the run has any finding.</option>
+    </command>
+    <command name="doctor" owner="M09" required="">
+      <summary>Probe this environment for the resolved configuration, read-only: the Java runtime, its compiler, memory budget against heap, the working directory, the SUT plugin and capability refusals, each OK, WARNING or BLOCKING as the legacy bundle doctor reported; exits 1 only when a check is blocking.</summary>
+      <option name="--scenario" value="FILE" repeatable="false">Scenario whose static Python imports are inspected from a bounded preview; no candidates or preprocessing run.</option>
+      <option name="--json" value="FILE" repeatable="false">Also write the cf.doctor/v1 JSON report to FILE.</option>
+    </command>
+    <command name="benchmark" owner="M09" required="">
+      <summary>Time each stage on its own at a size profile, as the legacy bundle bench did: generator, sieve, executor and analyzer in this JVM, with the environment that makes the figures comparable (JDK, heap, hardware, workers, seed); no end-to-end or billion-execution throughput is claimed.</summary>
+      <option name="--profile" value="10K|1M|10M|N" repeatable="false">Candidates per stage; default 10K. Above 10,000,000 only with --allow-huge.</option>
+      <option name="--stages" value="LIST" repeatable="false">Comma-separated stages: generator, sieve, executor, analyzer; default all.</option>
+      <option name="--allow-huge" repeatable="false">Allow a profile above 10,000,000 candidates.</option>
+      <option name="--out" value="FILE" repeatable="false">Also write the versioned JSON report (cf.benchmark/v1) to FILE.</option>
+    </command>
+    <command name="capabilities" owner="M00" required="">
+      <summary>Print what this build implements, what is not built yet, and what is incompatible by design.</summary>
+    </command>
+  </commands>
+  <exit-codes>
+    <exit-code value="0" name="OK">The command completed. For run: the run reached COMPLETED.</exit-code>
+    <exit-code value="1" name="FAILED">The run reached FAILED, or the command failed unexpectedly (a framework defect).</exit-code>
+    <exit-code value="2" name="USAGE">The command line is invalid: unknown command or option, missing or malformed value.</exit-code>
+    <exit-code value="3" name="VALIDATION_FAILED">Configuration, scenario or plan validation found errors; no run entered RUNNING.</exit-code>
+    <exit-code value="4" name="UNSUPPORTED_CAPABILITY">The request needs a capability this build does not provide.</exit-code>
+    <exit-code value="5" name="RESOURCE_LIMIT">A configured budget stopped the work explicitly; nothing was dropped silently.</exit-code>
+    <exit-code value="6" name="CANCELLED">The run was cancelled.</exit-code>
+    <exit-code value="130" name="INTERRUPTED">The process received an interrupt signal (SIGINT convention: 128 + 2).</exit-code>
+  </exit-codes>
+</cli-contract>

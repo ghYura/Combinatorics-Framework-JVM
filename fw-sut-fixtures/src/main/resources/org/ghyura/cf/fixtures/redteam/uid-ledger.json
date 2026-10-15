@@ -1,0 +1,1253 @@
+{
+  "attacks": [
+    {
+      "combo_id": 0,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "08411",
+        "app3": "08629"
+      }
+    },
+    {
+      "combo_id": 1,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "08402",
+        "app3": "09320"
+      }
+    },
+    {
+      "combo_id": 2,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04111",
+        "app3": "04025"
+      }
+    },
+    {
+      "combo_id": 3,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "09387",
+        "app3": "08794"
+      }
+    },
+    {
+      "combo_id": 4,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04050",
+        "app3": "02542"
+      }
+    },
+    {
+      "combo_id": 5,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "08316",
+        "app3": "05970"
+      }
+    },
+    {
+      "combo_id": 6,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "03323",
+        "app3": "02485"
+      }
+    },
+    {
+      "combo_id": 7,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "09825",
+        "app3": "01686"
+      }
+    },
+    {
+      "combo_id": 8,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "17490",
+        "app3": "18421"
+      }
+    },
+    {
+      "combo_id": 9,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "13580",
+        "app3": "11245"
+      }
+    },
+    {
+      "combo_id": 10,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "19656",
+        "app3": "12034"
+      }
+    },
+    {
+      "combo_id": 11,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "11975",
+        "app3": "11584"
+      }
+    },
+    {
+      "combo_id": 12,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "14116",
+        "app3": "14963"
+      }
+    },
+    {
+      "combo_id": 13,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "11492",
+        "app3": "18601"
+      }
+    },
+    {
+      "combo_id": 14,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "16345",
+        "app3": "18217"
+      }
+    },
+    {
+      "combo_id": 15,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "14200",
+        "app3": "19505"
+      }
+    },
+    {
+      "combo_id": 16,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "24828",
+        "app3": "25819"
+      }
+    },
+    {
+      "combo_id": 17,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "29188",
+        "app3": "21075"
+      }
+    },
+    {
+      "combo_id": 18,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "22392",
+        "app3": "28492"
+      }
+    },
+    {
+      "combo_id": 19,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "25557",
+        "app3": "27664"
+      }
+    },
+    {
+      "combo_id": 20,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "22363",
+        "app3": "25161"
+      }
+    },
+    {
+      "combo_id": 21,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "26165",
+        "app3": "24762"
+      }
+    },
+    {
+      "combo_id": 22,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "29403",
+        "app3": "25735"
+      }
+    },
+    {
+      "combo_id": 23,
+      "labels": {
+        "family": "rag_inject",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "21487",
+        "app3": "22150"
+      }
+    },
+    {
+      "combo_id": 24,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "02768",
+        "app3": "07560"
+      }
+    },
+    {
+      "combo_id": 25,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "02766",
+        "app3": "05766"
+      }
+    },
+    {
+      "combo_id": 26,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "07332",
+        "app3": "02094"
+      }
+    },
+    {
+      "combo_id": 27,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "01276",
+        "app3": "01008"
+      }
+    },
+    {
+      "combo_id": 28,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04498",
+        "app3": "04436"
+      }
+    },
+    {
+      "combo_id": 29,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "01857",
+        "app3": "08700"
+      }
+    },
+    {
+      "combo_id": 30,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "07151",
+        "app3": "07511"
+      }
+    },
+    {
+      "combo_id": 31,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "07877",
+        "app3": "02196"
+      }
+    },
+    {
+      "combo_id": 32,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "14252",
+        "app3": "15420"
+      }
+    },
+    {
+      "combo_id": 33,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "16519",
+        "app3": "12427"
+      }
+    },
+    {
+      "combo_id": 34,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "16098",
+        "app3": "16449"
+      }
+    },
+    {
+      "combo_id": 35,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "11248",
+        "app3": "17718"
+      }
+    },
+    {
+      "combo_id": 36,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "12933",
+        "app3": "13205"
+      }
+    },
+    {
+      "combo_id": 37,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "15036",
+        "app3": "12655"
+      }
+    },
+    {
+      "combo_id": 38,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "11179",
+        "app3": "11981"
+      }
+    },
+    {
+      "combo_id": 39,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "18617",
+        "app3": "18976"
+      }
+    },
+    {
+      "combo_id": 40,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "23911",
+        "app3": "24086"
+      }
+    },
+    {
+      "combo_id": 41,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "28330",
+        "app3": "29337"
+      }
+    },
+    {
+      "combo_id": 42,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "24124",
+        "app3": "23145"
+      }
+    },
+    {
+      "combo_id": 43,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "27868",
+        "app3": "27287"
+      }
+    },
+    {
+      "combo_id": 44,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "22908",
+        "app3": "27469"
+      }
+    },
+    {
+      "combo_id": 45,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "27893",
+        "app3": "24487"
+      }
+    },
+    {
+      "combo_id": 46,
+      "labels": {
+        "family": "math_dos",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "21007",
+        "app3": "25420"
+      }
+    },
+    {
+      "combo_id": 47,
+      "labels": {
+        "family": "math_dos",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "25983",
+        "app3": "21321"
+      }
+    },
+    {
+      "combo_id": 48,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04452",
+        "app3": "04068"
+      }
+    },
+    {
+      "combo_id": 49,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "07459",
+        "app3": "02643"
+      }
+    },
+    {
+      "combo_id": 50,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "01689",
+        "app3": "03397"
+      }
+    },
+    {
+      "combo_id": 51,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04493",
+        "app3": "08234"
+      }
+    },
+    {
+      "combo_id": 52,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "05231",
+        "app3": "01156"
+      }
+    },
+    {
+      "combo_id": 53,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "06389",
+        "app3": "05854"
+      }
+    },
+    {
+      "combo_id": 54,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "07327",
+        "app3": "02202"
+      }
+    },
+    {
+      "combo_id": 55,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "02217",
+        "app3": "02476"
+      }
+    },
+    {
+      "combo_id": 56,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "14419",
+        "app3": "14981"
+      }
+    },
+    {
+      "combo_id": 57,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "11254",
+        "app3": "17040"
+      }
+    },
+    {
+      "combo_id": 58,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "17089",
+        "app3": "18425"
+      }
+    },
+    {
+      "combo_id": 59,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "13084",
+        "app3": "18925"
+      }
+    },
+    {
+      "combo_id": 60,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "13223",
+        "app3": "17325"
+      }
+    },
+    {
+      "combo_id": 61,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "13995",
+        "app3": "13525"
+      }
+    },
+    {
+      "combo_id": 62,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "16092",
+        "app3": "14741"
+      }
+    },
+    {
+      "combo_id": 63,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "15087",
+        "app3": "14109"
+      }
+    },
+    {
+      "combo_id": 64,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "23596",
+        "app3": "24220"
+      }
+    },
+    {
+      "combo_id": 65,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "27360",
+        "app3": "28905"
+      }
+    },
+    {
+      "combo_id": 66,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "22286",
+        "app3": "27905"
+      }
+    },
+    {
+      "combo_id": 67,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "21776",
+        "app3": "22701"
+      }
+    },
+    {
+      "combo_id": 68,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "22786",
+        "app3": "21634"
+      }
+    },
+    {
+      "combo_id": 69,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "29394",
+        "app3": "25180"
+      }
+    },
+    {
+      "combo_id": 70,
+      "labels": {
+        "family": "sys_override",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "24906",
+        "app3": "27416"
+      }
+    },
+    {
+      "combo_id": 71,
+      "labels": {
+        "family": "sys_override",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "25210",
+        "app3": "27894"
+      }
+    },
+    {
+      "combo_id": 72,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "09044",
+        "app3": "05807"
+      }
+    },
+    {
+      "combo_id": 73,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "09520",
+        "app3": "03874"
+      }
+    },
+    {
+      "combo_id": 74,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "02126",
+        "app3": "03070"
+      }
+    },
+    {
+      "combo_id": 75,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04742",
+        "app3": "08852"
+      }
+    },
+    {
+      "combo_id": 76,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "02214",
+        "app3": "05591"
+      }
+    },
+    {
+      "combo_id": 77,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "04479",
+        "app3": "04341"
+      }
+    },
+    {
+      "combo_id": 78,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "01271",
+        "app3": "02133"
+      }
+    },
+    {
+      "combo_id": 79,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "0"
+      },
+      "uids": {
+        "app2": "05410",
+        "app3": "07740"
+      }
+    },
+    {
+      "combo_id": 80,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "18302",
+        "app3": "15080"
+      }
+    },
+    {
+      "combo_id": 81,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "11990",
+        "app3": "11763"
+      }
+    },
+    {
+      "combo_id": 82,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "13887",
+        "app3": "15619"
+      }
+    },
+    {
+      "combo_id": 83,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "17042",
+        "app3": "19699"
+      }
+    },
+    {
+      "combo_id": 84,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "13155",
+        "app3": "12510"
+      }
+    },
+    {
+      "combo_id": 85,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "16933",
+        "app3": "13267"
+      }
+    },
+    {
+      "combo_id": 86,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "18378",
+        "app3": "16422"
+      }
+    },
+    {
+      "combo_id": 87,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "1"
+      },
+      "uids": {
+        "app2": "19551",
+        "app3": "13299"
+      }
+    },
+    {
+      "combo_id": 88,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "21574",
+        "app3": "21293"
+      }
+    },
+    {
+      "combo_id": 89,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "none",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "28779",
+        "app3": "26856"
+      }
+    },
+    {
+      "combo_id": 90,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "26108",
+        "app3": "21549"
+      }
+    },
+    {
+      "combo_id": 91,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "leet",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "21348",
+        "app3": "22226"
+      }
+    },
+    {
+      "combo_id": 92,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "28900",
+        "app3": "22102"
+      }
+    },
+    {
+      "combo_id": 93,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "26096",
+        "app3": "26224"
+      }
+    },
+    {
+      "combo_id": 94,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "en",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "23238",
+        "app3": "22186"
+      }
+    },
+    {
+      "combo_id": 95,
+      "labels": {
+        "family": "jailbreak",
+        "locale": "ru",
+        "obfuscation": "leet+unicode",
+        "variant": "2"
+      },
+      "uids": {
+        "app2": "22233",
+        "app3": "28423"
+      }
+    }
+  ],
+  "seed": 11
+}

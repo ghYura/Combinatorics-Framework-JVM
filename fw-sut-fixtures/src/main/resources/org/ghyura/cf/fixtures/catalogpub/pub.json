@@ -1,0 +1,8 @@
+{
+  "sheets": {
+    "FW_Seq": [["quantity", "FW_Combi(1)"], ["seed", "FW_Combi(1)"], ["barman", "FW_Combi(1)"]],
+    "quantity": [["1"], ["-1"], ["abcd"], ["1001"]],
+    "seed": [["0"], ["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"]],
+    "barman": [["Chuck"]]
+  }
+}

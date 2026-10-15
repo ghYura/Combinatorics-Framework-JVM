@@ -1,0 +1,14 @@
+{
+  "sheets" : {
+    "HEAD" : [ [ "public class Candidate{public static int FW_VAR;public static void main(String[] a){int A=" ] ],
+    "A" : [ [ "1" ], [ "2" ], [ "3" ] ],
+    "B" : [ [ ";int B=1;" ], [ ";int B=5;" ] ],
+    "TAIL" : [ [ "FW_VAR=(A*B>6)?1:0;}}" ] ],
+    "ROW" : [ [ "FW_EMPTY_STRING" ] ],
+    "FW_Seq" : [ [ "HEAD", "FW_Exclude", "FW_Reuse", "FW_Combi(1)", "FW_Combi(1)" ], [ "A", "FW_Exclude", "FW_Reuse", "FW_Combi(1)", "FW_Combi(1)" ], [ "B", "FW_Exclude", "FW_Reuse", "FW_Combi(1)", "FW_Combi(1)" ], [ "TAIL", "FW_Exclude", "FW_Reuse", "FW_Combi(1)", "FW_Combi(1)" ], [ "ROW", null, null, "FW_(HEAD,,A,,B,,TAIL,,M:N)" ] ],
+    "FW_SheetNames" : [ [ "HEAD", "FW_EMPTY_STRING", "FW_EMPTY_STRING" ], [ "A", "FW_EMPTY_STRING", "FW_EMPTY_STRING" ], [ "B", "FW_EMPTY_STRING", "FW_EMPTY_STRING" ], [ "TAIL", "FW_EMPTY_STRING", "FW_EMPTY_STRING" ], [ "ROW", "FW_EMPTY_STRING", "FW_EMPTY_STRING" ] ],
+    "FW_RunMeFirstOnce" : [ [ "class RunMeFirstOnce { public static String FW_ARGS; public static void main(String[] args){ FW_ARGS=\"\"; } }" ] ],
+    "FW_Arguments" : [ [ "noargs" ] ],
+    "FW_CUSTOM_VAR" : [ [ "2", "FWCUSTOMVAR=2 product over threshold" ] ]
+  }
+}

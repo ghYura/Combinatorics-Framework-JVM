@@ -1,0 +1,16 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      ["mode", "FW_Combi(1)"],
+      ["region", "FW_Combi(1)"],
+      ["coupons", "FW_Optional", "FW_Combi(1)"],
+      ["stages", "FW_Combi(3)", "FW_Permut()"],
+      ["duplicate_submit", "FW_Optional", "FW_Combi(1)"]
+    ],
+    "mode": [["strict"], ["fast"], ["legacy"]],
+    "region": [["us"], ["eu"]],
+    "coupons": [["LOYALTY"]],
+    "stages": [["discount"], ["tax"], ["round"]],
+    "duplicate_submit": [["duplicate_submit"]]
+  }
+}

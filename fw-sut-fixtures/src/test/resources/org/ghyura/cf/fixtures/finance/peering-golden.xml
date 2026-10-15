@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+<finance-peering-preregistration status="frozen-before-peering-node-Java" owner="Claude" derived="static reading of the pinned sources; no original code executed" scope="peer link state machine, file registry discovery, time-unit properties persistence, in-JVM bank nodes (health, interbank inbound/time-config, proxy) and the on-hold recovery example">
+  <source path="SUT/fin_tech_to_test/finance_stack/peering.py" sha256="cf0c69717ebaf6bc608f0a4d39e9e448f3205546aba4887896671cf6ac7c4743" />
+  <source path="SUT/fin_tech_to_test/finance_stack/node.py" sha256="94c5db70066d83e1258cf1dfda5dda07c3fbd77e8a3fa82df0d5fc7d4158e8ab" />
+  <source path="SUT/fin_tech_to_test/finance_stack/timeconfig.py" sha256="bccc33d0cd83f0e25e4413e46cc5bce30b77ee3061ecf3fe2316a9a231971036" />
+  <source path="SUT/fin_tech_to_test/finance_stack/config.py" sha256="6acc545c8d8b867aa520922da8d288525d390e55ea57e05e559758d2bdca2c29" />
+  <source path="SUT/fin_tech_to_test/finance_stack/ecosystem.py" sha256="7cf2820632d71e95ca2a4aa6aecaa69c1cd65fe0c25b5ac0544ada2752341f91" />
+  <source path="SUT/fin_tech_to_test/finance_stack/gateway.py" sha256="3c0fa88483706208757d0dfcb564cebb92af1328f8778c0535ea5e7dbca1d110" />
+  <source path="SUT/fin_tech_to_test/finance_stack/kernel/errors.py" sha256="077234f3b59749098c39bf6a54a20e3cf2bfac743af535fded333c3fa20408b6" />
+  <source path="SUT/fin_tech_to_test/tests/test_peering.py" sha256="c5481769c05ba1f262e3d86f37126103db99a227d5486fd7dcc24c1574b464de" />
+  <source path="SUT/fin_tech_to_test/tests/test_timeconfig.py" sha256="23ad902df0cef380e45e8616e901e158e7580db431a16306c44e5d410d5dbec0" />
+  <source path="SUT/fin_tech_to_test/tests/test_multinode.py" sha256="42a939d6864954da49231a7acd29bfc9759e26beee28e561e6ebc2c3ed1b2a95" />
+  <source path="SUT/fin_tech_to_test/examples/on_hold_recover.py" sha256="3063cba58cc9cbb6183513248ececd8d870b2d220da21fee9b5dd73eedc2affb" />
+  <peer-link>[
+ {"id":"source-ping-healthy","health":true,"unavailable_after":30,"expected":"AVAILABLE"},
+ {"id":"source-ping-unhealthy","health":false,"unavailable_after":30,"expected":"ON_HOLD"},
+ {"id":"source-escalation","unavailable_after":30,"steps":[["failure",1000,"ON_HOLD"],["failure",1020,"ON_HOLD"],["failure",1031,"UNAVAILABLE"],["ok",null,"AVAILABLE"]]},
+ {"id":"reset-and-inclusive-deadline","unavailable_after":30,"steps":[["failure",1000,"ON_HOLD"],["ok",null,"AVAILABLE"],["failure",2000,"ON_HOLD"],["failure",2030,"UNAVAILABLE"]]},
+ {"id":"source-ensure-available","expected":{"AVAILABLE":null,"ON_HOLD":{"code":"PEER_UNAVAILABLE","status":503,"message":"peer bank NORD is ON_HOLD","details":{"bank":"NORD"},"retryable":true},"UNAVAILABLE":{"code":"PEER_UNAVAILABLE","status":503,"message":"peer bank NORD is UNAVAILABLE","details":{"bank":"NORD"},"retryable":false}}},
+ {"id":"state-now-reconnect-delay","reconnect_delay":2,"unavailable_after":30,"initial":"ON_HOLD","steps":[[100,true,"AVAILABLE","pinged"],[101,false,"AVAILABLE","cached"],[102,false,"ON_HOLD","pinged"],[103,false,"ON_HOLD","cached"],[132,false,"UNAVAILABLE","pinged"],[133,true,"UNAVAILABLE","cached"],[134,true,"AVAILABLE","pinged"]]},
+ {"id":"live-timing","note":"explicit override wins, else the live time config, else the settings default","unavailable_after_live":5,"steps_live":[["failure",0,"ON_HOLD"],["failure",5,"UNAVAILABLE"]],"override":50,"steps_override":[["failure",0,"ON_HOLD"],["failure",5,"ON_HOLD"],["failure",50,"UNAVAILABLE"]],"default_without_config":30},
+ {"id":"call-outcomes","note":"non-2xx leaves the state unchanged; a dict message wins, else Python str(data)","request_body":"{\"values\": {\"risk_window_seconds\": 12}}","cases":[
+   {"reply":[200,{"applied":true}],"returns":{"applied":true},"state":"AVAILABLE"},
+   {"reply":[201,["x"]],"returns":{"ok":true},"state":"AVAILABLE"},
+   {"reply":[403,{"code":"POLICY_BLOCKED","message":"beneficiary is sanctioned","details":{"reasons":["listed_id"]}}],"error":{"code":"POLICY_BLOCKED","status":403,"message":"beneficiary is sanctioned"},"state":"ON_HOLD"},
+   {"reply":[404,{"detail":"Not Found"}],"error":{"code":"UPSTREAM_ERROR","status":404,"message":"{'detail': 'Not Found'}"},"state":"ON_HOLD"},
+   {"reply":[500,["a",1,true,null]],"error":{"code":"UPSTREAM_ERROR","status":500,"message":"['a', 1, True, None]"},"state":"ON_HOLD"},
+   {"reply":[302,{"code":"X"}],"error":{"code":"X","status":302,"message":"{'code': 'X'}"},"state":"ON_HOLD"}]},
+ {"id":"inbound-port-body","payload_order":["account_id","amount","currency","reference"],"body":"{\"account_id\": \"acc_x\", \"amount\": \"50.00\", \"currency\": \"USD\", \"reference\": \"TRF-1\"}"}
+]</peer-link>
+  <registry>[
+ {"id":"missing-directory","nodes":{}},
+ {"id":"two-nodes","register":[["toBank1","AURUM","http://127.0.0.1:8001"],["toBank2","NORD","http://127.0.0.1:8002"]],"aliases":["toBank1","toBank2"],"entry_keys":["alias","bank_code","base_url","pid","ts"]},
+ {"id":"skipped-files","files":{"broken.json":"{not json","noalias.json":"{\"bank_code\": \"ZED\"}","notes.txt":"toBank9"},"aliases":["toBank1","toBank2"]},
+ {"id":"non-object-entry","files":{"list.json":"[1, 2]"},"outcome":"TypeError propagates from read_nodes"},
+ {"id":"deregister","remove":"toBank1","aliases":["toBank2"],"remove_again":"no error"},
+ {"id":"missing-bank-code","files":{"nobank.json":"{\"alias\": \"toBank5\"}"},"read":"kept","refresh_peers":"KeyError propagates"}
+]</registry>
+  <time-persistence>[
+ {"id":"source-round-trip","update":{"peer_ping_interval_seconds":9},"accept_sync":false,"reloaded":{"peer_ping_interval_seconds":9,"accept_time_sync":false}},
+ {"id":"created-defaults","text":"# finance_stack time units (seconds) — edited live via PUT /v1/time-config\nreplay_window_seconds = 300\nconfirmation_ttl_seconds = 3600\nrisk_window_seconds = 60\npeer_ping_interval_seconds = 5\npeer_reconnect_delay_seconds = 2\npeer_unavailable_after_seconds = 30\naccept_time_sync = true\n"},
+ {"id":"parse","text":"# comment\n  \n  replay_window_seconds =  1_000 \nrisk_window_seconds=7\nnot a pair\naccept_time_sync = Yes\nunknown_seconds = 5\nconfirmation_ttl_seconds = 10\nconfirmation_ttl_seconds = 11\npeer_ping_interval_seconds = ٣\n","values":{"replay_window_seconds":1000,"confirmation_ttl_seconds":11,"risk_window_seconds":7,"peer_ping_interval_seconds":3,"peer_reconnect_delay_seconds":2,"peer_unavailable_after_seconds":30},"accept_time_sync":true},
+ {"id":"invalid","cases":[["risk_window_seconds = 0","risk_window_seconds must be a positive number of seconds"],["risk_window_seconds = -3","risk_window_seconds must be a positive number of seconds"],["risk_window_seconds = 1.5","risk_window_seconds must be an integer number of seconds"],["risk_window_seconds =","risk_window_seconds must be an integer number of seconds"],["risk_window_seconds = 1__0","risk_window_seconds must be an integer number of seconds"]]},
+ {"id":"accept-flag","true":["1","TRUE"," on ","yes"],"false":["0","false","off","no","","y","enabled"]},
+ {"id":"no-path-save","writes":false},
+ {"id":"node-hook","note":"every applied update, local or incoming, saves the node file; a declined incoming sync returns before the hooks and saves nothing"}
+]</time-persistence>
+  <nodes>[
+ {"id":"health-before-discovery","node":"toBank1","body":{"ok":true,"alias":"toBank1","bank":"AURUM","peers":{}}},
+ {"id":"discovery","node":"toBank1","peers_after_refresh":{"toBank2":"ON_HOLD"},"peers_after_heartbeat":{"toBank2":"AVAILABLE"},"remote_bank":{"code":"NORD","name":"NORD (peer)","jurisdiction":"XX","sanctioned":false}},
+ {"id":"propagation","steps":[
+   {"node":"toBank1","put":{"values":{"risk_window_seconds":12},"propagate":"connected"},"propagated":{"toBank2":"applied"},"toBank2_risk_window":12,"toBank2_file_risk_window":12},
+   {"node":"toBank2","put":{"accept_sync":false},"toBank2_file_accept":false},
+   {"node":"toBank1","put":{"values":{"risk_window_seconds":13},"propagate":"connected"},"propagated":{"toBank2":"sync_declined"},"toBank2_risk_window":12},
+   {"node":"toBank1","toBank2":"frozen","put":{"values":{"risk_window_seconds":14},"propagate":"connected"},"propagated":{"toBank2":"PEER_UNAVAILABLE"}}]},
+ {"id":"interbank-inbound","node":"toBank2","steps":[
+   {"body":{"account_id":"$bob","amount":"5.00","currency":"USD","reference":"MANUAL-1"},"status":200,"reply":{"ok":true,"credited":"$bob","bank":"NORD"}},
+   {"replay":"same bytes, timestamp, nonce and signature","status":200,"note":"node-level verification keeps no nonces","bob_balance_delta":"10.00"},
+   {"signature":"bad","status":401,"reply":{"code":"UNAUTHORIZED","message":"bad_signature"}},
+   {"body":{"account_id":"acc_missing","amount":"1.00","currency":"USD","reference":"MANUAL-2"},"status":404,"reply":{"code":"NOT_FOUND","message":"account not found","details":{"account_id":"acc_missing"}}},
+   {"sanction":"bob listed","status":403,"reply":{"code":"POLICY_BLOCKED","message":"beneficiary is sanctioned","details":{"reasons":["listed_id"]}}},
+   {"live_replay_window":1,"signed_seconds_ago":100,"interbank_status":200,"mounted_gateway_status":401,"note":"interbank routes use the static settings window of 300"}]},
+ {"id":"proxy","via":"toBank1","steps":[
+   {"path":"/toBank2/v1/accounts/$bob/balance","status":200,"reply":"toBank2 balance view"},
+   {"path":"/toBank9/v1/network/banks","status":404,"reply":{"code":"NOT_FOUND","message":"unknown bank node 'toBank9'"}},
+   {"toBank2":"frozen","path":"/toBank2/v1/network/banks","status":503,"reply":{"code":"PEER_UNAVAILABLE","message":"peer 'toBank2' is ON_HOLD","peer_state":"ON_HOLD"}}]}
+]</nodes>
+  <on-hold-recovery source="examples/on_hold_recover.py">{"nodes":{"toBank1":"AURUM","toBank2":"NORD"},"alice_deposit":"500.00","steps":[
+ {"step":1,"transfer":"120.00","status":"SETTLED","alice":"380.00","bob":"120.00"},
+ {"step":2,"toBank2":"frozen","peers_seen_by_toBank1":{"toBank2":"ON_HOLD"},"transfer":"50.00","status":"ON_HOLD","failure":"PEER_UNAVAILABLE","alice_balance":"380.00","alice_hold":"50.00","alice_available":"330.00"},
+ {"step":3,"toBank2":"resumed","status":"SETTLED","alice":"330.00","alice_hold":"0.00","bob":"170.00","positions_at_toBank1":{"AURUM":{"USD":"170.00"},"NORD":{"USD":"-170.00"}}}]}</on-hold-recovery>
+  <implementation-hints>Port PeerLink with injected clock, health probe and caller; a 2xx dict reply records success, a transport failure records failure and raises PEER_UNAVAILABLE with retryable from the new state, other statuses raise ServiceError without touching the state. Port the registry as one JSON file per alias in an explicit directory, read in sorted order. Port TimeConfig.load/save with the source line parser (not java.util.Properties) and int() semantics. Nodes share one in-JVM network of base URLs; a frozen node fails every probe and call. Interbank routes verify with the static settings window and keep no nonces; the mounted gateway keeps its own live window and nonces.</implementation-hints>
+</finance-peering-preregistration>

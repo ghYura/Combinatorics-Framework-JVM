@@ -1,0 +1,94 @@
+[
+ {
+  "tree": "mixed",
+  "files": {
+   "intake/verified_examples.json": "[{\"id\": \"ok1\", \"spec\": \"usecases/a/a.toml\", \"title\": \"A\", \"blurb\": \"first\", \"candidates\": \"6\", \"pass\": \"6\", \"analyzer\": \"x:max\"}, {\"id\": \"\", \"spec\": \"usecases/a/a.toml\"}, {\"title\": \"no id\", \"spec\": \"usecases/a/a.toml\"}, {\"id\": \"nospec\", \"title\": \"no spec\"}, {\"id\": \"missing\", \"spec\": \"usecases/missing.toml\"}, {\"id\": \"outside\", \"spec\": \"../outside.toml\"}, \"not an entry\", {\"id\": \"suited\", \"spec\": \"usecases/a/a.toml\", \"suite\": \"s2\", \"suite_title\": \"Second suite\", \"title\": \"Suited\"}, {\"id\": \"dir\", \"spec\": \"usecases/a\"}]",
+   "intake/automation_scenarios.json": "[{\"id\": \"gate\", \"spec_materializer\": \"release_gate_breakpoint\", \"run_profile\": \"ai_combi_release_gate_breakpoint\", \"source\": \"usecases/gen.py\", \"difficulty_units\": [2, 4, 8], \"suite\": \"ai\", \"suite_title\": \"AI\"}, {\"id\": \"gate-default\", \"spec_materializer\": \"release_gate_breakpoint\", \"run_profile\": \"ai_combi_release_gate_breakpoint\", \"source\": \"usecases/gen.py\", \"suite\": \"ai\"}, {\"id\": \"badgate\", \"spec_materializer\": \"release_gate_breakpoint\", \"run_profile\": \"ai_combi_release_gate_breakpoint\", \"source\": \"usecases/gen.py\", \"difficulty_units\": [3, 6]}, {\"id\": \"gate-bool\", \"spec_materializer\": \"release_gate_breakpoint\", \"run_profile\": \"ai_combi_release_gate_breakpoint\", \"source\": \"usecases/gen.py\", \"difficulty_units\": [true, 2]}, {\"id\": \"gate-profile\", \"spec_materializer\": \"release_gate_breakpoint\", \"run_profile\": \"other\", \"source\": \"usecases/gen.py\"}, {\"id\": \"othermat\", \"spec_materializer\": \"other\", \"source\": \"usecases/gen.py\"}, {\"id\": \"gate-nosource\", \"spec_materializer\": \"release_gate_breakpoint\", \"run_profile\": \"ai_combi_release_gate_breakpoint\"}, {\"id\": \"auto1\", \"spec\": \"usecases/b/b.toml\", \"suite\": \"auto\", \"suite_title\": \"Automation\", \"title\": \"Ж автоматика\"}]",
+   "usecases/a/a.toml": "[[slots]]\nsheet = \"A\"\nvalues = [\"1\", \"2\"]\n",
+   "usecases/b/b.toml": "[[slots]]\nsheet = \"B\"\nvalues = [\"x\"]\n",
+   "usecases/gen.py": "# generator\n",
+   "../outside.toml": "[[slots]]\nsheet = \"O\"\nvalues = [\"o\"]\n"
+  },
+  "expected": {
+   "scenarios": [
+    {
+     "id": "gate",
+     "suite": "ai",
+     "suite_title": "AI",
+     "label": "fresh release_gate_breakpoint from usecases/gen.py",
+     "release_gate_candidates": 1536
+    },
+    {
+     "id": "gate-default",
+     "suite": "ai",
+     "suite_title": "Verified examples",
+     "label": "fresh release_gate_breakpoint from usecases/gen.py",
+     "release_gate_candidates": 2560
+    },
+    {
+     "id": "auto1",
+     "suite": "auto",
+     "suite_title": "Automation",
+     "label": "usecases/b/b.toml"
+    },
+    {
+     "id": "ok1",
+     "suite": "verified_examples",
+     "suite_title": "Verified examples",
+     "label": "usecases/a/a.toml"
+    },
+    {
+     "id": "suited",
+     "suite": "s2",
+     "suite_title": "Second suite",
+     "label": "usecases/a/a.toml"
+    }
+   ],
+   "suites": [
+    [
+     "ai",
+     "AI"
+    ],
+    [
+     "auto",
+     "Automation"
+    ],
+    [
+     "verified_examples",
+     "Verified examples"
+    ],
+    [
+     "s2",
+     "Second suite"
+    ]
+   ],
+   "in_suite": {
+    "ai": [
+     "gate",
+     "gate-default"
+    ],
+    "auto": [
+     "auto1"
+    ],
+    "verified_examples": [
+     "ok1"
+    ],
+    "s2": [
+     "suited"
+    ]
+   }
+  }
+ },
+ {
+  "tree": "not-lists",
+  "files": {
+   "intake/verified_examples.json": "{\"scenarios\": []}",
+   "intake/automation_scenarios.json": "[{\"id\": \"x\", \"spec\": \"s.toml\""
+  },
+  "expected": {
+   "scenarios": [],
+   "suites": [],
+   "in_suite": {}
+  }
+ }
+]

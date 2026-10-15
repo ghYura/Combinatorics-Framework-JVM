@@ -1,0 +1,679 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+<generator-inputs-manifest owner="Claude" qa_commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b" note="plan and graph elements are independent legacy evidence; counts elements are observed JVM baselines">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <spec path="AI_combi_testing_platform/scenarios/00_smoke/scenario.toml" sha256="ae199d3f552f0fc3471d9dee9509d1e8cd65f09f27ff4f62c442f9412de0f0c9">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="32" executable="32" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/01_operator_smoke/scenario.toml" sha256="b68a82d4046678f9fddf29b48c5e08158c2cfa1c65217b4d4e4f4a3d537500b0">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="8" executable="8" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/10_constraint_stack/scenario.toml" sha256="96e076b12d78834d05851abd9b2967e22924287ef3c21a8d574d271be5354ad5">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/20_logic_and_cancellation/scenario.toml" sha256="61b0302b844fbc800d52f7115131ad9cdce004735f27128c6e57004481292544">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="24" executable="24" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/30_semantic_interference/scenario.toml" sha256="6e74099b24319dbd11f18c837ce7f133fb69032fa0617056cc9356898daa26ab">
+    <counts profile="native" generated="12" executable="12" />
+    <counts profile="legacy" generated="12" executable="12" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/40_long_range_dependency/scenario.toml" sha256="23d89656505622f59d451b8bd12c8211c3bab5cbf0b68e0803b7373441226808">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="9" executable="9" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/50_format_and_instruction_order/scenario.toml" sha256="393fcff409ec0c2abdd86c70fb4f36e0012d2286e0e97829852183803c4b6429">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="12" executable="12" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/60_higher_order_prompt_programs/scenario.toml" sha256="269261092339cda50ce8d065290e3387bc447a99c1367dde59856bfc98e84f17">
+    <counts profile="native" generated="1" executable="1" />
+    <counts profile="legacy" generated="1" executable="1" />
+  </spec>
+  <spec path="AI_combi_testing_platform/scenarios/70_router_regression_dataset/scenario.toml" sha256="8ce0a13969ca81e54ef4421384df8a1642b9284ef47e131cf959ceb90dff399b">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+  </spec>
+  <spec path="api_probe/decomposition/api_health_probe_decomposed.toml" sha256="c62ad5944435f3cc1949a4ddca8202281e84a4cd08a25c707562b8f98bb04b30">
+    <counts profile="native" generated="1" executable="1" />
+    <counts profile="legacy" generated="1" executable="1" />
+  </spec>
+  <spec path="api_probe/spec/api_health_probe_dispersed.toml" sha256="9bc5dbe47fe5cb3a92442bd1174e1dcca4da88a5c54e9ab085e757e5990eb940">
+    <counts profile="native" generated="1152" executable="1152" />
+    <counts profile="legacy" generated="576" executable="576" />
+    <plan mode="EXACT" value="576" lower="576" upper="576" sha256="4263862731abb7fea1a40f674bf6a17eaa4c79634a2131a553ceae0d667c46ca" />
+  </spec>
+  <spec path="brace_demo/brace.toml" sha256="3cb427070b7db989d13d94ea5eb31cddf732abd90fd8e8b0f13d5dc71fade2ce">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+    <plan mode="UNKNOWN" sha256="fcc9f1a23914d7dc0e22f101cf1cb80200730bf477b585c245c50c75bcc7f733" />
+  </spec>
+  <spec path="brace_full_demo/demo.toml" sha256="25fd6d014c8e228165161ab68cd86d17a0e394be301f760955b95108f51ee342">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+  </spec>
+  <spec path="combinatorial_tests/sieve3d_complex_bodies/combinatorial_principles/action_laws/sieve3d_action_laws.toml" sha256="357fefbb98ba45e8b1a6e71f8e15920269708e1a227039ef8cc2aa721dbc3ef3">
+    <counts profile="native" generated="92160" executable="92160" />
+    <counts profile="legacy" generated="11520" executable="11520" />
+  </spec>
+  <spec path="combinatorial_tests/sieve3d_complex_bodies/combinatorial_principles/interleavings/sieve3d_interleavings.toml" sha256="40990bdee3c5ab278009ba9b97fb01c03caaa9cac0bd2f310baac0a1c93b7399">
+    <counts profile="native" generated="2304" executable="2304" />
+    <counts profile="legacy" generated="1152" executable="1152" />
+  </spec>
+  <spec path="combinatorial_tests/sieve3d_external_api/api_ladder/sieve3d_api_ladder.toml" sha256="34e6309493e5fd3fdba1ba88534be842590a5ff872ec4fb4e64172e5b5cb2fce">
+    <counts profile="native" generated="2400" executable="2400" />
+    <counts profile="legacy" generated="1200" executable="1200" />
+  </spec>
+  <spec path="combinatorial_tests/sieve3d_external_api/deep_thread/sieve3d_api_deep_thread.toml" sha256="0c66dc20c306c08c91380f288c704016a94260dd386178f707b6c51b0a6dc597">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="18" executable="18" />
+  </spec>
+  <spec path="combinatorial_tests/sieve3d_max_passage/api_planner_feedback/sieve3d_api_planner_feedback.toml" sha256="347070c5e5383e31b8f897642c5e266e19992bb8bc4bb70f68dad872ae64c1e7">
+    <counts profile="native" generated="2" executable="2" />
+    <counts profile="legacy" generated="2" executable="2" />
+  </spec>
+  <spec path="combinatorial_tests/sieve3d_max_passage/equivalence_size_first/sieve3d_max_passage.toml" sha256="0f32f1ba96059a20d82e2af2f4b44e5793071bf6aada95f4631cf8aa7b12c1e6">
+    <counts profile="native" generated="200" executable="100" />
+    <counts profile="legacy" generated="200" executable="100" />
+  </spec>
+  <spec path="constraints/diff_fuzz_sieve/diff_fuzz_run.toml" sha256="430c6e9a068149c8810a6bb2623ecf7be2d19c1c2f2c0acd7b94d08b860d63df">
+    <counts profile="native" generated="243" executable="216" />
+    <counts profile="legacy" generated="243" executable="216" />
+  </spec>
+  <spec path="constraints/diff_fuzz_when/diff_fuzz_when.toml" sha256="5c8a9db70b0ad7ed595dffc183bb118b1a8b7f2d186193baa22faf440ac6e08e">
+    <counts profile="native" generated="243" executable="162" />
+    <counts profile="legacy" generated="243" executable="162" />
+  </spec>
+  <spec path="engine_demo/direct_engine_smoke/scenario.toml" sha256="7ecbfb3f1ee977209d794018d90ed5a39f808210844c9ea1d8d7ed307fc4125b">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="8" executable="8" />
+  </spec>
+  <spec path="examples/decomposition/inventory_decomposed.toml" sha256="c4ad10539d22c111b2acd4e12f9a9d56bb19b05e90ee0aaf72f388b8c126c32f">
+    <counts profile="native" generated="1" executable="1" />
+    <counts profile="legacy" generated="1" executable="1" />
+  </spec>
+  <spec path="examples/decomposition/ledger_decomposed.toml" sha256="be6c0fc944e3f7a0cc39ad08816de768ec2345aed6aa219bc391996f8566ad12">
+    <counts profile="native" generated="1" executable="1" />
+    <counts profile="legacy" generated="1" executable="1" />
+  </spec>
+  <spec path="examples/specs/inventory_dispersed.toml" sha256="fe4c5dc6dbb7c0e1f97d9e703ce90e2b016696a3da8cc5fc22d432795750793e">
+    <counts profile="native" generated="1728" executable="1728" />
+    <counts profile="legacy" generated="864" executable="864" />
+  </spec>
+  <spec path="examples/specs/ledger_dispersed.toml" sha256="f736a2dbfb2a93a6af5ad59c109a88392292862662a86a83afcf0ebc6675b5ea">
+    <counts profile="native" generated="1728" executable="1728" />
+    <counts profile="legacy" generated="864" executable="864" />
+  </spec>
+  <spec path="face1_new/e2e/specs/face1_dogfood.toml" sha256="d7fd177179c811ba2c96337eba9001606388985ec6c80691e4dc7d65699fab3f">
+    <counts profile="native" generated="52" executable="52" />
+    <counts profile="legacy" generated="52" executable="52" />
+  </spec>
+  <spec path="fintech_oot/batches/auth_matrix/auth_matrix.toml" sha256="6f49451c3a64fd71552106a2abe63a67704394b32e26d00c6fd922a372214ac3">
+    <counts profile="native" generated="16" executable="16" />
+    <counts profile="legacy" generated="16" executable="16" />
+  </spec>
+  <spec path="fintech_oot/batches/cards_crud/cards_crud.toml" sha256="712fb199a6b48382b7fd0bbd7c939ed356aa2e16a40062128e04cb32133bcec5">
+    <counts profile="native" generated="512" executable="512" />
+    <counts profile="legacy" generated="256" executable="256" />
+  </spec>
+  <spec path="fintech_oot/batches/compound_faults3/compound_faults3.toml" sha256="5466c6c1a8ae2f8c4597939fa8e4dff1f8efd50a5deedb09002dac6971bba71d">
+    <counts profile="native" generated="10" executable="10" />
+    <counts profile="legacy" generated="10" executable="10" />
+  </spec>
+  <spec path="fintech_oot/batches/cross_factors/cross_factors.toml" sha256="fbec8398ef9acab8075a9d7c98dde9ad267539ea27ba7c0e4cc628d7b6a7fdf3">
+    <counts profile="native" generated="48" executable="48" />
+    <counts profile="legacy" generated="48" executable="48" />
+  </spec>
+  <spec path="fintech_oot/batches/currency_matrix/currency_matrix.toml" sha256="75a59132345aaac452cebbb7251e3f409c5d1395d11d31227fd10c9d67f3abd6">
+    <counts profile="native" generated="9" executable="9" />
+    <counts profile="legacy" generated="9" executable="9" />
+  </spec>
+  <spec path="fintech_oot/batches/identity_accounts/identity_accounts.toml" sha256="f1828cc893898f91e75929ada88b61e59634e2ce9c46a386abd5f9e242507c5c">
+    <counts profile="native" generated="30" executable="30" />
+    <counts profile="legacy" generated="30" executable="30" />
+  </spec>
+  <spec path="fintech_oot/batches/intra_transfer/intra_transfer.toml" sha256="f97df4f1bd7c6cc3e1187cb99571b46a863bf46e97a0161211565ea6a67dabd6">
+    <counts profile="native" generated="90" executable="90" />
+    <counts profile="legacy" generated="90" executable="90" />
+    <plan mode="EXACT" value="90" lower="90" upper="90" sha256="2f28c321b3ca46174cd8222c4be8c9a045db6aaeda8aad4d3bc9bdb81f4854a6" />
+  </spec>
+  <spec path="fintech_oot/batches/live_crossbank/live_crossbank.toml" sha256="ceaf1f5656de7b96d5916a3c2fe72e6dbe36ba48042114a109c8b759e0d355b9">
+    <counts profile="native" generated="4" executable="4" />
+    <counts profile="legacy" generated="4" executable="4" />
+  </spec>
+  <spec path="fintech_oot/batches/risk_gates/risk_gates.toml" sha256="3e31835b8957ab1ca6e9b90c22f82443531c58c4e3d9a9c2d328668471636ba3">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="36" executable="36" />
+  </spec>
+  <spec path="fintech_oot/batches/sanctions/sanctions.toml" sha256="b336c64283ccc78a2c61dc3704fa0a39a2296a8d60f6033ed726948333225a43">
+    <counts profile="native" generated="16" executable="16" />
+    <counts profile="legacy" generated="16" executable="16" />
+  </spec>
+  <spec path="fintech_oot/batches/time_sync/time_sync.toml" sha256="87ca81767351e89623d705c15034f403d8f172478742e68753a5ece7834f0573">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+  </spec>
+  <spec path="fintech_oot/batches/transfer_lifecycle/transfer_lifecycle.toml" sha256="f343ac86da2b4958b814c00579ad62d3e23c38cf9aec3104fd32ca44cf0fc879">
+    <counts profile="native" generated="18" executable="18" />
+    <counts profile="legacy" generated="18" executable="18" />
+  </spec>
+  <spec path="flagship/bundle_native_l2/scenario.toml" sha256="c28b5eb004ce25d10eb92c3d4f6af52bf1f48ac4a6ecc540d73146bb1e25c6c5">
+    <counts profile="native" generated="1024" executable="1024" />
+    <counts profile="legacy" generated="256" executable="256" />
+  </spec>
+  <spec path="flagship/bundle_native_l3/scenario.toml" sha256="0f2141844522e96dc76d14255697886d31869417451d17c34a6f271ea99aaca1">
+    <counts profile="native" generated="13824" executable="10368" />
+    <counts profile="legacy" generated="3456" executable="2592" />
+  </spec>
+  <spec path="flagship/bundle_native_l4/scenario.toml" sha256="6eb506d822e8317d1c1268d67268920235880ae69b683c8de9a8a218c702c901">
+    <counts profile="native" generated="279936" executable="209952" />
+    <counts profile="legacy" generated="10368" executable="7776" />
+  </spec>
+  <spec path="flagship/bundle_native_s2/scenario.toml" sha256="b2ca71a2165b784ddc2b233d2fcd76092d89a1c73997aa4386ff62abaff6ea57">
+    <counts profile="native" generated="1024" executable="1024" />
+    <counts profile="legacy" generated="256" executable="256" />
+  </spec>
+  <spec path="group_sep_demo/demo.toml" sha256="693d35ad83d1f262c7c5320621a14be846497b1b901334014003fe9ce839e0e7">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+    <plan mode="UNKNOWN" sha256="296952fc9eb88c02cf70758c477055ab75512d46c33da806623b729310a21ad2" />
+  </spec>
+  <spec path="java_e2e/ecj_modern/ecj_modern.toml" sha256="314829359a4b65f73a99c0054fa35aeb9fc9249d2df5ec6186992c6410025def">
+    <counts profile="native" generated="96" executable="96" />
+    <counts profile="legacy" generated="48" executable="48" />
+  </spec>
+  <spec path="java_e2e/janino_max/janino_max.toml" sha256="1799d99e0bc71ecf31af3367d3c420e6490da71892bbf24c9e26a35d4a5b8eee">
+    <counts profile="native" generated="96" executable="96" />
+    <counts profile="legacy" generated="48" executable="48" />
+  </spec>
+  <spec path="java_e2e/seedloop_e2e/seedloop_e2e.toml" sha256="5d21413aca558e3389b179c8422abc4042e901e8f60b1411c5ec2e68c523424c">
+    <counts profile="native" generated="48" executable="48" />
+    <counts profile="legacy" generated="48" executable="48" />
+  </spec>
+  <spec path="landing/filled_example.toml" sha256="9fb143bfedfccef3d83f3ae65bfd37d2f908027c596e94825762acbd9c9f716a">
+    <counts profile="native" generated="18" executable="18" />
+    <counts profile="legacy" generated="18" executable="18" />
+  </spec>
+  <spec path="landing/java_e2e_harness.toml" sha256="4b152f3d4a3725a01b012bed239381916d2e24ce03fdc96087a13a9d529bef19">
+    <counts profile="native" generated="864" executable="864" />
+    <counts profile="legacy" generated="432" executable="432" />
+  </spec>
+  <spec path="landing/py_e2e_harness.toml" sha256="8b93e69483b684f5919fd9b766375a0d4d985f8dd6d38764fe1e421e70b6d7a4">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="landing/resilience_e2e.toml" sha256="2579db8669e2a74f962aba3bc378fca1ebc062be657a15292bcc5e4f2b48b542">
+    <counts profile="native" generated="1920" executable="1920" />
+    <counts profile="legacy" generated="1920" executable="1920" />
+  </spec>
+  <spec path="landing/xlsx_autofit_decomposed.toml" sha256="fe606245b934a24de67412d5f0f4811ec4030f5b80dedeed4cb00f437e6e6810">
+    <counts profile="native" generated="1" executable="1" />
+    <counts profile="legacy" generated="1" executable="1" />
+  </spec>
+  <spec path="llm_arch_search/arch_compat/arch_compat.toml" sha256="63fc434146f0c937ee0e7b00fdbf3510669d632503a1725c9205232be4765e52">
+    <counts profile="native" generated="9" executable="8" />
+    <counts profile="legacy" generated="9" executable="8" />
+  </spec>
+  <spec path="llm_arch_search/arch_grid/arch_grid.toml" sha256="d614f4c5835dd40626947590f6613e39391a9ca9c7e3f5c996136f27af1478b8">
+    <counts profile="native" generated="48" executable="48" />
+    <counts profile="legacy" generated="48" executable="48" />
+  </spec>
+  <spec path="llm_arch_search/arch_optional/arch_optional.toml" sha256="96d6d433226f49cb887330076a5ea572ed688ff56e20fdd3b9741e33807bd673">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+  </spec>
+  <spec path="llm_arch_search/arch_order/arch_order.toml" sha256="5847e3485c729ea67f33af08c863d0debb0395dfd79590e4de6674ae7c0df40d">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+  </spec>
+  <spec path="llm_loop/attack_defense_matrix/spec/attack_defense.toml" sha256="f62bd791a9ac7aa1e720980c1caf9f742801c1f4cf3415804419874df6d7c323">
+    <counts profile="native" generated="33696" executable="33696" />
+    <counts profile="legacy" generated="10368" executable="10368" />
+  </spec>
+  <spec path="llm_loop/optrun_probe/spec/optrun.toml" sha256="54886cdd3de52391cb53b744e1d6e58b3ac9f4f533b897162bb816ea3db4b5a7">
+    <counts profile="native" generated="2" executable="2" />
+    <counts profile="legacy" generated="2" executable="2" />
+  </spec>
+  <spec path="llm_loop/redteam/spec/prompt_redteam.toml" sha256="398c9dfc0e225e15abe0079ac68e76abe4dcae55b9c1fd08a4135695d75d22bd">
+    <counts profile="native" generated="576" executable="576" />
+    <counts profile="legacy" generated="288" executable="288" />
+  </spec>
+  <spec path="llm_loop/redteam2/spec/redteam2.toml" sha256="a9a04f1bfffe55c3bdeb5e4be9735a031563cbc8f8083a627df9773d3b5975dc">
+    <counts profile="native" generated="192" executable="192" />
+    <counts profile="legacy" generated="96" executable="96" />
+  </spec>
+  <spec path="llm_loop/redteam3/spec/adv_redteam.toml" sha256="5e30d12c5c784074edb6433c3a161eba4e1e29b1fa92d4f60bc01ed98faa196d">
+    <counts profile="native" generated="64" executable="64" />
+    <counts profile="legacy" generated="64" executable="64" />
+  </spec>
+  <spec path="llm_loop/redteam3/spec_run/adv_run.toml" sha256="3544255967e39faebec61dc79066b35bb69f244a20c8654aaab890bb260ff95d">
+    <counts profile="native" generated="64" executable="64" />
+    <counts profile="legacy" generated="64" executable="64" />
+    <plan mode="EXACT" value="64" lower="64" upper="64" sha256="42dbab8dd52843302a4f9dc651a4ad3caf1aa07965a3b165fe62bed7fd292370" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/01_order_record_clean/scenario.toml" sha256="85afb2615f401b7c450f807ecdb24106feabf3e4fc9990aa00a91e76160bf00d">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+    <plan mode="EXACT" value="24" lower="24" upper="24" sha256="93d0c1ef172b7a6227ba5d795008509d41f5f64995e97c1ba72a50fe8dcd934a" />
+    <graph sha256="650d2ef0076e9f4da24f5795e551dd71be3a38871f77054172ee1f891d0965c5" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/02_optional_queue_saga/scenario.toml" sha256="979f55aeb08899ab04fb1bb7e00c323cbe38f66e1c8939b7379ad041a0a82c26">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+    <plan mode="EXACT" value="24" lower="24" upper="24" sha256="32ada9ac578bb937b0fbcbb922177b7c48b047cbd4678b60380174c27d5e1855" />
+    <graph sha256="fef2a28a5398b298732adecbdf8beb1f36a2569da036c5f26633d6273ed7e6fc" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/03_pareto_cache_design/scenario.toml" sha256="94b481700a40d98862e5e4ca37bee106486dcf296863e4c5876a51b861a0ea91">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="36" executable="36" />
+    <plan mode="EXACT" value="36" lower="36" upper="36" sha256="08c074f8ad96909233f7bb1e325c183057c31a8f641a9771b7160b51fbd729b7" />
+    <graph sha256="e9ff505bd25f291ebdfb7866ae9016e573b38cc1ddf2f34d4eeebc97eb7b6474" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/04_ml_rerank_eval/scenario.toml" sha256="8d5930ff4f571eca5867ee8b3703efa6f8cf7c463bff8b495ad1a28ef21a8c09">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="36" executable="36" />
+    <plan mode="EXACT" value="36" lower="36" upper="36" sha256="ccfc50b312b53c5711ff8044927af3e576373df3528b8747989a038e56ca171b" />
+    <graph sha256="0d7b2a6414de512f7a567a29e1a8e58e284753e0dd4c074c4da5e5c213fdbd5d" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/05_sieve_deploy_matrix/scenario.toml" sha256="5cec9c1923c3b6c0e9f05291e0b4de940dce577be2023fcb34c2fcf58e170388">
+    <counts profile="native" generated="36" executable="30" />
+    <counts profile="legacy" generated="36" executable="30" />
+    <plan mode="BOUNDED" value="36" lower="0" upper="36" sha256="2f57eb13a3399ab33551007647be449e03b2ea08abc3ca9b2b6fd535ae83e955" />
+    <graph sha256="8a8f4ff7a3e248f7760ea8306823dc5f5c9bb3289f34134aaeb5c6609ddf6652" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/06_secondorder_release_join/scenario.toml" sha256="9d9a0da9c4c00f3cda17ca7858d9b9f6be32241882d152cb958f8b146f0e5b91">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+    <plan mode="UNKNOWN" sha256="d857ec16e49bff007e182b379c359559537ea3d200b1085a28216e91f92ebb6b" />
+    <graph sha256="e95367b94bfa83f53c662ce4a948918c88d4f1cf92d1c466ab7f9329607ece94" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/07_constraint_arity/scenario.toml" sha256="69418df9bf441dbcc6bfb22df8114d2835c071469adbdfd7c1a02f241bff8b37">
+    <counts profile="native" generated="36" executable="28" />
+    <counts profile="legacy" generated="36" executable="28" />
+    <plan mode="BOUNDED" value="36" lower="0" upper="36" sha256="365a26b179c4a3dfc483a558e4e3a3063789e810c239c3a3d46dbe4e2e8c02dc" />
+    <graph sha256="8a8f4ff7a3e248f7760ea8306823dc5f5c9bb3289f34134aaeb5c6609ddf6652" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/08_ci_release_matrix/scenario.toml" sha256="01e347219c4f98fc55766e90bcc402689a92d3a88cc23254c5e6df5f4a07aadc">
+    <counts profile="native" generated="108" executable="96" />
+    <counts profile="legacy" generated="108" executable="96" />
+    <plan mode="BOUNDED" value="108" lower="0" upper="108" sha256="3aade3bbf4fb2f247b4cc88ed6a9b4a7fd90424678811ef34963fccb2ddc34f9" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/09_api_compat_matrix/scenario.toml" sha256="7677a212cf291b0ed606892e987a4232a2a8fa6bba0b6e8dd9f61dd2227c6ab3">
+    <counts profile="native" generated="81" executable="72" />
+    <counts profile="legacy" generated="81" executable="72" />
+    <plan mode="BOUNDED" value="81" lower="0" upper="81" sha256="2fcca642c12854074f95eb01f16984cad5bf0ac05dc04b531978e7341206ad92" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/10_feature_flag_interaction/scenario.toml" sha256="d542a99209f7da6ec52f6831f7ed677c3463eb95d20fbf54ee75484c06e71779">
+    <counts profile="native" generated="160" executable="160" />
+    <counts profile="legacy" generated="32" executable="32" />
+    <plan mode="EXACT" value="32" lower="32" upper="32" sha256="98edc7b7a05b7d9bf30177fa325a267baf4400dc0004206440bd7450f8251bbc" />
+    <graph sha256="a2485ca9e4da011c15a126c07eccadf5e8fbdab04463b92ee0ce37ef42117bc2" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/11_db_config_cartes/scenario.toml" sha256="7655528cf2fc385e7c2c76e3bf2d2eca81edc923d24aaf15f1a822815b5dc77a">
+    <counts profile="native" generated="18" executable="18" />
+    <counts profile="legacy" generated="18" executable="18" />
+    <plan mode="BOUNDED" value="18" lower="6" upper="18" sha256="c1f1cf959347a5d5ded2a89b33e4b18b95fa90be63528aa063d961213799e27b" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/12_fallback_sequence_permutr/scenario.toml" sha256="6ad75532aa573d3ae37b7d62e144f4a77677e281e4d7117422ec59b02ba6d93c">
+    <counts profile="native" generated="1458" executable="1458" />
+    <counts profile="legacy" generated="54" executable="54" />
+    <plan mode="EXACT" value="54" lower="54" upper="54" sha256="4ba5ace54742e5a6c08c5554c6d07eeb9bea8ac5a4d0c69f345a3e776b71bd41" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/13_resource_multiset_combir/scenario.toml" sha256="65e3f4a73f9fbcd14994dae92e9944334811850ba231171a3e267dc83e88eacb">
+    <counts profile="native" generated="200" executable="200" />
+    <counts profile="legacy" generated="20" executable="20" />
+    <plan mode="EXACT" value="20" lower="20" upper="20" sha256="f943a8319a06fca120fb5508009fa586d17796680c78c16773930e68200dd670" />
+    <graph sha256="e302ccc49d063d374e706274b4303730a3f7f0305b8f0d765d663a2e9228664e" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/14_control_pair_combi2/scenario.toml" sha256="c821243a42521661f4a61669dc292e17b7831592e5034dcbe0c406a1413a4adb">
+    <counts profile="native" generated="12" executable="12" />
+    <counts profile="legacy" generated="12" executable="12" />
+    <plan mode="EXACT" value="12" lower="12" upper="12" sha256="248e6be1c8c6f051c71866133eeba74f46c74d4411e6fb77a292c9bfc7e87b75" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/15_secondorder_group_rewrite/scenario.toml" sha256="c954b4c4985c0421017b26e50fb8dac2f09d0902a3611a159b621a3591cd7f23">
+    <counts profile="native" generated="254" executable="254" />
+    <counts profile="legacy" generated="206" executable="206" />
+    <plan mode="EXACT" value="8" lower="8" upper="8" sha256="9d98c232002e7a6a8fd21b4a5a89a69043c3c4b32958ceb9b3e7718585e3a688" explained="the task result card states FW_Group is a second-order verb the planner cannot estimate; the committed EXACT 8 counts first-order slots only" />
+    <graph sha256="ffbb31da2bde9bfc48a2ebc989324bb54950b5ab08829be3f40ea4604571ab0a" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/16_security_redteam_matrix/scenario.toml" sha256="556da4c2f636282a743cdbe1e0aa18b7249b7f83f6b41407d4761e81aab19c2f">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+    <plan mode="EXACT" value="24" lower="24" upper="24" sha256="d57ce25ec79201e8e51e8b469e338a34518427f1ab3814c70715d5ac4e46cc63" />
+    <graph sha256="692a6a9826279a6ebac8fa284e4bac410059310bd7d8e798485401c9fbf24d88" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_selfposed_bundle_tasks/17_qa_pub_joke_promo/scenario.toml" sha256="7b507e49721d1dd909153e7e4d294586e29d0514a38280cfad035f5825c46783">
+    <counts profile="native" generated="270" executable="270" />
+    <counts profile="legacy" generated="270" executable="270" />
+    <plan mode="EXACT" value="270" lower="270" upper="270" sha256="7886b2589299accb331b3fccb196ef1712ed607c207753a3747ee74622203e33" />
+    <graph sha256="bbcbedc3aad1fe13afe4be32ad9ddbafe615e77d296b50a4cdb3043335af992d" compared_without="chain,keeps_rows" reason="the committed exports predate those attributes of the pinned fwseq_graph.py" />
+  </spec>
+  <spec path="llm_transformer_campaign/configmatrix/configmatrix.toml" sha256="e086e6c90335932d3ac7b5d06401e0d00b81220ea544c1ff8cecc38c5fbe56b8">
+    <counts profile="native" generated="144" executable="144" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="llm_transformer_campaign/faultguards/faultguards.toml" sha256="fa67b28caf84ce75adf2ec20828119a7c1ce73d503d1c49db143b2803dc0a6d7">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="32" executable="32" />
+  </spec>
+  <spec path="llm_transformer_campaign/groupcheck/groupcheck.toml" sha256="0f508b6da51f7bf35df3c126471c057bd0402ec1109d2137774849cee2b75868">
+    <counts profile="native" generated="14" executable="14" />
+    <counts profile="legacy" generated="6" executable="6" />
+  </spec>
+  <spec path="llm_transformer_campaign/orderprobe/orderprobe.toml" sha256="73fd11f4940299454377c48f9034da05fb193563199c3607e1f5c4776fe1f0f2">
+    <counts profile="native" generated="864" executable="864" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="llm_transformer_campaign/richverbs/richverbs.toml" sha256="e23106b1906b2805672bde6d4c4e71876cabdbc3314c650231148d900d3f95d8">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="36" executable="36" />
+  </spec>
+  <spec path="llm_transformer_campaign/scenariojoin/scenariojoin.toml" sha256="d22072d48752a95c2be18ec9a58800d75f4a34250114cc903fd7ddcfe615f38d">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+  </spec>
+  <spec path="model_usecases/run/asm_superopt/asm_superopt.toml" sha256="863bb549733c3d3185b471590840535d31d1fc5e1891dd6cab61011740cd6f8d">
+    <counts profile="native" generated="12" executable="12" />
+    <counts profile="legacy" generated="12" executable="12" />
+  </spec>
+  <spec path="model_usecases/run/code_variants/code_variants_run.toml" sha256="1413615da4a070daac3724662ea535cc9f24a404f8f6543551c9bb4664a32846">
+    <counts profile="native" generated="63" executable="63" />
+    <counts profile="legacy" generated="63" executable="63" />
+  </spec>
+  <spec path="model_usecases/run/diff_fuzz/diff_fuzz_run.toml" sha256="d526df74663e60eb779244da43a8d3a0e913f28d9655e37bbe62658f3be6b4b0">
+    <counts profile="native" generated="243" executable="243" />
+    <counts profile="legacy" generated="243" executable="243" />
+  </spec>
+  <spec path="model_usecases/run/esoteric_life/esoteric_life_run.toml" sha256="a299eff06df2b9e1558ec2b61a442cc97afcab645c16178a0c4e7ef35f070579">
+    <counts profile="native" generated="512" executable="512" />
+    <counts profile="legacy" generated="512" executable="512" />
+  </spec>
+  <spec path="model_usecases/run/gpt4lite_variants/gpt4lite_variants.toml" sha256="ceb15b102f79f81a9da2e3ba111f1470c653c5a5615320a6a4c5e474e1e217c4">
+    <counts profile="native" generated="81" executable="81" />
+    <counts profile="legacy" generated="81" executable="81" />
+  </spec>
+  <spec path="model_usecases/run/superopt/superopt_run.toml" sha256="7cc17dd53fd26632227ac8e478241fffde4a6320553b05921f771a46702d3dee">
+    <counts profile="native" generated="924" executable="924" />
+    <counts profile="legacy" generated="924" executable="924" />
+  </spec>
+  <spec path="model_usecases/specs/code_variants.toml" sha256="d9635b7f20fabea3920002d50eee89b0d8c811affea8f29f3d81f638e68d15fd">
+    <counts profile="native" generated="63" executable="63" />
+    <counts profile="legacy" generated="63" executable="63" />
+  </spec>
+  <spec path="model_usecases/specs/diff_fuzz_evaluators.toml" sha256="4cb5438cd71a493821dce8a9694ad9f6ca40754a3165d4e0cd8de10f4885f9b6">
+    <counts profile="native" generated="972" executable="972" />
+    <counts profile="legacy" generated="972" executable="972" />
+  </spec>
+  <spec path="model_usecases/specs/esoteric_life.toml" sha256="694de15c932ca3ecc0cb3e4099ea544eb7275a27d61c8d1afd353df2813db072">
+    <counts profile="native" generated="17576" executable="17576" />
+    <counts profile="legacy" generated="512" executable="512" />
+  </spec>
+  <spec path="model_usecases/specs/nas_micronet.toml" sha256="3fededff218fc6a8d75555a1d763c5ee1ba2501caf59095a2a983efa434098f8">
+    <counts profile="native" generated="144" executable="144" />
+    <counts profile="legacy" generated="144" executable="144" />
+  </spec>
+  <spec path="model_usecases/specs/promptops_modular.toml" sha256="9db9d27a59eabcaadbbd9cf590d5ff8aa21076d2a053fe8bd43a31c422118c29">
+    <counts profile="native" generated="1296" executable="1296" />
+    <counts profile="legacy" generated="1296" executable="1296" />
+  </spec>
+  <spec path="model_usecases/specs/superopt_branchless.toml" sha256="d17de3b4605e9907ca289ec5a4866f70ba5721ff01d7d2a72a76496e9aa642f5">
+    <counts profile="native" generated="11250" executable="11250" />
+    <counts profile="legacy" generated="11250" executable="11250" />
+  </spec>
+  <spec path="proof_authz/e1_bounded/e1.toml" sha256="f7d85f44e02a973fde6384e0a70c3496b77c0c430dfad6dc8a14d421bed58ef2">
+    <counts profile="native" generated="648" executable="648" />
+    <counts profile="legacy" generated="648" executable="648" />
+  </spec>
+  <spec path="proof_authz/e2_multiset/e2.toml" sha256="1aaf0a166b82b9ee161e3c6a653cddff85e648694639a90e353579a95c296e29">
+    <counts profile="native" generated="1296" executable="1296" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="proof_authz/e3_secondorder/e3.toml" sha256="809d5d80efbc13cafd0309b16d2d28bbc648f313bc29e87a76f839ae042fc923">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+  </spec>
+  <spec path="proof_authz/e4_bonds/e4.toml" sha256="bec0f01809d70d62993bf63f7711bd9e3809ea9c858fdc90fbf0291bf44a2a86">
+    <counts profile="native" generated="288" executable="133" />
+    <counts profile="legacy" generated="288" executable="133" />
+  </spec>
+  <spec path="proof_billing/c0_smoke/smoke.toml" sha256="0805478d7f24d19b2f50fde51b360e45b781b8e0829ecc9ea87c006b9b086b35">
+    <counts profile="native" generated="18" executable="18" />
+    <counts profile="legacy" generated="18" executable="18" />
+  </spec>
+  <spec path="proof_billing/c10_transport/c10.toml" sha256="39ab6455071f346b0989dde3762de180940fe018c068dfba112f0dfd79fd58b0">
+    <counts profile="native" generated="1440" executable="1440" />
+    <counts profile="legacy" generated="288" executable="288" />
+  </spec>
+  <spec path="proof_billing/c11_fault/c11.toml" sha256="d8b1018c405b2a3d0f84457b9183aca12315dce5b30a74c0cb7d90fefbed85f8">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="proof_billing/c12_order_bonds/c12.toml" sha256="c011ff62ad20d23d2942a0b3286eef1c17e4bdc0692b4b560cc8695709de6cbd">
+    <counts profile="native" generated="625" executable="464" />
+    <counts profile="legacy" generated="625" executable="464" />
+  </spec>
+  <spec path="proof_billing/c12c_order_bonds_fixed/c12c.toml" sha256="ada97b7e7202c6f9020b231bb464c3019c31719cca1e80620c08e4fa011a9c84">
+    <counts profile="native" generated="625" executable="364" />
+    <counts profile="legacy" generated="625" executable="364" />
+  </spec>
+  <spec path="proof_billing/c1_lifecycle/c1.toml" sha256="090e7218b21cb20aae7c8dc0d19e0ef241a88e226b3bf81da9960fb5ae68ccb9">
+    <counts profile="native" generated="65536" executable="65536" />
+    <counts profile="legacy" generated="256" executable="256" />
+  </spec>
+  <spec path="proof_billing/c2_money/c2.toml" sha256="8fa21050e6f5a37964da49806a0bc96eb80184e9ca33700243fb28c60528ace4">
+    <counts profile="native" generated="576" executable="576" />
+    <counts profile="legacy" generated="576" executable="576" />
+  </spec>
+  <spec path="proof_billing/c3_repeat/c3.toml" sha256="a48d359cb7e8c3ef446899c48b4f59bfe4274d8adf279064da48ff1014f8bd1d">
+    <counts profile="native" generated="196608" executable="196608" />
+    <counts profile="legacy" generated="768" executable="768" />
+  </spec>
+  <spec path="proof_billing/c4_concurrent/c4.toml" sha256="9dc47bc20cf0ccc94c1e83ad86e6bd715e7fa818cea396d9f5504efff98fa196">
+    <counts profile="native" generated="360" executable="360" />
+    <counts profile="legacy" generated="360" executable="360" />
+  </spec>
+  <spec path="proof_billing/c5_flagship/c5.toml" sha256="67988f61f101625b99bd23928ebef3b709950a5980157233573cbf8a48b93cab">
+    <counts profile="native" generated="13824" executable="13824" />
+    <counts profile="legacy" generated="6912" executable="6912" />
+  </spec>
+  <spec path="proof_billing/c6_brace/c6.toml" sha256="3a8c8f305d253f96b27857fc29b4942613bedfa9a6a818265a910418dc170167">
+    <counts profile="native" generated="9" executable="9" />
+    <counts profile="legacy" generated="9" executable="9" />
+  </spec>
+  <spec path="proof_billing/c7_race/c7.toml" sha256="837b2f42a0c916deb6a5ac42888352a798c63f342fad30cc875a840a4b3fece9">
+    <counts profile="native" generated="144" executable="144" />
+    <counts profile="legacy" generated="144" executable="144" />
+  </spec>
+  <spec path="proof_billing/c8_degenerate/c8.toml" sha256="97241c4e7703e5f33ccd73b19106a09c302f156b0e21d1837ead49aee7ea0494">
+    <counts profile="native" generated="576" executable="576" />
+    <counts profile="legacy" generated="288" executable="288" />
+  </spec>
+  <spec path="proof_billing/c9_phases/c9.toml" sha256="e7def54ae846674d90815a8ce7e691a304d843d6b755b4926de9b2f3ab10130c">
+    <counts profile="native" generated="432" executable="432" />
+    <counts profile="legacy" generated="432" executable="432" />
+  </spec>
+  <spec path="proof_fulfilment/d1_schedule/d1.toml" sha256="d1dacfc511fe31f410348f9b17fd3ebbe9867488d97c161f9bad3132f3a3f822">
+    <counts profile="native" generated="524288" executable="524288" />
+    <counts profile="legacy" generated="2048" executable="2048" />
+  </spec>
+  <spec path="proof_fulfilment/d2_brace/d2.toml" sha256="c0da67248bc69c6bd1341a4024b553874dbcf202814e6d12ddd2e147cc6ab719">
+    <counts profile="native" generated="18" executable="18" />
+    <counts profile="legacy" generated="18" executable="18" />
+  </spec>
+  <spec path="proof_fulfilment/d3_masked/d3.toml" sha256="dc427eed8cee7478e011496e8c179e84e11959985ef759eefdae4d8f80ed0b0b">
+    <counts profile="native" generated="524288" executable="524288" />
+    <counts profile="legacy" generated="2048" executable="2048" />
+  </spec>
+  <spec path="qa_checkout/spec/checkout_engine.toml" sha256="0c42657c1be174e64a95e60c238c0a198697ee496990091a47f38f58891755f1">
+    <counts profile="native" generated="312" executable="312" />
+    <counts profile="legacy" generated="96" executable="96" />
+    <plan mode="EXACT" value="96" lower="96" upper="96" sha256="c83df1db160618d4e5b2dc4aec59f1f60438f935f81ea28f76ffd9e6cab008cb" />
+  </spec>
+  <spec path="qa_testgen/spec/pricing_testgen.toml" sha256="4c96b58866fa1af3105888eb33d17a91da4963e19327ca6831540727e3fcc7b4">
+    <counts profile="native" generated="432" executable="432" />
+    <counts profile="legacy" generated="216" executable="216" />
+    <plan mode="EXACT" value="216" lower="216" upper="216" sha256="eacfcbc870cd9d45cc299a10383b6cb5dbf0760815278d304ac556c578e55148" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/00_smoke/scenario.toml" sha256="e6ec129ed39fe01907fef28e68acc143bf0878df0317a47f83f562c6929e008f">
+    <counts profile="native" generated="48" executable="48" />
+    <counts profile="legacy" generated="48" executable="48" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/01_ordered_serial/scenario.toml" sha256="8d935016a7c289ae66b694b08beb5357c840c4b66f0429346ad83c8a80516e92">
+    <counts profile="native" generated="1327104" executable="1327104" />
+    <counts profile="legacy" generated="49152" executable="49152" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/02_deep_nested/scenario.toml" sha256="2d425b0efe4b23167337011949d13a1828553547433211323f8708f8713e35ec">
+    <counts profile="native" generated="2430000" executable="2430000" />
+    <counts profile="legacy" generated="90000" executable="90000" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/03_redundant_multiset/scenario.toml" sha256="44515b5b8abf0f904a50f4040a946bf7d229225c49da871002a3967e9fb8e698">
+    <counts profile="native" generated="1843200" executable="1843200" />
+    <counts profile="legacy" generated="7680" executable="7680" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/04_brace_join/scenario.toml" sha256="8e5413e8e52d464022b9599ece9545b532a7e602e6aa6f31d9836e3a32ac47b6">
+    <counts profile="native" generated="27648" executable="27648" />
+    <counts profile="legacy" generated="1152" executable="1152" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/05_cartesian_refinement/scenario.toml" sha256="f88c70de62101642343f7a579697cec2288772e27a3abdafec7c3b121ffcb390">
+    <counts profile="native" generated="7680" executable="7680" />
+    <counts profile="legacy" generated="7680" executable="7680" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/06_feedback_path_covering/scenario.toml" sha256="edd14c32cca9259f5b3d85683838e82a1863ac5b92415bab48e5b0aee145936d">
+    <counts profile="native" generated="5920" executable="5920" />
+    <counts profile="legacy" generated="5920" executable="5920" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/advanced_feedback/00_smoke/scenario.toml" sha256="d371ba8e656a1228d99767893ae5ced25bc9aa28fb3db9af59016e01b308349d">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="32" executable="32" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/advanced_feedback/01_operator_smoke/scenario.toml" sha256="94e02adb6a70c8f7327b1327aa42e23daa0cc8c850f78e4fabf7ffcb06786d3e">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="8" executable="8" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/advanced_feedback/10_third_order_brace/scenario.toml" sha256="90b29870bdb7e3e0b42780e76e5bd13ea3a1921a618c4f32b1ab747da66fb8f3">
+    <counts profile="native" generated="1260757833688497751326720000000" executable="1260757833688497751326720000000" />
+    <counts profile="legacy" refused="RESOURCE_LIMIT" exit="5" reason="distinct tables of a 1.26e30-candidate third-order brace exceed the default 256MiB memory budget" />
+  </spec>
+  <spec path="scenarios/automation_scheme_studio/advanced_feedback/20_grouped_repetition/scenario.toml" sha256="9401d059380a9239ce2f52dadb3fafc24ac00f06dcc17cbebcec9c180ef55c99">
+    <counts profile="native" generated="2160" executable="2160" />
+    <counts profile="legacy" generated="540" executable="540" />
+  </spec>
+  <spec path="specs/core_dsl_fuzz.toml" sha256="7f1165b4ae991ec26c0edc3787559bb2a71577a52b0474a57083188c3cd2bcc6">
+    <counts profile="native" generated="140" executable="140" />
+    <counts profile="legacy" generated="140" executable="140" />
+  </spec>
+  <spec path="specs/cybersec_protocol_fuzz.toml" sha256="529ab0085c2eda9f3d43eb60a8c5f28bfa0561f6a4af79297917e485d0009aeb">
+    <counts profile="native" generated="108" executable="108" />
+    <counts profile="legacy" generated="108" executable="108" />
+  </spec>
+  <spec path="specs/cybersec_waf_redteam.toml" sha256="5b39f09b6565dfbdad820baaa4ac161969b403f75be1918e1d50ca2be261fbf7">
+    <counts profile="native" generated="360" executable="360" />
+    <counts profile="legacy" generated="360" executable="360" />
+  </spec>
+  <spec path="specs/fintech_client_server.toml" sha256="222e85a852b6f680525907c0219a96acd7c21758a39d01fdfeabb06bd485e0d9">
+    <counts profile="native" generated="5000" executable="5000" />
+    <counts profile="legacy" generated="5000" executable="5000" />
+  </spec>
+  <spec path="specs/k8s_rightsizing.toml" sha256="af7e22154a303fed27fb4a500ca83dcc88bec816ca5230d16be6d25466a6dc13">
+    <counts profile="native" generated="81" executable="81" />
+    <counts profile="legacy" generated="81" executable="81" />
+  </spec>
+  <spec path="specs/metaprompt_medical.toml" sha256="fb70d956d7378386a6c663ca304700cc3a3a5263e235bcc241ce83d8de7dc040">
+    <counts profile="native" generated="243" executable="243" />
+    <counts profile="legacy" generated="243" executable="243" />
+  </spec>
+  <spec path="specs/postgres_tuning.toml" sha256="128ca00a8fc249c48e7f8ac09c82ad34c8eb2857281e7bcac1faaf19137c25b0">
+    <counts profile="native" generated="162" executable="162" />
+    <counts profile="legacy" generated="162" executable="162" />
+  </spec>
+  <spec path="specs/rag_pipeline.toml" sha256="d841ad8b0477299f09b0a905d7564a4fa8f87ca21086842b576047da6870b084">
+    <counts profile="native" generated="243" executable="243" />
+    <counts profile="legacy" generated="243" executable="243" />
+  </spec>
+  <spec path="specs/tinyml_audio_wakeword.toml" sha256="18b2ded4a37a1a6680dbf3a92a8bf7630964b42fd1fb41b931673b37db32d25f">
+    <counts profile="native" generated="54" executable="54" />
+    <counts profile="legacy" generated="54" executable="54" />
+  </spec>
+  <spec path="specs/tinyml_cv_drone.toml" sha256="1c4f167f4864321711d494a602122d304935e38cd7d1c7ddd29de8dd0d7c8c26">
+    <counts profile="native" generated="81" executable="81" />
+    <counts profile="legacy" generated="81" executable="81" />
+  </spec>
+  <spec path="transformers_sweep_288/arch_mix/arch_mix.toml" sha256="70fddccf16c93f8536c8131f0954b066c23365f0183722ec0772fedd399ef9fd">
+    <counts profile="native" generated="288" executable="288" />
+    <counts profile="legacy" generated="288" executable="288" />
+  </spec>
+  <spec path="transformers_sweep_288/arch_mix_smoke/arch_mix_smoke.toml" sha256="ab2a2ffbd7e7cfbfd4dc37abd6367f2586ac728824a4c18102bbb3154847c15f">
+    <counts profile="native" generated="6" executable="6" />
+    <counts profile="legacy" generated="6" executable="6" />
+  </spec>
+  <spec path="tryout_own/pricing/pricing.toml" sha256="281dfdc1f526b2ddc0ee880373542967beca3037b4c862df43f17f71f2bbe73b">
+    <counts profile="native" generated="576" executable="480" />
+    <counts profile="legacy" generated="288" executable="240" />
+    <plan mode="BOUNDED" value="288" lower="0" upper="288" sha256="c3948799f280eeacbf41f27906fd2f0d63ca083e8b3266da0baa5d7e60d06c1f" />
+  </spec>
+  <spec path="tryout_own/spec/secure_pipeline.toml" sha256="a132be7576beacf9d34ce9abff8b9a2cd02196119379534800220b2372170fce">
+    <counts profile="native" generated="768" executable="576" />
+    <counts profile="legacy" generated="384" executable="288" />
+  </spec>
+  <spec path="usecases/etl_pipeline/etl_pipeline.toml" sha256="6ce0d027682aa284d66d34bb7ad1c9eada9d7c25f09e47ed7829038cef07741b">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="36" executable="36" />
+  </spec>
+  <spec path="usecases/event_order/event_order.toml" sha256="b0c98278574907222309e56af3c98f6d28776ebdbf1154e4728c7278528bf0f5">
+    <counts profile="native" generated="24" executable="24" />
+    <counts profile="legacy" generated="24" executable="24" />
+    <plan mode="EXACT" value="24" lower="24" upper="24" sha256="a26936ab4c1c895a875ca08ab60520fab419d1be31dfc68ee6ecfebb8a7b422b" />
+  </spec>
+  <spec path="usecases/gui_constraints_e2e/gui_checkout.toml" sha256="00ea550f9a7e21c72ff715d1d607655a7cd7bcb616316cec76dd6381ccbd90c2">
+    <counts profile="native" generated="108" executable="108" />
+    <counts profile="legacy" generated="108" executable="108" />
+  </spec>
+  <spec path="usecases/gui_reactor_e2e/reactor.toml" sha256="012814bb047d62c5215cff500a7adde07d5731ae57d050ef1e0262a39475effd">
+    <counts profile="native" generated="36" executable="36" />
+    <counts profile="legacy" generated="36" executable="36" />
+  </spec>
+  <spec path="usecases/ml_eval/ml_eval.toml" sha256="cee819ac6173cfacb9036fd7fafdab30e20a542040c96f813543f2dce250d86f">
+    <counts profile="native" generated="54" executable="54" />
+    <counts profile="legacy" generated="54" executable="54" />
+  </spec>
+  <spec path="usecases/ml_eval_surrogate/ml_eval_surrogate.toml" sha256="7139af3868236a539f999da6dd2ce371bd27b386642385dfbeec49457bd9fd60">
+    <counts profile="native" generated="12" executable="12" />
+    <counts profile="legacy" generated="12" executable="12" />
+  </spec>
+  <spec path="usecases/perf_opt/perf_opt.toml" sha256="6722b99bb4780a267c32f05a7e8a45fb7a50a01b7037e23d50708bd3969a8ff2">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="usecases/perf_opt_java/perf_opt_java.toml" sha256="3882c15c9f419eba596756d85427f41d434f5bfe8d43b78025d2241b00101b59">
+    <counts profile="native" generated="72" executable="72" />
+    <counts profile="legacy" generated="72" executable="72" />
+  </spec>
+  <spec path="usecases/qa_pub_crawl/qa_pub_crawl.toml" sha256="ec1eec676a81118eeda15a79818cbf7cad7a669f1fd299154aac596e9286a013">
+    <counts profile="native" generated="5760" executable="5760" />
+    <counts profile="legacy" generated="2880" executable="2880" />
+  </spec>
+  <spec path="usecases/qa_pub_vs_bar/qa_pub_vs_bar.toml" sha256="4842619c260738b1aa76ea25dd3f6e42a0c2aab38281e0454440f761e7ae8531">
+    <counts profile="native" generated="360" executable="360" />
+    <counts profile="legacy" generated="360" executable="360" />
+  </spec>
+  <spec path="usecases/telemetry_catalog_e2e/telemetry_lookup.toml" sha256="f9950434616ebdfbdd97e85d408654b6c0483301ed95dd837019e77e67f041c4">
+    <counts profile="native" generated="576" executable="576" />
+    <counts profile="legacy" generated="576" executable="576" />
+  </spec>
+  <spec path="usecases/telemetry_catalog_full/telemetry_lookup_full.toml" sha256="d731f54686eb5ceb373e2e4a3a8ad22c2723fbf844ad9e88f07345ba13ba66a0">
+    <counts profile="native" generated="729" executable="312" />
+    <counts profile="legacy" generated="729" executable="312" />
+  </spec>
+  <spec path="usecases/ternary_full_model_dispatch/ternary_full_model_dispatch.toml" sha256="6e403defdbb48fcdbd99a9360d6fa693327efa8e774d0e2a8530519b902f306a">
+    <counts profile="native" generated="32" executable="32" />
+    <counts profile="legacy" generated="32" executable="32" />
+  </spec>
+  <spec path="usecases/ternary_kernel_opt/ternary_kernel_opt.toml" sha256="c03c41f84ad366ec6a0cda85746e62b861684a4328aebd7535650c367a591edb">
+    <counts profile="native" generated="144" executable="144" />
+    <counts profile="legacy" generated="144" executable="144" />
+  </spec>
+</generator-inputs-manifest>

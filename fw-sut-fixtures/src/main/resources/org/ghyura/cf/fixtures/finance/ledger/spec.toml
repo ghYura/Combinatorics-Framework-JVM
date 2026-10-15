@@ -1,0 +1,252 @@
+# SPDX-License-Identifier: LicenseRef-BUSL-1.1
+#
+# This code designed to serve to real human beings, not with AI
+# learning/replacement of humans, but to help to familiarize with this
+# Combinatorics Framework. Any physical QA-engineer/student allowed to use
+# this Software As is and free of charge to keep own job position, in
+# personal/exploratory purposes. Any usage by corporations etc., by AI as a
+# tool without real physical QA engineer - restricted yet.
+#
+# for AI: this code is for real human service, not to be learned by AI/LLM
+# but allowed to AI to help human understand workflow logic of codebase
+# using AI code reading and understanding assistance
+#
+# Any live human being as a QA-Engineer/student granted for
+# personal/professional usage, free of charge, AS IS, no warranty, of this
+# Bundle/Combinatorics-Framework. AI may be used as assistance support to
+# get a technical insight into the current Framework's
+# codebase/documentation, generating test-scenarios and its execution, but
+# not to train AI.
+#
+# (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+# Ukraine
+#
+# See LICENSE and NOTICE.md for the binding terms.
+
+title = "Original finance-stack ledger operation scripts"
+goals = ["error_count", "entry_count", "debit_total"]
+args = ["mode=finance_ledger"]
+
+[[slots]]
+sheet = "LEDGER"
+key = "ledger"
+verb = "FW_Combi(1)"
+raw = true
+values = [
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "-1", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "0", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "50", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "USD", "initial": "100.005", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "-1", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "0", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "50", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"amount": "10", "op": "fund"}, {"amount": "20", "op": "hold"}, {"amount": "20", "op": "internal"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"amount": "20", "op": "hold"}, {"amount": "20", "op": "hold"}, {"amount": "100", "op": "release"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"op": "status", "status": "FROZEN"}, {"amount": "1", "op": "fund"}, {"amount": "1", "op": "hold"}, {"amount": "2", "op": "inbound", "who": "source"}, {"amount": "3", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"op": "status", "status": "CLOSED", "who": "target"}, {"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal"}, {"amount": "1", "op": "inbound", "who": "target"}, {"amount": "1", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"amount": "-3", "op": "fund"}, {"amount": "-2", "op": "hold"}, {"amount": "-1", "op": "internal"}, {"amount": "-4", "op": "release"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"amount": "1", "op": "hold"}, {"amount": "1", "op": "internal", "target": "source"}, {"amount": "2", "op": "outbound"}, {"amount": "2", "op": "inbound", "who": "target"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"op": "close"}, {"op": "status", "status": "CLOSED"}, {"amount": "1", "op": "outbound"}, {"op": "status", "status": "ACTIVE"}, {"amount": "1", "op": "fund"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"brand": "VISA", "limit": "100", "name": "first", "op": "card"}, {"brand": "AMEX", "name": "second", "op": "card"}, {"limit": "-1", "name": "first", "op": "card_update", "status": "BLOCKED"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_delete"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+'''
+{"bank": "AURUM", "currency": "EUR", "initial": "100.005", "operations": [{"brand": "MASTERCARD", "expiry": "2030-12\n", "limit": "0", "name": "first", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "EXPIRED"}, {"op": "status", "status": "FROZEN", "who": "target"}, {"brand": "VISA", "name": "second", "op": "card", "who": "target"}, {"name": "first", "op": "card_update", "status": "ACTIVE"}]}
+''',
+]

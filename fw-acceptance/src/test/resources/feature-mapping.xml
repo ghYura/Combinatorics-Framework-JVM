@@ -1,0 +1,1041 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+<feature-mapping schema="1" traceability="feature-traceability-handoff.xml" architecture-revision="2" developer="Automation">
+  <!-- Status: implemented (built and evidenced within its scope; release gates may stay open), partial (what is missing is
+       named), replaced (the legacy mechanism is replaced by a different in-JVM design whose obligations are tested),
+       incompatible (ruled out by the architecture and reported), not-implemented. Paths are relative to the reactor root. -->
+  <feature id="CORE:CR-INPUT-01" status="implemented">
+    <summary>Readers by extension (xlsx, json, yaml, toml; no XLSX fallback for unknown extensions) and the Java builder produce one format-neutral workbook; JSON numbers and booleans become their legacy text, null cells are absent, scalar rows are one-cell rows; absent and present-empty cells stay distinct.</summary>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/WorkbookFormats.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/JsonWorkbookReader.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/builder/ScheduleBuilder.java"/>
+    <source path="fw-model/src/main/java/org/ghyura/cf/model/input/WorkbookData.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/InputSource.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/ScenarioInputs.java"/>
+    <test module="fw-input" class="org.ghyura.cf.input.InputSourceTest" method="theStreamLimitStopsGrowingInputWithoutConsumingTheRest"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.SessionTest" method="aScenarioAndItsConstraintFilesShareOneReadingBudget"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.SessionTest" method="unsavedConstraintPreviewsAndEditedCompanionsAreAdmittedBeforeParsing"/>
+    <test module="fw-input" class="org.ghyura.cf.input.JsonWorkbookReaderTest" method="anAbsentCellIsNotACellAndGapsKeepTheirColumns"/>
+    <test module="fw-input" class="org.ghyura.cf.input.JsonWorkbookReaderTest" method="numbersBooleansAndStringsGetTheTextTheLegacyTreeModelGave"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ScenarioParityTest" method="theBuilderTheHandWrittenJsonAndEveryFormatGiveTheSameScenario"/>
+    <test module="fw-input" class="org.ghyura.cf.input.WorkbookWritersTest" method="formatsAreChosenByExtensionWithoutALegacyFallbackToXlsx"/>
+  </feature>
+  <feature id="CORE:CR-INPUT-02" status="implemented">
+    <summary>Control sheets (FW_Seq, FW_Info, FW_SheetNames, FW_CUSTOM_VAR, FW_RunMeFirstOnce, FW_Arguments) are interpreted case-sensitively; data sheets get sheet keys; FW_File reads text through the scenario directory and FW_EMPTY_STRING is an empty value with a key.</summary>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/ScenarioInterpreter.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/FileResolver.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.SessionTest" method="referencedFilesAreAdmittedForSavedAndEditedScenarios"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ScenarioInterpreterTest" method="controlSheetNamesAreCaseSensitiveSoFwUnderscoreSeqInLowerCaseIsADataSheet"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ScenarioInterpreterTest" method="fileDirectiveReadsThroughTheResolverAndTheValueIsAFileValue"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ScenarioInterpreterTest" method="emptyStringDirectiveIsAnEmptyValueAndTrailingTextIsAWarning"/>
+    <test module="fw-input" class="org.ghyura.cf.input.LegacyWorkbookCorpusTest" method="everyRealWorkbookHasTheSixLegacyControlSheetsAndNothingElseControlLike"/>
+  </feature>
+  <feature id="CORE:CR-PLAN-01" status="implemented">
+    <summary>FW_Exclude, FW_Heading, FW_Optional, FW_LastInQueue and FW_Concatenator flags, row-accumulation rules and the legacy promotion of a single bracketed verb, checked against every real workbook.</summary>
+    <source path="fw-plan/src/main/java/org/ghyura/cf/plan/SeqPlanner.java"/>
+    <source path="fw-plan/src/main/java/org/ghyura/cf/plan/DirectiveParser.java"/>
+    <test module="fw-plan" class="org.ghyura.cf.plan.SeqPlannerTest" method="aFlagMovesASheetOnlyWhileItIsMandatoryAndTheFirstMoveWins"/>
+    <test module="fw-plan" class="org.ghyura.cf.plan.SeqPlannerTest" method="aSingleCombinationVerbIsRepeatedAtTheEndOfTheRowByTheLegacyRuleOfTheCellText"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="thePromotionCountsOnlyBracketedVerbsAndAppendsTheLoneOne"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.CorpusPlanTest" method="everyRealWorkbookPlansWithoutErrorAndEveryFactAgreesWithTheDirectSurvey"/>
+  </feature>
+  <feature id="CORE:CR-GEN-01" status="implemented">
+    <summary>Combinations with and without repetition, permutations (distinct and identical duplicates), repeated permutations, Cartesian products (and _first) and every subset mode, in both legacy library orders, with exact BigInteger counts.</summary>
+    <source path="fw-algebra/src/main/java/org/ghyura/cf/algebra/Operators.java"/>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/SheetStages.java"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.ExhaustiveOracleTest" method="combinationsWithoutRepetitionMatchTheOracleForEveryNAndK"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.ExhaustiveOracleTest" method="subsetsAndCartesianProductsMatchTheirOracles"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.LegacyOrderTest" method="everyOperatorEmitsExactlyTheLegacyLibrarysTuplesInItsOrder"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="subsetsModesInTheFirstPassButEverySubsetIncludingTheEmptyOneLater"/>
+  </feature>
+  <feature id="CORE:CR-GEN-02" status="implemented">
+    <summary>FW_Group sorts grouped units by signed labels then length and combines whole rows; FW_ReplaceRE rewrites the legacy numeric code text; replacement policies report or refuse no-op, unmatched and unparseable cases.</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/SheetStages.java"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="groupedUnitsAreSortedByLabelsThenLengthAndCombinedWithCombinatoricslib3WhateverTheLibrary"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="aGroupedPassRewritesTheLegacyTextAndReadsTheLabelsBack"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.ReplacePolicyTest" method="theDefaultsAreTheHistoricalBehaviour"/>
+  </feature>
+  <feature id="CORE:CR-JOIN-01" status="implemented">
+    <summary>Nine-field brace joiners with 1:1, 1:N, M:1, M:M and M:N, nested placeholders reading the most recent joiner, operand consumption and reuse, computed lazily.</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/JoinedRows.java"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="everyMultiplicityBuildsTheArchitectsExampleRows"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="nestedPlaceholdersReadTheMostRecentJoinerAndTheGroupedOneFlattensItsRows"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.BoundedGenerationTest" method="joinedRowsAreComputedAndAgreeWithTheirCursor"/>
+  </feature>
+  <feature id="CORE:CR-FINAL-01" status="implemented">
+    <summary>The first row of each mandatory sheet is the baseline, deltas inherit it, a present-empty baseline stays present; the lazy assembly agrees with a list model of the legacy assembler. Limits cut a deterministic rank-ordered prefix, not an interleaving-dependent one (delta).</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/Assembly.java"/>
+    <source path="fw-model/src/main/java/org/ghyura/cf/model/key/LegacyKeyImport.java"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyTest" method="aBaselineRowThatIsEmptyIsAPresentEmptyRowNotAnInventedFirstValue"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyModelTest" method="theLazyAssemblyAgreesWithAListModelOfTheLegacyAssembler"/>
+    <test module="fw-model" class="org.ghyura.cf.model.key.LegacyKeyImportTest" method="aNullColumnMeansBaselineForMandatoryDeltasAndAbsenceForOptionals"/>
+  </feature>
+  <feature id="CORE:CR-FINAL-02" status="implemented">
+    <summary>Optional subset sizes over the optional sheets with absent and present-empty branches; deferred legacy bonds filter candidates as the reader filter did.</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/OptionalSpace.java"/>
+    <source path="fw-constraints/src/main/java/org/ghyura/cf/constraints/RuleEngine.java"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyTest" method="twoOptionalSheetsOfTwoAndThreeRowsGiveFiveAndSixOptionalRowsSo66BearingCandidatesPlusSixAbsent"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyTest" method="sizesNotProducedAreRefusedAndSizesAboveTheOptionalSheetsAreReported"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LegacyConstraintGoldenTest" method="legacyBondsFilterCandidatesAsTheReaderFilterDid"/>
+  </feature>
+  <feature id="CORE:CR-RENDER-01" status="implemented">
+    <summary>Rendering in plan order with sheet prefixes, endings and concatenators; the reader refiner keeps quoted text; the code refiner closes an unclosed quote as the legacy code did.</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/CandidateRenderer.java"/>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/ReaderRefiner.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/CodeRefiner.java"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyTest" method="renderingFollowsTheReaderAndFwConcatenatorJoinsTheValuesOfARow"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyTest" method="theReaderRefinerKeepsQuotedTextAndAppliesAffixRulesOutsideQuotes"/>
+    <test module="fw-input" class="org.ghyura.cf.input.CodeRefinerTest" method="anUnclosedDoubleQuoteGetsClosedAsTheLegacyCodeDidIt"/>
+  </feature>
+  <feature id="CORE:CR-LIFECYCLE-01" status="replaced">
+    <summary>Cross-process counters, acknowledgement files and producer pools are replaced in one JVM by reservations before allocation (MemoryBudget), ordinal windows with item and byte admission, cooperative cancellation and checkpoints.</summary>
+    <source path="fw-store/src/main/java/org/ghyura/cf/store/MemoryBudget.java"/>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/ExecutionEngine.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="admissionIsBoundedByBytesAndFaultsOrExhaustionStopTheRunWithoutDeadlock"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="cancellingWhileFullOrEmptyInterruptingPausingAndSerializingNeverDeadlock"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.BoundedGenerationTest" method="cancellationStopsTheGenerationWithRunCancelledAndReleasesEveryReservation"/>
+    <test module="fw-store" class="org.ghyura.cf.store.MemoryBudgetTest" method="manyThreadsNeverHoldMoreThanTheBudgetAtOnce"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="boundedHeapWorkloadsStayWithinTheirBudgetsOrRefuseExplicitly"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ScenarioReadingBytesTest" method="textDocumentsCountTenBytesPerByteAndWorkbooksTwentyFivePerUncompressedByte"/>
+    <test module="fw-app" class="org.ghyura.cf.app.ValidateScenarioTest" method="aScenarioTooLargeToReadWithinTheBudgetIsRefusedBeforeItIsParsed"/>
+  </feature>
+  <feature id="CORE:CR-SEED-01" status="implemented">
+    <summary>Bundle seed winners become Seed_ sheets (elitism), seeds written by one run bias another; the schedule is not rewired automatically, as in the legacy strategy.</summary>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/Campaign.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/BundleSeed.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CampaignTest" method="elitismAddsTheWinnersAsSeedSheetsAndNoopRepeatsTheScenario"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CampaignTest" method="aSeedFileWrittenByOneRunBiasesTheFirstIterationOfAnother"/>
+  </feature>
+  <feature id="GEN:authoring" status="implemented">
+    <summary>Scenarios import from XLSX, JSON, YAML and TOML and the Java builder into one model, write back to every format, and are edited in the desktop; fwgen spec documents (TOML and JSON: slots, aliases, option expansion, parameter metadata, constraints, orders, goals, custom verdicts and coverage choices in one file) compile exactly as fwgen compiled them, its dependency gate included, and their goals and coverage choices become settings below every explicit one (D57).</summary>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/SpecReader.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/TomlReader.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/TextWorkbookWriters.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/ScenarioDocument.java"/>
+    <test module="fw-input" class="org.ghyura.cf.input.SpecReaderTest" method="specsCompileExactlyAsTheLegacyCompilerCompiledThem"/>
+    <test module="fw-input" class="org.ghyura.cf.input.SpecReaderTest" method="tomlDocumentsAreReadAsPythonsTomllibReadsThem"/>
+    <test module="fw-input" class="org.ghyura.cf.input.SpecReaderTest" method="aSpecIsAScenarioWithItsOwnConstraintsAndChoosesSettingsBelowExplicitOnes"/>
+    <test module="fw-app" class="org.ghyura.cf.app.ValidateScenarioTest" method="anFwgenSpecIsValidatedPlannedAndAssembledWithItsChoicesBelowExplicitSettings"/>
+    <test module="fw-input" class="org.ghyura.cf.input.WorkbookWritersTest" method="everyFormatRoundTripsATrickyModelToTheSameLogicalContent"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.ScenarioDocumentTest" method="everyFormatRoundTripsTheCanonicalWorkbookAndUnsavedValidationEqualsTheSavedFile"/>
+  </feature>
+  <feature id="GEN:workbook-controls" status="implemented">
+    <summary>FW_Seq, FW_SheetNames prefixes and endings, FW_RunMeFirstOnce, FW_Arguments, FW_CUSTOM_VAR and inert FW_Info; FW_EMPTY_STRING.</summary>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/ScenarioInterpreter.java"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ScenarioInterpreterTest" method="customVarAndExitCodeCellsAreOrdinaryValuesNotDirectives"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="runMeFirstOnceProvidesTheArgumentsAndItsFailureStopsTheRun"/>
+  </feature>
+  <feature id="GEN:combinatorial-dsl" status="implemented">
+    <summary>The directive grammar (Combi, CombiR, Permut, PermutR, Subsets with their modes, Cartes and _first, Separator, Group with ReplaceRE, braces and nested operands) parses every directive of the real corpus.</summary>
+    <source path="fw-plan/src/main/java/org/ghyura/cf/plan/DirectiveParser.java"/>
+    <test module="fw-plan" class="org.ghyura.cf.plan.DirectiveParserTest" method="aSubsetModeIsCaseInsensitiveAndTakesTheSizesItNeeds"/>
+    <test module="fw-plan" class="org.ghyura.cf.plan.DirectiveParserTest" method="aJoinerHasNineFieldsOfWhichSixAreSheetNamesAndTwoAreTheTablesToJoin"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.CorpusPlanTest" method="everyDirectiveCellOfTheRealWorkbooksParsesToTheFamilyTheSurveyNamedIt"/>
+  </feature>
+  <feature id="GEN:higher-order-dataflow" status="implemented">
+    <summary>Braces join prior generated result sequences with the five multiplicities and nested operands; the FW_Seq dependency graph (slot, passive and brace nodes; cartes, separator, operand, nested operand, reference and produces edges; missing operands, cycles, consumed-result ambiguity and unused excluded sheets) with the legacy canonical JSON, DOT and hash (D71).</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/JoinedRows.java"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="aJoinerReadsTheFinalTableOfItsOperandEvenWhenItIsEmpty"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.StageSemanticsTest" method="aJoinerConsumesItsOperandsUnlessTheyAreReused"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/SeqGraph.java"/>
+    <test module="fw-input" class="org.ghyura.cf.input.SeqGraphTest" method="everyGraphIsTheLegacyGraphExactly"/>
+    <test module="fw-app" class="org.ghyura.cf.app.PlanCommandTest" method="theDependencyGraphIsReportedAndWrittenAsDotOrJson"/>
+  </feature>
+  <feature id="GEN:cardinality-resource-planning" status="implemented">
+    <summary>Exact table sizes (BigInteger, without building tables) with each table's formula and optional rows by length from the operators' parameters (counted while a table is stored; oversized subset histograms omitted with an explicit reason), first rows, key census and RESOURCE_LIMIT for stored tables; the candidate, admitted, sample, verdict, measurement and attempt counts with fwgen's confidence classes (EXACT, BOUNDED, ESTIMATED, UNKNOWN), formulas, reasons and assumptions, an unknown count never becoming zero; the S/B/L/X run class and duration (estimated from deadlines and effective parallelism with explicit exclusions, not a wall-clock bound), result and source estimates, kept apart from the exactly reported reserved memory. Source sampling does not search for survivors beyond --scan (D59).</summary>
+    <source path="fw-app/src/main/java/org/ghyura/cf/app/PlanReport.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/PlanEstimates.java"/>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/Cardinality.java"/>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/ExpandedRows.java"/>
+    <source path="fw-algebra/src/main/java/org/ghyura/cf/algebra/RankedTuples.java"/>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/PrefixCounts.java"/>
+    <test module="fw-app" class="org.ghyura.cf.app.PlanCommandTest" method="planPrintsEveryTableWithItsExactSizeAndFirstRowsInTheConfiguredOrder"/>
+    <test module="fw-app" class="org.ghyura.cf.app.PlanCommandTest" method="aStoredTableThatDoesNotFitTheBudgetEndsWithResourceLimit"/>
+    <test module="fw-app" class="org.ghyura.cf.app.PlanCommandTest" method="everyCountCarriesHowSureItIsWithItsFormulaAndRowLengths"/>
+    <test module="fw-app" class="org.ghyura.cf.app.PlanCommandTest" method="aCountThePlanCannotKnowStaysUnknownAndNeverBecomesZero"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.CardinalityTest" method="confidenceSurvivesScalingCapsAndEarlierEnds"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.ReferenceModelTest" method="theLazyGenerationAgreesWithTheListModelOnGeneratedScenarios"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.ExhaustiveOracleTest" method="subsetsAndCartesianProductsMatchTheirOracles"/>
+  </feature>
+  <feature id="GEN:coverage-reduction" status="implemented">
+    <summary>Exhaustive by default; greedy t-wise and the second greedy set cover, never claimed minimal; budgeted strength; infeasible tuples are not counted as uncovered.</summary>
+    <source path="fw-constraints/src/main/java/org/ghyura/cf/constraints/Coverage.java"/>
+    <test module="fw-constraints" class="org.ghyura.cf.constraints.CoverageTest" method="tuplesNoAllowedRowContainsAreInfeasibleNotUncovered"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LegacyConstraintGoldenTest" method="coverageSelectionsAreTheLegacyReducersAndCoverEveryFeasibleTuple"/>
+  </feature>
+  <feature id="GEN:optional-composition" status="implemented">
+    <summary>One optional contract: produced and consumed sizes, consumed a subset of produced, complete mode.</summary>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/OptionalSpace.java"/>
+    <test module="fw-config" class="org.ghyura.cf.config.AssemblySettingsTest" method="optionalSizeListsAreTheTwoSidesOfTheOptionalContract"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.AssemblyTest" method="anOptionalSheetWithoutRowsGivesOnlyItsAbsentBranchAndAPresentEmptyRowStaysPresent"/>
+  </feature>
+  <feature id="GEN:constraints" status="implemented">
+    <summary>Sidecar constraints (n-ary sets, predicates with Python semantics, require and forbid, positional gates, absence-sensitive rules) against the legacy sieve and CPython; legacy bonds.</summary>
+    <source path="fw-constraints/src/main/java/org/ghyura/cf/constraints/RuleEngine.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/ConstraintSidecarReader.java"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LegacyConstraintGoldenTest" method="theRuleEngineAgreesWithTheLegacySieveOnEveryGoldenRow"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LegacyConstraintGoldenTest" method="predicatesEvaluateAsCPythonEvaluatedThem"/>
+    <test module="fw-constraints" class="org.ghyura.cf.constraints.RuleEngineTest" method="absenceSensitiveRulesOnOptionalSheetsAreEvaluatedWhereTheLegacyReaderFailedClosed"/>
+  </feature>
+  <feature id="GEN:baseline-code-storage" status="implemented">
+    <summary>Mandatory deltas inherit the baseline, optional empty columns mean absence, global value labels from S+1 with the legacy window.</summary>
+    <source path="fw-store/src/main/java/org/ghyura/cf/store/KeyDictionary.java"/>
+    <test module="fw-store" class="org.ghyura.cf.store.KeyDictionaryTest" method="valuesAreLabelledFromSPlusOneInSheetOrderAcrossSheetsAndRepeatsKeepTheirOwnLabel"/>
+    <test module="fw-generation" class="org.ghyura.cf.generation.LegacyWindowTest" method="negativeLabelsFlowThroughGroupingReplacementRenderingAndIdentity"/>
+  </feature>
+  <feature id="GEN:orchestration-lifecycle" status="replaced">
+    <summary>Stages run in one JVM under a run handle with a unique run id, one terminal state after draining, pause and resume at barriers, and checkpoints instead of run directories and manifests.</summary>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/RunHandle.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="environmentsAndNestedRepeatsComeFromTheConfigurationAndTheLifecycleEndsOnceAfterDraining"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="cancellingStopsAdmissionAndRunningSamplesAndPausingHoldsAdmission"/>
+  </feature>
+  <feature id="GEN:reconciliation" status="implemented">
+    <summary>Every run report carries one reconciliation of its stage invariants (the legacy invariants.py over the run's own totals): generated = excluded + unselected + executable, admission within the executable count and complete for a completed run, one final observation per admitted sample, outcomes, measurement outcomes and verdict codes adding up, attempts covering retries, every commit delivered once (restored attempts counted apart), the analysis reading every final observation; notices for broken, timed-out and infrastructure failures, abandoned threads, listener losses and values no admitted candidate held (axis coverage and fully excluded values). A failed consistency check is RUN_RECONCILIATION_FAILED and fails the command. Seed lineage travels in memory with content digests and the seed bias keeps an exploration floor, so the legacy seed-file and degenerate-bias checks hold by construction.</summary>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/Reconciliation.java"/>
+    <source path="fw-generation/src/main/java/org/ghyura/cf/generation/AssemblyCounts.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.ReconciliationTest" method="consistentTotalsHoldAndOnlyTheNoticesSpeak"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.ReconciliationTest" method="everyBrokenSumIsNamedByItsOwnCheck"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="aGeneratedJavaScenarioRunsWithItsArgumentsAndNamesTheCarrierOfAFailure"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CheckpointResumeTest" method="pausedCheckpointedCancelledAndResumedEqualsAnUninterruptedRun"/>
+    <test module="fw-app" class="org.ghyura.cf.app.RunCommandTest" method="aCompletedRunExitsZeroWithItsDomainFailuresReported"/>
+    <test module="fw-app" class="org.ghyura.cf.app.CandidatesCommandTest" method="theCompanionSidecarIsReadAndTheTutorCountsAreReportedApart"/>
+    <test module="fw-results" class="org.ghyura.cf.results.ResultRepositoryTest" method="aggregateTotalsMatchFullRetentionAcrossRetriesWhileMemoryStaysBounded"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.SeedBiasTest" method="degenerateAndExhaustedPlansFollowTheLegacyPlan"/>
+  </feature>
+  <feature id="GEN:repeats-scheduling" status="implemented">
+    <summary>Candidate, assignment, verdict and measurement counts per repeat scope and environment policy; K=1 normalizes every topology.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/ExecutionEngine.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="underTheMetricsScopeRepeatZeroIsTheVerdictAndTheOtherRepeatsMeasurementsSkippedWithoutAVerdict"/>
+  </feature>
+  <feature id="GEN:adaptive-seed-loop" status="implemented">
+    <summary>Seed winners bias the next iteration by support, adjacency and exploration floors exactly as the legacy plan; campaigns run bias, elitism and noop with lineage.</summary>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/SeedBias.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.SeedBiasTest" method="floorFillAndTheRelevanceFallbackFollowTheLegacyPlan"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CampaignTest" method="aBiasCampaignDerivesEachIterationFromTheBaseAndThePreviousSeedWithItsLineage"/>
+  </feature>
+  <feature id="GEN:configuration-capability-registry" status="implemented">
+    <summary>Command line over environment over file over defaults with every origin, secrets never shown, legacy settings classified; one capability registry with evidence, including installed addons.</summary>
+    <source path="fw-config/src/main/java/org/ghyura/cf/config/ConfigResolver.java"/>
+    <source path="fw-config/src/main/java/org/ghyura/cf/config/CapabilityCatalog.java"/>
+    <test module="fw-config" class="org.ghyura.cf.config.ConfigResolverTest" method="thePrecedenceIsFrozenAndEveryReplacedValueIsReportedWithBothOrigins"/>
+    <test module="fw-config" class="org.ghyura.cf.config.LegacyImporterTest" method="noSecretValueAppearsAnywhereInTheImport"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="anInstalledAddonStatesItsCapabilitiesAndPluginsOnlyWhileInstalled"/>
+  </feature>
+  <feature id="GEN:gateway" status="incompatible">
+    <summary>HTTP and gRPC gateways are excluded by the single-JVM, no-network architecture; the in-process embedding facade gives concurrent isolated sessions instead.</summary>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/Session.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.SessionTest" method="twoSessionsWithTheirOwnPoliciesAndSeedsRunConcurrentlyWithoutSeeingEachOther"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="syscallObservationShowsNoSubprocessAndNoNetworkUse"/>
+    <open>No network server is offered by design.</open>
+  </feature>
+  <feature id="GEN:operator-authoring-ui" status="implemented">
+    <summary>Workbook editing (sheets, cells, rows) with unsaved validation, plan table, run control and results in the desktop; the legacy face1 cell-template palette (all 55 templates: row roles, choose, order and subset modes, Cartesian and separator forms, every brace multiplicity with full, nested and grouped operands, FW_Group, its cleanup cell and FW_ReplaceRE lines that join their FW_Group cell), each accepted by the planner in its context; operand dependencies predicted from the plan on every validation (each joiner's operands as written and resolved, their lifetimes under FW_Reuse and FW_ReuseTableOnly, helper sheets, and a GEN_OPERAND_CONSUMED warning when a joiner would read an operand an earlier joiner consumed, as the generation reports it); the constraint editor: the companion sidecar as the legacy editor's bonds and back (sidecar_to_bonds, bonds_to_sidecar, find_contradictions and the sieve's plain-language describe, exact against the unchanged legacy editor), a bond matrix of forbidden or required pairs between two sheets under a gate (any, adjacent, within n), rules in words, the JSON, the unsaved sidecar's impact through the shared session's preview, and saving beside the scenario, refused while bonds contradict; the runtime control sheets (FW_RunMeFirstOnce, FW_Arguments, FW_CUSTOM_VAR) edited apart from the grid with the legacy FW_EMPTY_STRING marker and face1's checks (Java integer codes, duplicate codes such as 02 for 2, the bootstrap class shape); the FW_Seq dependency graph of every validation drawn from left to right (operands, braces, the sheets they produce) with its issues, copied or saved as DOT or JSON (D71); the constraint graph of the legacy editor's canvas (a column of values per sheet, pairs as threads, n-ary tuples and many-to-many sets as hubs, gated bonds dashed, contradicting bonds thick) and each rule's parts as a tree (gate, when-predicate, the all/any/not nesting of a condition or assert in the legacy phrases, mapping, sets, pairs); the verified-scenario library of the legacy Face 1 (intake/scenario_library.py exactly: suites, entries and their documented counts), a scenario opened in the Scenario tab and its plan's candidate count checked against the documented one, naming the known reasons a legacy figure differs (D16, D72); the rule editor (D73): a selected rule's polarity, gate and "only when" condition, a when rule's sheets and formula as text or as the legacy nested blocks (compare, and/or, not, + - x, sheet.param, number in typed slots, put from a palette or a right-click menu, moved into an empty slot of their type, compiled as the page's compileT; a typed formula opens as blocks when every part has one), an assert rule's tree, condition and assert trees edited as blocks at any depth, new formula and assert rules (the legacy formula and relation dialogs) and removal, the legacy params table (its parse, display and cleanParams), all exact against the page's own JavaScript; every draft read as a run reads the sidecar while it is edited, and Apply refused for a draft that adds a problem. A companion with an invalid formula can be opened and repaired through the existing editor; the base scenario, file structure, ownership and reading-budget checks still apply. Mapping entries and all supported sidecar fields can be edited through Edit JSON, admitted and strictly validated before Apply; failed drafts preserve the last valid model and Save remains explicit. The library's release-gate ladder is made by an application the port does not carry (author scope 2026-10-11): it is listed with its documented ladder and cannot be opened (0108). Named-sheet rules keep their tree representation on the legacy-style canvas.</summary>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/AuthoringView.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/CellTemplates.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/OperandDependencies.java"/>
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/ConstraintBonds.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/ConstraintEditing.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/ConstraintsView.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/ControlSheets.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="aScenarioAuthoredInTheEditorIsValidatedUnsavedSavedPlannedAndRun"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="thePaletteFillsCellsAndValidationShowsWhichOperandAJoinerFindsEmpty"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.AuthoringModelsTest" method="thePaletteIsTheLegacyOneAndThePlannerAcceptsEveryTemplate"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.AuthoringModelsTest" method="operandLifetimesArePredictedAsTheGenerationReadsThem"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ConstraintBondsTest" method="readingWritingAndContradictionsMatchTheLegacyEditor"/>
+    <test module="fw-input" class="org.ghyura.cf.input.ConstraintBondsTest" method="aWrittenSidecarIsWhatTheReaderAcceptsAndPrettyJsonRoundTrips"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.ConstraintEditingTest" method="pairsAreDrawnBetweenTwoSheetsCheckedBeforeSavingAndSavedBesideTheScenario"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theConstraintsTabDrawsPairsChecksTheirImpactAndSavesTheSidecar"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.AuthoringModelsTest" method="controlSheetsRoundTripWithTheirMarkersAndTheChecksOfTheLegacyEditor"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/GraphView.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.GraphViewTest" method="dependenciesStandLeftOfWhatIsComputedFromThemAndNothingOverlaps"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.GraphViewTest" method="cyclesAndUndeclaredOperandsAreDrawnAndMarked"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/ScenarioLibrary.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/LibraryView.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.ScenarioLibraryTest" method="everyTreeIsCatalogedAsTheLegacyLibraryCatalogedIt"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theLibraryTabListsSuitesOpensAScenarioAndChecksItsDocumentedCount"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/ConstraintGraphView.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/ConditionTree.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.ConstraintGraphViewTest" method="pairsAreThreadsTuplesAndSetsAreHubsAndConditionalRulesAreLeftToTheList"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.ConstraintGraphViewTest" method="aRuleShowsItsGateWhenNestingMappingSetsAndPairsAsATree"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/FormulaBlocks.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/ConditionBlocks.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/JsText.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/FormulaEditor.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/ConditionEditor.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/RuleEditor.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.FormulaBlocksTest" method="theBlocksCompileDropAndMoveAsTheLegacyPageDid"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.FormulaBlocksTest" method="aCompiledFormulaOpensAsTheSameBlocksAndTextsWithoutABlockStayText"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.FormulaBlocksTest" method="conditionTreesNestAtAnyDepthAndStayTreesTheSieveReads"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.ConstraintEditingTest" method="rulesAreEditedAsWrittenWithNestedConditionsAndCheckedAsARunReadsThem"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theRuleEditorBuildsFormulasAsBlocksNestsConditionsAndChecksTheirImpact"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="anInvalidCompanionCanBeOpenedRepairedAndSavedWithoutRunningIt"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.SessionTest" method="constraintRepairKeepsFileFormatAndCompanionOwnershipChecks"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="mappingEntriesCanBeEditedAsValidatedJsonWithoutLosingTheLastGoodDraft" />
+  </feature>
+  <feature id="GEN:source-decomposition" status="implemented">
+    <summary>decompose: byte-preserving pieces of a source and the legacy code_decompose.py fwgen spec (one raw slot per piece, interaction notes from shared names); Java split at the members the JDK's parser finds (text blocks and annotation braces split correctly), the legacy scanner exactly as java-heuristic, the legacy blank-line split as generic, and Python at its top-level statements as the legacy ast decomposition did, read by a Java parser of the CPython 3.14 grammar (all 825 Python files of the reference trees decompose identically, PySurvey), all exact against the unchanged legacy tool; oversize pieces split at line ends; every value reads back to its piece, so decompose, read, plan and render give the source back byte for byte, CR LF included (D62).</summary>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/SourceDecomposition.java"/>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/PythonSyntax.java"/>
+    <source path="fw-app/src/main/java/org/ghyura/cf/app/DecomposeCommand.java"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.SourceDecompositionTest" method="theLegacyHeuristicAndTheBlankLineSplitAreTheLegacyToolsExactly"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.SourceDecompositionTest" method="theSyntaxAwareSplitAgreesWhereTheHeuristicIsRightAndMendsWhereItIsNot"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.SourceDecompositionTest" method="piecesWithEdgesTheLegacyValuesLostStillReadBack"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.SourceDecompositionTest" method="autoChoosesPythonJavaOrBlankLinesAsTheLegacyToolDid"/>
+    <test module="fw-app" class="org.ghyura.cf.app.DecomposeCommandTest" method="theSpecReadsBackAndItsFirstCandidateIsTheSourceExactly"/>
+    <test module="fw-app" class="org.ghyura.cf.app.DecomposeCommandTest" method="pythonSourcesSplitAsTheLegacyToolAndTheLegacyScannerRefusesTextBlocks"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.SourceDecompositionTest" method="thePythonDecompositionIsTheLegacyToolsExactly"/>
+  </feature>
+  <feature id="GEN:reference-applications" status="partial">
+    <summary>Bounded deterministic ports of the tutor (exact), pricing, secure pipeline, billing, fulfilment, telemetry catalog and tester pub reference applications, as an installable addon. D7 reduction trees, D2 stream boundaries, D8 ties/pagination, D11 coalition values, D4 configuration rules and D8b dependency DAGs run their unchanged original scenarios through typed Java SUTs and independent original predictions. D11 exact allocation consumes observed values using the shared run service and existing permutations.</summary>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/business/BusinessPlugins.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/catalogpub/CatalogPubPlugins.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.business.BusinessSutTest" method="pricingMatchesPythonAcrossOrdersRegionsCouponsAndIdempotency"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.catalogpub.CatalogPubTest" method="pubOracleDefectsStrictModeAndStatefulTranscriptsMatchOriginal"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.TutorRunTest" method="theTypedPluginAndTheGeneratedJavaGiveTheLessonAndAgreeOnEveryCandidate"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ReductionTrees.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ReductionTreePlugin.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ReductionTreesTest" method="everyOriginalTreeVectorAndPolicyMatchesTheIndependentExactPrediction"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ReductionTreeRunTest" method="theUnchangedOriginalScenarioRunsAll168CasesWithIdenticalSerialAndParallelObservations"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theCompleteReductionTreeDemoRunsFromThePackagedAddonWithoutPython"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/StreamBoundaries.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/StreamBoundaryPlugin.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.StreamBoundariesTest" method="all480OriginalCodecOutcomesChunksAndFailureClassesMatchIndependentPredictions"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.StreamBoundaryRunTest" method="theUnchangedOriginalScenarioFilters672CutsAndRuns480CasesIdenticallyInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theCompleteStreamBoundaryDemoRunsFromThePackagedAddonWithoutPython"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/TiesPagination.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/CoalitionValues.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/CoalitionAllocation.java"/>
+    <source path="tools/CoalitionAllocationReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.TiesPaginationTest" method="all450OriginalPageTracesAndOutcomesMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.TiesPaginationTest" method="all150ReversedTieAlternativesRetainPrimaryOrderAndRejectExactly102UnstableOnes"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.CoalitionValuesTest" method="all64OriginalCoalitionsIncludingEmptyAndNullPlayerMatchBothIndependentValueRoutes"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.CoalitionValuesTest" method="all192WeightedMarginals720PermutationCertificatesAnd64DividendsMatchIndependentPredictions"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PaginationCoalitionRunTest" method="theOriginalPaginationScenarioRuns450CasesWithIdenticalSerialAndParallelTraces"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PaginationCoalitionRunTest" method="all64OriginalCoalitionIdentitiesFeedExactAllocationFromObservedSerialAndParallelValues"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theCompletePaginationDemoPreservesBothDefectsInThePackagedAddon"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theCoalitionDemoAndObservedAllocationRunWithoutPythonFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ConfigurationRules.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ConfigurationRulesPlugin.java"/>
+    <source path="tools/ConfigurationRulesReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ConfigurationRulesTest" method="everyOriginalMainAndControlCaseMatchesIndependentAcceptanceHeadersPayloadAndFailureClasses"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ConfigurationRulesTest" method="thePolicyBlindOracleSeparatesAcceptanceViolationIdsAndAllEnvelopeFailures"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ConfigurationRulesRunTest" method="bothOriginalScenariosHaveIdenticalSerialParallelObservationsAndExactFaultDistributions"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ConfigurationRulesRunTest" method="theRealRuleEnginePreservesAllMandatoryTruthCountsAndDefersOnlyR6"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ConfigurationRulesRunTest" method="existingSetCoverSelectsTheOriginalNineRowsAndObservedVerdictsProveWrongSieveMasking"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="bothConfigurationRuleScenariosAndTheirObservedPairwiseProofRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/DependencyDags.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/DependencyDagsPlugin.java"/>
+    <source path="tools/DependencyDagsReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.DependencyDagsTest" method="all768CasesMatchEveryIndependentCacheTraceAndRecursiveReferenceField"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.DependencyDagsTest" method="completeOrderSetsAndAll31RedundantEdgeCertificatesMatchIndependentPredictions"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.DependencyDagsRunTest" method="theUnchangedOriginalScenarioRunsAll768CasesWithExactIndependentSerialParallelTraces"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.DependencyDagsRunTest" method="theExistingAlgebraPermutationsFeedCompleteTopologyCertificatesForEveryOriginalGraph"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theOriginalDependencyDagScenarioAndCompleteTopologyProofRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/RobustPortfolios.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/RobustPortfolioPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/PortfolioRanking.java"/>
+    <source path="tools/RobustPortfolioReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.RobustPortfoliosTest" method="all1024CostsAndIndependentReferencesMatchEveryFrozenField"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.RobustPortfoliosTest" method="allRankingsMeansWeightsTiesAndJointSensitivityMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.RobustPortfoliosTest" method="invalidSetupAndIncompleteSupportAreRefusedAndChangedObservedCostsAreUsed"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RobustPortfoliosRunTest" method="unchangedOriginalScenarioProducesAll1024IndependentCostsInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RobustPortfoliosRunTest" method="completeRankingsAndSensitivityConsumeActualSharedRunObservations"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalRobustPortfoliosAndFullObservedRankingsRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/CyclicPatterns.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/CyclicPatternPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/CyclicAnalysis.java"/>
+    <source path="tools/CyclicPatternReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.CyclicPatternsTest" method="all729DirectedRingScoresAndIndependentRotationReferencesMatchEveryFrozenField"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.CyclicPatternsTest" method="allOrbitsBurnsideReflectionPopulationsRankingAndMassesMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.CyclicPatternsTest" method="malformedSetupAndBadSupportAreRefusedAndChangedObservedCostsAndCrossMismatchesAreRetained"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.CyclicPatternsRunTest" method="bothUnchangedOriginalScenariosMatchAllIndependentFieldsInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.CyclicPatternsRunTest" method="fullObservedPopulationAnalysisCrossChecksBothSharedRuns"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="bothOriginalCyclicScenariosAndFullObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/DiagnosticSensors.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/DiagnosticSensorPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SensorDiagnosis.java"/>
+    <source path="tools/DiagnosticSensorReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.DiagnosticSensorsTest" method="all3072ProbeReadingsLatentBitsAndLiteralReferencesMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.DiagnosticSensorsTest" method="everyClassSuiteDistanceMinimumCostTieAdaptiveBeliefPathAndNoiseControlMatchesPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.DiagnosticSensorsTest" method="malformedSetupAndBadSupportAreRefusedAndConsistentlyChangedObservedReadingsChangeDiagnosis"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.DiagnosticSensorsRunTest" method="unchangedOriginalScenarioRunsAll3072CasesWithEveryIndependentFieldInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.DiagnosticSensorsRunTest" method="fullDiagnosisUsesActualSharedRunReadingsIncludingAllTiesBeliefsAndDecodingControls"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalDiagnosticSensorsAndCompleteObservedDiagnosisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ToolCallOrder.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ToolCallOrderOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ToolCallOrderPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ToolCallAnalysis.java"/>
+    <source path="tools/ToolCallOrderReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ToolCallOrderTest" method="all480OriginalEventsSnapshotsDecisionsEffectsAndIndependentReferencesMatchFrozenPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ToolCallOrderTest" method="everyObservedAxisViolationCountRequestEffectAttemptAndFiveWitnessTimelineMatchesPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ToolCallOrderTest" method="partialReadRevocationDuplicatesDenyAllPrefixRulesSetupAndObservedSupportAreHandledWithoutFallback"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ToolCallOrderRunTest" method="unchangedOriginalScenarioProducesAll480IndependentTracesInSerialAndParallelIncludingAbsentRevocation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ToolCallOrderRunTest" method="completeAnalysisConsumesActualSharedRunEventsWithAllAxisCountsAndFivePrefixWitnessTimelines"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalToolCallOrderAndCompleteObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ConcurrencySchedules.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ConcurrencySchedulesOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ConcurrencySchedulesPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ConcurrencyScheduleAnalysis.java"/>
+    <source path="tools/ConcurrencySchedulesReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ConcurrencySchedulesTest" method="allThirtyOriginalObservationsMatchEveryFrozenCheckpointLocalReferenceAndVerdict"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ConcurrencySchedulesTest" method="prefixCompletionEnablednessDefectsAndMalformedSetupPreserveOriginalContracts"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ConcurrencySchedulesTest" method="fullObservedSummariesAndWitnessesMatchOriginalAndRejectIncompleteSupportWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ConcurrencySchedulesRunTest" method="bothUnchangedScenariosRetainEveryOriginalObservationInSerialAndParallelWithFullObservedAnalysis"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ConcurrencySchedulesRunTest" method="existingRuleEngineAssessesAllRawProductsWithExactBondOverlapSurvivorExclusionAndReservationCertificates"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="bothOriginalConcurrencyScenariosAndCompleteCertificatesRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SessionMemory.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SessionMemoryOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SessionMemoryPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SessionMemoryAnalysis.java"/>
+    <source path="tools/SessionMemoryReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SessionMemoryTest" method="allEightHundredOriginalObservationsMatchEveryFrozenTraceOwnerCheckLeakAndVerdict"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SessionMemoryTest" method="inputOwnedIsolationToolChannelsResetTimingUsefulRetentionAndStrictAtomsPreserveOriginalContracts"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SessionMemoryTest" method="fullObservedAnalysisMatchesOriginalAndRejectsIncompleteSupportWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SessionMemoryRunTest" method="unchangedScenarioRetainsEveryOriginalObservationInSerialAndParallelWithFullObservedAnalysis"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SessionMemoryRunTest" method="existingRuleEngineMatchesEveryOriginalRawBondTruthAndExactSurvivorOverlapCertificate"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalSessionMemoryAndCompleteObservedCertificatesRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/Idempotency.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/IdempotencyOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/IdempotencyPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/IdempotencyAnalysis.java"/>
+    <source path="tools/IdempotencyReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.IdempotencyTest" method="allOneHundredTwentyOriginalObservationsMatchEveryFrozenDeliveryLedgerSensorAndVerdict"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.IdempotencyTest" method="restartCacheLifetimesStoredReceiptIdentityFullPayloadConflictsAndPolicyBlindSensorsPreserveOriginalContracts"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.IdempotencyTest" method="allOriginalObservedTablesHistogramsAndFortyFourWitnessEntriesUseRecordedValuesWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.IdempotencyRunTest" method="unchangedScenarioRetainsEveryOriginalDeliveryLedgerAndSensorInSerialAndParallelWithFullAnalysis"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.IdempotencyRunTest" method="existingRuleEngineMatchesAllSixHundredRawBondTruthsAndExactPopulationCertificate"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalIdempotencyAndAllObservedTablesHistogramsAndWitnessesRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ComposedCarriers.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ComposedCarriersOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ComposedCarriersPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ComposedCarriersAnalysis.java"/>
+    <source path="tools/ComposedCarriersReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ComposedCarriersTest" method="allOneHundredEightOriginalTreesTracesDecodedContentActionsAndEffectsMatchEveryFrozenField"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ComposedCarriersTest" method="independentOracleRejectsLostRelabelledDecodedContentMissingTrustedWorkAndForbiddenEffectsWhileSetupIsStrict"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ComposedCarriersTest" method="allOriginalFiveAxesThirtyCrossGroupsEffectsBenignPromotionsAndFiveWitnessesUseRecordedValuesWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ComposedCarriersRunTest" method="unchangedComposedScenarioRetainsEveryOriginalTreeTraceAndEffectInSerialAndParallelWithFullAnalysis"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ComposedCarriersRunTest" method="existingGeneratorMatchesEveryDictionaryCodeWholePairRewriteAndBothBracesWithOriginalSettings"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalComposedCarriersAndCompleteConstructionAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/AgentMessageOrder.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/AgentMessageOrderOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/AgentMessageOrderPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/AgentMessageOrderAnalysis.java"/>
+    <source path="tools/AgentMessageOrderReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.AgentMessageOrderTest" method="allFiftyFourOriginalTracesPromisesPrefixChecksAndEveryFrozenFieldMatch"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.AgentMessageOrderTest" method="independentReferenceRequiresUsefulGrantIntegrityPrecedesSensorsAndMalformedSetupNeverBecomesDomainFail"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.AgentMessageOrderTest" method="allOriginalStrataDenominatorsMechanismsWitnessesAndEnablednessCertificatesUseRecordedValuesWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.AgentMessageOrderRunTest" method="unchangedScenarioProducesEveryOriginalObservationInSerialAndParallelWithCompleteRecordedAnalysis"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.AgentMessageOrderRunTest" method="existingSieveMatchesAllTwoHundredEightyEightRawBondTruthsOverlapAndSequentialSurvivors"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalAgentMessageOrderAndAllRawBondsEnablednessPromisesAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SolverRelations.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SolverRelationsOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SolverRelationsPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SolverRelationsAnalysis.java"/>
+    <source path="tools/SolverRelationsReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SolverRelationsTest" method="allOneHundredFortyFourCasesAndThreeVariantsMatchEveryFrozenFieldIncludingTiedOptimaAndBothDefects"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SolverRelationsTest" method="independentExhaustiveOracleRejectsMalformedResultsAndRequiresUsefulOptimalCorrectValueAndValidTransforms"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SolverRelationsTest" method="completeOriginalTalliesControlsAndFiveWitnessesUseRecordedValuesWithoutSolvingOrRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SolverRelationsRunTest" method="unchangedScenarioRetainsEveryOriginalVariantRelationAndOracleCertificateInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SolverRelationsRunTest" method="existingGeneratorRetainsSixWholeNativeRelabelPermutationsAndExactUnfilteredPopulation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalSolverRelationsAndAllNativePermutationsOptimaControlsAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/LanguageProcessors.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/LanguageProcessorsOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/LanguageProcessorsPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/LanguageProcessorsAnalysis.java"/>
+    <source path="tools/LanguageProcessorsReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.LanguageProcessorsTest" method="allFourHundredThirtyTwoCasesAndEveryProgramBytecodeAndVmTransitionMatchIndependentFrozenPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.LanguageProcessorsTest" method="malformedProgramsBytecodeAndReferenceSetupRefuseBeforeSensorsWhileEqualWrongNumbersFailAndDiagnosticsStayNoncausal"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.LanguageProcessorsTest" method="fullOriginalTalliesDeclarationControlsAndFiveWitnessesReadRecordedValuesWithoutRecompilingOrRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LanguageProcessorsRunTest" method="unchangedScenarioRetainsEveryOriginalProgramBytecodeVmTraceAndNumericSensorInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LanguageProcessorsRunTest" method="existingGeneratorRetainsBothWholeNativeDeclarationOrdersAndExactUnfilteredPopulation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalLanguageProcessorsAndAllProgramsBytecodesVmTracesDeclarationControlsAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ContextPosition.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ContextPositionOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ContextPositionPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/ContextPositionAnalysis.java"/>
+    <source path="tools/ContextPositionReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ContextPositionTest" method="allFiftyFourCasesEveryTrialDrawReadingAndContextStepMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ContextPositionTest" method="malformedContextsTracesTrialsAndDrawsRefuseWhileUsefulWorkAndExactPairedThresholdsSurvive"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.ContextPositionTest" method="completeRecordedCalibrationStrataWilsonPairedTablesAndWitnessesMatchWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ContextPositionRunTest" method="unchangedScenarioRetainsEveryTrialDrawContextTraceAndPairedReadingInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ContextPositionRunTest" method="existingGeneratorRetainsNineWholeOriginalContextOrdersAndExactUnfilteredPopulation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalContextPositionAndAllTrialsSharedReadingsCalibrationCoverageAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SqlPartitioning.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SqlPartitioningOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SqlPartitioningPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/SqlPartitioningAnalysis.java"/>
+    <source path="tools/SqlPartitioningReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SqlPartitioningTest" method="allSeventyTwoCasesEveryQueryRowBagSqlAndFaultyRecombinationMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SqlPartitioningTest" method="malformedRowsRefuseAndFourUsefulQueryChecksPreventVacuousOrWrongBagsEvenWhenSetsAgree"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.SqlPartitioningTest" method="completeRecordedStrataHiddenSetFailuresControlsAndFiveWitnessesMatchWithoutQueryingOrRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SqlPartitioningRunTest" method="unchangedScenarioRetainsEveryQueryRowBagAndUnionRelationInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SqlPartitioningRunTest" method="existingGeneratorRetainsFiveOriginalSheetsDictionaryAndExactUnfilteredPopulation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalSqlPartitioningAndAllQueryBagsNullableControlsAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FaultSchedules.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FaultSchedulesOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FaultSchedulesPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FaultSchedulesAnalysis.java"/>
+    <source path="tools/FaultSchedulesReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FaultSchedulesTest" method="allThreeHundredTwelveCasesEveryAttemptCheckpointJournalPayloadAndSevenChecksMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FaultSchedulesTest" method="durableJournalBeforeAckVolatilePendingLossFullDoubleReplayAndKeySortedMergePreserveOriginalControls"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FaultSchedulesTest" method="policyBlindOracleRefusesMalformedEvidenceAndRejectsUniformWrongVacuousAndTamperedPayloads"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FaultSchedulesTest" method="completeRecordedTalliesMechanismsStrataAndFiveWitnessesMatchWithoutExecutingOrRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FaultSchedulesRunTest" method="unchangedScenarioRetainsEveryAttemptCheckpointJournalAndSevenChecksInSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FaultSchedulesRunTest" method="existingGeneratorRetainsSevenSheetsNativeFailedSubsetsAndExactPartitionExclusions"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalFaultSchedulesAndAllAttemptsCheckpointsJournalsPayloadsAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowCoverage.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowCoverageOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowCoveragePlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowCoverageAnalysis.java"/>
+    <source path="tools/WorkflowCoverageReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowCoverageTest" method="allCasesMatchIndependentSnapshots"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowCoverageTest" method="durableRestartAndReadControlsPreserveEarlierFailures"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowCoverageTest" method="policyBlindChecksRejectWrongAndMalformedSnapshots"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowCoverageTest" method="recordedCoverageCertificatesMeasureWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.WorkflowCoverageRunTest" method="unchangedScenarioMatchesSerialAndParallel"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.WorkflowCoverageRunTest" method="nativePermutationAndCataloguePlanningKeepExactPopulation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalWorkflowCoverageAndAllCheckpointsCertificatesAndObservedAnalysisRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowOrder.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowOrderOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowOrderPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/WorkflowOrderAnalysis.java"/>
+    <source path="tools/WorkflowOrderReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowOrderTest" method="allCasesMatchIndependentSnapshots"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowOrderTest" method="durableLedgerRepeatedRefundAndRestartControls"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowOrderTest" method="policyBlindChecksRejectWrongAndMalformedSnapshots"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.WorkflowOrderTest" method="recordedSummariesAndWitnessesReadWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.WorkflowOrderRunTest" method="unchangedScenariosMatchSerialParallelAndAlternateChains"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.WorkflowOrderRunTest" method="nativeOptionalTailsRepeatedWordsAndAlternateMultisetsKeepExactPopulation"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalWorkflowOrderAllPhasesAndRepeatedWordsMatchIndependentSnapshotsFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FieldPipeline.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FieldPipelineOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FieldPipelinePlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/FieldPipelineAnalysis.java"/>
+    <source path="tools/FieldPipelineReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FieldPipelineTest" method="allCasesMatchIndependentRecordsAndTraces"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FieldPipelineTest" method="policyBlindExactRecordComparisonKeepsDiagnosticTraceDifferences"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.FieldPipelineTest" method="recordedAnalysisRequiresCompleteSupportWithoutRepair"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FieldPipelineRunTest" method="unchangedScenarioMatchesSerialParallelAndEveryRecord"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FieldPipelineRunTest" method="nativeGroupedCartesKeepsExcludedFieldInsideOpsAndSixTwelveTwentyFourStages"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalFieldPipelineGroupedRowsAndExactRecordVerdictsRunFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/NestedScopes.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/NestedScopesOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/NestedScopesPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/demos/NestedScopesAnalysis.java"/>
+    <source path="tools/NestedScopesReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.NestedScopesTest" method="allRecordsTreesFragmentsAndTracesMatchIndependentModels"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.NestedScopesTest" method="independentStackRestoresEnclosingFieldsAndEveryExecutionStartsFresh"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.NestedScopesTest" method="builderRejectsOutOfOrderUnclosedPoisonAndDuplicateBundleFragments"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.demos.NestedScopesTest" method="recordedSupportSummariesAndWitnessesAreReadWithoutRejudging"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.NestedScopesRunTest" method="bothOriginalCampaignsMatchEveryFieldSerialParallelAndFreshBundleMembers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.NestedScopesRunTest" method="nativeRewritesSubsetsZipCatAndGroupedNestedReferencesMatchIndependentTables"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalNestedScopesBothCampaignsAndGroupedBundleRunFromPackagedJars"/>
+    <open>Bounded ports only: on 2026-10-11 the author decided that the remaining SUT and generator_trunk applications (AI and model searches, fuzzing, API probes, automation topology, GUI applications and the pending SUT families) are not ported; their scenarios and specs are framework inputs (0105, 0107, 0108) and the inventory is verified (0109). All 22 SmallUseCasesDemo families including all D3 and D5 phases are verified; C17 is implemented only with the addon.</open>
+      <source path="fw-model/src/main/java/org/ghyura/cf/model/proposal/FrozenTask.java" />
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/proposal/TaskFreezer.java" />
+    <source path="fw-input/src/main/java/org/ghyura/cf/input/proposal/TaskSnapshot.java" />
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/proposal/LocalProposalScenarios.java" />
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/proposal/LocalPromptGuardPlugin.java" />
+    <source path="tools/LocalProposalReport.java" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalProposalProvidersTest" method="originalScenarioRolesAndCountsMatchAllFrozenProposals" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalProposalProvidersTest" method="rolePriorityContextFallbackZeroAndMissingBanksPreserveSourceSemantics" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalProposalProvidersTest" method="scriptedResponsesPreserveDuplicatesEmptyOrderImmutabilityAndContentIdentity" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalProposalProvidersTest" method="missingExhaustedMalformedAndOverBudgetScriptRefuseWithoutFallback" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalTaskSnapshotTest" method="nativeReaderReceivesFrozenValuesGoalsFlagsAndOrderedExpertDirectiveRows" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalTaskSnapshotTest" method="persistedReplayRetainsIdentityAndNeverCallsProviderAgain" />
+    <test module="fw-input" class="org.ghyura.cf.input.LocalTaskSnapshotTest" method="corruptionUnknownSchemaAndBudgetRefusalsPreserveLastGoodSnapshot" />
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LocalTaskCheckpointTest" method="pausedOriginalTaskResumesFromSavedProposalsAndRejectsChangedMetadataWithIdenticalValues" />
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalLocalProposalWorkflowsMatchAll992IndependentRecordsAndReplayWithoutProviders" />
+      <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamMock.java" />
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamOracle.java" />
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamMatrix.java" />
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamMockPlugin.java" />
+    <source path="tools/RedTeamReport.java" />
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeamMockTest" method="all288OriginalResponsesTokensLatenciesAndOracleRecordsMatchPreproductionPredictions" />
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeamMockTest" method="unknownCoordinatesAndBoundsRefuseAndUnicodeWhitespaceAndNeutralResponsesRemainExact" />
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeamRunTest" method="original288NativeAttacksKeepEveryPreregisteredRecordAndSourceIdentityAcrossWorkers" />
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeamRunTest" method="realCheckpointResumesTheSame288ObservedRecordsWithoutAnotherCoordinator" />
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeamRunTest" method="unknownOriginalFragmentsAreBrokenAndNeverInventARefusalOrBreach" />
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalRedTeamV1RunsFromPackagedJarsWithoutExternalServices" />
+      <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/LocalArithmetic.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/LocalMemory.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/LocalAssistant.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/LocalAssistantPlugin.java"/>
+    <source path="tools/LocalAssistantReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalArithmeticTest" method="all728IndependentNumericExtractionPrecedenceAndErrorCasesMatch"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalArithmeticTest" method="resourceRefusalsAndExactIntermediateRatiosAndPythonFloatModuloStayDistinct"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalMemoryTest" method="allSeedAndIngestIdsTagsTokensRankedScoresAndSnippetsMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalMemoryTest" method="snapshotsRestoreAndSourceFallbackAndFailedMutationsPreserveGoodData"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalAssistantTest" method="all13IndependentTextRequestsPreserveResponsesUsageAndEveryStreamingEnvelope"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalAssistantTest" method="originalPoisonEchoAndContextWindowAndPredictionBranchesKeepTheirBehavior"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LocalAssistantRunTest" method="all13NativeTextRequestsKeepIndependentResponsesUsageAndIdentityAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.LocalAssistantRunTest" method="unsupportedRequestNeverCreatesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="localTextAssistantRunsAll13IndependentRequestsFromPackagedJarsWithoutExternalServices"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalArithmeticTest" method="floatingPowerOverflowComplexIntermediatesAndNonfiniteExponentsMatchIndependentControls"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamRegression.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamRegressionOracle.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamRegressionPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeamRegressionAnalysis.java"/>
+    <source path="tools/RedTeamRegressionReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeamRegressionTest" method="all192OriginalUidRequestsAndCumulativeMemoryResponsesMatchIndependentPredictions"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeamRegressionTest" method="originalResponseOracleAndTimingBoundariesRemainIndependentOfAdmissionAndSetup"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeamRegressionRunTest" method="all96NativeAttacksKeep192IndependentVersionRecordsAndMeasuredRatesAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeamRegressionRunTest" method="checkpointRestoresMeasuredRowsExactlyAndCompletesAllSourceRequests"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeamRegressionRunTest" method="unsupportedOriginalFamilyIsBrokenWithoutInventingABreachOrRefusal"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalRedTeam2KeepsAll192VersionRecordsAndObservedRegressionFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/PortableForest.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/PortableForestPlugin.java"/>
+    <source path="fw-sut-fixtures/src/main/resources/org/ghyura/cf/fixtures/assistant/source-forest.json"/>
+    <source path="tools/PortableForestReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.PortableForestTest" method="all3916IndependentSourceModelPredictionsProbabilitiesAndFloat32BoundariesMatchExactly"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.PortableForestTest" method="neutralSnapshotsAndFittedDimensionBoundsRejectMalformedModelsWithoutLosingTheGoodArtifact"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PortableForestRunTest" method="all625NativeFittedModelVectorsKeepIndependentProbabilitiesAndProvenanceAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PortableForestRunTest" method="nonfiniteNativeFeatureIsBrokenAndCannotPretendToBeAnOracleClass"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="sourcePortableForestKeepsAll625PredictionsFromPackagedJarsWithoutOriginalRuntime"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/LocalContent.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/assistant/StructuredContentPlugin.java"/>
+    <source path="tools/StructuredContentReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalContentTest" method="all190IndependentContentFloatKindAndPythonContainerRenderingControlsMatch"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.assistant.LocalContentTest" method="defaultDecimalParsingStaysUnchangedAndMalformedOrExcessiveContentIsRefused"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.StructuredContentRunTest" method="all13StructuredRequestsKeepSourceResponsesUsageAndIdentityAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.StructuredContentRunTest" method="unsupportedStructuredRequestNeverCreatesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="structuredContentKeepsAll13OriginalResponsesFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceKernel.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceIdentity.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceTime.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceRisk.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinancePolicyScenario.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinancePolicyPlugin.java"/>
+    <source path="tools/FinancePolicyReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinancePolicyTest" method="all98IndependentScriptsMatch762DecisionsRestrictionsDirectoryAndAudit"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinancePolicyTest" method="identityLifecycleAndLiveTimeKeepOrderedErrorsPartialChangesAndAudit"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinancePolicyTest" method="moneyRoundingNegativeZeroCurrencyAndAdmissionAreExplicit"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinancePolicyRunTest" method="all98FinanceScriptsKeep762DecisionsRestrictionsDirectoryAndAuditAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinancePolicyRunTest" method="unsupportedFinancePolicyRequestNeverCreatesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackPolicyRuns98ScriptsAnd762FullDecisionsFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceLedger.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceLedgerScenario.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceLedgerPlugin.java"/>
+    <source path="tools/FinanceLedgerReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceLedgerTest" method="all72IndependentScriptsMatch336OperationsAccountsCardsJournalAndAudit"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceLedgerTest" method="sourceFailedMutationCurrencyExpiryAndPrivateStateAdmissionStayObservable"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceLedgerRunTest" method="all72LedgerScriptsKeep336OperationsFullStateJournalErrorsAndAuditAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceLedgerRunTest" method="unsupportedFinanceLedgerRequestNeverCreatesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackLedgerRuns72ScriptsAnd336FullOperationsFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceSettlement.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceNetwork.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceSanctionsScenario.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceNetworkPlugin.java"/>
+    <source path="tools/FinanceNetworkReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceNetworkTest" method="all268IndependentSanctionsProfilesKeepOrderedHitsAndBankListFlagEquivalence"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceNetworkTest" method="registryRoutingPositionsAndBeneficiaryFirstFailurePreserveSourceBehavior"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceNetworkRunTest" method="all268SanctionsProfilesKeepCompleteGateResultsAndIdentityAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceNetworkRunTest" method="unsupportedFinanceNetworkRequestNeverCreatesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackSanctionsRuns268CompleteGateRecordsFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceClearing.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceClearingScenario.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceClearingPlugin.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceClearingTest" method="all192IndependentScriptsKeepCompleteClearingStatesErrorsEventsAndBalances"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceClearingTest" method="retryablePeerRetainsHoldThenSettlesWhileDownPeersAndExpiryRelease"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceClearingTest" method="failedSourceLegAndSettledHookKeepCommittedMoneyAndSourceFailureLifecycle"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceClearingTest" method="routerFailuresStayInitiatedAndHoldErrorsKeepPartialSideEffectsWhileSafeReleaseSwallowsErrors"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceClearingRunTest" method="all192ClearingScriptsKeepCompleteStateErrorsEventsAndBalancesAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceClearingRunTest" method="unsupportedClearingProfileNeverCreatesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackClearingRuns192CompleteLifecycleScriptsFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceBank.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceEcosystem.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceSimulation.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceEcosystemPlugin.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceEcosystemTest" method="allThirteenPhasesRetainIndependentTransferRiskAndFinalMoneyCertificates"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceEcosystemTest" method="accountAndCurrencyPrevalidationPrecedeIdempotencyAndCachedReplacementDoesNotFallback"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceEcosystemTest" method="liveSharedTimeChangesAffectNewDeadlinesAndExistingRiskWindows"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceEcosystemTest" method="timeHooksRunBeforeEventsAndPropagationWhileInvalidUpdatesAndFailingHooksKeepPartialChanges"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceEcosystemTest" method="localRemotePortsRetainHoldsRetryAndSettlementHooksAndNullActorReviewBypass"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceEcosystemRunTest" method="thirteenPhaseWorldRetainsAllIndependentCertificatesAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceEcosystemRunTest" method="unsupportedWorldNeverProducesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackEcosystemRunsThirteenPhasesAnd23TransfersFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceSecurity.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceGateway.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceGatewayScenario.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceGatewayPlugin.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceSecurityTest" method="all72IndependentCanonicalJsonAndHmacVectorsKeepExactBytesAndMountedPaths"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceSecurityTest" method="orderedAuthenticationPrecedenceKeepsInclusiveSkewAndPermanentNonceConsumption"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceGatewayTest" method="allTwentyRoutesDriveSharedWorldCardsTransfersAuditAndLiveTime"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceGatewayTest" method="authenticationConsumesBeforeJsonFailuresAndSignsRawMountedBodyWhileHealthBypasses"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceGatewayTest" method="allElevenIndependentReviewTruthinessControlsKeepStringFalseAndNullActorBypasses"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceGatewayTest" method="sourceJsonValidityAndSourceLookupOrderSeparateSourceErrorsFromRefusals"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceGatewayTest" method="theSourceGatewayHttpTestsPassOverInJvmDispatch"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceGatewayRunTest" method="hmacAuthenticationReviewAndErrorProjectionsMatchIndependentPredictionsAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinanceGatewayRunTest" method="unsupportedGatewayProfileNeverProducesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackGatewayRuns72Hmac13Auth11ReviewAnd5ErrorProjectionsFromPackagedJars"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinancePeering.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceNode.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinanceTime.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinancePeeringScenario.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/finance/FinancePeeringPlugin.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinancePeeringTest" method="theSourcePeeringTestsAndDerivedLinkControlsHold"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinancePeeringTest" method="theRegistryKeepsOneFilePerNodeAndSkipsWhatTheSourceSkips"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinancePeeringTest" method="theSourceTimeConfigTestsAndPropertiesControlsHold"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceNodeTest" method="theOnHoldRecoveryExampleAndNodeControlsMatchTheIndependentProjection"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.finance.FinanceNodeTest" method="theNodeAppRoutesAndSourceCrashesAsStarletteDoes"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinancePeeringRunTest" method="onHoldRecoveryAndNodeControlsMatchIndependentProjectionsAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.FinancePeeringRunTest" method="unsupportedPeeringProfileNeverProducesSuccessfulDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="financeStackPeeringRecoversOnHoldTransfersAcrossTwoInJvmNodesFromPackagedJars"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SutScenarioFixturesTest" method="everyGeneratedScenarioAndAblationSeedAssemblesExactlyThePredictedCandidatesAndControls"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.SutScenarioFixturesTest" method="legacyRootFixturesReadTheSameFromWorkbookAndJsonExport"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.QaGeneratorInputsTest" method="everyGeneratorSpecLoadsAndAssemblesItsPinnedCountsUnderBothProfiles"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.QaGeneratorInputsTest" method="theOriginalBundlePlanCardinalitiesAndGraphExportsHold"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.QaGeneratorInputsTest" method="everyStaticLibraryEntryOpensAndItsDocumentedCountReconciles"/>
+
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/AttackDefenseMatrix.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/AttackDefenseRouting.java"/>
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/AttackDefensePlugin.java"/>
+    <source path="tools/AttackDefenseReport.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.AttackDefenseTest" method="all10368SourceCoordinatesGuardScoresFeaturesCostsFrontiersAndFocusedNeedlesMatchIndependentControls"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.AttackDefenseTest" method="sourceSeededRoutingSweepAndDiscoveryMatchExactIndependentProbeAndReportedSets"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.AttackDefenseTest" method="sourceAdmissionAndStrictThresholdRemainExplicit"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.AttackDefenseRunTest" method="original10368PairsNativeMetricsCandidateIdsAndSourceFrontiersMatchAcrossWorkers"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.AttackDefenseRunTest" method="unsupportedFragmentsProduceBrokenWithoutDomainData"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="originalAttackDefenseMatrixAndObservedFrontiersRunFromPackagedJars"/>
+
+    <source path="fw-sut-fixtures/src/main/java/org/ghyura/cf/fixtures/redteam/RedTeam3.java"/>
+    <source path="tools/RedTeam3Report.java"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeam3Test" method="bothOriginalExecutorsMatchAll128IndependentRequestTracesAndObservedOracles"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeam3Test" method="sourceThresholdFailureOrderFallbackAndOptionalApplicabilityStayDistinct"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeam3Test" method="callerOwnedMemoryEvolvesAcrossRealLocalRecallScenariosWithoutSubstitutingTraining"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeam3Test" method="observationsAreOwnedAndInvalidOrIncompleteInputsAreRefused"/>
+    <test module="fw-sut-fixtures" class="org.ghyura.cf.fixtures.redteam.RedTeam3Test" method="requestBodiesKeepTheSourceDictKeyOrder"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RedTeam3PlanTest" method="bothUnchangedSourceSpecsYield64NativeCoordinatesAndCorrectOptionalCalls"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="redteam3CapturedObservationsScoreBothSourceVariantsFromPackagedJars"/>
+</feature>
+  <feature id="GEN:diagnostics-reporting-release" status="implemented">
+    <summary>validate, plan, candidates, run, resume, export, analyze, score, triage, doctor, benchmark, capabilities and desktop with a frozen CLI contract, typed exit codes and honest capability reports. The project's LICENSE and NOTICE.md travel unchanged in both jars (META-INF) and beside them in the local distribution, which tools/Distribution.java writes with its launch path and file hashes (OPEN-08, OPEN-09). The canonical SUT inventory is not carried: the SUT applications are not ported (author decision 2026-10-11).</summary>
+    <source path="fw-app/src/main/java/org/ghyura/cf/app/cli/CliSpec.java"/>
+    <test module="fw-app" class="org.ghyura.cf.app.cli.CliContractTest" method="theSpecsMatchTheFrozenContractFile"/>
+    <test module="fw-app" class="org.ghyura.cf.app.ApplicationTest" method="capabilitiesTextAdmitsOnlyWhatTheModulesProve"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/Triage.java"/>
+    <source path="fw-app/src/main/java/org/ghyura/cf/app/TriageCommand.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.TriageTest" method="everyReportIsTheLegacyTextAndJsonExactly"/>
+    <test module="fw-app" class="org.ghyura.cf.app.TriageCommandTest" method="theCommandPrintsWhatTheLegacyCommandPrinted"/>
+    <test module="fw-app" class="org.ghyura.cf.app.TriageCommandTest" method="aCheckpointOfTypedObservationsIsTriagedFromTheirVerdictsAndAttributes"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/Doctor.java"/>
+    <source path="fw-app/src/main/java/org/ghyura/cf/app/DoctorCommand.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.DoctorTest" method="whatWouldFailARunIsBlockingAndWhatOnlyDegradesItIsAWarning"/>
+    <test module="fw-app" class="org.ghyura.cf.app.DoctorCommandTest" method="warningsKeepExitZeroAndABlockingCheckExitsOne"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/RunReportPage.java"/>
+    <test module="fw-app" class="org.ghyura.cf.app.RunReportExportTest" method="aRunsPageShowsItsVerdictsFindingsAndAttachmentsAndSaysWhatItLacks"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.RepositoryHygieneTest" method="noFileOfTheReactorLooksLikeABackupOrAnObsoleteCopy"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/Benchmark.java"/>
+    <source path="fw-app/src/main/java/org/ghyura/cf/app/BenchmarkCommand.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.BenchmarkTest" method="profilesFactorPairsAndTheTableAreTheLegacyHarnesses"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.BenchmarkTest" method="everyStageRunsInThisJvmAndReportsWhatItProcessed"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.BenchmarkTest" method="aStageTheKeysOrABudgetRefuseIsSkippedWithItsReasonAndTheOthersAreStillMeasured"/>
+    <test module="fw-app" class="org.ghyura.cf.app.BenchmarkCommandTest" method="everyStageRunsAtTheProfileAndTheReportCarriesItsConditions"/>
+    <test module="fw-app" class="org.ghyura.cf.app.BenchmarkCommandTest" method="hugeUnknownAndMalformedRequestsAreRefusedWithTheLegacyMessages"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="everyBundledComponentTravelsWithItsLicenseAndNotice"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="releaseManifestOfThisTreeStatesItsSourceInputsTestsAndResiduals"/>
+    <source path="tools/Distribution.java"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theLocalDistributionDeclaresEveryFileCarriesTheTermsAndZipsReproducibly"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="theDistributionFindsItsAddonAndRunsItsSamplesFromItsOwnFolderInIsolation"/>
+      <source path="fw-model/src/main/java/org/ghyura/cf/spi/SutDoctor.java"/>
+    <source path="fw-python/src/main/java/org/ghyura/cf/python/PythonDoctor.java"/>
+    <test module="fw-python" class="org.ghyura.cf.python.PythonDoctorTest" method="versionAndMissingDottedModulesAreReadWithoutExecutingSourcesOrPackages"/>
+    <test module="fw-python" class="org.ghyura.cf.python.PythonDoctorTest" method="aMissingInterpreterBlocksWithoutMisclassifyingItAsACandidateFailure"/>
+    <test module="fw-python" class="org.ghyura.cf.python.PythonDoctorTest" method="invalidSyntaxAndOversizedPreviewAreReportedAsPartial"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PythonDoctorCommandTest" method="scenarioDefaultsScopeAndExitStatusesReachTheCliWithoutRunningCode"/>
+  </feature>
+  <feature id="AN:AN-01" status="implemented">
+    <summary>Typed domain observations are the primary transport; the legacy key/value metric parser is an import adapter (metric corpora, inline metrics, textual features), keeping payload, identity and metrics apart.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/MetricLines.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/MetricCorpus.java"/>
+    <source path="fw-model/src/main/java/org/ghyura/cf/spi/DomainObservation.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="failingSourcesAreAttachedWithinTheirBoundAndMetricLinesBecomeTypedMetrics"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.CoverageImportTest" method="physicalLinesProvenanceEligibilityAndMergedDuplicateIdentityArePreserved"/>
+  </feature>
+  <feature id="AN:AN-02" status="implemented">
+    <summary>Immutable CorpusProfile (frozen before scoring), RuleSet, RuleScorer and ScoreBreakdown with the legacy contribution names and thresholds, exact against the unchanged legacy analyzer; heuristic decisions never decide optimization eligibility.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/TextScoring.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/RuleScorer.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.TextScoringTest" method="everyFeatureProfileRuleAndScoreMatchesTheOriginalAnalyzer"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.TextScoringTest" method="ruleTypesTheLegacyReaderCoercedSilentlyAreRefusedAndNullBoundsAreOpen"/>
+    <test module="fw-app" class="org.ghyura.cf.app.ScoreCommandTest" method="aTextFileIsScoredWithManualRulesAndRefusalsAreTyped"/>
+  </feature>
+  <feature id="AN:AN-03" status="implemented">
+    <summary>Goals carry direction, target and weight with finite checks; formal mode uses declared goals only, exploratory mode records discovered axes.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/Goal.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/Discovery.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AnalysisTest" method="repeatsAggregateByTheirMedianEnvironmentsStayApartAndFormalModeUsesDeclaredGoalsOnly"/>
+    <test module="fw-config" class="org.ghyura.cf.config.ConfigResolverTest" method="goalsAreKeyModeTargetAndWeightWithTheirErrorsRefused"/>
+  </feature>
+  <feature id="AN:AN-04" status="implemented">
+    <summary>Brent, Newton, gradient descent, Nelder-Mead, annealing, Simpson, trapezoid and RK4 in Java with convergence metadata; a declared Java expression language replaces Python evaluation, which is refused.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/NumericMethods.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/Expression.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.NumericMethodsTest" method="minimaAndRootsMatchTheirClosedForms"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.NumericMethodsTest" method="nonfiniteObjectivesAndInvalidExpressionsAreExplicitFailures"/>
+  </feature>
+  <feature id="AN:AN-05" status="implemented">
+    <summary>Exact Pareto fronts and the NSGA-II, NSGA-III, SPEA2 and MOEA/D rankers as rankers and diversity selectors against an exhaustive oracle; generation feedback is the campaign's strategy, not a ranker.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/FrontRanking.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/Dominance.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.MultiObjectiveTest" method="everyFrontAndRankerAgreesWithTheExhaustiveOracle"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.MultiObjectiveTest" method="tiesZeroWeightsAndTheRankersDiagnosticsBehaveAsTheLegacyOnes"/>
+  </feature>
+  <feature id="AN:AN-06" status="implemented">
+    <summary>Mergeable Welford statistics, deterministic weighted reservoirs, bounded top-K and analysis inputs/workspace admitted to a declared memory budget with RESOURCE_LIMIT. Admission covers repeats, metric summaries, point/report construction, dominance relationships and the selected ranker's reference directions; operation leases are released when returning the caller-owned report or failing. Run-owned observation adapters stay admitted through analysis, and the retained report remains charged through run finalization before transferring to its caller.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/PriorityReservoir.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/AnalysisInput.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/Analysis.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/FrontRanking.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.StatisticsTest" method="welfordAndReservoirMergesEqualOnePassWhateverThePartition"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.CoverageImportTest" method="retainedReportsAndInputShareOneBudgetAndFailureReleasesBoth"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.TextScoringTest" method="scoringIsAdmittedBeforeItAllocatesAndAFileIsReadStrictly"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AnalysisTest" method="sampleAdmissionPrecedesCopyingAndPreservesTheCallersReservation"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AnalysisTest" method="repeatsAndMetricSummariesDoNotEscapeAnalysisAdmission"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AnalysisTest" method="rankingAdmitsDominanceEdgesAndReferenceDirectionsWithoutApproximating"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AnalysisTest" method="observationAdaptersAreAdmittedBeforeCopyingAndStayChargedThroughAnalysis" />
+  </feature>
+  <feature id="AN:AN-07" status="implemented">
+    <summary>Typed execution observations require a passing verdict to win; repeats aggregate by exact order statistics and intervals are never invented for one sample. The legacy metric-corpus adapter separately permits absent FW_VAR as eligible input and reports its missing-verdict count; explicit domain failures remain excluded.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/RepeatStatistics.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AnalysisTest" method="onlyPassingSamplesWinTheScoresUseOneProfileAndInputOrderChangesNothing"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.StatisticsTest" method="repeatIntervalsAreExactOrderStatisticsAndNeverInventedForOneSample"/>
+  </feature>
+  <feature id="AN:AN-08" status="implemented">
+    <summary>Raw line execution is replaced by typed plugin sessions, inline metric replay and generated Java compiled in memory with an isolated class loader.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/InlineMetricsPlugin.java"/>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/PluginTarget.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="anAnalysedRunOfMetricBearingCandidatesFindsItsFrontThroughTheInlineMetricsPlugin"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.JavaSourceCompilerTest" method="compilesInMemoryAndEveryLoaderStartsWithFreshStaticState"/>
+  </feature>
+  <feature id="AN:AN-09" status="implemented">
+    <summary>Environments are local session partitions; local, disperse and nested repeat policies keep every sample apart with its latest attempt.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/ExecutionEngine.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="environmentsAndRepeatPoliciesKeepEverySampleApartWithItsLatestAttempt"/>
+    <test module="fw-config" class="org.ghyura.cf.config.ConfigResolverTest" method="environmentsAreDistinctLabelsAndEmptyPiecesAreDroppedAsTheLegacyControlPlaneDid"/>
+  </feature>
+  <feature id="AN:AN-10" status="implemented">
+    <summary>One stop owner per run (StopPolicy) with one terminal reason (RunSummary.Stop: exhausted candidates, candidate limit, error budget, metric target, time budget, cancellation, failure) and its boundary: the candidate limit (cf.run.stop.candidates) admits exactly the first candidates, the error budget (cf.run.stop.errors) and the metric target (cf.run.stop.target, a coverage target when the candidates report coverage) are decided in delivery order on each verdict sample's final attempt, so the deciding candidate does not depend on workers or timing; a resumed run seeds them from its restored observations; campaign stops (exhausted space, stable front, missing winners), the run time budget, cancellation and exact checkpoints with resume as before. Search stagnation is the campaign's stable-front stop.</summary>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/StopPolicy.java"/>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/Campaign.java"/>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/RunHandle.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.StopPolicyTest" method="errorsCountOnTheFinalAttemptOfVerdictSamplesAndDecideAtTheirCandidate"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.StopPolicyTest" method="aTargetIsReachedOnlyByAPassSampleAndTheLimitByAdmission"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="theCandidateLimitAdmitsTheFirstCandidatesAndTheErrorBudgetStopsAtTheSameCandidateForAnyWorkerCount"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="aMetricTargetEndsAdmissionAtTheFirstPassingSampleThatReachesIt"/>
+    <test module="fw-app" class="org.ghyura.cf.app.RunCommandTest" method="theStopPolicyEndsAdmissionAndAnErrorBudgetFailsTheCommand"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="theRunsTimeBudgetCancelsItCooperatively"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CampaignTest" method="exhaustedSpaceMissingWinnersAndCancellationStopTheCampaign"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CheckpointResumeTest" method="pausedCheckpointedCancelledAndResumedEqualsAnUninterruptedRun"/>
+  </feature>
+  <feature id="AN:AN-11" status="implemented">
+    <summary>Reports keep goals, contributions, dominance, front membership, repeat evidence, eligibility rejections and campaign lineage; immutable seeds feed the next iteration directly.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/AnalysisReport.java"/>
+    <source path="fw-campaign/src/main/java/org/ghyura/cf/campaign/SeedBias.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CampaignTest" method="aBiasCampaignDerivesEachIterationFromTheBaseAndThePreviousSeedWithItsLineage"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.SeedBiasTest" method="adjacencyCoverageSupportAndRolesFollowTheLegacyPlan"/>
+  </feature>
+  <feature id="AN:AN-12" status="implemented">
+    <summary>Existing JaCoCo XML, coverage.py JSON and gcov summaries are imported (import-only) with provenance and admission, exact against the original probe; the legacy Auto-Analysis plan suggests explicit goals (score --suggest, the desktop's Auto-plan), exact against the original planner, and never enables execution; optional in-memory line instrumentation of generated Java candidates (cf.execution.coverage=lines, R-INSTRUMENTATION): the candidate's own executable lines from the bytecode line tables (compiler-generated members left out), probes per sample and attempt in the attempt's own class loader, read once when the attempt completes, the version in the bytecode cache digest and the sample's source identity, coverage_line omitted with EXEC_COVERAGE_OMITTED when there is no executable line, plugins refused.</summary>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/CoverageImport.java"/>
+    <source path="fw-analysis/src/main/java/org/ghyura/cf/analysis/AutoPlan.java"/>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/LineCoverage.java"/>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/GeneratedJavaTarget.java"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.CoverageImportTest" method="matchesIndependentOriginalProbeGoldens"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="coverageImportsRunThroughTheJarWithoutToolsAndRefuseHugeReports"/>
+    <test module="fw-analysis" class="org.ghyura.cf.analysis.AutoPlanTest" method="suggestionsMatchTheOriginalPlannerAndAreExplicitSettingsThatNeverEnableExecution"/>
+    <test module="fw-app" class="org.ghyura.cf.app.ScoreCommandTest" method="suggestPrintsTheLegacyPlanAsExplicitSettingsAndScoresNothing"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.LineCoverageTest" method="everyAttemptCountsTheCandidatesOwnLinesInItsOwnProbes"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.LineCoverageTest" method="workLeftRunningByOneAttemptWritesOnlyItsOwnSealedProbes"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="lineCoverageReportsTheShareOfTheCandidatesOwnLinesEachVerdictSampleRan"/>
+    <test module="fw-app" class="org.ghyura.cf.app.RunCommandTest" method="lineCoverageIsAMetricOfEveryVerdictSampleAndAStopTargetCanUseIt"/>
+  </feature>
+  <feature id="AN:AN-13" status="implemented">
+    <summary>One Swing desktop over the shared session (authoring, validate and plan, the candidates and sieve preview, run with pause, resume, cancel and export, campaigns with live iteration lineage, pause, resume and cancel, results analysis, the text scorer and charts); headless use never initializes Swing; embedded sessions are isolated. The candidates tab shows the plan's counts with their confidence, every rule's impact and bounded pages of generated candidates with their fate and source, read off the event thread within the scan limit and cancellable. Real-display acceptance is recorded separately under handoff/outbox (0059 full tour and 0064 refresh with mapping editing); automated headless workflow and embedding tests remain the reproducible build gate. A display server is not required to build or use headless commands. Every table shows its own name, saying what it holds, as the title of its scroll pane and as its accessible name; the authoring grid and the library's scenarios are renamed with the sheet or suite they show. The tabs carry their step in the order a user works through them (1 · Library to 9 · Text scorer, nested tabs 2.1, 4.1, ...), and an opaque hints layer shows, in plain words, what the element the pointer rests on is for, followed by its tooltip: a pop-up appears after a short rest, leaves at once when the pointer leaves its element (the next element's follows quickly), stands beside its element without covering it or the pointer, and takes no clicks, so a move onto it is a move onto the element beneath it, whose hint takes over; a Hints button above the tabs (and F1, also in the chart window, whose hints follow the button) turns hints and tooltips off and on, and every change redraws exactly the area it touched. Every field shows its own name, beside it or as its title and as its accessible name, and the hint of every text field and area says when it gets filled.</summary>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/Session.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/Desktop.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/session/CandidatePreview.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/CandidatesView.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/CampaignView.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="everyTabDrivesTheSharedSessionHeadlessWithPauseResumeAndCancel"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theCandidatesTabPagesTheSieveOffTheEventThreadWithinTheScan"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theCampaignTabShowsEachIterationAsItIsRecordedAndIsPausedResumedAndCancelled"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.CandidatePreviewTest" method="everyGeneratedCandidateShowsItsFateAndKeptPagesFollowEachOtherToTheEnd"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.CandidatePreviewTest" method="aPageReadsAtMostTheScanAndCoveringSelectionIsNamed"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.session.SessionTest" method="twoSessionsWithTheirOwnPoliciesAndSeedsRunConcurrentlyWithoutSeeingEachOther"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="startupLoadsNoWindowingToolkitAndNoNetworkingClass"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="mappingEntriesCanBeEditedAsValidatedJsonWithoutLosingTheLastGoodDraft" />
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/TableTitles.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="everyTableShowsItsOwnNameSayingWhatItHolds"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/Hints.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/HintLayer.java"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/Steps.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="aPopUpAppearsOnlyAfterThePointerRestsOnAnElement"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="crossingTheWindowQuicklyShowsNoPopUpAtAll"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="leavingRemovesThePopUpAtOnceAndTheNextElementsComesQuickly"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="movingWithinTheSameElementKeepsItsPopUpStill"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="aClickOrAKeyHidesThePopUpUntilThePointerLeavesTheElement"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="turningHintsOffRemovesTheShownPopUpAndShowsNoneUntilTheyAreOn"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="thePopUpIsOpaque"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="thePopUpNeverCoversItsElementOrThePointerAndStaysInsideTheWindow"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="anElementsTooltipShowsInsideItsPopUpAndEachItemGetsItsOwn"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="anElementThatRepaintsUnderAPopUpLeavesThePopUpOnTop"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="aMoveOntoThePopUpGoesToTheElementUnderItAndItsHintTakesOver"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="anyWalkOfThePointerLeavesTheGuiExactlyAsAFreshPaintingWould"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="everyTabStartsWithItsStepInTheOrderAUserWorksThroughThem"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="everyElementAndEveryTabHasAHintInPlainWords"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="restingOnTabsAndElementsShowsTheirHintsAndMovingOnRedrawsTheGuiCorrectly"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="anyWalkOverTheDesktopLeavesTheGuiExactlyAsAFreshPaintingWould"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theHintsButtonTurnsHintsAndTooltipsOffAndOnAndF1PressesIt"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="theChartWindowsHintsFollowTheHintsButtonAndF1ThereToo"/>
+    <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/FieldNames.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="everyFieldShowsItsOwnName"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.DesktopTest" method="everyTextFieldAndAreaSaysInItsHintWhenItIsFilled"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="oneSwitchImmediatelyDismissesShownAndPendingHintsInEveryControlledLayer"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.HintLayerTest" method="removingTheLayerCancelsItsPendingHintAndDetachesItsSwitch"/>
+      <source path="fw-desktop/src/main/java/org/ghyura/cf/desktop/RunnerSettings.java"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.RunnerSettingsTest" method="absentPythonAddonIsReportedWithoutChangingTheSession"/>
+    <test module="fw-desktop" class="org.ghyura.cf.desktop.RunnerSettingsTest" method="failedApplyKeepsThePreviousSessionAndBlankDefaultsKeepTheirOrigins"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.desktop.DesktopPythonRunTest" method="libraryPythonChoiceAndAppliedFieldsReachPreviewAndRuns"/>
+  </feature>
+  <feature id="AN:AN-14" status="implemented">
+    <summary>No database, JDBC poller or SQL schema: results live in an in-memory repository with bounded views, optional checkpoint and export artifacts and a run-owned lifecycle; banned dependencies and APIs are gated.</summary>
+    <source path="fw-results/src/main/java/org/ghyura/cf/results/ResultRepository.java"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ModuleGraphTest" method="noPomDeclaresABannedDependencyAndProductionModulesDeclareNoUnapprovedThirdParty"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="capabilitiesAnswersWithNoPythonNoDatabaseNoToolsAndAReadOnlyWorkingDirectory"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.ArchitectureGateTest" method="ownedProductionBytecodeUsesNoForbiddenApi"/>
+  </feature>
+  <feature id="EX:EX01" status="implemented">
+    <summary>The legacy bundle.handoff/v2 Java/Python loose-files hand-over is imported fail-closed (fixed order, run id, custom verdicts, arguments); typed candidates replace the transport, and other versions or transports are refused by name. candidates --export writes rendered candidates back as a loose-files or sharded hand-over in the legacy formats, and an exported hand-over runs again (D112); Python needs its explicit add-on/configuration and uses .py files and the legacy sorted-name checksum. Python candidates run as the legacy Python executor ran them, through the Python add-on (cf.execution.sut=python, C07, D115; author decision 2026-10-12).</summary>
+    <source path="fw-artifacts/src/main/java/org/ghyura/cf/artifacts/LegacyHandoff.java"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.LegacyHandoffTest" method="aLooseFilesBundleImportsItsCandidatesInAFixedOrderWithItsRunIdAndVerdicts"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.LegacyHandoffTest" method="everyOtherVersionAndWhatThisBuildCannotHonourAreRefusedByName"/>
+    <test module="fw-app" class="org.ghyura.cf.app.RunCommandTest" method="aLegacyHandOverRunsItsJavaCandidatesAndAFailedExportLeavesTheResultsIntact"/>
+    <source path="fw-python/src/main/java/org/ghyura/cf/python/PythonPlugin.java"/>
+    <source path="fw-python/src/main/java/org/ghyura/cf/python/PythonProcess.java"/>
+    <test module="fw-python" class="org.ghyura.cf.python.PythonPluginTest" method="argumentsWorkingDirectoryAndPythonPathReachTheCandidate"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PythonAddonRunTest" method="theUnchangedD10RunsItsOwnPythonAndEveryRecordAgreesWithTheIndependentGolden"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.OriginalDemosPythonTest" method="everyCaseOfAnOriginalDemoHasTheSameOutcomeAndVerdictFromItsOwnPythonAsFromItsJavaPort"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="generatorTrunkExamplesRunTheirOwnPythonAsTheLegacyBundleRanThem"/>
+    <source path="fw-artifacts/src/main/java/org/ghyura/cf/artifacts/HandoffExport.java"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.HandoffExportTest" method="looseFilesAreTheLegacyFilesAndTheManifestImportsThemBack"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.HandoffExportTest" method="shardsAreTheShardSinkFormatInIdOrderAThousandRecordsEach"/>
+    <test module="fw-app" class="org.ghyura.cf.app.CandidatesExportTest" method="anExportedHandOverRunsWithTheScenariosOutcomesAndShardsCarryTheSameCandidates"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.HandoffExportTest" method="everyTransportAdmitsItsManifestAndFileMetadataBeforeWritingIt"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.HandoffExportTest" method="compressionBuffersMustFitTheBudgetEvenWhenThePayloadCompressesWell"/>
+    <test module="fw-python" class="org.ghyura.cf.python.PythonPluginTest" method="aCancelledSampleDoesNotTryToStartTheInterpreter"/>
+  <test module="fw-python" class="org.ghyura.cf.python.PythonPluginTest" method="longVerdictNumbersKeepTheFirstMarkerAcrossChunksWithoutRetainingTheDigits"/>
+  <test module="fw-app" class="org.ghyura.cf.app.CandidatesExportTest" method="aPythonExportNeverWritesAJavaLabelledHandoff"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.HandoffExportTest" method="pythonFilesKeepTheirLanguagePayloadAndMetadataThroughTheHandoff"/>
+    <test module="fw-artifacts" class="org.ghyura.cf.artifacts.LegacyHandoffTest" method="pythonBundlesReadOnlyPythonFilesAndRequireTheMatchingTrustedPolicy"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PythonHandoffRunTest" method="exportedPythonRunsAgainWithItsArgumentsPreprocessAndCustomVerdicts"/>
+</feature>
+  <feature id="EX:EX02" status="implemented">
+    <summary>The JDK JavaCompiler compiles candidates in memory with positioned diagnostics and a digest cache charged to the run budget; every class loader starts with fresh static state.</summary>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/JavaSourceCompiler.java"/>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/BytecodeCache.java"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.JavaSourceCompilerTest" method="compilesInMemoryAndEveryLoaderStartsWithFreshStaticState"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.JavaSourceCompilerTest" method="compileErrorsKeepTheirPositionsAndTheCacheCanBeOff"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="theCompilerCacheIsReservedFromTheRunBudget"/>
+  </feature>
+  <feature id="EX:EX03" status="implemented">
+    <summary>Timeouts, infrastructure failures, broken candidates and missing verdicts map to exclusive outcomes with exact custom verdicts; every outcome is reachable.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/Failures.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="generatedJavaGivesEveryOutcomeItCanAndKeepsCustomVerdictsExact"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="withoutACompilerServiceGeneratedCandidatesAreInfrastructureFailures"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.OutcomeFixtureRunTest" method="theFixturePluginYieldsEveryOutcomeWithItsCode"/>
+  </feature>
+  <feature id="EX:EX04" status="implemented">
+    <summary>FW_VAR and FW_CUSTOM_VAR are integer fields read from the candidate; the carrier sheet of a failure is named positionally, without claiming causality.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/GeneratedJavaTarget.java"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="aGeneratedJavaScenarioRunsWithItsArgumentsAndNamesTheCarrierOfAFailure"/>
+  </feature>
+  <feature id="EX:EX05" status="implemented">
+    <summary>Sample identity is run, candidate, attempt, repeat and environment; an existing sample is never overwritten; the latest attempt is a projection.</summary>
+    <source path="fw-model/src/main/java/org/ghyura/cf/model/SampleKey.java"/>
+    <source path="fw-results/src/main/java/org/ghyura/cf/results/ResultRepository.java"/>
+    <test module="fw-model" class="org.ghyura.cf.model.IdentityTest" method="sampleKeyUniquenessUsesAllFiveFields"/>
+    <test module="fw-results" class="org.ghyura.cf.results.ResultRepositoryTest" method="oneObservationPerKeyReplaysAreHarmlessConflictsAreErrors"/>
+    <test module="fw-results" class="org.ghyura.cf.results.ResultRepositoryTest" method="theHighestAttemptIsFinalPerRepeatAndTotalsStayApart"/>
+  </feature>
+  <feature id="EX:EX06" status="implemented">
+    <summary>Repeats get fresh sessions per sample, K=1 stays compatible, raw samples are retained exactly (or reported as aggregate-only), environments and nested repeats come from the configuration.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/ExecutionEngine.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="repeatsGetFreshSessionsRetriesFollowTimeoutsAndInfraFailuresAndRandomnessIsPerSample"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="environmentsAndNestedRepeatsComeFromTheConfigurationAndTheLifecycleEndsOnceAfterDraining"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="aggregateOnlyRunsWithTheSameTotalsAndDropsObservationsAndAttachments"/>
+  </feature>
+  <feature id="EX:EX07" status="implemented">
+    <summary>The legacy metrics corpus keeps its line format and string order (10_0_0 before 1_0_0) as an explicit export; structured observations are the primary transport.</summary>
+    <source path="fw-results/src/main/java/org/ghyura/cf/results/LegacyMetricsCorpus.java"/>
+    <test module="fw-results" class="org.ghyura.cf.results.ResultRepositoryTest" method="theLegacyMetricsCorpusKeepsTheLegacyLinesAndStringOrderInAnyLocale"/>
+    <test module="fw-app" class="org.ghyura.cf.app.AnalyzeCommandTest" method="aLegacyCorpusIsAnalysedWithItsGoalsAndADomainFailureNeverWins"/>
+  </feature>
+  <feature id="EX:EX08" status="replaced">
+    <summary>Worker assignment and cross-process credit are replaced by deterministic ordinal windows, bounded item and byte admission and committed results delivered in candidate order whatever the worker count.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/ExecutionEngine.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="listenersHearCommittedResultsInCandidateOrderWithRetriesWithinTheWindowWhateverTheWorkers"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.CampaignTest" method="oneAndFourWorkersGiveTheSameLineage"/>
+    <test module="fw-acceptance" class="org.ghyura.cf.acceptance.PackagedApplicationIT" method="identitiesAndResultsAreTheSameInEveryLocaleTimeZoneAndWorkerCount"/>
+  </feature>
+  <feature id="EX:EX09" status="incompatible">
+    <summary>Hard CPU, memory and kill limits and OS isolation are ruled out in one JVM and reported before execution; cooperative deadlines are honest (an uncooperative sample is reported as left running) and VM-stopping calls are found in candidate code.</summary>
+    <source path="fw-execution/src/main/java/org/ghyura/cf/execution/ExecutionPolicy.java"/>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/ForbiddenCalls.java"/>
+    <test module="fw-execution" class="org.ghyura.cf.execution.ExecutionEngineTest" method="anUncooperativeSampleIsReportedLeftRunningAndItsLateResultIgnored"/>
+    <test module="fw-config" class="org.ghyura.cf.config.ConfigResolverTest" method="architectureExcludedModesAreUnsupportedCapabilitiesNotTypos"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.JavaSourceCompilerTest" method="callsThatStopTheVirtualMachineAreFound"/>
+    <open>Process or container isolation is not offered by the core by design (architecture D07); the optional Python add-on runs Python candidates in bubblewrap or docker when cf.python.sandbox selects it (0126) and runs a legacy Python hand-over with a no-network container policy only in docker:IMAGE; legacy allowlist policies remain refused because a named network does not enforce the allowlist (0161).</open>
+  </feature>
+  <feature id="EX:EX10" status="implemented">
+    <summary>Compiled classes, their loaders and buffers belong to the run and are released after the last user; cache hits never share static state across repeats.</summary>
+    <source path="fw-compiler/src/main/java/org/ghyura/cf/compiler/CandidateClassLoader.java"/>
+    <test module="fw-compiler" class="org.ghyura.cf.compiler.JavaSourceCompilerTest" method="compilesInMemoryAndEveryLoaderStartsWithFreshStaticState"/>
+    <test module="fw-campaign" class="org.ghyura.cf.campaign.RunServiceTest" method="theCompilerCacheIsReservedFromTheRunBudget"/>
+  </feature>
+  <feature id="EX:CB01" status="implemented">
+    <summary>Element by rank, lazy cursors, contiguous half-open splits with the remainder in the first parts, cancellation within one poll interval.</summary>
+    <source path="fw-algebra/src/main/java/org/ghyura/cf/algebra/RankedTuples.java"/>
+    <source path="fw-algebra/src/main/java/org/ghyura/cf/algebra/Ranges.java"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.RangesCursorsAndScaleTest" method="splitsCoverTheWholeRangeInOrderWithoutOverlapAndGiveTheRemainderToTheFirstParts"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.RangesCursorsAndScaleTest" method="cursorsOverEverySubRangeAndOverEverySplitEqualRandomAccess"/>
+  </feature>
+  <feature id="EX:CB02" status="implemented">
+    <summary>Counts and ranks are exact BigInteger arithmetic beyond Long.MAX_VALUE; overflow is never reproduced as semantics.</summary>
+    <source path="fw-algebra/src/main/java/org/ghyura/cf/algebra/Counting.java"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.RangesCursorsAndScaleTest" method="countsAndRanksBeyondLongMaxValueAreExact"/>
+    <test module="fw-app" class="org.ghyura.cf.app.PlanCommandTest" method="aTableBeyondAnyMachineWordIsSizedExactlyWithoutBeingBuilt"/>
+  </feature>
+  <feature id="EX:CB03" status="implemented">
+    <summary>Every combinatoricslib3 family is ported with independent brute-force oracles (empty inputs, k=0, duplicates, size errors, orders) and the legacy library orders.</summary>
+    <source path="fw-algebra/src/main/java/org/ghyura/cf/algebra/LegacyLibrary.java"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.ExhaustiveOracleTest" method="distinctArrangementsOfMultisetsMatchTheOracle"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.ExhaustiveOracleTest" method="permutationsWithRepetitionMatchTheOracleInBothDigitOrders"/>
+    <test module="fw-algebra" class="org.ghyura.cf.algebra.LegacyOrderTest" method="theTwoLibrariesDifferWhereTheFixturesSayTheyDo"/>
+  </feature>
+</feature-mapping>

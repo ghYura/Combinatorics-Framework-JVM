@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "params": {
+    "customer": {
+      "o.customer(\"guest\");": {"trust": 1},
+      "o.customer(\"member\");": {"trust": 2},
+      "o.customer(\"vip\");": {"trust": 3}
+    },
+    "payment": {
+      "o.pay(\"card\");": {"risk": 1},
+      "o.pay(\"wallet\");": {"risk": 2},
+      "o.pay(\"cod\");": {"risk": 3}
+    }
+  },
+  "constraints": [
+    {
+      "id": "no_cod_via_api",
+      "polarity": "forbid",
+      "pairs": [{"channel": "o.channel(\"api\");", "payment": "o.pay(\"cod\");"}],
+      "desc": "Cash on delivery is not offered through the public API."
+    },
+    {
+      "id": "payment_needs_trust",
+      "polarity": "forbid",
+      "sheets": ["customer", "payment"],
+      "when": "payment.risk > customer.trust",
+      "condition": {"not": {"all": [{"sheet": "channel", "eq": "o.channel(\"web\");"}, {"sheet": "gift", "present": true}]}},
+      "desc": "A payment riskier than the customer's trust is refused, except for a web gift order, which staff review by hand."
+    },
+    {
+      "id": "guests_do_not_stack_coupons",
+      "polarity": "require",
+      "assert": {"any": [{"sheet": "customer", "ne": "o.customer(\"guest\");"}, {"sheet": "coupons", "countLe": 1}]},
+      "desc": "A guest may not stack two coupons."
+    }
+  ]
+}

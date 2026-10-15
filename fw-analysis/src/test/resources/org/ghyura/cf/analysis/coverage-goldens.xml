@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+
+<coverage-goldens reference-commit="0bc3e5acf6cf8f612a08ce640d236132c448b29b" source="Combinatorics-Framework-QA-edition/Analyzer_trunk/src/main/java/com/yurii/analyzer/core/optimization/CoverageProbe.java" source-sha256="774b24a5b3f06c15f49080b684aff12ba9d4c36e3b8b82b9978b9aec1038f9bf" jackson="2.21.6" cases="12" oracle="unchanged CoverageProbe with isolated default ObjectMapper factory">
+  <case id="jacoco-original-verify" format="jacoco">
+    <report>&lt;report&gt;&lt;package&gt;&lt;counter type="LINE" missed="5" covered="15"/&gt;&lt;/package&gt;&lt;counter type="INSTRUCTION" missed="40" covered="160"/&gt;&lt;counter type="BRANCH" missed="3" covered="7"/&gt;&lt;counter type="LINE" missed="2" covered="18"/&gt;&lt;counter type="METHOD" missed="1" covered="9"/&gt;&lt;counter type="CLASS" missed="0" covered="3"/&gt;&lt;/report&gt;</report>
+    <expected> coverage_line=0.900000 coverage_line_covered=18 coverage_line_total=20 coverage_branch=0.700000 coverage_branch_covered=7 coverage_branch_total=10 coverage_method=0.900000 coverage_method_covered=9 coverage_method_total=10 coverage_class=1.000000 coverage_class_covered=3 coverage_class_total=3 coverage_instruction=0.800000 coverage_instruction_covered=160 coverage_instruction_total=200</expected>
+  </case>
+  <case id="jacoco-rounding" format="jacoco">
+    <report>&lt;counter type="LINE" missed="2" covered="1"/&gt;</report>
+    <expected> coverage_line=0.333333 coverage_line_covered=1 coverage_line_total=3</expected>
+  </case>
+  <case id="jacoco-last-zero" format="jacoco">
+    <report>&lt;counter type="LINE" missed="2" covered="1"/&gt;&lt;counter type="LINE" missed="0" covered="0"/&gt;</report>
+    <expected />
+  </case>
+  <case id="jacoco-attribute-order" format="jacoco">
+    <report>&lt;counter missed="2" type="LINE" covered="1"/&gt;</report>
+    <expected />
+  </case>
+  <case id="jacoco-text-extraction" format="jacoco">
+    <report>&lt;!DOCTYPE report SYSTEM "file:///not-opened"&gt;&lt;!-- &lt;counter type="LINE" missed="1" covered="3"/&gt; --&gt;</report>
+    <expected> coverage_line=0.750000 coverage_line_covered=3 coverage_line_total=4</expected>
+  </case>
+  <case id="coverage-py-original-verify" format="coverage-py">
+    <report>{"meta":{},"totals":{"covered_lines":85,"num_statements":100,"missing_lines":15,"percent_covered":85.0,"covered_branches":18,"num_branches":20}}</report>
+    <expected> coverage_line=0.850000 coverage_line_covered=85 coverage_line_total=100 coverage_line_missed=15 coverage_branch=0.900000 coverage_branch_covered=18 coverage_branch_total=20</expected>
+  </case>
+  <case id="coverage-py-coercions" format="coverage-py">
+    <report>{"totals":{"covered_lines":"12","num_statements":"20.8","missing_lines":null,"percent_covered":"60","covered_branches":true,"num_branches":3}}</report>
+    <expected> coverage_line=0.600000 coverage_line_covered=12 coverage_line_total=20 coverage_branch=0.333333 coverage_branch_covered=1 coverage_branch_total=3</expected>
+  </case>
+  <case id="coverage-py-absent" format="coverage-py">
+    <report>{"totals":{"percent_covered":null,"num_statements":-1,"missing_lines":-1,"num_branches":0}}</report>
+    <expected />
+  </case>
+  <case id="coverage-py-partial" format="coverage-py">
+    <report>{"totals":{"covered_lines":5,"num_statements":10,"percent_covered":120.5}}</report>
+    <expected> coverage_line=1.205000 coverage_line_covered=5 coverage_line_total=10</expected>
+  </case>
+  <case id="gcov-original-verify" format="gcov">
+    <report>File 'src/foo.c'
+Lines executed:60.00% of 30
+Branches executed:50.00% of 10
+Calls executed:75.00% of 4
+File 'src/bar.c'
+Lines executed:80.00% of 50
+Branches executed:65.00% of 20
+Calls executed:90.00% of 10
+</report>
+    <expected> coverage_line=0.800000 coverage_line_total=50 coverage_branch=0.650000 coverage_branch_total=20 coverage_call=0.900000 coverage_call_total=10</expected>
+  </case>
+  <case id="gcov-last-no-total" format="gcov">
+    <report>Lines executed:50% of 8
+LiNeS covered:33.333333333%
+Calls executed:120% of 003</report>
+    <expected> coverage_line=0.333333 coverage_call=1.200000 coverage_call_total=003</expected>
+  </case>
+  <case id="gcovr-comment-is-not-grammar" format="gcov">
+    <report>lines: 85.00% (170 out of 200)</report>
+    <expected />
+  </case>
+</coverage-goldens>

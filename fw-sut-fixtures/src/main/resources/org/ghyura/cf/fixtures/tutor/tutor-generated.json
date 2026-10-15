@@ -1,0 +1,122 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "channel",
+        "FW_Combi(1)"
+      ],
+      [
+        "account",
+        "FW_Combi(1)"
+      ],
+      [
+        "payment",
+        "FW_Combi(1)"
+      ],
+      [
+        "steps",
+        "FW_Combi(3)",
+        "FW_Permut()"
+      ],
+      [
+        "duplicate_submit",
+        "FW_Optional",
+        "FW_Combi(1)"
+      ],
+      [
+        "carrier_timeout",
+        "FW_Optional",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "public class TutorCandidate { public static int FW_CUSTOM_VAR = -1; public static void main(String[] args) { String channel = \"\"; String account = \"\"; String payment = \"\"; java.util.List<String> steps = new java.util.ArrayList<>(); java.util.Set<String> stress = new java.util.TreeSet<>();"
+      ]
+    ],
+    "channel": [
+      [
+        "channel = \"web\";"
+      ],
+      [
+        "channel = \"mobile\";"
+      ]
+    ],
+    "account": [
+      [
+        "account = \"guest\";"
+      ],
+      [
+        "account = \"member\";"
+      ]
+    ],
+    "payment": [
+      [
+        "payment = \"card\";"
+      ],
+      [
+        "payment = \"wallet\";"
+      ]
+    ],
+    "steps": [
+      [
+        "steps.add(\"reserve\");"
+      ],
+      [
+        "steps.add(\"charge\");"
+      ],
+      [
+        "steps.add(\"dispatch\");"
+      ]
+    ],
+    "duplicate_submit": [
+      [
+        "stress.add(\"duplicate_submit\");"
+      ]
+    ],
+    "carrier_timeout": [
+      [
+        "stress.add(\"carrier_timeout\");"
+      ]
+    ],
+    "TAIL": [
+      [
+        "int verdict; if (payment.equals(\"wallet\") && !account.equals(\"member\")) { verdict = 11; } else if (steps.indexOf(\"charge\") < steps.indexOf(\"reserve\")) { verdict = 20; } else if (steps.indexOf(\"dispatch\") < steps.indexOf(\"charge\")) { verdict = 20; } else if (stress.contains(\"duplicate_submit\") && channel.equals(\"mobile\") && payment.equals(\"wallet\")) { verdict = 30; } else if (stress.contains(\"carrier_timeout\") && channel.equals(\"web\") && payment.equals(\"card\")) { verdict = 31; } else { verdict = 0; } StringBuilder line = new StringBuilder(\"channel=\" + channel + \" account=\" + account + \" payment=\" + payment + \" steps=\" + String.join(\">\", steps)); for (String s : stress) { line.append(\" stress=\").append(s); } System.out.println(line); FW_CUSTOM_VAR = verdict; } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        0,
+        "PASS"
+      ],
+      [
+        10,
+        "INPUT_ERROR"
+      ],
+      [
+        11,
+        "MODEL_INVALID"
+      ],
+      [
+        20,
+        "ORDER_VIOLATION"
+      ],
+      [
+        30,
+        "DOUBLE_CHARGE"
+      ],
+      [
+        31,
+        "DISPATCH_LOST"
+      ]
+    ]
+  }
+}

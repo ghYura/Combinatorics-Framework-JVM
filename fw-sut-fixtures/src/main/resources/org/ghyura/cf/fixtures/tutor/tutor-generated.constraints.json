@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "wallet_requires_member",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "payment": "payment = \"wallet\";",
+          "account": "account = \"guest\";"
+        }
+      ],
+      "desc": "Guest wallet payment is not a real supported state (scenarios.json constraint wallet_requires_member)."
+    }
+  ]
+}

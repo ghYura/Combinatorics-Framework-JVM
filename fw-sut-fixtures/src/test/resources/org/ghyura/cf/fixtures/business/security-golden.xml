@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+<business-golden family="security" commit="8d5aa2d48a605521f783d1787a42fc9a5ebfc7a9" source="bundle_secure_pipeline_tryout/app.py" sha256="b2a85094500ca4a6b2ee6a8ef9a01593b9d28d3d8691b2876020ef9f9b53b1f5" cases="147" oracle="original Python functions on scratch copy" stubs="FastAPI decorators and Pydantic declarations only; SimpleNamespace requests">
+  <regenerate>python3 -B handoff/outbox/devtools/BusinessGoldens.py</regenerate>
+  <case id="security-000">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-001">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-002">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-003">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-004">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-005">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-006">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-007">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-008">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-009">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-010">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-011">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-012">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-013">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-014">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-015">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-016">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-017">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-018">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-019">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-020">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-021">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-022">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-023">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-024">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-025">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-026">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-027">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-028">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-029">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-030">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-031">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-032">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-033">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-034">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-035">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-036">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-037">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-038">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-039">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-040">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-041">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-042">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-043">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-044">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-045">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-046">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-047">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-048">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-049">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-050">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-051">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-052">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-053">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-054">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-055">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-056">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-057">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-058">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-059">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-060">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-061">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-062">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-063">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-064">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-065">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-066">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-067">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"e4abf74fad50ea6c35a27c0108f49cc8ae7d1c8f0493911143b6620d7bbc10c7","key_version":2,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-068">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-069">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-070">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-071">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"c84eb8ad2a6916191a50e45b563b7fb2f4727933502bb1c041e978bb6fae7b16","key_version":2,"audit":true,"mode":"strict","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-072">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-073">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-074">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-075">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-076">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-077">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-078">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-079">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-080">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-081">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-082">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-083">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","redact","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","redact","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-084">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-085">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-086">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-087">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-088">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-089">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-090">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-091">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-092">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-093">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-094">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-095">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["normalize","tag","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["normalize","tag","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-096">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-097">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-098">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-099">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-100">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"8b0d8ca1a8cef67878517da6e03b5a38546987bca4f52e8c448841e7922165ec","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-101">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-102">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"8b0d8ca1a8cef67878517da6e03b5a38546987bca4f52e8c448841e7922165ec","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-103">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-104">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-105">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-106">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-107">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","normalize","tag"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","normalize","tag"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-108">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-109">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-110">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-111">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-112">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"8b0d8ca1a8cef67878517da6e03b5a38546987bca4f52e8c448841e7922165ec","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-113">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-114">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"8b0d8ca1a8cef67878517da6e03b5a38546987bca4f52e8c448841e7922165ec","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-115">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-116">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-117">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-118">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-119">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["redact","tag","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["redact","tag","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-120">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-121">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-122">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-123">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-124">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-125">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-126">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-127">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-128">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-129">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-130">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-131">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","normalize","redact"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","normalize","redact"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-132">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-133">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-134">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"8b4dcdcd18a505d6714fd1e52ff71636e588858d3ce14a948c63171965b2a819","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-135">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note SECRET-ABC end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note [REDACTED] end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-136">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"8b0d8ca1a8cef67878517da6e03b5a38546987bca4f52e8c448841e7922165ec","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-137">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-138">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"8b0d8ca1a8cef67878517da6e03b5a38546987bca4f52e8c448841e7922165ec","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-139">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"note ＳＥＣＲＥＴ-ＡＢＣ end"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"note SECRET-ABC end|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-140">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-141">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":false,"poison":true}</input>
+    <expected>[{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-142">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":false}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"eb8f2e3686311f0df16e96585fe3a45d944f39c6992179f907b7faff5f483849","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="security-143">
+    <input>{"request":{"scenario_id":"sample","mode":"legacy","order":["tag","redact","normalize"],"features":["cache","audit"],"text":"ℌello ① SECRET-A9 and SECRET-a_2"},"rotate":true,"poison":true}</input>
+    <expected>[{"ok":true,"key_version":2},{"ok":true,"poisoned":true},{"ok":true,"text":"Hello 1 [REDACTED] and [REDACTED]_2|TAG","digest":"0000000000000000000000000000000000000000000000000000000000000000","key_version":1,"audit":true,"mode":"legacy","order":["tag","redact","normalize"],"features":["audit","cache"]}]</expected>
+  </case>
+  <case id="invalid-mode">
+    <input>{"request":{"scenario_id":"sample","mode":"unknown","order":["normalize","redact","tag"],"features":[],"text":"SECRET-ABC"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":false,"error":"unknown mode"}]</expected>
+  </case>
+  <case id="invalid-order">
+    <input>{"request":{"scenario_id":"sample","mode":"strict","order":["normalize","normalize","tag"],"features":[],"text":"SECRET-ABC"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":false,"error":"invalid operation order"}]</expected>
+  </case>
+  <case id="unicode-feature-order">
+    <input>{"request":{"scenario_id":"unicode","mode":"strict","order":["normalize","redact","tag"],"features":["😀","","cache","😀"],"text":"秘密 SECRET-ABC 😀"},"rotate":false,"poison":false}</input>
+    <expected>[{"ok":true,"text":"秘密 [REDACTED] 😀|TAG","digest":"63c99869aec0c5fcaa3bfe4ee57dfa672fff328502c0ebb1c0b99b20d8c114ea","key_version":1,"audit":false,"mode":"strict","order":["normalize","redact","tag"],"features":["cache","","😀","😀"]}]</expected>
+  </case>
+</business-golden>

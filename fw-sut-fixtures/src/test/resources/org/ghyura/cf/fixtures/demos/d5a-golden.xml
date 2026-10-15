@@ -1,0 +1,5565 @@
+<?xml version='1.0' encoding='utf-8'?>
+<field-pipeline-golden origin="original verify.trees/model pure independent functions cross-checked against architect-derived-A;no SUT/oracle/runtime/harness/derive/candidate execution" prepared-at="2026-10-10T00:23:09.875280+00:00">
+  <!-- SPDX-License-Identifier: LicenseRef-BUSL-1.1 -->
+  <cases>
+    <case id="A|correct|OPS=AM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=AM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 6,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 6,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": 6
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": 6
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=AM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=AM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 12
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 12
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 12
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 12
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=AN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=AN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -3,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -3,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -3
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=AN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=AN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -6
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -6
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -6
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -6
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=AS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=AS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 0
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 0
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=AS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=AS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 3
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=MA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=MA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 5,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 5,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 5
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 5
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=MA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=MA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 11
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 11
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 11
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 11
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=MN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=MN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=MN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=MN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -10
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -10
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=MS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=MS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 1
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=MS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=MS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 7
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 7
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 7
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 7
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=NA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=NA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": -1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": -1
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=NA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=NA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -4
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -4
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=NM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=NM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=NM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=NM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": -10
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": -10
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=NS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=NS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -5,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -5,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": -5
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": -5
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=NS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=NS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -8
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -8
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": -8
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": -8
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=SA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=SA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 0
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 0
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=SA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=SA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 3
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=SM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=SM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -2,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -2,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -2
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -2
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=SM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=SM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 4
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 4
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 4
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=SN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=SN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": 1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": 1
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|correct|OPS=SN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|correct|OPS=SN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -2
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -2
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">correct</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -2
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -2
+  }
+]</field>
+      <field name="traces_equal" kind="json">true</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=AM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=AM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 6,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 5,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": 6
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 5
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=AM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=AM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 12
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 11
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 12
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 11
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=AN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=AN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -3,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": -1
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=AN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=AN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -6
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -4
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -6
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=AS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=AS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 0
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 0
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=AS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=AS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 3
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=MA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=MA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 5,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 6,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 5
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": 6
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=MA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=MA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 11
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 12
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 11
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 12
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=MN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=MN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=MN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=MN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -10
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": -10
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=MS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=MS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -2,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -2
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=MS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=MS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 7
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 4
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 7
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=NA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=NA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -3,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": -1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -3
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=NA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=NA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -4
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -6
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -6
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=NM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=NM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=NM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=NM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": -10
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -10
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=NS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=NS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -5,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": -5
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": 1
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=NS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=NS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -8
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -2
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": -8
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -2
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=SA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=SA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 0
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 0
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=SA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=SA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">0</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 3
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">PASS</field>
+    </case>
+    <case id="A|reverse_pair|OPS=SM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=SM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -2,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -2
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 1
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=SM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=SM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 4
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 7
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 7
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=SN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=SN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -5,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": 1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": -5
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|reverse_pair|OPS=SN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|reverse_pair|OPS=SN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -2
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -8
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">reverse_pair</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -2
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": -8
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=AM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=AM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 6,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 12
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": 6
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 12
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=AM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=AM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 12
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 6,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 12
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": 6
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=AN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=AN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -3,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -6
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -6
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=AN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=AN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -6
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -3,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -6
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -3
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=AS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=AS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 0
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 3
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "A",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=AS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=AS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "A",
+    "value": 6
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "A",
+    "value": 3
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 0
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "A",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=MA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=MA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 5,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 11
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 5
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 11
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=MA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=MA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 11
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 5,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 11
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 5
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=MN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=MN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -10
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=MN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=MN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -10
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=MS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=MS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 7
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 7
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "M",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=MS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=MS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 7
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "M",
+    "value": 10
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": 7
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "M",
+    "value": 4
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": 1
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "M",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=NA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=NA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -4
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": -1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=NA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=NA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -4
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": -1
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=NM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=NM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": -10
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=NM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=NM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -10
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -4,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": -10
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=NS|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=NS|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -5,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -8
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": -5
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": -8
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "N",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=NS|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=NS|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -8
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -5,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "N",
+    "value": -5
+  },
+  {
+    "field": "y",
+    "op": "S",
+    "value": -8
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "N",
+    "value": -2
+  },
+  {
+    "field": "x",
+    "op": "S",
+    "value": -5
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "N",
+    "S"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=SA|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=SA|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 0
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 3
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=SA|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=SA|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 3
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "A"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 0,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "A",
+    "value": 3
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "A",
+    "value": 0
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "A"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=SM|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=SM|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": -2,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": 4
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -2
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 4
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=SM|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=SM|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": 4
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "M"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": -2,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "M",
+    "value": 4
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "M",
+    "value": -2
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "M"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=SN|FIELD=x">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=SN|FIELD=x</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "x"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 2,
+  "y": -2
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": 1
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -2
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "x",
+  "ops": [
+    "S",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+    <case id="A|wrong_field|OPS=SN|FIELD=y">
+      <field name="carrier" kind="string">IMPL position 2 (legacy positional, not causal)</field>
+      <field name="case_id" kind="string">A|wrong_field|OPS=SN|FIELD=y</field>
+      <field name="contract" kind="string">A</field>
+      <field name="expected" kind="json">{
+  "x": 2,
+  "y": -2
+}</field>
+      <field name="fragments" kind="json">[
+  [
+    "push_op",
+    "S"
+  ],
+  [
+    "push_op",
+    "N"
+  ],
+  [
+    "bind",
+    "y"
+  ]
+]</field>
+      <field name="fw_var" kind="json">2</field>
+      <field name="input" kind="json">{
+  "x": 2,
+  "y": 5
+}</field>
+      <field name="observed" kind="json">{
+  "x": 1,
+  "y": 5
+}</field>
+      <field name="phase" kind="string">A</field>
+      <field name="policy" kind="string">wrong_field</field>
+      <field name="reference_trace" kind="json">[
+  {
+    "field": "y",
+    "op": "S",
+    "value": 2
+  },
+  {
+    "field": "y",
+    "op": "N",
+    "value": -2
+  }
+]</field>
+      <field name="schema" kind="string">d5a.observation/v1</field>
+      <field name="sut_trace" kind="json">[
+  {
+    "field": "x",
+    "op": "S",
+    "value": -1
+  },
+  {
+    "field": "x",
+    "op": "N",
+    "value": 1
+  }
+]</field>
+      <field name="traces_equal" kind="json">false</field>
+      <field name="tree" kind="json">{
+  "field": "y",
+  "ops": [
+    "S",
+    "N"
+  ]
+}</field>
+      <field name="verdict" kind="string">DOMAIN_FAIL</field>
+    </case>
+  </cases>
+  <analysis>{
+  "by_policy": {
+    "correct": {
+      "PASS": 24
+    },
+    "reverse_pair": {
+      "DOMAIN_FAIL": 16,
+      "PASS": 8
+    },
+    "wrong_field": {
+      "DOMAIN_FAIL": 24
+    }
+  },
+  "reverse_pair_passes": [
+    "A|reverse_pair|OPS=AS|FIELD=x",
+    "A|reverse_pair|OPS=AS|FIELD=y",
+    "A|reverse_pair|OPS=MN|FIELD=x",
+    "A|reverse_pair|OPS=MN|FIELD=y",
+    "A|reverse_pair|OPS=NM|FIELD=x",
+    "A|reverse_pair|OPS=NM|FIELD=y",
+    "A|reverse_pair|OPS=SA|FIELD=x",
+    "A|reverse_pair|OPS=SA|FIELD=y"
+  ],
+  "totals": {
+    "DOMAIN_FAIL": 40,
+    "PASS": 32
+  },
+  "witnesses": [
+    {
+      "case_id": "A|correct|OPS=AM|FIELD=x",
+      "expected": {
+        "x": 6,
+        "y": 5
+      },
+      "label": "correct_AM_x",
+      "observed": {
+        "x": 6,
+        "y": 5
+      },
+      "sut_trace": [
+        {
+          "field": "x",
+          "op": "A",
+          "value": 3
+        },
+        {
+          "field": "x",
+          "op": "M",
+          "value": 6
+        }
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "M"
+        ]
+      },
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "A|reverse_pair|OPS=AM|FIELD=x",
+      "expected": {
+        "x": 6,
+        "y": 5
+      },
+      "label": "reverse_pair_AM_x",
+      "observed": {
+        "x": 5,
+        "y": 5
+      },
+      "sut_trace": [
+        {
+          "field": "x",
+          "op": "M",
+          "value": 4
+        },
+        {
+          "field": "x",
+          "op": "A",
+          "value": 5
+        }
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "M"
+        ]
+      },
+      "verdict": "DOMAIN_FAIL"
+    },
+    {
+      "case_id": "A|wrong_field|OPS=AM|FIELD=x",
+      "expected": {
+        "x": 6,
+        "y": 5
+      },
+      "label": "wrong_field_AM_x",
+      "observed": {
+        "x": 2,
+        "y": 12
+      },
+      "sut_trace": [
+        {
+          "field": "y",
+          "op": "A",
+          "value": 6
+        },
+        {
+          "field": "y",
+          "op": "M",
+          "value": 12
+        }
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "M"
+        ]
+      },
+      "verdict": "DOMAIN_FAIL"
+    },
+    {
+      "case_id": "A|reverse_pair|OPS=AS|FIELD=x",
+      "expected": {
+        "x": 0,
+        "y": 5
+      },
+      "label": "reverse_pair_AS_x",
+      "observed": {
+        "x": 0,
+        "y": 5
+      },
+      "sut_trace": [
+        {
+          "field": "x",
+          "op": "S",
+          "value": -1
+        },
+        {
+          "field": "x",
+          "op": "A",
+          "value": 0
+        }
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "S"
+        ]
+      },
+      "verdict": "PASS"
+    }
+  ]
+}</analysis>
+  <construction>{
+  "OPS_rows": 24,
+  "data_sheets": 5,
+  "encoded_ops_rows": [
+    {
+      "codes": [
+        10,
+        11,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "M"
+        ]
+      },
+      "values": [
+        "push_op(\"A\")\n",
+        "push_op(\"M\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        10,
+        11,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "A",
+          "M"
+        ]
+      },
+      "values": [
+        "push_op(\"A\")\n",
+        "push_op(\"M\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        10,
+        12,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "S"
+        ]
+      },
+      "values": [
+        "push_op(\"A\")\n",
+        "push_op(\"S\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        10,
+        12,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "A",
+          "S"
+        ]
+      },
+      "values": [
+        "push_op(\"A\")\n",
+        "push_op(\"S\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        10,
+        13,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "A",
+          "N"
+        ]
+      },
+      "values": [
+        "push_op(\"A\")\n",
+        "push_op(\"N\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        10,
+        13,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "A",
+          "N"
+        ]
+      },
+      "values": [
+        "push_op(\"A\")\n",
+        "push_op(\"N\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        11,
+        10,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "M",
+          "A"
+        ]
+      },
+      "values": [
+        "push_op(\"M\")\n",
+        "push_op(\"A\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        11,
+        10,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "M",
+          "A"
+        ]
+      },
+      "values": [
+        "push_op(\"M\")\n",
+        "push_op(\"A\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        11,
+        12,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "M",
+          "S"
+        ]
+      },
+      "values": [
+        "push_op(\"M\")\n",
+        "push_op(\"S\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        11,
+        12,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "M",
+          "S"
+        ]
+      },
+      "values": [
+        "push_op(\"M\")\n",
+        "push_op(\"S\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        11,
+        13,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "M",
+          "N"
+        ]
+      },
+      "values": [
+        "push_op(\"M\")\n",
+        "push_op(\"N\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        11,
+        13,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "M",
+          "N"
+        ]
+      },
+      "values": [
+        "push_op(\"M\")\n",
+        "push_op(\"N\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        12,
+        10,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "S",
+          "A"
+        ]
+      },
+      "values": [
+        "push_op(\"S\")\n",
+        "push_op(\"A\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        12,
+        10,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "S",
+          "A"
+        ]
+      },
+      "values": [
+        "push_op(\"S\")\n",
+        "push_op(\"A\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        12,
+        11,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "S",
+          "M"
+        ]
+      },
+      "values": [
+        "push_op(\"S\")\n",
+        "push_op(\"M\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        12,
+        11,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "S",
+          "M"
+        ]
+      },
+      "values": [
+        "push_op(\"S\")\n",
+        "push_op(\"M\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        12,
+        13,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "S",
+          "N"
+        ]
+      },
+      "values": [
+        "push_op(\"S\")\n",
+        "push_op(\"N\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        12,
+        13,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "S",
+          "N"
+        ]
+      },
+      "values": [
+        "push_op(\"S\")\n",
+        "push_op(\"N\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        13,
+        10,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "N",
+          "A"
+        ]
+      },
+      "values": [
+        "push_op(\"N\")\n",
+        "push_op(\"A\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        13,
+        10,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "N",
+          "A"
+        ]
+      },
+      "values": [
+        "push_op(\"N\")\n",
+        "push_op(\"A\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        13,
+        11,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "N",
+          "M"
+        ]
+      },
+      "values": [
+        "push_op(\"N\")\n",
+        "push_op(\"M\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        13,
+        11,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "N",
+          "M"
+        ]
+      },
+      "values": [
+        "push_op(\"N\")\n",
+        "push_op(\"M\")\n",
+        "bind(\"y\")\n"
+      ]
+    },
+    {
+      "codes": [
+        13,
+        12,
+        15
+      ],
+      "tree": {
+        "field": "x",
+        "ops": [
+          "N",
+          "S"
+        ]
+      },
+      "values": [
+        "push_op(\"N\")\n",
+        "push_op(\"S\")\n",
+        "bind(\"x\")\n"
+      ]
+    },
+    {
+      "codes": [
+        13,
+        12,
+        16
+      ],
+      "tree": {
+        "field": "y",
+        "ops": [
+          "N",
+          "S"
+        ]
+      },
+      "values": [
+        "push_op(\"N\")\n",
+        "push_op(\"S\")\n",
+        "bind(\"y\")\n"
+      ]
+    }
+  ],
+  "predicted_codes": {
+    "FIELD": [
+      15,
+      16
+    ],
+    "HEAD": [
+      6
+    ],
+    "IMPL": [
+      7,
+      8,
+      9
+    ],
+    "OPS": [
+      10,
+      11,
+      12,
+      13
+    ],
+    "TAIL": [
+      14
+    ]
+  },
+  "rule_count": 0,
+  "structural_columns": [
+    "HEAD",
+    "IMPL",
+    "OPS",
+    "TAIL"
+  ],
+  "virtual_sheets": 0
+}</construction>
+  <native-prefix-counts>{"Combi2": 6, "Permut": 12, "grouped_Cartes": 24}</native-prefix-counts>
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/architect-derived-A.json" sha256="abbf88f484865f37dc46408bd6c89f22eaccf81ac9e99f8d5fa6eec89499ec03" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/build_spec.py" sha256="ea50f45176c7559a013ea6da1935d69db61235727ebee53006b310a85df11842" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/oracle.py" sha256="0608cca557ec20f385a7554d7b7819be97ccf04c8d7c14c4b34035d0e1cf753f" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/replay.py" sha256="54fac943523ae3729c54e40f957c510d9436d3ca0569027118b5d41308dcadd9" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/run_demo.py" sha256="807c953005c3e3790398788f9d27d8b7857a7152ed1f48a25de65ba6553d0067" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/runtime.py" sha256="4e08c96fd31607a38b258cdc30fb5cff3b898204dee95859a71969426fc2a2b3" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/spec/build.json" sha256="1c0f48c56da5eaf8a354a2ea08fc68a0148f970991432e90bcc2bfb2e33e8365" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/spec/spec.toml" sha256="e50a63893b2e06b58aed0ad26b542dab8ecdede49604150846544f0d3a93a909" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/sut.py" sha256="4f5ca2ca974e9a48bf86bc192e663acad6dd830b5f7c60a4613c71e5cf53ef6a" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/tests/test_d5a_fixture.py" sha256="8ee4d3f74b62284731c093490c9470ab75941cb22a46ed8ab34252df5230476f" />
+  <source path="Combinatorics-Framework-QA-edition/SmallUseCasesDemo/05-d5-nested-pipelines/phase-a/verify.py" sha256="891d0f96764cbb08bae9ce2075b50bf1d637face2f3446fba1c392409345156c" />
+</field-pipeline-golden>

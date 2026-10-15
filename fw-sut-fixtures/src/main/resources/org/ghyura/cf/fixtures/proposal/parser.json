@@ -1,0 +1,122 @@
+{
+  "license": "LicenseRef-BUSL-1.1",
+  "author": "Yurii Baranov",
+  "id": "parser",
+  "version": "6472813f70368f9c63da5f470f001da390deb53daa9c85b2f1d361209227a1e1",
+  "title": "Original local proposal task: parser",
+  "context": "A command parser: input is a token stream meant to be ACTION TARGET AMOUNT. Known filler words {please, pls, kindly} are skipped; everything else is read positionally. Unexpected interjections/slang inserted between the real tokens shift the positions and corrupt the parse.",
+  "source": "Combinatorics-Framework-QA-edition/generator_trunk/llm_loop/cmd_parser_scenario.py",
+  "source_line": 54,
+  "slots": [
+    {
+      "sheet": "FRAME",
+      "key": "frame",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "public class Cmd {\n    public static int FW_VAR = 0;\n    public static int FW_CUSTOM_VAR = 0;\n    static java.util.List<String> toks = new java.util.ArrayList<>();\n    static java.util.Set<String> FILLERS = new java.util.HashSet<>(java.util.Arrays.asList(\"please\", \"pls\", \"kindly\"));\n    static String wantAction = \"\", wantTarget = \"\", wantAmount = \"\";\n    static String[] parse(){\n        java.util.List<String> clean = new java.util.ArrayList<>();\n        for (String t : toks) if (!FILLERS.contains(t)) clean.add(t);\n        String a  = clean.size() > 0 ? clean.get(0) : \"\";\n        String tg = clean.size() > 1 ? clean.get(1) : \"\";\n        String am = clean.size() > 2 ? clean.get(2) : \"\";\n        return new String[]{a, tg, am};\n    }\n    public static void main(String[] args){\n"
+      ]
+    },
+    {
+      "sheet": "ACTION",
+      "key": "action",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "role": "action verb",
+      "count": 2,
+      "prefix": "        wantAction = \"",
+      "suffix": "\"; toks.add(wantAction);\n",
+      "context": ""
+    },
+    {
+      "sheet": "SURPRISE1",
+      "key": "surprise1",
+      "verb": "FW_Combi(1)",
+      "flags": [
+        "FW_Optional"
+      ],
+      "raw": true,
+      "role": "surprise interjection slang",
+      "count": 2,
+      "prefix": "        toks.add(\"",
+      "suffix": "\");\n",
+      "context": ""
+    },
+    {
+      "sheet": "TARGET",
+      "key": "target",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "role": "target object",
+      "count": 2,
+      "prefix": "        wantTarget = \"",
+      "suffix": "\"; toks.add(wantTarget);\n",
+      "context": ""
+    },
+    {
+      "sheet": "SURPRISE2",
+      "key": "surprise2",
+      "verb": "FW_Combi(1)",
+      "flags": [
+        "FW_Optional"
+      ],
+      "raw": true,
+      "role": "surprise interjection slang",
+      "count": 2,
+      "prefix": "        toks.add(\"",
+      "suffix": "\");\n",
+      "context": ""
+    },
+    {
+      "sheet": "AMOUNT",
+      "key": "amount",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "role": "amount value",
+      "count": 2,
+      "prefix": "        wantAmount = \"",
+      "suffix": "\"; toks.add(wantAmount);\n",
+      "context": ""
+    },
+    {
+      "sheet": "SURPRISE3",
+      "key": "surprise3",
+      "verb": "FW_Combi(1)",
+      "flags": [
+        "FW_Optional"
+      ],
+      "raw": true,
+      "role": "surprise interjection slang",
+      "count": 2,
+      "prefix": "        toks.add(\"",
+      "suffix": "\");\n",
+      "context": ""
+    },
+    {
+      "sheet": "VERDICT",
+      "key": "verdict",
+      "verb": "FW_Combi(1)",
+      "flags": [],
+      "raw": true,
+      "values": [
+        "        String[] got = parse();\n        boolean ok = got[0].equals(wantAction) && got[1].equals(wantTarget) && got[2].equals(wantAmount);\n        FW_VAR = ok ? 0 : 1;\n        FW_CUSTOM_VAR = FW_VAR;\n        System.out.println(\"FW_VAR=\" + FW_VAR + \" want=[\" + wantAction + \"|\" + wantTarget + \"|\" + wantAmount\n                + \"] got=\" + java.util.Arrays.toString(got) + \" toks=\" + toks);\n    }\n}\n"
+      ]
+    }
+  ],
+  "args": [
+    "mode=cmd_parser"
+  ],
+  "goals": [
+    "bugs_found"
+  ],
+  "custom_vars": [
+    {
+      "code": 2,
+      "msg": "parse corrupted by an optional surprise"
+    }
+  ]
+}

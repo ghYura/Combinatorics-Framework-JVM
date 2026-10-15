@@ -1,0 +1,69 @@
+{
+  "seeds": [
+    {
+      "tags": [
+        "hardware",
+        "cpu",
+        "local"
+      ],
+      "text": "Target machine: AMD FX-8320, 32 GB RAM, integrated or very weak graphics. The application should avoid GPU dependencies, avoid downloading transformer weights by default, cap context and output length, and prefer deterministic CPU-friendly algorithms. Good defaults are single-process inference, small JSON memory, lexical retrieval, and a compact random forest surrogate.",
+      "title": "Local hardware profile"
+    },
+    {
+      "tags": [
+        "chat",
+        "assistant",
+        "llm-like"
+      ],
+      "text": "This app behaves like a small local assistant API but it is not a neural LLM. It accepts chat messages, keeps a local knowledge store, retrieves relevant snippets, performs small deterministic reasoning tasks, streams responses, and exposes chat-API-compatible endpoint shapes for local experiments.",
+      "title": "LLM-like local assistant design"
+    },
+    {
+      "tags": [
+        "surrogate",
+        "classifier",
+        "oracle"
+      ],
+      "text": "The surrogate classifier predicts labels from numeric features. If the model is untrained it can synchronously query the simulated oracle. If confidence is low it returns the best surrogate guess and asks the oracle in the background so later retraining improves hard cases.",
+      "title": "Surrogate classifier behavior"
+    }
+  ],
+  "stop_words": [
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "for",
+    "from",
+    "how",
+    "i",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "that",
+    "the",
+    "this",
+    "to",
+    "what",
+    "with",
+    "you",
+    "your",
+    "для",
+    "или",
+    "как",
+    "на",
+    "по",
+    "с",
+    "у",
+    "что",
+    "это",
+    "я"
+  ]
+}

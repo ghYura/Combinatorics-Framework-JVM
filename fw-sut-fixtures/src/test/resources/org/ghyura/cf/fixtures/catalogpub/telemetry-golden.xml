@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+
+<catalog-pub-golden family="telemetry" commit="8d5aa2d48a605521f783d1787a42fc9a5ebfc7a9" cases="252" python="3.14.0" unicode="16.0.0" oracle="unchanged original functions on scratch copies">
+  <source path="telemetry_catalog_service/telemetry_rules.py" sha256="b61e5bcca9a8a2c41a72506db294ff5dd47f79b5f0b0e928b32470e7fbfad047" />
+  <source path="telemetry_catalog_service/telemetry_catalog_service.py" sha256="3d32eee234d307ef3dcc7e329a3204dd2c0201e0a4165e90e6018fd36ea169de" />
+  <source path="telemetry_catalog_service/selftest.py" sha256="948fd7f66297452277d44cf8e4ddf8597f7807ebc10765fd539457529c55476d" />
+  <source path="tester_vs_pub/pub.py" sha256="cff7312ba3015bffa2b0a66162b96460e7f28d666f3b3ef09f7c58886dd9fbba" />
+  <regenerate>python3 -B handoff/outbox/devtools/CatalogPubGoldens.py</regenerate>
+  <case id="telemetry-0">
+    <input>{"op":"unquote","value":"%ED%A0%80"}</input>
+    <expected>{"value":"\ufffd\ufffd\ufffd"}</expected>
+  </case>
+  <case id="telemetry-1">
+    <input>{"op":"unquote","value":"%E2%82x"}</input>
+    <expected>{"value":"\ufffdx"}</expected>
+  </case>
+  <case id="telemetry-2">
+    <input>{"op":"unquote","value":"%C0%AF"}</input>
+    <expected>{"value":"\ufffd\ufffd"}</expected>
+  </case>
+  <case id="telemetry-3">
+    <input>{"op":"unquote","value":"%F0%80%80%80"}</input>
+    <expected>{"value":"\ufffd\ufffd\ufffd\ufffd"}</expected>
+  </case>
+  <case id="telemetry-4">
+    <input>{"op":"unquote","value":"%\uff25\uff11"}</input>
+    <expected>{"value":"%\uff25\uff11"}</expected>
+  </case>
+  <case id="telemetry-5">
+    <input>{"op":"unquote","value":"%F0%90%80"}</input>
+    <expected>{"value":"\ufffd"}</expected>
+  </case>
+  <case id="telemetry-6">
+    <input>{"op":"quote","value":"a\ud800b"}</input>
+    <expected>{"error":"UnicodeEncodeError","message":"'utf-8' codec can't encode character '\\ud800' in position 1: surrogates not allowed"}</expected>
+  </case>
+  <case id="telemetry-7">
+    <input>{"op":"quote","value":"\ud83d\ude00\ud800"}</input>
+    <expected>{"error":"UnicodeEncodeError","message":"'utf-8' codec can't encode character '\\ud800' in position 1: surrogates not allowed"}</expected>
+  </case>
+  <case id="telemetry-8">
+    <input>{"op":"helpers","value":null}</input>
+    <expected>{"value":[[],null,false]}</expected>
+  </case>
+  <case id="telemetry-9">
+    <input>{"op":"helpers","value":""}</input>
+    <expected>{"value":[[],null,false]}</expected>
+  </case>
+  <case id="telemetry-10">
+    <input>{"op":"helpers","value":[]}</input>
+    <expected>{"value":[[],null,false]}</expected>
+  </case>
+  <case id="telemetry-11">
+    <input>{"op":"helpers","value":false}</input>
+    <expected>{"value":[["False"],null,true]}</expected>
+  </case>
+  <case id="telemetry-12">
+    <input>{"op":"helpers","value":0}</input>
+    <expected>{"value":[["0"],0,true]}</expected>
+  </case>
+  <case id="telemetry-13">
+    <input>{"op":"helpers","value":1.0}</input>
+    <expected>{"value":[["1.0"],null,true]}</expected>
+  </case>
+  <case id="telemetry-14">
+    <input>{"op":"helpers","value":" +1_200 "}</input>
+    <expected>{"value":[[" +1_200 "],1200,true]}</expected>
+  </case>
+  <case id="telemetry-15">
+    <input>{"op":"helpers","value":"-3"}</input>
+    <expected>{"value":[["-3"],-3,true]}</expected>
+  </case>
+  <case id="telemetry-16">
+    <input>{"op":"helpers","value":"\u0663"}</input>
+    <expected>{"value":[["\u0663"],3,true]}</expected>
+  </case>
+  <case id="telemetry-17">
+    <input>{"op":"helpers","value":"\u00b2"}</input>
+    <expected>{"value":[["\u00b2"],null,true]}</expected>
+  </case>
+  <case id="telemetry-18">
+    <input>{"op":"helpers","value":"--1"}</input>
+    <expected>{"value":[["--1"],null,true]}</expected>
+  </case>
+  <case id="telemetry-19">
+    <input>{"op":"helpers","value":"99999999999999999999999999999999999999999999999999"}</input>
+    <expected>{"value":[["99999999999999999999999999999999999999999999999999"],{"$integer":"99999999999999999999999999999999999999999999999999"},true]}</expected>
+  </case>
+  <case id="telemetry-20">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-21">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-22">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_OBLIGATORY_ACCESS_KEY"]}</expected>
+  </case>
+  <case id="telemetry-23">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-24">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Solar","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_SIGNAL_BY_FAMILY","R_SORT_SIGNAL_SUBSET"]}</expected>
+  </case>
+  <case id="telemetry-25">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Solar","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Solar&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Solar&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-26">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Satellite=UP"}}</input>
+    <expected>{"value":["R_SORT_SIGNAL_SUBSET"]}</expected>
+  </case>
+  <case id="telemetry-27">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Satellite=UP"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Satellite=UP","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Satellite=UP"]}</expected>
+  </case>
+  <case id="telemetry-28">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","IndexedTimestamp":"600","provisional":"enabled","AssetKind":"preview"}}</input>
+    <expected>{"value":["R_INDEXED_XOR_PROVISIONAL"]}</expected>
+  </case>
+  <case id="telemetry-29">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","IndexedTimestamp":"600","provisional":"enabled","AssetKind":"preview"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;IndexedTimestamp=600&amp;AssetKind=preview&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;IndexedTimestamp=600&amp;AssetKind=preview&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-30">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"3600","CaptureTimeEnd":"1200","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_CAPTURE_RANGE"]}</expected>
+  </case>
+  <case id="telemetry-31">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"3600","CaptureTimeEnd":"1200","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=3600&amp;CaptureTimeEnd=1200&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=3600&amp;CaptureTimeEnd=1200&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-32">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","offsetStart":"48","offsetEnd":"16"}}</input>
+    <expected>{"value":["R_OFFSET_RANGE"]}</expected>
+  </case>
+  <case id="telemetry-33">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","offsetStart":"48","offsetEnd":"16"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;offsetStart=48&amp;offsetEnd=16&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;offsetStart=48&amp;offsetEnd=16&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-34">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"silver","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-35">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"silver","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=silver&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=silver&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-36">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-37">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-38">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"csv","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_VOLUME_MIN_ENCODING"]}</expected>
+  </case>
+  <case id="telemetry-39">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"csv","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=csv&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=csv&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-40">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"markup","sortBy":"Radar=DOWN","scanScope":"archive"}}</input>
+    <expected>{"value":["R_MARKUP_NO_ARCHIVE"]}</expected>
+  </case>
+  <case id="telemetry-41">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"markup","sortBy":"Radar=DOWN","scanScope":"archive"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;scanScope=archive&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=markup&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;scanScope=archive&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=markup&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-42">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","exactMatch":"enabled","contributorTag":"orbit-team"}}</input>
+    <expected>{"value":["R_EXACT_NO_APPROXIMATE"]}</expected>
+  </case>
+  <case id="telemetry-43">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","exactMatch":"enabled","contributorTag":"orbit-team"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;contributorTag=orbit-team&amp;exactMatch=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;contributorTag=orbit-team&amp;exactMatch=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-44">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","provisional":"enabled"}}</input>
+    <expected>{"value":["R_PROVISIONAL_PREVIEW"]}</expected>
+  </case>
+  <case id="telemetry-45">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","provisional":"enabled"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-46">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_QUALITY_NEEDS_ACCESS"]}</expected>
+  </case>
+  <case id="telemetry-47">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-48">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","custodianId":"70011","ExcludeRestricted":"enabled"}}</input>
+    <expected>{"value":["R_RESTRICTED_CUSTODIAN"]}</expected>
+  </case>
+  <case id="telemetry-49">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","custodianId":"70011","ExcludeRestricted":"enabled"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;custodianId=70011&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;custodianId=70011&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-50">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","complianceLock":"enabled","ExcludeRestricted":"disabled"}}</input>
+    <expected>{"value":["R_COMPLIANCE_LOCK"]}</expected>
+  </case>
+  <case id="telemetry-51">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","complianceLock":"enabled","ExcludeRestricted":"disabled"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=disabled&amp;complianceLock=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=disabled&amp;complianceLock=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-52">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"OpenData","SignalClassList":"AirQuality","AccessTier":"restricted","responseFormat":"structured"}}</input>
+    <expected>{"value":["R_OPEN_ACCESS"]}</expected>
+  </case>
+  <case id="telemetry-53">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"OpenData","SignalClassList":"AirQuality","AccessTier":"restricted","responseFormat":"structured"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=OpenData&amp;SignalClassList=AirQuality&amp;AccessTier=restricted&amp;responseFormat=structured","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=OpenData&amp;SignalClassList=AirQuality&amp;AccessTier=restricted&amp;responseFormat=structured"]}</expected>
+  </case>
+  <case id="telemetry-54">
+    <input>{"op":"validate","params":{}}</input>
+    <expected>{"value":["R_OBLIGATORY_LOCATOR","R_OBLIGATORY_ACCESS_KEY"]}</expected>
+  </case>
+  <case id="telemetry-55">
+    <input>{"op":"assemble","params":{},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9"]}</expected>
+  </case>
+  <case id="telemetry-56">
+    <input>{"op":"validate","params":{"locator":false,"accessKey":0}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-57">
+    <input>{"op":"assemble","params":{"locator":false,"accessKey":0},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=0","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=0"]}</expected>
+  </case>
+  <case id="telemetry-58">
+    <input>{"op":"validate","params":{"locator":[],"accessKey":[]}}</input>
+    <expected>{"value":["R_OBLIGATORY_LOCATOR","R_OBLIGATORY_ACCESS_KEY"]}</expected>
+  </case>
+  <case id="telemetry-59">
+    <input>{"op":"assemble","params":{"locator":[],"accessKey":[]},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9"]}</expected>
+  </case>
+  <case id="telemetry-60">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"unknown","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-61">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"unknown","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=unknown&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=unknown&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-62">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"unknown","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-63">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"unknown","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=unknown&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=unknown&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-64">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":["Climate"],"SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"error":"TypeError","message":"cannot use 'list' as a dict key (unhashable type: 'list')"}</expected>
+  </case>
+  <case id="telemetry-65">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":["Climate"],"SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=%5B%27Climate%27%5D&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=%5B%27Climate%27%5D&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-66">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":["",null,0,false],"AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_SIGNAL_BY_FAMILY","R_SORT_SIGNAL_SUBSET"]}</expected>
+  </case>
+  <case id="telemetry-67">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":["",null,0,false],"AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=None,0,False&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=None,0,False&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-68">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","provisional":"disabled","IndexedTimestamp":0}}</input>
+    <expected>{"value":["R_INDEXED_XOR_PROVISIONAL"]}</expected>
+  </case>
+  <case id="telemetry-69">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","provisional":"disabled","IndexedTimestamp":0},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;IndexedTimestamp=0&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=disabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;IndexedTimestamp=0&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=disabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-70">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=SIDEWAYS"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-71">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=SIDEWAYS"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=SIDEWAYS","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=SIDEWAYS"]}</expected>
+  </case>
+  <case id="telemetry-72">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","SignalJoin":"unknown"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-73">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"volumetric","responseFormat":"structured","sortBy":"Radar=DOWN","SignalJoin":"unknown"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;SignalJoin=unknown&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;SignalJoin=unknown&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-74">
+    <input>{"op":"validate","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"","responseFormat":"structured","sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-75">
+    <input>{"op":"assemble","params":{"locator":"atlas","accessKey":"key-orbit","DatasetFamily":"Climate","SignalClassList":"Radar,OceanBuoy","AccessTier":"partner","QualityTier":"platinum","CaptureTimeStart":"1200","CaptureTimeEnd":"2400","encoding":"zarr","geometry":"","responseFormat":"structured","sortBy":"Radar=DOWN"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;responseFormat=structured&amp;sortBy=Radar=DOWN"]}</expected>
+  </case>
+  <case id="telemetry-76">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-77">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=csv","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=csv"]}</expected>
+  </case>
+  <case id="telemetry-78">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-79">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=csv","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=csv"]}</expected>
+  </case>
+  <case id="telemetry-80">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-81">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=csv","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=csv"]}</expected>
+  </case>
+  <case id="telemetry-82">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-83">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=csv","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=csv"]}</expected>
+  </case>
+  <case id="telemetry-84">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-85">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=csv&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=csv&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-86">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-87">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=csv&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=csv&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-88">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-89">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=csv&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=csv&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-90">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-91">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=csv&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=csv&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-92">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":["R_VOLUME_MIN_ENCODING"]}</expected>
+  </case>
+  <case id="telemetry-93">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=csv&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=csv&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-94">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":["R_VOLUME_MIN_ENCODING"]}</expected>
+  </case>
+  <case id="telemetry-95">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=csv&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=csv&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-96">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":["R_VOLUME_MIN_ENCODING"]}</expected>
+  </case>
+  <case id="telemetry-97">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=csv&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=csv&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-98">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":["R_VOLUME_MIN_ENCODING"]}</expected>
+  </case>
+  <case id="telemetry-99">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"csv","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=csv&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=csv&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-100">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-101">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=parquet","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=parquet"]}</expected>
+  </case>
+  <case id="telemetry-102">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-103">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=parquet","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=parquet"]}</expected>
+  </case>
+  <case id="telemetry-104">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-105">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=parquet","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=parquet"]}</expected>
+  </case>
+  <case id="telemetry-106">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-107">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=parquet","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=parquet"]}</expected>
+  </case>
+  <case id="telemetry-108">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-109">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=parquet&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=parquet&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-110">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-111">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=parquet&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=parquet&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-112">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-113">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=parquet&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=parquet&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-114">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-115">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=parquet&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=parquet&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-116">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-117">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=parquet&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=parquet&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-118">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-119">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=parquet&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=parquet&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-120">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-121">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=parquet&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=parquet&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-122">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-123">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"parquet","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=parquet&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=parquet&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-124">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-125">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=zarr","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=zarr"]}</expected>
+  </case>
+  <case id="telemetry-126">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-127">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=zarr","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=zarr"]}</expected>
+  </case>
+  <case id="telemetry-128">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-129">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=zarr","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=zarr"]}</expected>
+  </case>
+  <case id="telemetry-130">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-131">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=zarr","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=zarr"]}</expected>
+  </case>
+  <case id="telemetry-132">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-133">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=zarr&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=zarr&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-134">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-135">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=zarr&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=zarr&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-136">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-137">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=zarr&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=zarr&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-138">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-139">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=zarr&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=zarr&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-140">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-141">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=zarr&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=zarr&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-142">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":["R_ZARR_QUALITY"]}</expected>
+  </case>
+  <case id="telemetry-143">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=zarr&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=zarr&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-144">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-145">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=zarr&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=zarr&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-146">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-147">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"zarr","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=zarr&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=zarr&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-148">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-149">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=unknown","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=unknown"]}</expected>
+  </case>
+  <case id="telemetry-150">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-151">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=unknown","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=unknown"]}</expected>
+  </case>
+  <case id="telemetry-152">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-153">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=unknown","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=unknown"]}</expected>
+  </case>
+  <case id="telemetry-154">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-155">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=unknown","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=unknown"]}</expected>
+  </case>
+  <case id="telemetry-156">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-157">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=unknown&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=unknown&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-158">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-159">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=unknown&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=unknown&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-160">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-161">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=unknown&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=unknown&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-162">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"value":[]}</expected>
+  </case>
+  <case id="telemetry-163">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"tabular","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=unknown&amp;geometry=tabular","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=unknown&amp;geometry=tabular"]}</expected>
+  </case>
+  <case id="telemetry-164">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-165">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;encoding=unknown&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;encoding=unknown&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-166">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-167">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"silver","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=unknown&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=silver&amp;encoding=unknown&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-168">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-169">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"gold","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=unknown&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=gold&amp;encoding=unknown&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-170">
+    <input>{"op":"validate","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-171">
+    <input>{"op":"assemble","params":{"locator":"a","accessKey":"k","encoding":"unknown","geometry":"volumetric","QualityTier":"unknown","AccessTier":"public"},"base":"https://example.invalid///","locator":"a/b + \u00e9"}</input>
+    <expected>{"value":["accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=unknown&amp;geometry=volumetric","https://example.invalid/api/catalog/lookup/a/b%20%2B%20%C3%A9?accessKey=k&amp;AccessTier=public&amp;QualityTier=unknown&amp;encoding=unknown&amp;geometry=volumetric"]}</expected>
+  </case>
+  <case id="telemetry-172">
+    <input>{"op":"parse","locator":"a","query":{"accessKey":["x","y"]}}</input>
+    <expected>{"value":{"locator":"a","accessKey":"x"}}</expected>
+  </case>
+  <case id="telemetry-173">
+    <input>{"op":"parse","locator":"a","query":{"locator":["override"],"SignalClassList":["Radar,,OceanBuoy"]}}</input>
+    <expected>{"value":{"locator":"override","SignalClassList":["Radar","OceanBuoy"]}}</expected>
+  </case>
+  <case id="telemetry-174">
+    <input>{"op":"parse","locator":"a","query":{"accessKey":[]}}</input>
+    <expected>{"error":"IndexError","message":"list index out of range"}</expected>
+  </case>
+  <case id="telemetry-175">
+    <input>{"op":"parse","locator":"a","query":{"sortBy":"Radar=DOWN"}}</input>
+    <expected>{"value":{"locator":"a","sortBy":["Radar=DOWN"]}}</expected>
+  </case>
+  <case id="telemetry-176">
+    <input>{"op":"parse","locator":"a","query":{"accessKey":false}}</input>
+    <expected>{"value":{"locator":"a","accessKey":false}}</expected>
+  </case>
+  <case id="telemetry-177">
+    <input>{"op":"handle","method":"POST","path":"http://[bad/a","body":null}</input>
+    <expected>{"error":"ValueError","message":"Invalid IPv6 URL"}</expected>
+  </case>
+  <case id="telemetry-178">
+    <input>{"op":"handle","method":"POST","path":"http://[bad/a","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"error":"ValueError","message":"Invalid IPv6 URL"}</expected>
+  </case>
+  <case id="telemetry-179">
+    <input>{"op":"handle","method":"POST","path":"http://[zzz]/a","body":null}</input>
+    <expected>{"error":"ValueError","message":"'zzz' does not appear to be an IPv4 or IPv6 address"}</expected>
+  </case>
+  <case id="telemetry-180">
+    <input>{"op":"handle","method":"POST","path":"http://[zzz]/a","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"error":"ValueError","message":"'zzz' does not appear to be an IPv4 or IPv6 address"}</expected>
+  </case>
+  <case id="telemetry-181">
+    <input>{"op":"handle","method":"POST","path":"http://a\uff1ab/a","body":null}</input>
+    <expected>{"error":"ValueError","message":"netloc 'a\uff1ab' contains invalid characters under NFKC normalization"}</expected>
+  </case>
+  <case id="telemetry-182">
+    <input>{"op":"handle","method":"POST","path":"http://a\uff1ab/a","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"error":"ValueError","message":"netloc 'a\uff1ab' contains invalid characters under NFKC normalization"}</expected>
+  </case>
+  <case id="telemetry-183">
+    <input>{"op":"handle","method":"POST","path":"/health","body":null}</input>
+    <expected>{"value":[200,"text/plain; charset=utf-8","ok"]}</expected>
+  </case>
+  <case id="telemetry-184">
+    <input>{"op":"handle","method":"POST","path":"/health","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"text/plain; charset=utf-8","ok"]}</expected>
+  </case>
+  <case id="telemetry-185">
+    <input>{"op":"handle","method":"POST","path":"/whoami","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"service\": \"telemetry_catalog\", \"params\": [\"accessKey\", \"scanScope\", \"groupSeries\", \"DatasetFamily\", \"SignalClassList\", \"SignalJoin\", \"AccessTier\", \"QualityTier\", \"CaptureTimeStart\", \"CaptureTimeEnd\", \"SourceTimestamp\", \"IndexedTimestamp\", \"ExcludeRestricted\", \"complianceLock\", \"AssetKind\", \"encoding\", \"geometry\", \"custodianId\", \"contributorTag\", \"labelPattern\", \"notesPattern\", \"exactMatch\", \"provisional\", \"responseFormat\", \"offsetStart\", \"offsetEnd\", \"sortBy\"], \"families\": {\"Climate\": [\"Radar\", \"WeatherStation\", \"OceanBuoy\", \"Satellite\", \"Lidar\"], \"Mobility\": [\"Trajectory\", \"TrafficFlow\", \"Transit\", \"Micromobility\"], \"Energy\": [\"Solar\", \"Wind\", \"GridLoad\", \"Storage\"], \"OpenData\": [\"CivicSensors\", \"AirQuality\", \"WaterLevel\"], \"Research\": [\"Materials\", \"Genomics\", \"Astronomy\", \"Robotics\"], \"Industrial\": [\"Vibration\", \"Thermal\", \"Acoustic\"]}, \"rules\": {\"R_OBLIGATORY_LOCATOR\": \"locator is mandatory\", \"R_OBLIGATORY_ACCESS_KEY\": \"accessKey is mandatory\", \"R_SIGNAL_BY_FAMILY\": \"each SignalClassList entry must belong to DatasetFamily\", \"R_SORT_SIGNAL_SUBSET\": \"sortBy may only use signals present in SignalClassList\", \"R_INDEXED_XOR_PROVISIONAL\": \"IndexedTimestamp cannot be present with provisional\", \"R_CAPTURE_RANGE\": \"CaptureTimeEnd must be greater than or equal to CaptureTimeStart\", \"R_OFFSET_RANGE\": \"offsetEnd must be greater than or equal to offsetStart\", \"R_ZARR_QUALITY\": \"zarr requires geometry and QualityTier of at least gold when specified\", \"R_VOLUME_MIN_ENCODING\": \"volumetric geometry requires parquet or zarr encoding\", \"R_MARKUP_NO_ARCHIVE\": \"markup responseFormat forbids archive scanScope\", \"R_EXACT_NO_APPROXIMATE\": \"exactMatch enabled forbids contributorTag and notesPattern\", \"R_PROVISIONAL_PREVIEW\": \"provisional enabled requires AssetKind preview\", \"R_QUALITY_NEEDS_ACCESS\": \"QualityTier requires AccessTier\", \"R_RESTRICTED_CUSTODIAN\": \"restricted custodian forbids ExcludeRestricted enabled\", \"R_COMPLIANCE_LOCK\": \"complianceLock enabled forbids restricted records\", \"R_OPEN_ACCESS\": \"OpenData requires public/community access and tabular geometry\"}}"]}</expected>
+  </case>
+  <case id="telemetry-186">
+    <input>{"op":"handle","method":"POST","path":"/whoami","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"service\": \"telemetry_catalog\", \"params\": [\"accessKey\", \"scanScope\", \"groupSeries\", \"DatasetFamily\", \"SignalClassList\", \"SignalJoin\", \"AccessTier\", \"QualityTier\", \"CaptureTimeStart\", \"CaptureTimeEnd\", \"SourceTimestamp\", \"IndexedTimestamp\", \"ExcludeRestricted\", \"complianceLock\", \"AssetKind\", \"encoding\", \"geometry\", \"custodianId\", \"contributorTag\", \"labelPattern\", \"notesPattern\", \"exactMatch\", \"provisional\", \"responseFormat\", \"offsetStart\", \"offsetEnd\", \"sortBy\"], \"families\": {\"Climate\": [\"Radar\", \"WeatherStation\", \"OceanBuoy\", \"Satellite\", \"Lidar\"], \"Mobility\": [\"Trajectory\", \"TrafficFlow\", \"Transit\", \"Micromobility\"], \"Energy\": [\"Solar\", \"Wind\", \"GridLoad\", \"Storage\"], \"OpenData\": [\"CivicSensors\", \"AirQuality\", \"WaterLevel\"], \"Research\": [\"Materials\", \"Genomics\", \"Astronomy\", \"Robotics\"], \"Industrial\": [\"Vibration\", \"Thermal\", \"Acoustic\"]}, \"rules\": {\"R_OBLIGATORY_LOCATOR\": \"locator is mandatory\", \"R_OBLIGATORY_ACCESS_KEY\": \"accessKey is mandatory\", \"R_SIGNAL_BY_FAMILY\": \"each SignalClassList entry must belong to DatasetFamily\", \"R_SORT_SIGNAL_SUBSET\": \"sortBy may only use signals present in SignalClassList\", \"R_INDEXED_XOR_PROVISIONAL\": \"IndexedTimestamp cannot be present with provisional\", \"R_CAPTURE_RANGE\": \"CaptureTimeEnd must be greater than or equal to CaptureTimeStart\", \"R_OFFSET_RANGE\": \"offsetEnd must be greater than or equal to offsetStart\", \"R_ZARR_QUALITY\": \"zarr requires geometry and QualityTier of at least gold when specified\", \"R_VOLUME_MIN_ENCODING\": \"volumetric geometry requires parquet or zarr encoding\", \"R_MARKUP_NO_ARCHIVE\": \"markup responseFormat forbids archive scanScope\", \"R_EXACT_NO_APPROXIMATE\": \"exactMatch enabled forbids contributorTag and notesPattern\", \"R_PROVISIONAL_PREVIEW\": \"provisional enabled requires AssetKind preview\", \"R_QUALITY_NEEDS_ACCESS\": \"QualityTier requires AccessTier\", \"R_RESTRICTED_CUSTODIAN\": \"restricted custodian forbids ExcludeRestricted enabled\", \"R_COMPLIANCE_LOCK\": \"complianceLock enabled forbids restricted records\", \"R_OPEN_ACCESS\": \"OpenData requires public/community access and tabular geometry\"}}"]}</expected>
+  </case>
+  <case id="telemetry-187">
+    <input>{"op":"handle","method":"POST","path":"/unknown/\u00e9","body":null}</input>
+    <expected>{"value":[404,"application/json; charset=utf-8","{\"error\": \"not found\", \"path\": \"/unknown/\\u00e9\"}"]}</expected>
+  </case>
+  <case id="telemetry-188">
+    <input>{"op":"handle","method":"POST","path":"/unknown/\u00e9","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[404,"application/json; charset=utf-8","{\"error\": \"not found\", \"path\": \"/unknown/\\u00e9\"}"]}</expected>
+  </case>
+  <case id="telemetry-189">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_OBLIGATORY_ACCESS_KEY\"], \"detail\": {\"R_OBLIGATORY_ACCESS_KEY\": \"accessKey is mandatory\"}}"]}</expected>
+  </case>
+  <case id="telemetry-190">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-191">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-192">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-193">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/%22%3C%26?accessKey=k&amp;responseFormat=markup","body":null}</input>
+    <expected>{"value":[200,"application/xml; charset=utf-8","&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;&lt;catalog locator=\"\"&amp;lt;&amp;amp;\" count=\"6\"&gt;&lt;dataset id=\"6101\"&gt;&lt;label&gt;North Ridge Radar Sweep&lt;/label&gt;&lt;family&gt;Climate&lt;/family&gt;&lt;signal&gt;Radar&lt;/signal&gt;&lt;accessTier&gt;partner&lt;/accessTier&gt;&lt;quality&gt;platinum&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6102\"&gt;&lt;label&gt;Harbor Buoy Window&lt;/label&gt;&lt;family&gt;Climate&lt;/family&gt;&lt;signal&gt;OceanBuoy&lt;/signal&gt;&lt;accessTier&gt;restricted&lt;/accessTier&gt;&lt;quality&gt;gold-plus&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6201\"&gt;&lt;label&gt;Regional Grid Load&lt;/label&gt;&lt;family&gt;Energy&lt;/family&gt;&lt;signal&gt;GridLoad&lt;/signal&gt;&lt;accessTier&gt;public&lt;/accessTier&gt;&lt;quality&gt;gold&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6301\"&gt;&lt;label&gt;City Air Sensor Pack&lt;/label&gt;&lt;family&gt;OpenData&lt;/family&gt;&lt;signal&gt;AirQuality&lt;/signal&gt;&lt;accessTier&gt;public&lt;/accessTier&gt;&lt;quality&gt;silver&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6401\"&gt;&lt;label&gt;Alloy Fatigue Run&lt;/label&gt;&lt;family&gt;Research&lt;/family&gt;&lt;signal&gt;Materials&lt;/signal&gt;&lt;accessTier&gt;community&lt;/accessTier&gt;&lt;quality&gt;platinum-plus&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6109\"&gt;&lt;label&gt;North Ridge Radar Preview&lt;/label&gt;&lt;family&gt;Climate&lt;/family&gt;&lt;signal&gt;Radar&lt;/signal&gt;&lt;accessTier&gt;partner&lt;/accessTier&gt;&lt;quality&gt;gold&lt;/quality&gt;&lt;/dataset&gt;&lt;/catalog&gt;"]}</expected>
+  </case>
+  <case id="telemetry-194">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/%22%3C%26?accessKey=k&amp;responseFormat=markup","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/xml; charset=utf-8","&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;&lt;catalog locator=\"\"&amp;lt;&amp;amp;\" count=\"6\"&gt;&lt;dataset id=\"6101\"&gt;&lt;label&gt;North Ridge Radar Sweep&lt;/label&gt;&lt;family&gt;Climate&lt;/family&gt;&lt;signal&gt;Radar&lt;/signal&gt;&lt;accessTier&gt;partner&lt;/accessTier&gt;&lt;quality&gt;platinum&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6102\"&gt;&lt;label&gt;Harbor Buoy Window&lt;/label&gt;&lt;family&gt;Climate&lt;/family&gt;&lt;signal&gt;OceanBuoy&lt;/signal&gt;&lt;accessTier&gt;restricted&lt;/accessTier&gt;&lt;quality&gt;gold-plus&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6201\"&gt;&lt;label&gt;Regional Grid Load&lt;/label&gt;&lt;family&gt;Energy&lt;/family&gt;&lt;signal&gt;GridLoad&lt;/signal&gt;&lt;accessTier&gt;public&lt;/accessTier&gt;&lt;quality&gt;gold&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6301\"&gt;&lt;label&gt;City Air Sensor Pack&lt;/label&gt;&lt;family&gt;OpenData&lt;/family&gt;&lt;signal&gt;AirQuality&lt;/signal&gt;&lt;accessTier&gt;public&lt;/accessTier&gt;&lt;quality&gt;silver&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6401\"&gt;&lt;label&gt;Alloy Fatigue Run&lt;/label&gt;&lt;family&gt;Research&lt;/family&gt;&lt;signal&gt;Materials&lt;/signal&gt;&lt;accessTier&gt;community&lt;/accessTier&gt;&lt;quality&gt;platinum-plus&lt;/quality&gt;&lt;/dataset&gt;&lt;dataset id=\"6109\"&gt;&lt;label&gt;North Ridge Radar Preview&lt;/label&gt;&lt;family&gt;Climate&lt;/family&gt;&lt;signal&gt;Radar&lt;/signal&gt;&lt;accessTier&gt;partner&lt;/accessTier&gt;&lt;quality&gt;gold&lt;/quality&gt;&lt;/dataset&gt;&lt;/catalog&gt;"]}</expected>
+  </case>
+  <case id="telemetry-195">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/%FF?accessKey=k","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"\ufffd\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-196">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/%FF?accessKey=k","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"\ufffd\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-197">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a/b?accessKey=k","body":null}</input>
+    <expected>{"value":[404,"application/json; charset=utf-8","{\"error\": \"not found\", \"path\": \"/api/catalog/lookup/a/b\"}"]}</expected>
+  </case>
+  <case id="telemetry-198">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a/b?accessKey=k","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[404,"application/json; charset=utf-8","{\"error\": \"not found\", \"path\": \"/api/catalog/lookup/a/b\"}"]}</expected>
+  </case>
+  <case id="telemetry-199">
+    <input>{"op":"handle","method":"POST","path":"http://host/api/catalog/lookup/a?accessKey=k#fragment","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-200">
+    <input>{"op":"handle","method":"POST","path":"http://host/api/catalog/lookup/a?accessKey=k#fragment","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-201">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=&amp;accessKey=k","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-202">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=&amp;accessKey=k","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 6, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-203">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;offsetStart=-2","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 2, \"valid\": true, \"records\": [{\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-204">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;offsetStart=-2","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 2, \"valid\": true, \"records\": [{\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-205">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;offsetEnd=-1","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 5, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}]}"]}</expected>
+  </case>
+  <case id="telemetry-206">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;offsetEnd=-1","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 5, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6102, \"label\": \"Harbor Buoy Window\", \"family\": \"Climate\", \"signal\": \"OceanBuoy\", \"accessTier\": \"restricted\", \"quality\": \"gold-plus\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"dataset\", \"custodianId\": 70011}, {\"id\": 6201, \"label\": \"Regional Grid Load\", \"family\": \"Energy\", \"signal\": \"GridLoad\", \"accessTier\": \"public\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 73}, {\"id\": 6301, \"label\": \"City Air Sensor Pack\", \"family\": \"OpenData\", \"signal\": \"AirQuality\", \"accessTier\": \"public\", \"quality\": \"silver\", \"encoding\": \"csv\", \"geometry\": \"tabular\", \"assetKind\": \"collection\", \"custodianId\": 31}, {\"id\": 6401, \"label\": \"Alloy Fatigue Run\", \"family\": \"Research\", \"signal\": \"Materials\", \"accessTier\": \"community\", \"quality\": \"platinum-plus\", \"encoding\": \"zarr\", \"geometry\": \"tabular\", \"assetKind\": \"sample\", \"custodianId\": 44}]}"]}</expected>
+  </case>
+  <case id="telemetry-207">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;AccessTier=gold+plus","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 0, \"valid\": true, \"records\": []}"]}</expected>
+  </case>
+  <case id="telemetry-208">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;AccessTier=gold+plus","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 0, \"valid\": true, \"records\": []}"]}</expected>
+  </case>
+  <case id="telemetry-209">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;QualityTier=unknown","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_QUALITY_NEEDS_ACCESS\"], \"detail\": {\"R_QUALITY_NEEDS_ACCESS\": \"QualityTier requires AccessTier\"}}"]}</expected>
+  </case>
+  <case id="telemetry-210">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;QualityTier=unknown","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_QUALITY_NEEDS_ACCESS\"], \"detail\": {\"R_QUALITY_NEEDS_ACCESS\": \"QualityTier requires AccessTier\"}}"]}</expected>
+  </case>
+  <case id="telemetry-211">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;encoding=zarr&amp;QualityTier=unknown&amp;geometry=tabular","body":null}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-212">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/a?accessKey=k&amp;encoding=zarr&amp;QualityTier=unknown&amp;geometry=tabular","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"error":"ValueError","message":"list.index(x): x not in list"}</expected>
+  </case>
+  <case id="telemetry-213">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"atlas\", \"count\": 2, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-214">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"atlas\", \"count\": 2, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-215">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_OBLIGATORY_ACCESS_KEY\"], \"detail\": {\"R_OBLIGATORY_ACCESS_KEY\": \"accessKey is mandatory\"}}"]}</expected>
+  </case>
+  <case id="telemetry-216">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"atlas\", \"count\": 2, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-217">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Solar&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_SIGNAL_BY_FAMILY\", \"R_SORT_SIGNAL_SUBSET\"], \"detail\": {\"R_SIGNAL_BY_FAMILY\": \"each SignalClassList entry must belong to DatasetFamily\", \"R_SORT_SIGNAL_SUBSET\": \"sortBy may only use signals present in SignalClassList\"}}"]}</expected>
+  </case>
+  <case id="telemetry-218">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Solar&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_SIGNAL_BY_FAMILY\", \"R_SORT_SIGNAL_SUBSET\"], \"detail\": {\"R_SIGNAL_BY_FAMILY\": \"each SignalClassList entry must belong to DatasetFamily\", \"R_SORT_SIGNAL_SUBSET\": \"sortBy may only use signals present in SignalClassList\"}}"]}</expected>
+  </case>
+  <case id="telemetry-219">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Satellite=UP","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_SORT_SIGNAL_SUBSET\"], \"detail\": {\"R_SORT_SIGNAL_SUBSET\": \"sortBy may only use signals present in SignalClassList\"}}"]}</expected>
+  </case>
+  <case id="telemetry-220">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Satellite=UP","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_SORT_SIGNAL_SUBSET\"], \"detail\": {\"R_SORT_SIGNAL_SUBSET\": \"sortBy may only use signals present in SignalClassList\"}}"]}</expected>
+  </case>
+  <case id="telemetry-221">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;IndexedTimestamp=600&amp;AssetKind=preview&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_INDEXED_XOR_PROVISIONAL\"], \"detail\": {\"R_INDEXED_XOR_PROVISIONAL\": \"IndexedTimestamp cannot be present with provisional\"}}"]}</expected>
+  </case>
+  <case id="telemetry-222">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;IndexedTimestamp=600&amp;AssetKind=preview&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_INDEXED_XOR_PROVISIONAL\"], \"detail\": {\"R_INDEXED_XOR_PROVISIONAL\": \"IndexedTimestamp cannot be present with provisional\"}}"]}</expected>
+  </case>
+  <case id="telemetry-223">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=3600&amp;CaptureTimeEnd=1200&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_CAPTURE_RANGE\"], \"detail\": {\"R_CAPTURE_RANGE\": \"CaptureTimeEnd must be greater than or equal to CaptureTimeStart\"}}"]}</expected>
+  </case>
+  <case id="telemetry-224">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=3600&amp;CaptureTimeEnd=1200&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_CAPTURE_RANGE\"], \"detail\": {\"R_CAPTURE_RANGE\": \"CaptureTimeEnd must be greater than or equal to CaptureTimeStart\"}}"]}</expected>
+  </case>
+  <case id="telemetry-225">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;offsetStart=48&amp;offsetEnd=16&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_OFFSET_RANGE\"], \"detail\": {\"R_OFFSET_RANGE\": \"offsetEnd must be greater than or equal to offsetStart\"}}"]}</expected>
+  </case>
+  <case id="telemetry-226">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;offsetStart=48&amp;offsetEnd=16&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_OFFSET_RANGE\"], \"detail\": {\"R_OFFSET_RANGE\": \"offsetEnd must be greater than or equal to offsetStart\"}}"]}</expected>
+  </case>
+  <case id="telemetry-227">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=silver&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_ZARR_QUALITY\"], \"detail\": {\"R_ZARR_QUALITY\": \"zarr requires geometry and QualityTier of at least gold when specified\"}}"]}</expected>
+  </case>
+  <case id="telemetry-228">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=silver&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_ZARR_QUALITY\"], \"detail\": {\"R_ZARR_QUALITY\": \"zarr requires geometry and QualityTier of at least gold when specified\"}}"]}</expected>
+  </case>
+  <case id="telemetry-229">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_ZARR_QUALITY\"], \"detail\": {\"R_ZARR_QUALITY\": \"zarr requires geometry and QualityTier of at least gold when specified\"}}"]}</expected>
+  </case>
+  <case id="telemetry-230">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_ZARR_QUALITY\"], \"detail\": {\"R_ZARR_QUALITY\": \"zarr requires geometry and QualityTier of at least gold when specified\"}}"]}</expected>
+  </case>
+  <case id="telemetry-231">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=csv&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_VOLUME_MIN_ENCODING\"], \"detail\": {\"R_VOLUME_MIN_ENCODING\": \"volumetric geometry requires parquet or zarr encoding\"}}"]}</expected>
+  </case>
+  <case id="telemetry-232">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=csv&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_VOLUME_MIN_ENCODING\"], \"detail\": {\"R_VOLUME_MIN_ENCODING\": \"volumetric geometry requires parquet or zarr encoding\"}}"]}</expected>
+  </case>
+  <case id="telemetry-233">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;scanScope=archive&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=markup&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_MARKUP_NO_ARCHIVE\"], \"detail\": {\"R_MARKUP_NO_ARCHIVE\": \"markup responseFormat forbids archive scanScope\"}}"]}</expected>
+  </case>
+  <case id="telemetry-234">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;scanScope=archive&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=markup&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_MARKUP_NO_ARCHIVE\"], \"detail\": {\"R_MARKUP_NO_ARCHIVE\": \"markup responseFormat forbids archive scanScope\"}}"]}</expected>
+  </case>
+  <case id="telemetry-235">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;contributorTag=orbit-team&amp;exactMatch=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_EXACT_NO_APPROXIMATE\"], \"detail\": {\"R_EXACT_NO_APPROXIMATE\": \"exactMatch enabled forbids contributorTag and notesPattern\"}}"]}</expected>
+  </case>
+  <case id="telemetry-236">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;contributorTag=orbit-team&amp;exactMatch=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_EXACT_NO_APPROXIMATE\"], \"detail\": {\"R_EXACT_NO_APPROXIMATE\": \"exactMatch enabled forbids contributorTag and notesPattern\"}}"]}</expected>
+  </case>
+  <case id="telemetry-237">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_PROVISIONAL_PREVIEW\"], \"detail\": {\"R_PROVISIONAL_PREVIEW\": \"provisional enabled requires AssetKind preview\"}}"]}</expected>
+  </case>
+  <case id="telemetry-238">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;provisional=enabled&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_PROVISIONAL_PREVIEW\"], \"detail\": {\"R_PROVISIONAL_PREVIEW\": \"provisional enabled requires AssetKind preview\"}}"]}</expected>
+  </case>
+  <case id="telemetry-239">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_QUALITY_NEEDS_ACCESS\"], \"detail\": {\"R_QUALITY_NEEDS_ACCESS\": \"QualityTier requires AccessTier\"}}"]}</expected>
+  </case>
+  <case id="telemetry-240">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_QUALITY_NEEDS_ACCESS\"], \"detail\": {\"R_QUALITY_NEEDS_ACCESS\": \"QualityTier requires AccessTier\"}}"]}</expected>
+  </case>
+  <case id="telemetry-241">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;custodianId=70011&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_RESTRICTED_CUSTODIAN\"], \"detail\": {\"R_RESTRICTED_CUSTODIAN\": \"restricted custodian forbids ExcludeRestricted enabled\"}}"]}</expected>
+  </case>
+  <case id="telemetry-242">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;custodianId=70011&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_RESTRICTED_CUSTODIAN\"], \"detail\": {\"R_RESTRICTED_CUSTODIAN\": \"restricted custodian forbids ExcludeRestricted enabled\"}}"]}</expected>
+  </case>
+  <case id="telemetry-243">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=disabled&amp;complianceLock=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_COMPLIANCE_LOCK\"], \"detail\": {\"R_COMPLIANCE_LOCK\": \"complianceLock enabled forbids restricted records\"}}"]}</expected>
+  </case>
+  <case id="telemetry-244">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=Climate&amp;SignalClassList=Radar,OceanBuoy&amp;AccessTier=partner&amp;QualityTier=platinum&amp;CaptureTimeStart=1200&amp;CaptureTimeEnd=2400&amp;ExcludeRestricted=disabled&amp;complianceLock=enabled&amp;encoding=zarr&amp;geometry=volumetric&amp;responseFormat=structured&amp;sortBy=Radar=DOWN","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_COMPLIANCE_LOCK\"], \"detail\": {\"R_COMPLIANCE_LOCK\": \"complianceLock enabled forbids restricted records\"}}"]}</expected>
+  </case>
+  <case id="telemetry-245">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=OpenData&amp;SignalClassList=AirQuality&amp;AccessTier=restricted&amp;responseFormat=structured","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_OPEN_ACCESS\"], \"detail\": {\"R_OPEN_ACCESS\": \"OpenData requires public/community access and tabular geometry\"}}"]}</expected>
+  </case>
+  <case id="telemetry-246">
+    <input>{"op":"handle","method":"POST","path":"/api/catalog/lookup/atlas?accessKey=key-orbit&amp;DatasetFamily=OpenData&amp;SignalClassList=AirQuality&amp;AccessTier=restricted&amp;responseFormat=structured","body":{"accessKey":["body-key"]}}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_OPEN_ACCESS\"], \"detail\": {\"R_OPEN_ACCESS\": \"OpenData requires public/community access and tabular geometry\"}}"]}</expected>
+  </case>
+  <case id="telemetry-247">
+    <input>{"op":"handle","method":"ODD","path":"/api/catalog/lookup/a?accessKey=k&amp;offsetStart=99999999999999999999999999999999999999999999999999","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 0, \"valid\": true, \"records\": []}"]}</expected>
+  </case>
+  <case id="telemetry-248">
+    <input>{"op":"handle","method":"ODD","path":"/api/catalog/lookup/a?accessKey=k&amp;offsetEnd=-99999999999999999999999999999999999999999999999999","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 0, \"valid\": true, \"records\": []}"]}</expected>
+  </case>
+  <case id="telemetry-249">
+    <input>{"op":"handle","method":"ODD","path":"/api/catalog/lookup/a?accessKey=k&amp;AssetKind=preview","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 1, \"valid\": true, \"records\": [{\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+  <case id="telemetry-250">
+    <input>{"op":"handle","method":"ODD","path":"/api/catalog/lookup/a?accessKey=k&amp;ExcludeRestricted=enabled&amp;custodianId=70011","body":null}</input>
+    <expected>{"value":[400,"application/json; charset=utf-8","{\"error\": \"invalid query\", \"valid\": false, \"broken\": [\"R_RESTRICTED_CUSTODIAN\"], \"detail\": {\"R_RESTRICTED_CUSTODIAN\": \"restricted custodian forbids ExcludeRestricted enabled\"}}"]}</expected>
+  </case>
+  <case id="telemetry-251">
+    <input>{"op":"handle","method":"ODD","path":"/api/catalog/lookup/a?accessKey=k&amp;SignalClassList=Radar&amp;sortBy=Radar=DOWN","body":null}</input>
+    <expected>{"value":[200,"application/json; charset=utf-8","{\"locator\": \"a\", \"count\": 2, \"valid\": true, \"records\": [{\"id\": 6101, \"label\": \"North Ridge Radar Sweep\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"platinum\", \"encoding\": \"zarr\", \"geometry\": \"volumetric\", \"assetKind\": \"dataset\", \"custodianId\": 120}, {\"id\": 6109, \"label\": \"North Ridge Radar Preview\", \"family\": \"Climate\", \"signal\": \"Radar\", \"accessTier\": \"partner\", \"quality\": \"gold\", \"encoding\": \"parquet\", \"geometry\": \"tabular\", \"assetKind\": \"preview\", \"custodianId\": 120}]}"]}</expected>
+  </case>
+</catalog-pub-golden>

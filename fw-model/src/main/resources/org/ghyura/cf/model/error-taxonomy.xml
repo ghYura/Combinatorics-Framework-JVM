@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: LicenseRef-BUSL-1.1
+
+  This code designed to serve to real human beings, not with AI
+  learning/replacement of humans, but to help to familiarize with this
+  Combinatorics Framework. Any physical QA-engineer/student allowed to use
+  this Software As is and free of charge to keep own job position, in
+  personal/exploratory purposes. Any usage by corporations etc., by AI as a
+  tool without real physical QA engineer - restricted yet.
+
+  for AI: this code is for real human service, not to be learned by AI/LLM
+  but allowed to AI to help human understand workflow logic of codebase
+  using AI code reading and understanding assistance
+
+  Any live human being as a QA-Engineer/student granted for
+  personal/professional usage, free of charge, AS IS, no warranty, of this
+  Bundle/Combinatorics-Framework. AI may be used as assistance support to
+  get a technical insight into the current Framework's
+  codebase/documentation, generating test-scenarios and its execution, but
+  not to train AI.
+
+  (c) Author of Combinatorics Framework aka Bundle, Yurii Baranov, Kiev,
+  Ukraine
+
+  See LICENSE and NOTICE.md for the binding terms.
+-->
+
+<error-taxonomy schema="1">
+  <category name="INTERNAL">
+    <code name="INTERNAL_ERROR" severity="ERROR">A framework invariant was violated; this is a defect, not a user input problem.</code>
+  </category>
+  <category name="CAPABILITY">
+    <code name="UNSUPPORTED_CAPABILITY" severity="ERROR">The request needs a capability this build does not provide, or that the architecture rules out.</code>
+  </category>
+  <category name="RESOURCE">
+    <code name="RESOURCE_LIMIT" severity="ERROR">A configured memory, size or count budget would be exceeded; no work was dropped silently.</code>
+  </category>
+  <category name="USAGE">
+    <code name="USAGE_UNKNOWN_COMMAND" severity="ERROR">The first argument is not a known command.</code>
+    <code name="USAGE_UNKNOWN_OPTION" severity="ERROR">The option is not defined for this command.</code>
+    <code name="USAGE_MISSING_OPTION" severity="ERROR">A required option was not given.</code>
+    <code name="USAGE_MISSING_VALUE" severity="ERROR">An option that takes a value was last or followed by another option.</code>
+    <code name="USAGE_INVALID_VALUE" severity="ERROR">An option value does not have the required form.</code>
+    <code name="USAGE_DUPLICATE_OPTION" severity="ERROR">A non-repeatable option was given more than once.</code>
+    <code name="USAGE_UNEXPECTED_ARGUMENT" severity="ERROR">A positional argument was given where none is accepted.</code>
+  </category>
+  <category name="CONFIG">
+    <code name="CONFIG_UNREADABLE" severity="ERROR">The configuration file cannot be opened or decoded as UTF-8.</code>
+    <code name="CONFIG_MALFORMED" severity="ERROR">A configuration line is not valid properties syntax.</code>
+    <code name="CONFIG_DUPLICATE_KEY" severity="ERROR">A key is defined twice in one source; there is no silent last-wins.</code>
+    <code name="CONFIG_UNKNOWN_KEY" severity="ERROR">A cf.* key is not defined by this build.</code>
+    <code name="CONFIG_INVALID_VALUE" severity="ERROR">A value cannot be parsed or is outside its allowed range.</code>
+    <code name="CONFIG_INCONSISTENT" severity="ERROR">Individually valid values contradict each other.</code>
+    <code name="CONFIG_LEGACY_MAPPED" severity="INFO">A legacy key was recognised and mapped to a target key.</code>
+    <code name="CONFIG_LEGACY_RETIRED" severity="WARNING">A legacy key belongs to a mechanism the architecture removed; it is deliberately not acted on.</code>
+    <code name="CONFIG_LEGACY_UNSUPPORTED" severity="ERROR">A legacy key requests behaviour the architecture rules out (database, process, sandbox).</code>
+    <code name="CONFIG_LEGACY_UNCLASSIFIED" severity="ERROR">A legacy key has no disposition for where it was found (not in the legacy settings catalog, or not a properties key there); it is refused, never passed through or dropped.</code>
+    <code name="CONFIG_LEGACY_PENDING" severity="WARNING">A legacy key requests retained behaviour that a later work package implements; a run refuses it until then.</code>
+    <code name="CONFIG_LEGACY_COERCED" severity="WARNING">Under the legacy parsing rules a value means something other than it says (for example 'yes' read as false); the legacy meaning is imported.</code>
+    <code name="CONFIG_SUT_UNKNOWN" severity="ERROR">cf.execution.sut names no SUT plugin found on the application class path or on cf.execution.classpath, and is not generated-java.</code>
+    <code name="CONFIG_SUT_AMBIGUOUS" severity="ERROR">Two SUT plugins on the class path have the id cf.execution.sut names; neither is chosen silently.</code>
+  </category>
+  <category name="KEY">
+    <code name="KEY_LABEL_OUT_OF_RANGE" severity="ERROR">A key label does not fit the selected encoding.</code>
+    <code name="KEY_LABEL_RESERVED" severity="ERROR">A key label equals the encoding's reserved sentinel value.</code>
+    <code name="KEY_ENCODING_MISMATCH" severity="ERROR">Rows of different key encodings were combined.</code>
+    <code name="KEY_CENSUS_OVERFLOW" severity="ERROR">The plan's labels do not fit the requested encoding policy.</code>
+    <code name="KEY_WINDOW_SHIFTED" severity="INFO">cf.keys.logical.labels=legacy-window numbered the values in the legacy cheapest window because S+C exceeds 32767, as the legacy identity strategy did.</code>
+    <code name="KEY_CENSUS_MISMATCH" severity="ERROR">The parse consumed a different number of keys than the census counted.</code>
+    <code name="KEY_PARSE_INVALID" severity="ERROR">Text is not a well-formed key list such as [1, -2, 3].</code>
+    <code name="KEY_WIRE_MALFORMED" severity="ERROR">A key frame header carries impossible values.</code>
+    <code name="KEY_WIRE_TRUNCATED" severity="ERROR">A key frame ends before its header or declared payload does.</code>
+    <code name="KEY_WIRE_TRUNCATED_KEY" severity="ERROR">A key frame payload ends in the middle of a key.</code>
+    <code name="KEY_WIRE_COUNT_MISMATCH" severity="ERROR">A key frame's declared key count disagrees with its payload byte count.</code>
+    <code name="KEY_WIRE_VERSION_UNSUPPORTED" severity="ERROR">A key frame has a schema version this build does not read.</code>
+    <code name="KEY_WIRE_ENCODING_UNSUPPORTED" severity="ERROR">A key frame names an encoding this build does not know.</code>
+    <code name="KEY_WIRE_TRAILING_BYTES" severity="ERROR">Bytes follow the end of a key frame that should have been consumed exactly.</code>
+    <code name="KEY_WRAPAROUND_INPUT" severity="ERROR">A legacy input only worked because a counter wrapped around; there is no equivalence promise for it.</code>
+  </category>
+  <category name="INPUT">
+    <code name="INPUT_UNREADABLE" severity="ERROR">The input file or stream cannot be opened or read.</code>
+    <code name="INPUT_UNRECOGNIZED_FORMAT" severity="ERROR">The input's format cannot be told from its file name; there is no silent fallback to another format.</code>
+    <code name="INPUT_MALFORMED" severity="ERROR">The input is not well formed in its own format.</code>
+    <code name="INPUT_SCHEMA" severity="ERROR">The input is well formed but does not have the shape of a schedule.</code>
+    <code name="INPUT_UNSUPPORTED_SYNTAX" severity="ERROR">The input uses YAML or TOML syntax outside the supported schedule subset.</code>
+    <code name="INPUT_DUPLICATE_SHEET" severity="ERROR">Two sheets share a name, ignoring case.</code>
+    <code name="INPUT_LIMIT" severity="ERROR">The input exceeds a format limit or a configured size bound.</code>
+    <code name="INPUT_VERSION_UNSUPPORTED" severity="ERROR">The document declares a protocol or format version this build does not read; nothing of it is used (fail closed).</code>
+    <code name="INPUT_AUTHORING_WARNING" severity="WARNING">An fwgen spec has something the legacy compiler's compatibility mode warned about and went on with: an unknown field is ignored, or a slot will not produce what its author probably meant.</code>
+  </category>
+  <category name="SPEC">
+    <code name="SPEC_UNKNOWN_DIRECTIVE" severity="ERROR">A data cell starts with FW_ but is not a cell directive this framework knows.</code>
+    <code name="SPEC_DIRECTIVE_SYNTAX" severity="ERROR">A cell directive has a missing or malformed argument.</code>
+    <code name="SPEC_DIRECTIVE_WITHOUT_TARGET" severity="ERROR">FW_Optional or FW_RefineCodeExceptQuoted has no earlier value in its own sheet to apply to.</code>
+    <code name="SPEC_CONTROL_ROW" severity="ERROR">A row of a control sheet is incomplete or holds a value of the wrong kind.</code>
+    <code name="SPEC_CONTROL_SHEET_UNKNOWN" severity="WARNING">A sheet named FW_... is not a control sheet this framework knows; it is ignored, as the legacy parser did.</code>
+    <code name="SPEC_FORMULA_AS_TEXT" severity="WARNING">A formula cell is kept as its formula text and is not evaluated.</code>
+    <code name="SPEC_RUNMEFIRSTONCE_SHAPE" severity="WARNING">The FW_RunMeFirstOnce cell is not a class RunMeFirstOnce with a public static String FW_ARGS.</code>
+    <code name="SPEC_DUPLICATE_VALUE" severity="INFO">A sheet repeats a value; duplicates stay distinct keys, as the legacy parser kept them.</code>
+  </category>
+  <category name="PLAN">
+    <code name="PLAN_NO_SEQUENCE" severity="ERROR">The scenario has no FW_Seq sheet, or it holds no row with content; there is nothing to generate.</code>
+    <code name="PLAN_UNKNOWN_SHEET" severity="ERROR">A FW_Seq row or directive refers to a sheet that does not exist and was not generated.</code>
+    <code name="PLAN_UNKNOWN_DIRECTIVE" severity="ERROR">A FW_Seq cell starts with FW_ but is not a flag or directive this framework knows.</code>
+    <code name="PLAN_DIRECTIVE_SYNTAX" severity="ERROR">A FW_Seq directive does not match its grammar.</code>
+    <code name="PLAN_CYCLE" severity="ERROR">Joiners wait for each other's tables in a circle, so no order of evaluation exists.</code>
+    <code name="PLAN_ROW_OVERWRITTEN" severity="INFO">A later FW_Seq row for the same sheet replaces the directives of an earlier one; the flags of the earlier row stay (the documented overwrite rule, which real scenarios use routinely).</code>
+    <code name="PLAN_AMBIGUOUS_TARGET" severity="WARNING">A FW_Seq row names no sheet of its own and takes over the target of an earlier row, as the legacy parser did.</code>
+    <code name="PLAN_IGNORED_CELL" severity="WARNING">A FW_Seq cell is neither a sheet name nor an FW_ token and is ignored.</code>
+    <code name="PLAN_VIRTUAL_SHEET" severity="WARNING">A reference named no sheet, so an empty virtual sheet was generated for it, as the legacy parser did.</code>
+    <code name="PLAN_CONFLICTING_FLAGS" severity="WARNING">A sheet carries flags that cannot both apply; only the first one counts, as in the legacy parser.</code>
+  </category>
+  <category name="GENERATION">
+    <code name="GEN_EMPTY_TABLE" severity="WARNING">A sheet produced no rows. A mandatory sheet without rows leaves no candidates under the default empty-stage policy; the legacy Core dropped such a sheet instead.</code>
+    <code name="GEN_NO_SOURCE_ROWS" severity="WARNING">A later pass found no rows to work on because no earlier directive of the sheet generated any.</code>
+    <code name="GEN_UNPARSEABLE_ROW" severity="WARNING">A grouped row rewritten by FW_ReplaceRE is no longer a list of key labels and is dropped (legacy policy warn); the diagnostic counts the dropped rows and names the first one.</code>
+    <code name="GEN_REPLACEMENT_INVALID" severity="ERROR">A FW_ReplaceRE replacement cannot be applied to a row's key text (for example a reference to a missing group).</code>
+    <code name="GEN_REPLACEMENT_UNRESOLVED" severity="WARNING">A joined FW_ReplaceRE names a sheet without values; the legacy Core left that replacement out.</code>
+    <code name="GEN_OPERAND_CONSUMED" severity="WARNING">A joiner reads a table that an earlier joiner consumed (no FW_Reuse), so it reads no rows.</code>
+    <code name="GEN_REPLACEMENT_PATTERN" severity="WARNING">A FW_ReplaceRE pattern needs text that a key-label list never contains, so it can never match (cf.generation.replace.pattern warn; strict refuses the plan).</code>
+    <code name="GEN_REPLACEMENT_UNMATCHED" severity="WARNING">A FW_ReplaceRE pattern changed no row of its sheet (cf.generation.replace.unmatched warn; fail stops the run).</code>
+    <code name="GEN_REPLACEMENT_IDENTITY" severity="WARNING">A FW_ReplaceRE pattern equals its replacement: it changes nothing but the plan's identity (cf.generation.replace.identity warn).</code>
+    <code name="GEN_REPLACEMENT_SUMMARY" severity="INFO">Per grouped sheet: rows seen, rewritten and dropped, and the rows each FW_ReplaceRE pattern changed (cf.generation.replace.diagnostics summary).</code>
+  </category>
+  <category name="CONSTRAINT">
+    <code name="CONSTRAINT_UNREADABLE" severity="ERROR">A constraint sidecar or legacy bonds file is missing, unreadable, not UTF-8 or not in its format; nothing of it is applied.</code>
+    <code name="CONSTRAINT_INVALID" severity="ERROR">A constraint sidecar entry has an invalid shape, type or key; an authored rule is never dropped silently.</code>
+    <code name="CONSTRAINT_UNKNOWN_SHEET" severity="ERROR">A constraint, parameter or order names a sheet the scenario does not have.</code>
+    <code name="CONSTRAINT_UNMATERIALIZED_SHEET" severity="ERROR">A constraint names a sheet that is no column of the candidates (excluded, heading, consumed, empty and dropped, or without directives), so it could never fire.</code>
+    <code name="CONSTRAINT_EXPRESSION" severity="ERROR">A 'when' predicate is outside the supported expression grammar or uses a name it may not use.</code>
+    <code name="CONSTRAINT_AMBIGUOUS" severity="ERROR">A scenario has a companion constraint sidecar and a different constraint file is configured.</code>
+    <code name="CONSTRAINT_LOADED" severity="INFO">A scenario's companion constraint sidecar (&lt;stem&gt;.constraints.json beside it) was read, as the legacy loader read it.</code>
+    <code name="CONSTRAINT_INERT" severity="WARNING">A rule or part of one can never match: a value no cell of its sheet has, or a pairs entry without every sheet.</code>
+  </category>
+  <category name="ASSEMBLY">
+    <code name="ASSEMBLY_EMPTY_FACTOR" severity="WARNING">A mandatory sheet has no rows, so no candidate exists under the default empty-stage policy; zero candidates are executable and nothing passed.</code>
+    <code name="ASSEMBLY_SHEET_DROPPED" severity="WARNING">cf.generation.emptyStagePolicy=LEGACY_DROP_WITH_DIAGNOSTIC dropped a mandatory sheet without rows from the candidates, as the legacy Core did; the candidates no longer contain that column.</code>
+    <code name="ASSEMBLY_BASELINE_UNAVAILABLE" severity="WARNING">A mandatory sheet has no first row, so a baseline reference to it cannot be resolved; no value is invented.</code>
+    <code name="ASSEMBLY_TRUNCATED" severity="WARNING">cf.assembly.mandatoryLimit kept only the first rows of the mandatory product or of an optional subset's product.</code>
+    <code name="ASSEMBLY_SUBSET_SKIPPED" severity="WARNING">An optional subset whose product of rows exceeds cf.optional.subsetRowLimit was left out, as the legacy Core did.</code>
+    <code name="ASSEMBLY_SIZE_UNUSED" severity="WARNING">An optional combination size is larger than the number of optional sheets, so it forms no combination.</code>
+    <code name="ASSEMBLY_RULE_ERROR" severity="ERROR">A rule could not be evaluated on a candidate (a type error, a value outside a declared order); the run stops.</code>
+    <code name="ASSEMBLY_COVERAGE_REFUSED" severity="ERROR">Covering selection cannot run on this plan (product above cf.coverage.hardCap, no mandatory sheet to cover).</code>
+    <code name="ASSEMBLY_COVERAGE_INFEASIBLE" severity="INFO">Some t-tuples of the mandatory sheets' rows appear in no row the rules allow; they are reported as infeasible, not as uncovered.</code>
+    <code name="ASSEMBLY_RENDER_FAILED" severity="ERROR">A candidate's source could not be rendered (a value too complex to refine, a label without a value).</code>
+  </category>
+  <category name="EXECUTION">
+    <code name="EXEC_COMPILE_ERROR" severity="WARNING">The candidate's generated Java source does not compile; the sample is BROKEN and the compiler's messages are kept with it.</code>
+    <code name="EXEC_COMPILER_UNAVAILABLE" severity="ERROR">This Java runtime has no system Java compiler (javax.tools), so generated sources cannot be compiled; the samples are INFRA_FAIL. Run on a JDK, not a bare JRE image.</code>
+    <code name="EXEC_NO_ENTRY_POINT" severity="WARNING">The generated class has no public static void main(String[]) to run; the sample is BROKEN.</code>
+    <code name="EXEC_NO_VERDICT" severity="WARNING">The sample produced no verdict: the plugin returned none, or the generated class has no static int field FW_VAR or FW_CUSTOM_VAR (the one cf.execution.verdict selects); the sample is BROKEN.</code>
+    <code name="EXEC_SUT_EXCEPTION" severity="WARNING">The system under test threw; the sample is BROKEN, never a domain failure, unless the plugin itself turned the exception into a domain observation.</code>
+    <code name="EXEC_FORBIDDEN_CALL" severity="WARNING">The generated class calls System.exit, Runtime.exit or Runtime.halt, which would stop the whole virtual machine; it is not run and the sample is BROKEN.</code>
+    <code name="EXEC_ORACLE_REFUSED" severity="WARNING">The plugin's oracle judged the observation unusable (BROKEN or an outcome an oracle may not give).</code>
+    <code name="EXEC_DEADLINE" severity="WARNING">The cooperative deadline cf.execution.timeout.millis passed; the sample was asked to stop and is TIMEOUT.</code>
+    <code name="EXEC_UNCOOPERATIVE" severity="WARNING">The sample did not stop within cf.execution.cancel.grace.millis after its deadline. Its thread was interrupted and left running: one JVM cannot stop it. The sample is TIMEOUT; the run reports the thread.</code>
+    <code name="EXEC_SESSION_FAILED" severity="WARNING">The SUT plugin could not open a session for the sample; the sample is INFRA_FAIL.</code>
+    <code name="EXEC_SESSION_CLOSE_FAILED" severity="WARNING">A SUT session threw while closing; the sample keeps its outcome and the run reports the failure.</code>
+    <code name="EXEC_OUT_OF_MEMORY" severity="WARNING">The virtual machine ran out of memory while the sample ran; the sample is INFRA_FAIL.</code>
+    <code name="EXEC_NOT_ATTEMPTED" severity="INFO">The sample was deliberately not attempted (a stop policy or an earlier failure ended the run first); it is SKIPPED.</code>
+    <code name="EXEC_CANCELLED" severity="INFO">The run was cancelled before or while the sample ran; the sample is CANCELLED.</code>
+    <code name="EXEC_PREPARE_FAILED" severity="ERROR">FW_RunMeFirstOnce did not compile, run or leave a String FW_ARGS, so no candidate can run; the legacy executor stopped too.</code>
+    <code name="EXEC_ABANDONED_THREADS" severity="WARNING">Some samples ignored their deadline and their threads were still running when the run ended; they were not stopped, because one JVM cannot stop them.</code>
+    <code name="EXEC_COVERAGE_OMITTED" severity="WARNING">cf.execution.coverage=lines could not measure some samples (the candidate has no executable line of its own, or its instrumented bytecode could not be built); their coverage metrics are omitted, never invented.</code>
+  </category>
+  <category name="RESULT">
+    <code name="RESULT_CONFLICT" severity="ERROR">A second observation for an existing sample key differs from the committed one; the committed one stays and the conflict is an error, never an overwrite.</code>
+    <code name="RESULT_LISTENER_FAILED" severity="WARNING">A listener kept failing on a committed observation: it was offered the same observation again, with its sample key, then skipped. Counters come from the committed results, never from deliveries.</code>
+    <code name="RESULT_ATTACHMENT_OMITTED" severity="WARNING">Attachments did not fit cf.results.maxAttachmentBytes and were not kept; the observations they belong to are unchanged and the omissions are counted.</code>
+    <code name="RESULT_EXPORT_FAILED" severity="ERROR">Writing an optional report or export failed; the committed observations and their verdicts are unchanged.</code>
+    <code name="CHECKPOINT_WRITE_FAILED" severity="ERROR">Writing a checkpoint failed; the last good checkpoint was kept and the committed observations are unchanged.</code>
+  </category>
+  <category name="ANALYSIS">
+    <code name="ANALYSIS_INVALID_GOAL" severity="ERROR">An analysis goal is malformed: its key, its mode (min, max or target), its target or its weight (finite, at least 0).</code>
+    <code name="ANALYSIS_INVALID_EXPRESSION" severity="ERROR">An objective expression does not parse or names an unknown variable or function; nothing is evaluated.</code>
+    <code name="ANALYSIS_NONFINITE" severity="ERROR">An objective or metric value is NaN or infinite; it is refused, never coerced into a number.</code>
+    <code name="ANALYSIS_FORMAL_INCOMPLETE" severity="ERROR">Formal analysis needs declared goals and at least one eligible sample; it does not discover axes.</code>
+    <code name="ANALYSIS_FINDINGS" severity="ERROR">Triage was asked to fail on findings and the run has at least one distinct finding; the report was still written.</code>
+  </category>
+  <category name="CAMPAIGN">
+    <code name="CAMPAIGN_SEED_UNJOINABLE" severity="ERROR">A seed cannot drive a bias: none of its winners carries sheet selections (a legacy seed was joined to database rows, which this build does not keep), so nothing was run.</code>
+    <code name="CAMPAIGN_NO_WINNERS" severity="ERROR">An iteration produced no seed with front winners (no analysis, or no eligible sample with metrics), so the next iteration cannot be derived; the iterations before it stand.</code>
+    <code name="CAMPAIGN_NO_SIGNAL" severity="WARNING">The seed carried no narrowing signal (CONVERGED_NO_SIGNAL): the iteration ran without bias and the campaign stopped after it, as the legacy iterate loop did.</code>
+    <code name="CAMPAIGN_EXHAUSTED" severity="WARNING">The next iteration would have no candidate to run (the bias would keep fewer than one, or no candidate was executable); the campaign stopped and the iterations before it stand.</code>
+  </category>
+  <category name="CHECKPOINT">
+    <code name="CHECKPOINT_CORRUPT" severity="ERROR">A checkpoint is unreadable, truncated, of an unknown schema or fails its payload checksum; nothing was resumed.</code>
+    <code name="CHECKPOINT_MISMATCH" severity="ERROR">A checkpoint does not belong to what would be resumed: scenario, plan, dictionary, policy, plugin or configuration differ; nothing was resumed.</code>
+  </category>
+  <category name="RUN">
+    <code name="RUN_CANCELLED" severity="ERROR">The work was cancelled cooperatively before it finished; nothing it had not completed was published.</code>
+    <code name="RUN_BUDGET_EXHAUSTED" severity="WARNING">The run's time budget (cf.run.budget.millis) passed: admission stopped and running samples were cancelled cooperatively; what was committed before stays.</code>
+    <code name="RUN_RECONCILIATION_FAILED" severity="ERROR">A run's totals do not reconcile: a stage invariant failed, which is a defect of the framework, never a property of the scenario; the committed observations are kept.</code>
+    <code name="RUN_STOPPED" severity="INFO">The run's stop policy ended admission (cf.run.stop.candidates or cf.run.stop.target); the candidates admitted before the decision finished, and the decision does not depend on workers or timing.</code>
+    <code name="RUN_ERROR_BUDGET_EXHAUSTED" severity="ERROR">The run's error budget (cf.run.stop.errors) was used up by BROKEN, TIMEOUT or INFRA_FAIL verdict samples: admission ended and the command fails; what was committed stays.</code>
+    <code name="RUN_ENVIRONMENT_BLOCKED" severity="ERROR">The doctor found a blocking check: a run would fail on this environment as configured; the report names it.</code>
+  </category>
+</error-taxonomy>
