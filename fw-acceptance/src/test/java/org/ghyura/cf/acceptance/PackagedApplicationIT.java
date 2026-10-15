@@ -444,7 +444,9 @@ class PackagedApplicationIT {
         assertTrue(List.of("READY", "BLOCKED", "FAILED").contains(root.getAttribute("status")), root.getAttribute("status"));
         Element source = (Element) root.getElementsByTagName("source").item(0);
         assertTrue(source.getAttribute("treeSha256").matches("[0-9a-f]{64}") && Integer.parseInt(source.getAttribute("files")) > 500);
-        assertEquals("none", source.getAttribute("versionControl"), "this tree has no version control; its listing hash stands in");
+        String expectedVersionControl = Files.isDirectory(Reactor.root().resolve(".git")) ? "git" : "none";
+        assertEquals(expectedVersionControl, source.getAttribute("versionControl"),
+                "source provenance must describe the current checkout, including a locally initialized repository");
         assertEquals(6, root.getElementsByTagName("input").getLength());
         assertEquals("true", ((Element) root.getElementsByTagName("capabilities").item(0)).getAttribute("observed"), "the jar reports its capabilities");
         Element tests = (Element) root.getElementsByTagName("tests").item(0);
