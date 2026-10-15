@@ -53,18 +53,22 @@ class LegacyWindowTest {
 
     /** PAD fills the window up to -128, A then holds labels -128 and -127, BIG the rest: 40000 values, S = 3. */
     private static Scenario big(String... aDirectives) {
+        return bigWithValues(new String[]{"minus128", "minus127"}, aDirectives);
+    }
+
+    private static Scenario bigWithValues(String[] values, String... aDirectives) {
         String[] pad = new String[7104];
         for (int i = 0; i < pad.length; i++) {
             pad[i] = "pad" + i;
         }
-        String[] rest = new String[40000 - 7104 - 2];
+        String[] rest = new String[40000 - 7104 - values.length];
         for (int i = 0; i < rest.length; i++) {
             rest[i] = "big" + i;
         }
         String[] seq = new String[aDirectives.length + 1];
         seq[0] = "A";
         System.arraycopy(aDirectives, 0, seq, 1, aDirectives.length);
-        return Scenario.of().sheet("PAD", pad).sheet("A", "minus128", "minus127").sheet("BIG", rest).seq(seq)
+        return Scenario.of().sheet("PAD", pad).sheet("A", values).sheet("BIG", rest).seq(seq)
                 .options(Scenario.UNPROMOTED).names("A", "<", ">");
     }
 
@@ -146,4 +150,32 @@ class LegacyWindowTest {
         assertEquals(6, sources.get(0).size());
         assertNotEquals(ids.get(0), ids.get(1), "the encoding is part of the dictionary's identity");
     }
+    @Test
+    void everySignedByteLabelIncludingMinus128AndZeroRendersAfterRealWindowedTraversal() {
+        String[] values = new String[256];
+        for (int i = 0; i < values.length; i++) values[i] = "value=" + (Byte.MIN_VALUE + i);
+        ScenarioSpec spec = bigWithValues(values, "FW_Combi(1)").spec();
+        SeqPlan plan = SeqPlanner.plan(spec, Scenario.UNPROMOTED).plan();
+        MemoryBudget budget = new MemoryBudget(128L << 20);
+        try (KeyDictionary dictionary = window(spec, plan, budget);
+             Generation.Result result = Generation.run(plan, dictionary, GenerationOptions.defaults(), budget, Cancellation.NONE);
+             Assembly assembly = Assembly.of(plan, result.result(), dictionary, GenerationOptions.defaults(), AssemblyOptions.defaults(),
+                     RenderOptions.defaults(), 1L, budget, Cancellation.NONE);
+             CandidateRenderer renderer = CandidateRenderer.of(assembly, plan, dictionary, RenderOptions.defaults(), budget)) {
+            assertEquals(-128, dictionary.labelsOf(2)[0]);
+            assertEquals(127, dictionary.labelsOf(2)[255]);
+            assertEquals(BigInteger.valueOf(256), assembly.generated());
+            var cursor = assembly.candidates(Cancellation.NONE);
+            for (int label = Byte.MIN_VALUE; label <= Byte.MAX_VALUE; label++) {
+                assertTrue(cursor.hasNext());
+                Candidate candidate = cursor.next();
+                assertEquals(label, candidate.keys(0).label(0));
+                assertEquals(label, org.ghyura.cf.model.key.KeyWire.decode(org.ghyura.cf.model.key.KeyWire.encode(candidate.keys(0))).label(0));
+                assertEquals("<value=" + label, renderer.renderText(candidate), "ordinary labels are never skipped as Reader NULLs");
+            }
+            org.junit.jupiter.api.Assertions.assertFalse(cursor.hasNext());
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
 }
