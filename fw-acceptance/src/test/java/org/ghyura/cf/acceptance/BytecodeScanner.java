@@ -90,7 +90,8 @@ final class BytecodeScanner {
 
     /** Owner prefixes (packages) that may not appear at all. */
     private static final List<String> BANNED_PREFIXES = List.of("java/net/http/", "javax/script/", "java/sql/",
-            "javax/sql/", "javax/naming/", "java/rmi/", "javax/net/", "jdk/jshell/", "jdk/internal/", "jdk/nashorn/");
+            "javax/sql/", "javax/naming/", "java/rmi/", "javax/net/", "jdk/jshell/", "jdk/internal/", "jdk/nashorn/",
+            "com/sun/net/httpserver/");
 
     /** Individual methods, as owner#name. */
     private static final Set<String> BANNED_METHODS = Set.of(

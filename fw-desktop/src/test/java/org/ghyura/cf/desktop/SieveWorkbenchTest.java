@@ -51,6 +51,36 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SieveWorkbenchTest {
+    @Test void face2ButtonFitsTheFileToolbarAndProtectsPendingDrafts(@TempDir Path dir) throws Exception {
+        Path file = scenario(dir); Session session = session(); FileTrail trail = FileTrail.inMemory();
+        SieveWorkbench view = edt(() -> new SieveWorkbench(() -> session, () -> file, new Navigator(trail, () -> file)));
+        try {
+            edt(view::open).get(30, TimeUnit.SECONDS);
+            edt(() -> {
+                var root = view.component(); root.setSize(1180, 740); layout(root);
+                JButton browser = find(root, JButton.class, b -> "Open Face 2 in browser".equals(b.getName()));
+                assertNotNull(browser); assertEquals("Face 2 (Sieve) ↗", browser.getText());
+                assertTrue(browser.isEnabled()); assertTrue(browser.getWidth() > 0);
+                assertTrue(browser.getX() + browser.getWidth() <= browser.getParent().getWidth(), "Face 2 must fit beside the file actions");
+                assertTrue(browser.getY() + browser.getHeight() <= browser.getParent().getHeight(), "Face 2 must not be clipped vertically");
+                var image = new BufferedImage(1180, 740, BufferedImage.TYPE_INT_RGB);
+                var graphics = image.createGraphics(); try { root.paint(graphics); } finally { graphics.dispose(); }
+                Path screenshot = Path.of("target", "face2-workbench.png"); Files.createDirectories(screenshot.getParent());
+                javax.imageio.ImageIO.write(image, "png", screenshot.toFile());
+                var json = find(root, JTextArea.class, text -> "Sieve execution JSON".equals(text.getName()));
+                assertNotNull(json); json.append(" ");
+                return null;
+            });
+            var refused = edt(view::openFace2);
+            assertThrows(ExecutionException.class, () -> refused.get(30, TimeUnit.SECONDS));
+            assertTrue(edt(view::output).contains("pending"));
+        } finally { edt(view::close).get(30, TimeUnit.SECONDS); trail.close(); }
+    }
+
+    private static void layout(Container parent) {
+        parent.doLayout(); for (Component child : parent.getComponents()) if (child instanceof Container container) layout(container);
+    }
+
     @Test void drawEditUndoSaveReloadAndRunUseTheSameRules(@TempDir Path dir) throws Exception {
         Path scenario = scenario(dir); Session session = session(); FileTrail trail = FileTrail.inMemory();
         SieveWorkbench view = edt(() -> new SieveWorkbench(() -> session, () -> scenario, new Navigator(trail, () -> scenario)));

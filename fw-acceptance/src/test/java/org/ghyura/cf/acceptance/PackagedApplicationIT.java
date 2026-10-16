@@ -587,7 +587,9 @@ class PackagedApplicationIT {
                     "org/ghyura/cf/config/runtime-defaults.properties", "org/ghyura/cf/config/compatibility.xml",
                     "org/ghyura/cf/config/legacy-settings.xml", "org/ghyura/cf/config/compatibility-deltas.xml",
                     "org/ghyura/cf/model/error-taxonomy.xml", "org/ghyura/cf/app/cli-contract.xml",
-                    "org/ghyura/cf/app/version.properties")) {
+                    "org/ghyura/cf/app/version.properties", "org/ghyura/cf/desktop/SieveWorkbench.class",
+                    "org/ghyura/cf/desktop/session/Face2Bridge.class", "org/ghyura/cf/desktop/session/Face2Document.class",
+                    "org/ghyura/cf/desktop/face2/editor.html", "org/ghyura/cf/desktop/face2/bridge.js")) {
                 assertNotNull(jar.getJarEntry(entry), "missing from the jar: " + entry);
             }
             Properties version = new Properties();
