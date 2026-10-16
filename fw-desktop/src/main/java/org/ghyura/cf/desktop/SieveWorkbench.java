@@ -37,6 +37,9 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
+import java.net.URI;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -90,6 +93,8 @@ final class SieveWorkbench {
     private long layoutRevision, savedLayoutRevision, nextLayoutRevision;
     private boolean refreshing, jsonDirty, newDraft, busy, closed;
     private CompletableFuture<?> pending = CompletableFuture.completedFuture(null);
+    private Face2Bridge face2;
+    private long face2Revision;
 
     SieveWorkbench(Supplier<Session> sessions, Supplier<Path> scenario, Navigator navigator) {
         this.sessions = sessions; this.scenario = scenario; this.navigator = navigator;
@@ -105,6 +110,9 @@ final class SieveWorkbench {
         JButton load = button(fileBar, "Import constraints…", this::chooseImport);
         JButton export = button(fileBar, "Export JSON…", this::chooseExport);
         button(fileBar, "Save for scenario", () -> save());
+        JButton browser = button(fileBar, "Face 2 (Sieve) ↗", this::launchFace2);
+        browser.setName("Open Face 2 in browser");
+        browser.setToolTipText("Open the original QA Face 2 web editor in your browser. Submit validates and saves its rules for this scenario.");
         JPanel workBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
         button(workBar, "Undo", this::undo); button(workBar, "Redo", this::redo);
         button(workBar, "Validate", () -> validate(false)); button(workBar, "Check impact", () -> validate(true));
@@ -199,6 +207,7 @@ final class SieveWorkbench {
             try { return new Opened(openedSieve, SieveFiles.read(SieveFiles.layoutOf(ConstraintSidecarReader.companionOf(file)), InputSource::read, 4 * 1024 * 1024), ""); }
             catch (RuntimeException problem) { return new Opened(openedSieve, new SieveFiles.Text("", ""), "\nLayout could not be read: " + problem.getMessage() + ". Constraints are intact."); }
         }, result -> {
+            closeFace2();
             opened = file; document = result.sieve().document(); savedDocument = document; fingerprint = result.sieve().fingerprint(); layoutFingerprint = result.layout().fingerprint();
             Map<String, List<String>> offered = new LinkedHashMap<>();
             result.sieve().summary().spec().sheets().forEach(s -> offered.put(s.name(), s.cells().stream().map(v -> org.ghyura.cf.constraints.Py.strip(v.text())).distinct().toList()));
@@ -213,6 +222,75 @@ final class SieveWorkbench {
             location.setText("Scenario: " + opened + "   →   " + ConstraintSidecarReader.companionOf(opened).getFileName());
             output.setText("Opened " + document.rules().size() + " rules. Rule IDs, order and JSON types are preserved." + warning + "\n" + canvas.note()); status();
         });
+    }
+
+    private void launchFace2() {
+        openFace2().thenAccept(uri -> Background.run("face2-browser", () -> {
+            try {
+                if (!java.awt.Desktop.isDesktopSupported() || !java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE))
+                    throw new IllegalStateException("Automatic browser opening is unavailable.");
+                java.awt.Desktop.getDesktop().browse(uri);
+                return uri;
+            } catch (IOException e) { throw new UncheckedIOException(e); }
+        }, ignored -> { }, problem -> output.append("\n" + Background.describe(problem) + "\nOpen this address in your browser:\n" + uri)));
+    }
+
+    /** The button and browser tests share this path; Desktop.browse is only the final convenience. */
+    CompletableFuture<URI> openFace2() {
+        Path chosen = scenario.get();
+        if (chosen == null) {
+            output.setText("Select a scenario in step 3 first.");
+            return CompletableFuture.failedFuture(new IllegalStateException(output.getText()));
+        }
+        if (!chosen.toAbsolutePath().normalize().equals(opened)) {
+            if (dirty()) {
+                output.setText("Save or discard the current scenario's Sieve edits before opening another scenario in Face 2.");
+                return CompletableFuture.failedFuture(new IllegalStateException(output.getText()));
+            }
+            return open().thenCompose(ignored -> openFace2());
+        }
+        if (!cleanDrafts()) return CompletableFuture.failedFuture(new IllegalStateException(output.getText()));
+        Face2Bridge bridge = prepareFace2();
+        return work("open-face2", () -> {
+            try { return bridge.start(); }
+            catch (IOException | RuntimeException failure) { bridge.close(); throw new IllegalStateException("Face 2 could not start its local browser connection: " + failure.getMessage(), failure); }
+        }, uri -> output.setText("Face 2 (Sieve) is ready in your browser:\n" + uri
+                + "\nSubmit in Face 2 validates and saves the rules here. The scenario's runs and previews acquire them automatically."
+                + "\nFinish browser edits before changing rules in the JVM; stale submissions are refused."));
+    }
+
+    /** Prepare on the event thread; starting its socket is a separate background operation. */
+    Face2Bridge prepareFace2() {
+        if (!cleanDrafts()) throw new IllegalStateException(output.getText());
+        closeFace2();
+        Session session = sessions.get(); Path file = opened; SieveDocument snapshot = document;
+        var expected = new java.util.concurrent.atomic.AtomicReference<>(snapshot);
+        long revision = face2Revision;
+        face2 = new Face2Bridge(session, file, snapshot, values, optional, (Integer) scan.getValue(),
+                next -> acceptFace2(revision, session, file, expected.get(), next).thenRun(() -> expected.set(next)));
+        return face2;
+    }
+
+    private CompletableFuture<Void> acceptFace2(long revision, Session session, Path file, SieveDocument snapshot, SieveDocument next) {
+        CompletableFuture<Void> result = new CompletableFuture<>();
+        SwingUtilities.invokeLater(() -> {
+            try {
+                if (closed || busy || revision != face2Revision || !Objects.equals(opened, file)
+                        || !document.equals(snapshot) || drafts() || sessions.get() != session
+                        || scenario.get() == null || !scenario.get().toAbsolutePath().normalize().equals(file))
+                    throw new IllegalStateException("The JVM scenario, configuration or Sieve edits changed. Reopen Face 2 before submitting; your browser edits have not been saved.");
+                // Acquire only after the normal save succeeds. A failed save leaves both editors retryable.
+                saveTo(ConstraintSidecarReader.companionOf(opened), true, next, true).whenComplete((ignored, failure) -> {
+                    if (failure == null) result.complete(null); else result.completeExceptionally(failure);
+                });
+            } catch (RuntimeException failure) { result.completeExceptionally(failure); }
+        });
+        return result;
+    }
+
+    private void closeFace2() {
+        face2Revision++;
+        if (face2 != null) { face2.close(); face2 = null; }
     }
 
     boolean selectRule(int index) {
@@ -367,7 +445,10 @@ final class SieveWorkbench {
     }
     CompletableFuture<?> save() { return cleanDrafts() ? saveTo(ConstraintSidecarReader.companionOf(opened), true) : CompletableFuture.completedFuture(null); }
     private CompletableFuture<?> saveTo(Path target, boolean companion) {
-        Session session = sessions.get(); SieveDocument snapshot = document; String content = snapshot.json(), layout = canvas.layoutJson(); Path file = opened;
+        return saveTo(target, companion, document, false);
+    }
+    private CompletableFuture<?> saveTo(Path target, boolean companion, SieveDocument snapshot, boolean acquire) {
+        Session session = sessions.get(); String content = snapshot.json(), layout = canvas.layoutJson(); Path file = opened;
         long savedRevision = layoutRevision;
         String expected = companion ? fingerprint : null, expectedLayout = companion ? layoutFingerprint : null;
         return work("save-sieve", () -> {
@@ -380,6 +461,7 @@ final class SieveWorkbench {
             try { layoutWritten = SieveFiles.write(layoutFile, layout, layoutStamp); } catch (RuntimeException failure) { problem = failure.getMessage(); }
             return new Saved(written, layoutWritten, problem, warnings);
         }, result -> {
+            if (acquire) commit(snapshot, -1);
             if (companion) { fingerprint = result.fingerprint(); savedDocument = snapshot; layoutFingerprint = result.layoutFingerprint(); if (result.layoutProblem().isEmpty()) savedLayoutRevision = savedRevision; else layoutRevision = ++nextLayoutRevision; }
             navigator.trail().record(target);
             output.setText("Saved executable constraints: " + target + result.warnings() + (result.layoutProblem().isEmpty() ? "\nLayout saved separately: " + SieveFiles.layoutOf(target)
@@ -408,7 +490,7 @@ final class SieveWorkbench {
         return !dirty() || JOptionPane.showConfirmDialog(root, "Discard unsaved constraints, layout or pending drafts?\nChoose Cancel to apply drafts and Save for scenario first.", "Unsaved Sieve edits", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION;
     }
     boolean allowClose() { return confirmDiscard(); }
-    CompletableFuture<Void> close() { closed = true; cancelled.set(true); canvas.cancelGesture(); return pending.handle((value, failure) -> null); }
+    CompletableFuture<Void> close() { closed = true; closeFace2(); cancelled.set(true); canvas.cancelGesture(); return pending.handle((value, failure) -> null); }
 
     private <T> CompletableFuture<T> work(String name, Supplier<T> task, Consumer<T> done) {
         if (busy || closed) return CompletableFuture.failedFuture(new IllegalStateException("Another Sieve operation is still running."));

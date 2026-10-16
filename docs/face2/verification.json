@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-16",
+  "app": "fw-app/target/fw-app.jar",
+  "appSha256": "ab11cccd04f40a91485c414314b2a19098a96ca9ca01817df3679343eaa8efff",
+  "package": "PASS: all 20 reactor projects",
+  "desktop": {
+    "tests": 118,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "gates": {
+    "tests": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "selectedPackagedTests": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "appSha256": "ab11cccd04f40a91485c414314b2a19098a96ca9ca01817df3679343eaa8efff",
+    "status": "PASS",
+    "editAgainDelete": {
+      "savedRules": 0,
+      "workbenchRules": 0,
+      "kept": 8,
+      "dirty": false
+    },
+    "firstSubmit": {
+      "savedRules": 1,
+      "workbenchRules": 1,
+      "kept": 6,
+      "dirty": false
+    },
+    "staleSubmission": {
+      "savedRules": 0,
+      "workbenchRules": 1,
+      "kept": 8,
+      "dirty": true
+    }
+  },
+  "fullVerify": "Not rerun in full; the reported results cover the named desktop, gate, packaged and browser checks.",
+  "originalTemplateSha256": "4e5af253ae0ef3a72bba29ebff693b89ba79d58c4c06677919204aca38b5c513",
+  "jsAdapter": "PASS",
+  "browserHarnessCompilation": "PASS after replacing automation access to page-level lexical variables with DOM assertions (-Xlint:all -Werror)",
+  "packagedAssetsMatchBuild": true,
+  "freshFrameworkRun": "PASS: browser submission -> normal companion save -> 3 candidates instead of 4",
+  "desktopEvidence": "Full desktop run plus focused five-test Face2BridgeTest host rerun; the formerly skipped localhost test passes.",
+  "browserReport": "docs/face2/browser-result.json",
+  "browserScreenshot": "docs/face2/screenshot.png",
+  "remoteMain": "a44b908b018bd08411d29b65dfa4b1ca8aa90256 (verified with git ls-remote after host execution was enabled)",
+  "updatedAt": "2026-10-16T11:03:40.452134+00:00"
+}

@@ -45,7 +45,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Gate A01 (rules R01-R03): the owned code is Java only, runs in one JVM, and touches no subprocess, socket,
- * script engine, SQL, native code or process exit. Evidence is bytecode plus the file tree; the packaged jar
+ * script engine, SQL, native code or process exit, except the explicit add-on/browser allowances below.
+ * Evidence is bytecode plus the file tree; the packaged jar
  * and its dependencies are checked in {@code PackagedApplicationIT}.
  */
 class ArchitectureGateTest {
@@ -61,18 +62,33 @@ class ArchitectureGateTest {
     private static final Map<String, Set<String>> TEST_ALLOW_LIST = Map.of(
             "org/ghyura/cf/acceptance/PackagedApplicationIT",
             Set.of("uses java/lang/ProcessBuilder", "uses java/lang/Process"),
-            "org/ghyura/cf/acceptance/IsolationProbe", Set.of("uses java/net/Socket"));
+            "org/ghyura/cf/acceptance/IsolationProbe", Set.of("uses java/net/Socket"),
+            "org/ghyura/cf/desktop/session/Face2BridgeTest", Set.of("uses com/sun/net/httpserver/Headers",
+                    "uses com/sun/net/httpserver/HttpExchange", "uses java/net/http/HttpClient", "uses java/net/http/HttpRequest",
+                    "uses java/net/http/HttpRequest$Builder", "uses java/net/http/HttpResponse", "uses java/net/http/HttpResponse$BodyHandler",
+                    "uses java/net/http/HttpResponse$BodyHandlers"),
+            "org/ghyura/cf/desktop/session/Face2TestClient", Set.of("uses com/sun/net/httpserver/HttpExchange"),
+            "org/ghyura/cf/desktop/session/Face2TestClient$Exchange", Set.of("uses com/sun/net/httpserver/Headers",
+                    "uses com/sun/net/httpserver/HttpExchange", "uses com/sun/net/httpserver/HttpContext", "uses com/sun/net/httpserver/HttpPrincipal"));
 
     /**
-     * The only production class allowed a forbidden API, and exactly which: the Python add-on's PythonProcess starts the
+     * Production classes allowed otherwise forbidden APIs, and exactly which: the Python add-on's PythonProcess starts the
      * configured Python interpreter for each candidate (C07, author decision 2026-10-12: Python runs as the legacy executor
-     * ran it). Every other class, the whole core included, still starts no process.
+     * ran it). Face 2's loopback bridge serves the preserved QA HTML/CSS/JS by the author's explicit request
+     * on 2026-10-16. The core still starts no process or network connection.
      */
     private static final Map<String, Set<String>> PRODUCTION_ALLOW_LIST = Map.of(
-            "org/ghyura/cf/python/PythonProcess", Set.of("uses java/lang/ProcessBuilder", "uses java/lang/Process"));
+            "org/ghyura/cf/python/PythonProcess", Set.of("uses java/lang/ProcessBuilder", "uses java/lang/Process"),
+            "org/ghyura/cf/desktop/session/Face2Bridge", Set.of("uses com/sun/net/httpserver/HttpServer",
+                    "uses com/sun/net/httpserver/HttpHandler", "uses com/sun/net/httpserver/HttpExchange",
+                    "uses com/sun/net/httpserver/HttpContext", "uses com/sun/net/httpserver/Headers"));
+
+    /** The author's required browser UI and its dependency-free JS verification; no general foreign-runtime exception. */
+    private static final Set<String> FACE2_WEB_FILES = Set.of(
+            "fw-desktop/src/main/resources/org/ghyura/cf/desktop/face2/bridge.js", "tools/verify-face2-js.cjs");
 
     private static final List<String> FOREIGN_SUFFIXES = List.of(".py", ".pyw", ".sh", ".bash", ".zsh", ".bat", ".cmd",
-            ".ps1", ".js", ".mjs", ".ts", ".rb", ".pl", ".go", ".rs", ".c", ".cc", ".cpp", ".h", ".hpp", ".cs", ".sql",
+            ".ps1", ".js", ".mjs", ".cjs", ".ts", ".rb", ".pl", ".go", ".rs", ".c", ".cc", ".cpp", ".h", ".hpp", ".cs", ".sql",
             ".groovy", ".kts", ".gradle");
 
     @Test
@@ -103,7 +119,7 @@ class ArchitectureGateTest {
     }
 
     @Test
-    void ownedTestBytecodeUsesNoForbiddenApiExceptTheTwoAllowListedHarnessClasses() {
+    void ownedTestBytecodeUsesNoForbiddenApiExceptTheAllowListedHarnessClasses() {
         List<Path> classes = Reactor.classFiles(false);
         assertTrue(classes.size() >= 30, "the scan would be vacuous: only " + classes.size() + " classes");
         List<BytecodeScanner.Finding> findings = new ArrayList<>();
@@ -162,16 +178,18 @@ class ArchitectureGateTest {
     }
 
     @Test
-    void theProjectHoldsOnlyJavaSourceAndDataFiles() {
+    void theProjectHoldsOnlyJavaSourceDataAndTheExplicitFace2WebFiles() {
         List<String> foreign = new ArrayList<>();
         Path root = Reactor.root();
         for (Path file : Reactor.files(FOREIGN_SUFFIXES.toArray(new String[0]))) {
-            foreign.add(root.relativize(file).toString());
+            String name = root.relativize(file).toString().replace(java.io.File.separatorChar, '/');
+            if (!FACE2_WEB_FILES.contains(name)) foreign.add(name);
         }
         for (Path file : Reactor.files("Dockerfile", "Makefile", "Jenkinsfile")) {
             foreign.add(root.relativize(file).toString());
         }
-        assertEquals(List.of(), foreign, "R01: owned code and verification utilities are Java");
+        assertEquals(List.of(), foreign, "R01: Java source, with only the author-requested Face 2 browser assets and JS check");
+        for (String file : FACE2_WEB_FILES) assertTrue(Files.isRegularFile(root.resolve(file)), "explicit web allowance must exist: " + file);
         assertTrue(Reactor.javaSources().stream().anyMatch(p -> p.endsWith("tools/AddLicenseHeaders.java")),
                 "the header utility is Java and lives in tools/");
     }

@@ -1,0 +1,22 @@
+{
+  "appSha256": "ab11cccd04f40a91485c414314b2a19098a96ca9ca01817df3679343eaa8efff",
+  "status": "PASS",
+  "editAgainDelete": {
+    "savedRules": 0,
+    "workbenchRules": 0,
+    "kept": 8,
+    "dirty": false
+  },
+  "firstSubmit": {
+    "savedRules": 1,
+    "workbenchRules": 1,
+    "kept": 6,
+    "dirty": false
+  },
+  "staleSubmission": {
+    "savedRules": 0,
+    "workbenchRules": 1,
+    "kept": 8,
+    "dirty": true
+  }
+}
