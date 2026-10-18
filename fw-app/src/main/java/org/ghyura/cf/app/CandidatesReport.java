@@ -112,7 +112,10 @@ record CandidatesReport(List<String> columns, List<Boolean> optional, BigInteger
             line(text, "removed", count(null));
         }
         if (coverage != null) {
-            line(text, "coverage", "t=" + coverage.strength() + " " + coverage.method().name().toLowerCase(Locale.ROOT).replace('_', '-')
+            // a selection without a method kept every row: the coverage budget holds all of them
+            line(text, "coverage", coverage.method() == null
+                    ? "every row kept: the coverage budget holds all " + coverage.kept().length + " mandatory rows, so none is left out"
+                    : "t=" + coverage.strength() + " " + coverage.method().name().toLowerCase(Locale.ROOT).replace('_', '-')
                     + " (greedy, not a proven minimum): kept " + coverage.kept().length + " mandatory rows; " + coverage.universe()
                     + " tuples, " + coverage.feasible() + " feasible and covered, " + coverage.infeasible() + " infeasible");
             line(text, "unselected", count(counts.unselected()));
@@ -163,7 +166,8 @@ record CandidatesReport(List<String> columns, List<Boolean> optional, BigInteger
         }
         if (coverage != null) {
             xml.append(indent).append("  <coverage strength=\"").append(coverage.strength()).append("\" method=\"")
-                    .append(coverage.method().name().toLowerCase(Locale.ROOT).replace('_', '-')).append("\" minimum=\"not-claimed\" kept=\"")
+                    .append(coverage.method() == null ? "none" : coverage.method().name().toLowerCase(Locale.ROOT).replace('_', '-'))
+                    .append("\" minimum=\"not-claimed\" kept=\"")
                     .append(coverage.kept().length).append("\" universe=\"").append(coverage.universe()).append("\" feasible=\"")
                     .append(coverage.feasible()).append("\" covered=\"").append(coverage.covered()).append("\" infeasible=\"")
                     .append(coverage.infeasible()).append("\"/>\n");

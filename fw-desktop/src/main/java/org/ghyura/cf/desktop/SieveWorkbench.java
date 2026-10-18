@@ -65,7 +65,7 @@ final class SieveWorkbench {
     private final Supplier<Session> sessions;
     private final Supplier<Path> scenario;
     private final Navigator navigator;
-    private final JLabel location = new JLabel("Open the scenario selected in step 3."), state = new JLabel(" ");
+    private final JLabel location = new JLabel(" "), state = new JLabel(" ");
     private final JTextArea output = new JTextArea(4, 60), json = new JTextArea();
     private final JTextField search = new JTextField(14), graphSearch = new JTextField(12), rowFilter = new JTextField(7), colFilter = new JTextField(7);
     private final DefaultTableModel ruleRows = new DefaultTableModel(new String[]{"Rule ID", "Kind", "In words"}, 0) {
@@ -101,39 +101,68 @@ final class SieveWorkbench {
         canvas = new SieveCanvas(this::selectRule, this::pair, this::removeRule, before -> {
             remember(new Snapshot(document, before, selected, layoutRevision)); layoutRevision = ++nextLayoutRevision; status();
         });
-        editor = new SieveRuleEditor(this::applyRule, this::discardRule, this::status);
-        data = new SieveDataEditor(this::applyData, () -> { dataShow(); status(); }, this::status);
+        // a draft that cannot be applied says why in the messages below, not in a dialog
+        editor = new SieveRuleEditor(this::applyRule, this::discardRule, this::status, output::setText);
+        data = new SieveDataEditor(this::applyData, () -> { dataShow(); status(); }, this::status, output::setText);
         output.setEditable(false); output.setLineWrap(true); output.setWrapStyleWord(true);
+        Hints.of(output, "What the last action did, or what to do first. Filled after every action on this step.");
         json.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12)); json.setName("Sieve execution JSON");
+        Hints.of(json, "The rules as the JSON text the scenario's rules file holds. Filled when a scenario is opened; type to change "
+                + "it, then press Apply JSON.");
+        Hints.of(canvas, "The rules drawn as cards: drag from a value's right pin to another value to pair them, or shift-click "
+                + "values to group them.");
         JPanel top = new JPanel(new BorderLayout()); JPanel fileBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
-        button(fileBar, "Open scenario", () -> { if (confirmDiscard()) open(); });
-        JButton load = button(fileBar, "Import constraints…", this::chooseImport);
-        JButton export = button(fileBar, "Export JSON…", this::chooseExport);
-        button(fileBar, "Save for scenario", () -> save());
-        JButton browser = button(fileBar, "Face 2 (Sieve) ↗", this::launchFace2);
+        Hints.of(button(fileBar, "Open step 3 scenario", () -> { if (confirmDiscard()) open(); }), "Load the scenario chosen in step 3 "
+                + "with its rules, to see and edit them here; no file dialog opens.");
+        JButton load = Hints.of(button(fileBar, "Import constraints…", this::chooseImport), "Replace the rules shown with the rules of "
+                + "another constraints file; nothing is saved until you press Save for scenario.");
+        fileBar.add(new AutoSearch(navigator).button(() -> ready() ? FileSeeker.Kind.CONSTRAINTS : null, () -> opened, found -> {
+            if (!busy && !closed && confirmDiscard()) importFrom(found);
+        }, "Search the folders where constraints files usually are, then import the rules of one here."));
+        JButton export = Hints.of(button(fileBar, "Export JSON…", this::chooseExport), "Save a copy of the rules as a JSON file; runs "
+                + "keep reading the scenario's own rules file.");
+        Hints.of(button(fileBar, "Save for scenario", () -> save()), "Save the rules beside the scenario as the rules file that every "
+                + "run and preview reads.");
+        JButton browser = Hints.of(button(fileBar, "Face 2 (Sieve) ↗", this::launchFace2), "Open the Face 2 web editor in your browser; "
+                + "its Submit button saves the rules for this scenario.");
         browser.setName("Open Face 2 in browser");
         browser.setToolTipText("Open the original QA Face 2 web editor in your browser. Submit validates and saves its rules for this scenario.");
         JPanel workBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
-        button(workBar, "Undo", this::undo); button(workBar, "Redo", this::redo);
-        button(workBar, "Validate", () -> validate(false)); button(workBar, "Check impact", () -> validate(true));
-        workBar.add(new JLabel("Scan ≤")); workBar.add(scan); workBar.add(cancel); cancel.setEnabled(false);
+        Hints.of(button(workBar, "Undo", this::undo), "Take back the last change to the rules or the layout.");
+        Hints.of(button(workBar, "Redo", this::redo), "Make again the change that Undo took back.");
+        Hints.of(button(workBar, "Validate", () -> validate(false)), "Check the rules for mistakes without counting test cases.");
+        Hints.of(button(workBar, "Check impact", () -> validate(true)), "Count how many test cases each rule removes; nothing is run.");
+        Hints.of(scan, "The most test cases each counting pass looks at; a smaller number answers faster.");
+        Hints.of(cancel, "Stop the counting or saving that is still going.");
+        workBar.add(FieldNames.label("Scan ≤", scan)); workBar.add(scan); workBar.add(cancel); cancel.setEnabled(false);
         scan.setToolTipText("Candidate limit for each counting pass. Scenario generation has the configured memory limits. Nothing executes the SUT.");
         cancel.addActionListener(e -> { cancelled.set(true); output.setText("Cancellation requested; waiting for the current operation to release its resources."); });
         navigator.bind(load, () -> Navigator.Purpose.CONSTRAINTS_OPEN, () -> opened);
         navigator.bind(export, () -> Navigator.Purpose.CONSTRAINTS_SAVE, () -> opened);
         top.add(rows(fileBar, workBar)); JPanel labels = new JPanel(new GridLayout(0, 1)); labels.add(location); labels.add(state); top.add(labels, BorderLayout.SOUTH); root.add(top, BorderLayout.NORTH);
         JPanel graph = new JPanel(new BorderLayout()); JPanel graphBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
-        graphBar.add(new JLabel("Find cards")); graphBar.add(graphSearch);
-        button(graphBar, "Fit", canvas::fit); button(graphBar, "+", () -> canvas.zoomAt(new Point(canvas.getWidth() / 2, canvas.getHeight() / 2), 1.2));
-        button(graphBar, "−", () -> canvas.zoomAt(new Point(canvas.getWidth() / 2, canvas.getHeight() / 2), 1 / 1.2));
-        button(graphBar, "Arrange", canvas::arrange);
-        JPanel groupBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2)); groupBar.add(polarity); button(groupBar, "Group selected values", this::group);
+        Hints.of(graphSearch, "Show only the cards whose sheet or value holds this text. Filled by you: type part of a name.");
+        graphBar.add(FieldNames.label("Find cards", graphSearch)); graphBar.add(graphSearch);
+        Hints.of(button(graphBar, "Fit", canvas::fit), "Zoom the graph so that every card is in view.");
+        Hints.of(button(graphBar, "+", () -> canvas.zoomAt(new Point(canvas.getWidth() / 2, canvas.getHeight() / 2), 1.2)), "Zoom into the middle of the graph.");
+        Hints.of(button(graphBar, "−", () -> canvas.zoomAt(new Point(canvas.getWidth() / 2, canvas.getHeight() / 2), 1 / 1.2)), "Zoom out from the middle of the graph.");
+        Hints.of(button(graphBar, "Arrange", canvas::arrange), "Lay the cards out again in tidy columns.");
+        JPanel groupBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
+        Hints.of(polarity, "Whether the values selected on the graph are forbidden or required together when you group them.");
+        groupBar.add(FieldNames.label("Group as", polarity)); groupBar.add(polarity);
+        Hints.of(button(groupBar, "Group selected values", this::group), "Make one rule from the values selected on the graph, as the choice beside it says.");
         graph.add(rows(graphBar, groupBar), BorderLayout.NORTH); graph.add(canvas); JLabel instructions = new JLabel("<html>Drag right pin → value: pair. Shift-click values: group.<br>Wheel: zoom · empty space/Space: pan · 0: fit</html>");
         graph.add(instructions, BorderLayout.SOUTH); views.addTab("Sieve graph", graph); views.addTab("Bond matrix", matrixPanel());
         views.addTab("Parameters / orders", data.component());
-        JPanel raw = new JPanel(new BorderLayout()); raw.add(new JScrollPane(json)); JPanel rawActions = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        button(rawActions, "Apply JSON", () -> applyJson(json.getText())); button(rawActions, "Discard JSON draft", () -> { refreshJson(); status(); });
+        JPanel raw = new JPanel(new BorderLayout()); raw.add(FieldNames.titled(json, "Constraints as JSON")); JPanel rawActions = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        Hints.of(button(rawActions, "Apply JSON", () -> applyJson(json.getText())), "Use the JSON text as the rules; it is checked before it is used.");
+        Hints.of(button(rawActions, "Discard JSON draft", () -> { refreshJson(); status(); }), "Throw away the changes to the JSON text and show the rules again.");
         rawActions.add(new JLabel("Framework sidecar format; layout is saved separately.")); raw.add(rawActions, BorderLayout.SOUTH); views.addTab("Advanced JSON", raw);
+        String[] viewHints = {"The rules drawn as cards and links between the values of the scenario's sheets.",
+                "Every value of one sheet against every value of another, with how many rules forbid or require each pair.",
+                "Numbers attached to values, which formula rules use, and the order in which each sheet's values rank.",
+                "The rules as JSON text, for what the other editors cannot show."};
+        for (int i = 0; i < viewHints.length; i++) ((JComponent) views.getComponentAt(i)).putClientProperty(Hints.TAB, viewHints[i]);
         int[] activeView = {0};
         views.addChangeListener(e -> {
             int next = views.getSelectedIndex(), previous = activeView[0];
@@ -153,23 +182,45 @@ final class SieveWorkbench {
             int view = rules.getSelectedRow(); if (view >= 0 && !selectRule(rules.convertRowIndexToModel(view))) selectTable();
         });
         JPanel ruleList = new JPanel(new BorderLayout()); JPanel ruleBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
-        ruleBar.add(new JLabel("Find rules")); ruleBar.add(search);
-        JComboBox<String> type = new JComboBox<>(new String[]{"pairs", "sets", "when", "mapping", "assert"}); ruleBar.add(type);
-        button(ruleBar, "New rule", () -> newRule((String) type.getSelectedItem())); 
-        JPanel ruleActions = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2)); button(ruleActions, "Duplicate", this::duplicateRule);
-        button(ruleActions, "Delete", this::removeRule); button(ruleActions, "↑", () -> moveRule(-1)); button(ruleActions, "↓", () -> moveRule(1));
-        button(ruleActions, "Find on graph", () -> { views.setSelectedIndex(0); graphSearch.setText(""); canvas.focusRule(selected); });
+        Hints.of(search, "Show only the rules whose name, kind or words hold this text. Filled by you: type part of it.");
+        ruleBar.add(FieldNames.label("Find rules", search)); ruleBar.add(search);
+        JComboBox<String> type = Hints.of(new JComboBox<>(new String[]{"pairs", "sets", "when", "mapping", "assert"}),
+                "The kind of rule New rule starts: value pairs, sets, a formula, a mapping or an assertion.");
+        ruleBar.add(FieldNames.label("Kind", type)); ruleBar.add(type);
+        Hints.of(button(ruleBar, "New rule", () -> newRule((String) type.getSelectedItem())), "Start a new rule of the kind beside it, in the editor below.");
+        JPanel ruleActions = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
+        Hints.of(button(ruleActions, "Duplicate", this::duplicateRule), "Make a copy of the selected rule under a new name.");
+        Hints.of(button(ruleActions, "Delete", this::removeRule), "Delete the selected rule for good.");
+        Hints.of(button(ruleActions, "↑", () -> moveRule(-1)), "Move the selected rule one place up.");
+        Hints.of(button(ruleActions, "↓", () -> moveRule(1)), "Move the selected rule one place down.");
+        Hints.of(button(ruleActions, "Find on graph", () -> { views.setSelectedIndex(0); graphSearch.setText(""); canvas.focusRule(selected); }),
+                "Show the selected rule's cards on the graph.");
+        Hints.of(rules, "All rules, one per row, with their kind and a summary in words. Select one to edit it below.");
         ruleList.add(rows(ruleBar, ruleActions), BorderLayout.NORTH); ruleList.add(new JScrollPane(rules));
         JSplitPane inspector = new JSplitPane(JSplitPane.VERTICAL_SPLIT, ruleList, editor.component()); inspector.setResizeWeight(.32);
         inspector.setDividerLocation(190); inspector.setMinimumSize(new Dimension(380, 300)); views.setMinimumSize(new Dimension(330, 300));
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, views, inspector); split.setResizeWeight(.55); split.setDividerLocation(590); root.add(split);
-        root.add(new JScrollPane(output), BorderLayout.SOUTH); root.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        root.add(FieldNames.titled(output, "Messages"), BorderLayout.SOUTH); root.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         SieveRuleEditor.listen(search, () -> { String q = search.getText(); sorter.setRowFilter(q.isBlank() ? null : RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(q))); });
         SieveRuleEditor.listen(graphSearch, () -> { if (!refreshing) refreshGraph(); });
         SieveRuleEditor.listen(json, () -> { if (!refreshing) { jsonDirty = true; status(); } });
         binding("control Z", "undo", this::undo); binding("control Y", "redo", this::redo); binding("control S", "save", () -> save());
-        output.setText("Open a scenario from step 3. Edit its companion constraints here, validate or check impact, then save.\nGraph, matrix and inspector share one document. Forbid/require, gates and conditions retain Framework semantics.");
+        output.setText("Press Open step 3 scenario to load the scenario chosen in step 3 with its rules (constraints). Edit them here, "
+                + "validate or check impact, then press Save for scenario.\nGraph, matrix and inspector share one document. "
+                + "Forbid/require, gates and conditions retain Framework semantics.");
+        root.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override public void componentShown(java.awt.event.ComponentEvent e) { if (opened == null) waiting(); }
+        });
+        waiting();
         refresh();
+    }
+
+    /** Before a scenario is opened, the location line says which one Open step 3 scenario loads. */
+    private void waiting() {
+        Path next;
+        try { next = scenario.get(); } catch (java.nio.file.InvalidPathException e) { next = null; }
+        location.setText(next == null ? "No scenario is chosen in step 3 yet: choose one there, then press Open step 3 scenario."
+                : "Step 3 scenario: " + next + "   ·   press Open step 3 scenario to edit its rules.");
     }
 
     JComponent component() { return root; }
@@ -188,7 +239,7 @@ final class SieveWorkbench {
         root.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(key), name);
         root.getActionMap().put(name, new AbstractAction() { public void actionPerformed(ActionEvent e) { if (!busy && !closed) run.run(); } });
     }
-    private boolean ready() { if (opened == null) { output.setText("Open a scenario first."); return false; } return !busy && !closed; }
+    private boolean ready() { if (opened == null) { output.setText("Press Open step 3 scenario first."); return false; } return !busy && !closed; }
     private boolean cleanDrafts() {
         if (drafts()) { output.setText("Apply or discard the pending rule, data or JSON draft before this action. Your edits are still in their editor."); return false; }
         return ready();
@@ -200,7 +251,7 @@ final class SieveWorkbench {
 
     CompletableFuture<?> open() {
         Path chosen = scenario.get();
-        if (chosen == null) { output.setText("Select a scenario in step 3 first."); return CompletableFuture.completedFuture(null); }
+        if (chosen == null) { output.setText("Choose a scenario in step 3 first, then press Open step 3 scenario."); return CompletableFuture.completedFuture(null); }
         Session session = sessions.get(); Path file = chosen.toAbsolutePath().normalize();
         return work("open-sieve", () -> {
             var openedSieve = session.openSieve(file);
@@ -381,20 +432,28 @@ final class SieveWorkbench {
     private void moveRule(int delta) { int next = selected + delta; if (cleanDrafts() && selected >= 0 && next >= 0 && next < document.rules().size()) commit(document.move(selected, next), next); }
 
     private JComponent matrixPanel() {
-        JPanel panel = new JPanel(new BorderLayout()); JPanel bar = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        bar.add(new JLabel("Rows")); bar.add(sheetA); bar.add(rowFilter); bar.add(new JLabel("Columns")); bar.add(sheetB); bar.add(colFilter);
+        // each axis on its own row, so the names fit beside their fields in the narrow left pane
+        JPanel panel = new JPanel(new BorderLayout()); JPanel rowBar = new JPanel(new FlowLayout(FlowLayout.LEADING)), colBar = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        Hints.of(sheetA, "The sheet whose values are the rows of the matrix.");
+        Hints.of(sheetB, "The sheet whose values are the columns of the matrix.");
+        Hints.of(rowFilter, "Show only the row values that hold this text; up to 50 matches are shown. Filled by you.");
+        Hints.of(colFilter, "Show only the column values that hold this text; up to 50 matches are shown. Filled by you.");
+        rowBar.add(FieldNames.label("Rows", sheetA)); rowBar.add(sheetA); rowBar.add(FieldNames.label("Row filter", rowFilter)); rowBar.add(rowFilter);
+        colBar.add(FieldNames.label("Columns", sheetB)); colBar.add(sheetB); colBar.add(FieldNames.label("Column filter", colFilter)); colBar.add(colFilter);
         rowFilter.setToolTipText("Find row values; up to 50 matches are shown."); colFilter.setToolTipText("Find column values; up to 50 matches are shown.");
         JPanel matrixActions = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
-        button(matrixActions, "Add pair at cell", () -> { int r = matrix.getSelectedRow(), c = matrix.getSelectedColumn(); if (r >= 0 && c > 0) pair(new SieveCanvas.Value((String) sheetA.getSelectedItem(), rowValues().get(r)), new SieveCanvas.Value((String) sheetB.getSelectedItem(), columnValues().get(c - 1))); else output.setText("Select a value cell first (not the row label)."); });
-        button(matrixActions, "Edit cell rule", () -> {
+        Hints.of(button(matrixActions, "Add pair at cell", () -> { int r = matrix.getSelectedRow(), c = matrix.getSelectedColumn(); if (r >= 0 && c > 0) pair(new SieveCanvas.Value((String) sheetA.getSelectedItem(), rowValues().get(r)), new SieveCanvas.Value((String) sheetB.getSelectedItem(), columnValues().get(c - 1))); else output.setText("Select a value cell first (not the row label)."); }),
+                "Make a new rule from the selected cell's row value and column value.");
+        Hints.of(button(matrixActions, "Edit cell rule", () -> {
             int r = matrix.getSelectedRow(), c = matrix.getSelectedColumn();
             if (r >= 0 && c > 0 && matrix.getModel() instanceof Matrix model) {
                 int first = model.first[r][c - 1]; if (first >= 0) selectRule(first); else output.setText("No tuple/set rule in this cell.");
             }
-        });
+        }), "Select the rule that the selected cell counts, to edit it below.");
         SieveRuleEditor.listen(rowFilter, () -> { if (!refreshing) matrix.setModel(new Matrix()); });
         SieveRuleEditor.listen(colFilter, () -> { if (!refreshing) matrix.setModel(new Matrix()); });
-        panel.add(rows(bar, matrixActions), BorderLayout.NORTH); matrix.setCellSelectionEnabled(true); matrix.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); matrix.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        Hints.of(matrix, "Row values against column values: F counts the rules that forbid a pair, R those that require it.");
+        panel.add(rows(rowBar, colBar, matrixActions), BorderLayout.NORTH); matrix.setCellSelectionEnabled(true); matrix.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); matrix.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         matrix.setToolTipText("Numbers count tuple/set memberships, including gated rules. Formula, mapping and assertion logic is in the rule list. Add pair creates a new independent rule.");
         sheetA.addActionListener(e -> { if (!refreshing) matrix.setModel(new Matrix()); }); sheetB.addActionListener(e -> { if (!refreshing) matrix.setModel(new Matrix()); });
         panel.add(new JScrollPane(matrix)); panel.add(new JLabel("Forbid/require counts · first 50 matching values per axis · use filters to find other values."), BorderLayout.SOUTH); return panel;
@@ -480,14 +539,24 @@ final class SieveWorkbench {
     private void chooseImport() {
         if (!ready() || !confirmDiscard()) return;
         Path source = navigator.choose(root, Navigator.Purpose.CONSTRAINTS_OPEN, opened); if (source == null) return;
-        work("import-sieve", () -> {
+        importFrom(source);
+    }
+    /** Replaces the rules shown with the rules of a constraints file; Save for scenario attaches them. */
+    CompletableFuture<?> importFrom(Path source) {
+        return work("import-sieve", () -> {
             var text = SieveFiles.read(source, InputSource::read, SieveDocument.MAX_BYTES);
             if (text.fingerprint().isEmpty()) throw new IllegalArgumentException("No file at " + source);
             return SieveDocument.parse(text.content(), source.toString());
         }, next -> { commit(next, -1); output.setText("Imported " + source + ". Review and save to attach it to " + opened + "."); });
     }
     boolean confirmDiscard() {
-        return !dirty() || JOptionPane.showConfirmDialog(root, "Discard unsaved constraints, layout or pending drafts?\nChoose Cancel to apply drafts and Save for scenario first.", "Unsaved Sieve edits", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION;
+        if (!dirty()) return true;
+        if (java.awt.GraphicsEnvironment.isHeadless()) {
+            // no one can be asked: nothing is discarded
+            output.setText("Unsaved constraints, layout or drafts are kept: apply or discard the drafts, or press Save for scenario, first.");
+            return false;
+        }
+        return JOptionPane.showConfirmDialog(root, "Discard unsaved constraints, layout or pending drafts?\nChoose Cancel to apply drafts and Save for scenario first.", "Unsaved Sieve edits", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION;
     }
     boolean allowClose() { return confirmDiscard(); }
     CompletableFuture<Void> close() { closed = true; closeFace2(); cancelled.set(true); canvas.cancelGesture(); return pending.handle((value, failure) -> null); }

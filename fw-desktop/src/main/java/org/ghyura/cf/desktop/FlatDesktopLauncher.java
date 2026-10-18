@@ -25,6 +25,7 @@
 
 package org.ghyura.cf.desktop;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.ghyura.cf.desktop.session.FileTrail;
 import org.ghyura.cf.desktop.session.Session;
@@ -40,6 +41,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -76,10 +80,20 @@ public final class FlatDesktopLauncher {
         }
     }
 
-    /** Install before constructing any widgets; no optional native integration or animation work. */
+    /** The tint of every second table row, which sets odd rows apart from even ones. */
+    static final String ALTERNATE_ROW = "#e4ebf5";
+
+    /**
+     * Install before constructing any widgets; no optional native integration or animation work. Every table of the FlatLaf
+     * desktop tints its odd rows (checkbox and number columns too); the setting belongs to FlatLaf, so the original desktop's
+     * look is untouched.
+     */
     static void installLookAndFeel() {
         System.setProperty("flatlaf.useNativeLibrary", "false");
         System.setProperty("flatlaf.animation", "false");
+        Map<String, String> extra = new HashMap<>(Objects.requireNonNullElse(FlatLaf.getGlobalExtraDefaults(), Map.of()));
+        extra.put("Table.alternateRowColor", ALTERNATE_ROW);
+        FlatLaf.setGlobalExtraDefaults(extra);
         if (!FlatLightLaf.setup()) throw unavailable("could not initialize FlatLaf");
     }
 

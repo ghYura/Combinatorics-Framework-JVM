@@ -53,7 +53,9 @@ final class SieveRuleEditor {
     private final JTextField id = new JTextField(), description = new JTextField();
     private final JComboBox<String> polarity = new JComboBox<>(new String[]{"forbid", "require"});
     private final JCheckBox adjacent = new JCheckBox("Adjacent"), distance = new JCheckBox("Within");
-    private final JSpinner within = new JSpinner(new SpinnerNumberModel(0L, 0L, Long.MAX_VALUE, 1L));
+    // boxed, so value, bounds and step are all Long (primitive longs would pick the double constructor, and a Long value
+    // set later could not be compared with Double bounds)
+    private final JSpinner within = new JSpinner(new SpinnerNumberModel(Long.valueOf(0), Long.valueOf(0), Long.valueOf(Long.MAX_VALUE), Long.valueOf(1)));
     private final JLabel kind = new JLabel("Select or create a rule");
     private final DefaultListModel<String> sheetNames = new DefaultListModel<>();
     private final JList<String> sheets = new JList<>(sheetNames);
@@ -65,6 +67,8 @@ final class SieveRuleEditor {
     private final ConditionEditor assertion, guard;
     private final Consumer<RuleValue.MapValue> apply;
     private final Runnable changed;
+    /** Shows why a draft cannot be applied, without a dialog. */
+    private final Consumer<String> problem;
     private RuleValue.MapValue original;
     private Map<String, List<String>> values = Map.of();
     private List<String> columns = List.of();
@@ -72,24 +76,44 @@ final class SieveRuleEditor {
     private boolean editable = true;
     private boolean loading, dirty, bodyDirty, guardDirty, sheetsDirty, mappingSheetsDirty;
 
+    /** An editor on its own: why a draft cannot be applied shows in its heading. */
     SieveRuleEditor(Consumer<RuleValue.MapValue> apply, Runnable discard, Runnable changed) {
-        this.apply = apply; this.changed = changed;
+        this(apply, discard, changed, null);
+    }
+
+    /** @param problem shows why a draft cannot be applied (no dialog, so it also works without a display); null: the heading */
+    SieveRuleEditor(Consumer<RuleValue.MapValue> apply, Runnable discard, Runnable changed, Consumer<String> problem) {
+        this.apply = apply; this.changed = changed; this.problem = problem == null ? kind::setText : problem;
+        Hints.of(id, "The rule's name, unique among the rules. Filled from the selected rule; type to rename it.");
+        Hints.of(description, "What the rule means, in your own words. Filled from the selected rule; type to change it.");
+        Hints.of(polarity, "Forbid removes the test cases the rule matches; require keeps only the test cases it matches.");
+        Hints.of(adjacent, "Apply the rule only to values in neighbouring columns.");
+        Hints.of(distance, "Apply the rule only to values at most the number beside it of columns apart.");
+        Hints.of(within, "The largest number of columns between the values the rule applies to; zero means the same column.");
+        Hints.of(sheets, "The sheets the rule reads. Select at least two, then press Use chosen sheets.");
+        Hints.of(table, "The rule's values, one row each: which values of the chosen sheets it pairs or groups.");
+        Hints.of(source, "The sheet whose values the mapping starts from.");
+        Hints.of(target, "The sheet whose values each source value may go with.");
         formula = new FormulaEditor(this::bodyChanged);
         assertion = new ConditionEditor("Assertion", "Build the condition to require or forbid", this::bodyChanged);
         guard = new ConditionEditor("Only when", "Always active (no guard)", () -> { if (!loading) { guardDirty = true; touch(); } });
         JPanel metadata = new JPanel(new GridLayout(0, 1, 3, 3));
         metadata.add(kind); metadata.add(labeled("Rule ID", id)); metadata.add(labeled("Description", description));
         JPanel gates = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 0));
-        gates.add(polarity); gates.add(adjacent); gates.add(distance); gates.add(within); metadata.add(gates);
+        gates.add(FieldNames.label("Effect", polarity)); gates.add(polarity); gates.add(adjacent); gates.add(distance); gates.add(within);
+        gates.add(FieldNames.label("columns apart", within)); metadata.add(gates);
         polarity.setToolTipText("Forbid rejects a matching rule body; require rejects when it does not match. The guard and gate limit applicability.");
         within.setToolTipText("Largest column distance, including zero. Adjacent and Within may both be active.");
         ((JSpinner.DefaultEditor) within.getEditor()).getTextField().setColumns(6);
         form.add(metadata, BorderLayout.NORTH);
         parts.addTab("Rule body", body); parts.addTab("Only when", guard.component()); parts.setPreferredSize(new java.awt.Dimension(420, 360)); form.add(parts);
+        body.putClientProperty(Hints.TAB, "What the rule matches: value pairs, sets, a formula, a mapping or an assertion.");
+        guard.component().putClientProperty(Hints.TAB, "A condition that must hold for the rule to apply at all; empty means always.");
         scroll.getVerticalScrollBar().setUnitIncrement(18); root.add(scroll);
         JPanel actions = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        JButton use = new JButton("Apply rule"), revert = new JButton("Discard draft");
-        use.addActionListener(e -> { try { this.apply.accept(draft()); } catch (RuntimeException problem) { error(problem); } });
+        JButton use = Hints.of(new JButton("Apply rule"), "Use the rule as edited; it is checked before it is used."),
+                revert = Hints.of(new JButton("Discard draft"), "Throw away the changes to this rule.");
+        use.addActionListener(e -> { try { this.apply.accept(draft()); } catch (RuntimeException failure) { error(failure); } });
         revert.addActionListener(e -> discard.run()); actions.add(use); actions.add(revert); root.add(actions, BorderLayout.SOUTH);
         listen(id, this::touch); listen(description, this::touch);
         polarity.addActionListener(e -> touch()); adjacent.addActionListener(e -> touch()); distance.addActionListener(e -> touch());
@@ -200,8 +224,8 @@ final class SieveRuleEditor {
     }
 
     private JComponent sheetChooser() {
-        JPanel panel = new JPanel(new BorderLayout()); panel.add(new JScrollPane(sheets));
-        JButton use = new JButton("Use chosen sheets"); use.addActionListener(e -> {
+        JPanel panel = new JPanel(new BorderLayout()); panel.add(FieldNames.titled(sheets, "Sheets the rule reads"));
+        JButton use = Hints.of(new JButton("Use chosen sheets"), "Make the rule read the sheets selected above."); use.addActionListener(e -> {
             if (sheets.getSelectedValuesList().size() < 2) { error(new IllegalArgumentException("Choose at least two sheets.")); return; }
             List<String> previous = columns; columns = sheets.getSelectedValuesList();
             if (SieveDocument.kind(original).equals("when")) formula.offer(columns);
@@ -263,7 +287,8 @@ final class SieveRuleEditor {
 
     private JComponent rowButtons() {
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        JButton add = new JButton("Add row"), remove = new JButton("Remove row");
+        JButton add = Hints.of(new JButton("Add row"), "Add an empty row of values to the rule."),
+                remove = Hints.of(new JButton("Remove row"), "Delete the selected rows of the rule.");
         add.addActionListener(e -> { stopEditing(); ((DefaultTableModel) table.getModel()).addRow(new Object[table.getColumnCount()]); });
         remove.addActionListener(e -> { stopEditing(); int[] selected = table.getSelectedRows(); for (int i = selected.length - 1; i >= 0; i--) ((DefaultTableModel) table.getModel()).removeRow(selected[i]); });
         buttons.add(add); buttons.add(remove); buttons.setToolTipText("Choose existing values or type text. Use Advanced JSON for new numeric/boolean literals."); return buttons;
@@ -324,8 +349,8 @@ final class SieveRuleEditor {
     private void stopEditing() { if (table.isEditing() && !table.getCellEditor().stopCellEditing()) throw new IllegalStateException("Finish editing the current cell."); }
     private void bodyChanged() { if (!loading) { bodyDirty = true; touch(); } }
     private void touch() { if (!loading) { dirty = true; changed.run(); } }
-    private void error(RuntimeException failure) { JOptionPane.showMessageDialog(root, failure.getMessage(), "Rule draft", JOptionPane.ERROR_MESSAGE); }
-    static JPanel labeled(String label, JComponent field) { JPanel panel = new JPanel(new BorderLayout(4, 0)); JLabel name = new JLabel(label); name.setLabelFor(field); panel.add(name, BorderLayout.WEST); panel.add(field); return panel; }
+    private void error(RuntimeException failure) { problem.accept("The rule was not applied: " + failure.getMessage()); }
+    static JPanel labeled(String label, JComponent field) { JPanel panel = new JPanel(new BorderLayout(4, 0)); panel.add(FieldNames.label(label, field), BorderLayout.WEST); panel.add(field); return panel; }
     static void listen(javax.swing.text.JTextComponent field, Runnable action) {
         field.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) { action.run(); }

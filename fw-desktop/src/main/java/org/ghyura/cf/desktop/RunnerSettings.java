@@ -27,8 +27,10 @@ package org.ghyura.cf.desktop;
 
 import org.ghyura.cf.config.CapabilityCatalog;
 import org.ghyura.cf.config.ConfigResolver;
+import org.ghyura.cf.desktop.session.FileSeeker;
 import org.ghyura.cf.desktop.session.Session;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -48,13 +50,22 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-/** Desktop runner choices. Each apply creates an immutable session; already prepared operations keep theirs. */
+/**
+ * Desktop runner choices. Each apply creates an immutable session; already prepared operations keep theirs. The Python
+ * boxes are active only while the Python runner is chosen; with a navigator, the path boxes have buttons that choose them.
+ */
 final class RunnerSettings {
+    /** The keys only the Python runner reads. */
+    private static final List<String> PYTHON = List.of("cf.python.executable", "cf.python.path", "cf.python.workdir", "cf.python.env",
+            "cf.python.sandbox");
+
     private final Session base;
     private volatile Session current;
     private final Path installedPython;
+    private final Navigator navigator;
     private final JComboBox<String> runner;
     private final Map<String, JTextField> fields = new LinkedHashMap<>();
+    private final Map<String, List<JButton>> choosers = new LinkedHashMap<>();
     private final List<JLabel> summaries = new ArrayList<>();
     private final JPanel panel = new JPanel(new GridBagLayout());
     private final JLabel status = new JLabel("Settings apply to the next operation. Prepared runs keep their settings.");
@@ -64,9 +75,20 @@ final class RunnerSettings {
     }
 
     RunnerSettings(Session base, Path installedPython) {
+        this(base, installedPython, null);
+    }
+
+    /** Settings whose path boxes have buttons that choose the paths through the navigator's dialogs. */
+    static RunnerSettings withChoosers(Session base, Navigator navigator) {
+        return new RunnerSettings(base, installedPython(), navigator);
+    }
+
+    /** @param navigator opens the dialogs of the path boxes' buttons; null shows no buttons */
+    RunnerSettings(Session base, Path installedPython, Navigator navigator) {
         this.base = base;
         this.current = base;
         this.installedPython = installedPython;
+        this.navigator = navigator;
         LinkedHashSet<String> ids = new LinkedHashSet<>(List.of("generated-java", "python", base.configuration().config().executionSut()));
         try {
             CapabilityCatalog.load(base.configuration().config().executionClasspath()).plugins().forEach(p -> ids.add(p.id()));
@@ -77,24 +99,56 @@ final class RunnerSettings {
                 "Choose what runs the test cases: Java in this JVM, Python through its installed add-on, or a named plugin. Press Apply runner settings.");
         runner.setSelectedItem(base.configuration().config().executionSut());
         row(0, "Runner:", runner);
-        field(1, "cf.execution.classpath", "Add-on and dependency paths:",
-                "Jars or directories, separated by '" + File.pathSeparator + "'. Filled from the current configuration or by typing paths; "
-                + "the installed Python jar is added when Python is chosen. Press Apply runner settings.");
-        field(2, "cf.python.executable", "Python interpreter:",
-                "The Python executable or its full path. Filled from the current configuration or by typing; empty uses python3. Press Apply runner settings.");
-        field(3, "cf.python.path", "Python import directories:",
-                "Directories for Python imports, separated by '" + File.pathSeparator + "'. Filled from the current configuration or by typing; "
-                + "empty uses the scenario's defaults and inherited import paths. Press Apply runner settings.");
-        field(4, "cf.python.workdir", "Python working directory:",
-                "Where Python test cases work. Filled from the current configuration or by typing; leave empty to use the scenario's "
-                + "directory or its generator tree. Press Apply runner settings.");
-        field(5, "cf.python.env", "Python environment variables:",
+        JLabel note = FieldNames.note("The default runner, generated-java, needs nothing below. The Python boxes are used only "
+                + "when the runner is python.");
+        GridBagConstraints n = new GridBagConstraints();
+        n.gridx = 1; n.gridy = 1; n.gridwidth = GridBagConstraints.REMAINDER; n.anchor = GridBagConstraints.WEST;
+        n.insets = new java.awt.Insets(0, 4, 4, 4);
+        panel.add(note, n);
+        String separated = "separated by '" + File.pathSeparator + "'";
+        field(2, "cf.execution.classpath", "Add-on and dependency paths:",
+                "Jars or directories, " + separated + ". Filled from the current configuration, by typing paths or with Add...; "
+                + "the installed Python jar is added when Python is chosen. Press Apply runner settings.",
+                "empty: only the built-in runners; jars or class folders, " + separated);
+        field(3, "cf.python.executable", "Python interpreter:",
+                "The Python executable or its full path. Filled from the current configuration, by typing or with Browse...; empty "
+                + "uses python3. Press Apply runner settings.", "empty: python3; or a full path such as /usr/bin/python3");
+        field(4, "cf.python.path", "Python import directories:",
+                "Directories for Python imports, " + separated + ". Filled from the current configuration, by typing or with Add...; "
+                + "empty uses the scenario's defaults and inherited import paths. Press Apply runner settings.",
+                "empty: the scenario's defaults; folders of your Python modules, " + separated);
+        field(5, "cf.python.workdir", "Python working directory:",
+                "Where Python test cases work. Filled from the current configuration, by typing or with Browse...; leave empty to use "
+                + "the scenario's directory or its generator tree. Press Apply runner settings.", "empty: the scenario's folder");
+        field(6, "cf.python.env", "Python environment variables:",
                 "NAME=VALUE assignments separated by ';'. Filled from the current configuration or by typing. They affect only each "
-                + "Python child process. Press Apply runner settings.");
-        field(6, "cf.python.sandbox", "Python sandbox:",
+                + "Python child process. Press Apply runner settings.", "for example: MODE=fast;LEVEL=2");
+        field(7, "cf.python.sandbox", "Python sandbox:",
                 "Where each Python test case runs. Filled from the current configuration or by typing: empty runs it directly; bwrap "
                 + "isolates it with a read-only file system and no network; bwrap-network keeps the network; docker:IMAGE or "
-                + "docker:IMAGE@NETWORK runs it in a read-only container. Press Apply runner settings.");
+                + "docker:IMAGE@NETWORK runs it in a read-only container. Press Apply runner settings.",
+                "empty: runs directly; or bwrap, bwrap-network, docker:IMAGE");
+        if (navigator != null) {
+            chooser(2, "cf.execution.classpath", "Add...", Navigator.Purpose.ADDON_OPEN, true,
+                    "Choose a jar or a class folder to add to the add-on and dependency paths.");
+            chooser(3, "cf.python.executable", "Browse...", Navigator.Purpose.PROGRAM_OPEN, false,
+                    "Choose the Python program that runs the test cases.");
+            chooser(4, "cf.python.path", "Add...", Navigator.Purpose.IMPORTS_OPEN, true,
+                    "Choose a folder of Python modules to add to the import directories.");
+            chooser(5, "cf.python.workdir", "Browse...", Navigator.Purpose.WORKDIR_OPEN, false,
+                    "Choose the folder where each Python test case starts.");
+            AutoSearch search = new AutoSearch(navigator);
+            searcher(2, "cf.execution.classpath", search, FileSeeker.Kind.ADDON, true,
+                    "Search this application, this checkout and your folders for runner add-ons, then pick one to add.");
+            searcher(3, "cf.python.executable", search, FileSeeker.Kind.PYTHON, false,
+                    "Search your PATH and your virtual environments for Python interpreters, then pick one of them.");
+            searcher(4, "cf.python.path", search, FileSeeker.Kind.PYTHON_MODULES, true,
+                    "Search around the step 3 scenario for folders of Python modules, then pick one to add.");
+            searcher(5, "cf.python.workdir", search, FileSeeker.Kind.PYTHON_WORKDIR, false,
+                    "List the folders a Python test case can start in, the scenario's own first, then pick one.");
+        }
+        runner.addActionListener(e -> pythonBoxes());
+        pythonBoxes();
         JButton apply = Hints.of(new JButton("Apply runner settings"), "Use these settings for the next validation, candidate preview, run or campaign. "
                 + "An already started run keeps its settings. Problems are shown here.");
         apply.addActionListener(e -> apply());
@@ -102,8 +156,87 @@ final class RunnerSettings {
         bottom.add(apply);
         bottom.add(status);
         GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 7; c.gridwidth = 2; c.fill = GridBagConstraints.HORIZONTAL; c.weightx = 1;
+        c.gridy = 8; c.gridwidth = GridBagConstraints.REMAINDER; c.fill = GridBagConstraints.HORIZONTAL; c.weightx = 1;
         panel.add(bottom, c);
+        panel.setBorder(BorderFactory.createTitledBorder("Runner settings (optional): what runs the test cases"));
+    }
+
+    /** The Python boxes and their buttons are active only while the Python runner is chosen. */
+    private void pythonBoxes() {
+        boolean python = "python".equals(runner.getSelectedItem());
+        for (String key : PYTHON) {
+            fields.get(key).setEnabled(python);
+            for (JButton button : choosers.getOrDefault(key, List.of())) button.setEnabled(python);
+        }
+    }
+
+    /** An Auto-search… button beside a path box: the found path replaces it, or joins its list. */
+    private void searcher(int row, String key, AutoSearch search, FileSeeker.Kind kind, boolean append, String hint) {
+        JTextField field = fields.get(key);
+        JButton button = search.button(() -> kind, () -> held(field.getText()), chosen -> {
+            String held = field.getText().strip();
+            field.setText(append && !held.isEmpty() ? held + File.pathSeparator + chosen : chosen.toString());
+        }, hint);
+        choosers.computeIfAbsent(key, k -> new ArrayList<>()).add(button);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 3; c.gridy = row; c.fill = GridBagConstraints.HORIZONTAL; c.insets = new java.awt.Insets(2, 0, 2, 4);
+        panel.add(button, c);
+    }
+
+    /** A button beside a path box that fills it with a dialog: the chosen path replaces it, or joins its list. */
+    private void chooser(int row, String key, String text, Navigator.Purpose purpose, boolean append, String hint) {
+        JTextField field = fields.get(key);
+        JButton button = Hints.of(new JButton(text), hint);
+        button.addActionListener(e -> {
+            Path chosen = navigator.choose(panel, purpose, start(purpose, field.getText()));
+            if (chosen == null) return;
+            String held = field.getText().strip();
+            field.setText(append && !held.isEmpty() ? held + File.pathSeparator + chosen : chosen.toString());
+        });
+        navigator.bind(button, () -> purpose, () -> start(purpose, field.getText()));
+        choosers.computeIfAbsent(key, k -> new ArrayList<>()).add(button);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 2; c.gridy = row; c.fill = GridBagConstraints.HORIZONTAL; c.insets = new java.awt.Insets(2, 0, 2, 4);
+        panel.add(button, c);
+    }
+
+    /** Where a path box's dialog starts: its last path when that exists; the interpreter found on PATH; else null. */
+    private Path start(Navigator.Purpose purpose, String value) {
+        String[] entries = value.strip().split(java.util.regex.Pattern.quote(File.pathSeparator));
+        String last = entries[entries.length - 1].strip();
+        try {
+            if (!last.isEmpty() && Files.exists(Path.of(last))) return Path.of(last).toAbsolutePath();
+            if (purpose == Navigator.Purpose.PROGRAM_OPEN) return onPath(last.isEmpty() ? "python3" : last);
+            if (purpose == Navigator.Purpose.ADDON_OPEN && installedPython != null && installedPython.getParent() != null
+                    && Files.isDirectory(installedPython.getParent())) {
+                return installedPython.getParent();
+            }
+        } catch (java.nio.file.InvalidPathException ignored) {
+            // text that names no path opens where the purpose opens without one
+        }
+        return null;
+    }
+
+    /** The last path a box holds when it exists (where a search starts), else null. */
+    private static Path held(String value) {
+        String[] entries = value.strip().split(java.util.regex.Pattern.quote(File.pathSeparator));
+        String last = entries[entries.length - 1].strip();
+        try {
+            return last.isEmpty() || !Files.exists(Path.of(last)) ? null : Path.of(last).toAbsolutePath();
+        } catch (java.nio.file.InvalidPathException e) {
+            return null;
+        }
+    }
+
+    /** The program of that name on the PATH, or null. */
+    private static Path onPath(String program) {
+        if (program.contains(File.separator)) return null;
+        for (String folder : System.getenv().getOrDefault("PATH", "").split(java.util.regex.Pattern.quote(File.pathSeparator))) {
+            if (folder.isBlank()) continue;
+            Path candidate = Path.of(folder, program);
+            if (Files.isExecutable(candidate) && !Files.isDirectory(candidate)) return candidate;
+        }
+        return null;
     }
 
     Session session() { return current; }
@@ -178,8 +311,8 @@ final class RunnerSettings {
         view.add(header, BorderLayout.NORTH);
     }
 
-    private void field(int row, String key, String name, String hint) {
-        JTextField field = Hints.of(new JTextField(40), hint);
+    private void field(int row, String key, String name, String hint, String placeholder) {
+        JTextField field = FieldNames.placeholder(Hints.of(new JTextField(40), hint), placeholder);
         field.setText(base.configuration().entries().stream().filter(e -> e.key().equals(key)).findFirst().orElseThrow().rawValue());
         fields.put(key, field);
         row(row, name, field);

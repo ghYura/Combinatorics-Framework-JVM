@@ -92,7 +92,7 @@ class FileTrailTest {
         files.put(".hidden.json", "{\"sheets\": {}}");
         Map<String, Kind> expected = new java.util.LinkedHashMap<>();
         List<Kind> kinds = java.util.Arrays.asList(Kind.SCENARIO, Kind.SCENARIO, Kind.SCENARIO, Kind.CONSTRAINTS, Kind.CONSTRAINTS,
-                Kind.SETTINGS, Kind.REPORT, Kind.CHECKPOINT, Kind.CHECKPOINT, Kind.RESULTS, Kind.RESULTS, Kind.SCORES, null, Kind.PAGE,
+                Kind.SETTINGS, Kind.REPORT, Kind.CHECKPOINT, Kind.CHECKPOINT, Kind.RESULTS, Kind.METRICS, Kind.SCORES, null, Kind.PAGE,
                 Kind.GRAPH, Kind.GRAPH, Kind.RULES, Kind.TEXT, Kind.LIBRARY, null, null);
         int i = 0;
         for (Map.Entry<String, String> e : files.entrySet()) {

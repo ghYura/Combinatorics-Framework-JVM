@@ -50,6 +50,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** The run command (work package M04) through the application: reports, exit codes and the refusals before running. */
@@ -119,6 +120,25 @@ class RunCommandTest {
         Files.writeString(file, "{\"sheets\": {\"FW_Seq\": [[\"P\", \"FW_Combi(1)\"], [\"Q\", \"FW_Combi(1)\"]], \"P\": [" + p
                 + "], \"Q\": [[\"mode=a;\"], [\"mode=b;\"]]}}", StandardCharsets.UTF_8);
         return file;
+    }
+
+    /** A batch run reaches the same analysis as the desktop: export its metrics corpus, then analyze it. */
+    @Test
+    void aRunsMetricsExportIsWhatAnalyzeReads(@TempDir Path dir) throws Exception {
+        Path scenario = profiles(dir);
+        Path checkpoint = dir.resolve("run.cp.xml");
+        assertEquals(0, run("run", "--scenario", scenario.toString(), "--sut", "inline-metrics", "--run-id", "kv", "--checkpoint",
+                checkpoint.toString()).code());
+        Path metrics = dir.resolve("run-metrics.kv");
+        Result exported = run("export", "--input", checkpoint.toString(), "--output", metrics.toString(), "--kind", "metrics");
+        assertEquals(0, exported.code(), exported.err());
+        List<String> lines = Files.readAllLines(metrics);
+        assertEquals(16, lines.size(), "one line per sample: " + lines);
+        assertTrue(lines.stream().allMatch(l -> l.startsWith("candidate_id=") && l.contains(" run_id=kv ") && l.endsWith(" FW_VAR=0")), lines.toString());
+        Result analyzed = run("analyze", "--results", metrics.toString());
+        assertEquals(0, analyzed.code(), analyzed.err());
+        assertTrue(analyzed.out().contains("(16 samples)"), analyzed.out());
+        assertFalse(analyzed.err().contains("carry no FW_VAR"), "every sample carries its verdict: " + analyzed.err());
     }
 
     @Test
