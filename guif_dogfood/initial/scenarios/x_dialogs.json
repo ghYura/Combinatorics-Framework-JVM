@@ -1,0 +1,386 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "group",
+        "FW_Combi(1)"
+      ],
+      [
+        "place",
+        "FW_Combi(1)"
+      ],
+      [
+        "current",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_scenario_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_document_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_document_save",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_constraints_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_constraints_save",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_graph_save",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_export_report",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_export_results",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_export_samples",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_export_metrics",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_export_checkpoint",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_results_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_coverage_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_text_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_rules_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_scores_save",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_library_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_addon_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_program_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_imports_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_dialog_workdir_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_trail",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "group": [
+      [
+        "o.put(\"group\",\"scenario\");"
+      ],
+      [
+        "o.put(\"group\",\"run\");"
+      ],
+      [
+        "o.put(\"group\",\"python\");"
+      ],
+      [
+        "o.put(\"group\",\"other\");"
+      ]
+    ],
+    "place": [
+      [
+        "o.put(\"place\",\"empty\");"
+      ],
+      [
+        "o.put(\"place\",\"example\");"
+      ],
+      [
+        "o.put(\"place\",\"remembered\");"
+      ]
+    ],
+    "current": [
+      [
+        "o.put(\"current\",\"none\");"
+      ],
+      [
+        "o.put(\"current\",\"missing\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"x_dialogs\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_x_dialog_scenario_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_scenario_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_document_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_document_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_document_save": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_document_save\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_constraints_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_constraints_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_constraints_save": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_constraints_save\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_graph_save": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_graph_save\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_export_report": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_export_report\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_export_results": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_export_results\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_export_samples": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_export_samples\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_export_metrics": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_export_metrics\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_export_checkpoint": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_export_checkpoint\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_results_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_results_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_coverage_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_coverage_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_text_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_text_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_rules_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_rules_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_scores_save": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_scores_save\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_library_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_library_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_addon_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_addon_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_program_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_program_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_imports_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_imports_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_dialog_workdir_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_dialog_workdir_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_trail": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_trail\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_X_DIALOG_SCENARIO_OPEN_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_X_DIALOG_DOCUMENT_OPEN_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_X_DIALOG_DOCUMENT_SAVE_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_X_DIALOG_CONSTRAINTS_OPEN_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_X_DIALOG_CONSTRAINTS_SAVE_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_X_DIALOG_GRAPH_SAVE_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_X_DIALOG_EXPORT_REPORT_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_X_DIALOG_EXPORT_RESULTS_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_X_DIALOG_EXPORT_SAMPLES_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_X_DIALOG_EXPORT_METRICS_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_X_DIALOG_EXPORT_CHECKPOINT_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_X_DIALOG_RESULTS_OPEN_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_X_DIALOG_COVERAGE_OPEN_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_X_DIALOG_TEXT_OPEN_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_X_DIALOG_RULES_OPEN_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_X_DIALOG_SCORES_SAVE_INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_X_DIALOG_LIBRARY_OPEN_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_X_DIALOG_ADDON_OPEN_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_X_DIALOG_PROGRAM_OPEN_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_X_DIALOG_IMPORTS_OPEN_INVARIANT"
+      ],
+      [
+        "26",
+        "GUIF_X_DIALOG_WORKDIR_OPEN_INVARIANT"
+      ],
+      [
+        "27",
+        "GUIF_X_TRAIL_INVARIANT"
+      ]
+    ]
+  }
+}

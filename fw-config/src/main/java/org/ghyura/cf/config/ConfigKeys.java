@@ -405,14 +405,16 @@ public final class ConfigKeys {
                     + "none (legacy reader.constraints.bondsFile).", Parsers.path());
     public static final ConfigKey<Integer> COVERAGE_STRENGTH = add("cf.coverage.strength",
             "Keep only mandatory rows that cover the feasible t-tuples of the mandatory sheets' rows, t being this value; "
-                    + "0 keeps every row (0..64).", Parsers.intRange(0, 64));
+                    + "0 keeps every row (0..64). Not used while cf.coverage.budget is positive: the budget then decides t.",
+            Parsers.intRange(0, 64));
     public static final ConfigKey<RunConfig.CoverageMethod> COVERAGE_METHOD = add("cf.coverage.method",
             "'greedy' keeps a row when it covers a tuple not covered yet; 'set-cover' repeatedly takes the row covering most "
                     + "uncovered tuples. Both are greedy: neither claims a minimum suite.",
             Parsers.choice(RunConfig.CoverageMethod.class, RunConfig.CoverageMethod::token, Set.of("optimal", "minimum")));
     public static final ConfigKey<Long> COVERAGE_BUDGET = add("cf.coverage.budget",
             "When positive, the strongest t whose selection keeps at most this many mandatory rows is chosen, or the whole "
-                    + "product when it fits (0..2^40).", Parsers.longRange(0, 1L << 40));
+                    + "product when it fits; it then decides t, and cf.coverage.strength is not used (0..2^40).",
+            Parsers.longRange(0, 1L << 40));
     public static final ConfigKey<Long> COVERAGE_HARD_CAP = add("cf.coverage.hardCap",
             "Covering selection refuses mandatory products larger than this many rows (1..2^40; legacy 2000000).",
             Parsers.longRange(1, 1L << 40));

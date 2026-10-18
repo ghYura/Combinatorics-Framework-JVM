@@ -1,0 +1,224 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "source",
+        "FW_Combi(1)"
+      ],
+      [
+        "selection",
+        "FW_Combi(1)"
+      ],
+      [
+        "action",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_list_groups_of_examples",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_table_scenarios_of_the_selected_suite_documented_counts_and_sources",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_text_area_about_the_selected_example",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_open_the_example_library",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_open_a_library",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_auto_search",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_open_in_the_scenario_tab",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_check_the_candidate_count",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_use_python",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t1_button_runner_settings_step_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "source": [
+      [
+        "o.put(\"source\",\"valid\");"
+      ],
+      [
+        "o.put(\"source\",\"empty\");"
+      ],
+      [
+        "o.put(\"source\",\"malformed\");"
+      ]
+    ],
+    "selection": [
+      [
+        "o.put(\"selection\",\"none\");"
+      ],
+      [
+        "o.put(\"selection\",\"first\");"
+      ]
+    ],
+    "action": [
+      [
+        "o.put(\"action\",\"check\");"
+      ],
+      [
+        "o.put(\"action\",\"open\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t1_library\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t1_list_groups_of_examples": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_list_groups_of_examples\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_table_scenarios_of_the_selected_suite_documented_counts_and_sources": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_table_scenarios_of_the_selected_suite_documented_counts_and_sources\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_text_area_about_the_selected_example": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_text_area_about_the_selected_example\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_open_the_example_library": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_open_the_example_library\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_open_a_library": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_open_a_library\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_auto_search": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_auto_search\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_open_in_the_scenario_tab": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_open_in_the_scenario_tab\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_check_the_candidate_count": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_check_the_candidate_count\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_use_python": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_use_python\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t1_button_runner_settings_step_3": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t1_button_runner_settings_step_3\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T1_LIST_GROUPS_OF_EXAMPLES_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_T1_TABLE_SCENARIOS_OF_THE_SELECTED_SUITE_DOCUMENTED_COUNTS_AND_SOURCES_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T1_TEXT_AREA_ABOUT_THE_SELECTED_EXAMPLE_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T1_BUTTON_OPEN_THE_EXAMPLE_LIBRARY_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T1_BUTTON_OPEN_A_LIBRARY_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T1_BUTTON_AUTO_SEARCH_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T1_BUTTON_OPEN_IN_THE_SCENARIO_TAB_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T1_BUTTON_CHECK_THE_CANDIDATE_COUNT_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T1_BUTTON_USE_PYTHON_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T1_BUTTON_RUNNER_SETTINGS_STEP_3_INVARIANT"
+      ]
+    ]
+  }
+}

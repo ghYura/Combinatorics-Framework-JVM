@@ -1,0 +1,22 @@
+[
+  {
+    "name": "D001_accessible_names_t3",
+    "label_budget": 77,
+    "strength": 3
+  },
+  {
+    "name": "R003_runner_interactions_t3",
+    "label_budget": 67,
+    "strength": 3
+  },
+  {
+    "name": "D004_disguised_metrics_t3",
+    "label_budget": 41,
+    "strength": 3
+  },
+  {
+    "name": "D002_sieve_spinner_t3",
+    "label_budget": 90,
+    "strength": 3
+  }
+]

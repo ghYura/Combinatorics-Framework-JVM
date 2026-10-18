@@ -112,6 +112,53 @@ class FlatDesktopTest {
         }
     }
 
+    /** The author's rule: every table of the FlatLaf desktop sets odd rows apart from even ones, whatever its columns hold. */
+    @Test
+    void everyTableOfTheFlatDesktopTintsItsOddRows() throws Exception {
+        var previous = UIManager.getLookAndFeel();
+        String nativeSetting = System.getProperty("flatlaf.useNativeLibrary");
+        String animations = System.getProperty("flatlaf.animation");
+        Session session = Session.resolve(null, Map.of(), List.of());
+        Desktop flat = null;
+        try {
+            flat = edt(() -> {
+                FlatDesktopLauncher.installLookAndFeel();
+                return new Desktop(session, null, FileTrail.inMemory(), true);
+            });
+            Desktop desktop = flat;
+            List<String> plain = edt(() -> {
+                List<String> problems = new java.util.ArrayList<>();
+                List<javax.swing.JTable> tables = new java.util.ArrayList<>();
+                tables(desktop.component(), tables);
+                assertTrue(tables.size() >= 12, "tables found: " + tables.size());
+                Map<Class<?>, Object> samples = Map.of(Object.class, "text", Integer.class, 7, Double.class, 0.5, Boolean.class, true);
+                for (javax.swing.JTable table : tables) {
+                    samples.forEach((type, value) -> {
+                        var renderer = table.getDefaultRenderer(type);
+                        var even = renderer.getTableCellRendererComponent(table, value, false, false, 0, 0).getBackground();
+                        var odd = renderer.getTableCellRendererComponent(table, value, false, false, 1, 0).getBackground();
+                        if (even.equals(odd)) problems.add(type.getSimpleName() + " cells of " + Hints.own(table));
+                        else assertEquals(java.awt.Color.decode(FlatDesktopLauncher.ALTERNATE_ROW), odd);
+                    });
+                }
+                return problems;
+            });
+            assertEquals(List.of(), plain, "tables whose odd and even rows look alike");
+        } finally {
+            if (flat != null) edt(flat::close).get(30, TimeUnit.SECONDS);
+            edt(() -> { UIManager.setLookAndFeel(previous); return null; });
+            restore("flatlaf.useNativeLibrary", nativeSetting);
+            restore("flatlaf.animation", animations);
+        }
+    }
+
+    private static void tables(Component component, List<javax.swing.JTable> out) {
+        if (component instanceof javax.swing.JTable table) out.add(table);
+        if (component instanceof Container parent) {
+            for (Component child : parent.getComponents()) tables(child, out);
+        }
+    }
+
     private static boolean hasAction(Component component) {
         if (component instanceof AbstractButton) return true;
         if (component instanceof Container parent) {

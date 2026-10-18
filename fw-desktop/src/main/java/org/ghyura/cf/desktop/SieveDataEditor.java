@@ -57,34 +57,49 @@ final class SieveDataEditor {
     private String currentSheet;
     private final Runnable changed;
 
-    SieveDataEditor(Consumer<SieveDocument> apply, Runnable discard, Runnable changed) {
+    /** @param problem shows why a draft cannot be applied (no dialog, so it also works without a display) */
+    SieveDataEditor(Consumer<SieveDocument> apply, Runnable discard, Runnable changed, Consumer<String> problem) {
         this.changed = changed;
         table.putClientProperty("terminateEditOnFocusLost", true);
         table.setToolTipText("Text is literal. Number and boolean are typed. JSON supports arrays, objects and null.");
+        Hints.of(table, "Numbers and other attributes of each sheet's values, which formula rules can use, for example price 10.");
         table.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new JComboBox<>(new String[]{"text", "number", "boolean", "JSON"})));
         JPanel attributes = new JPanel(new BorderLayout()); attributes.add(new JScrollPane(table));
         JPanel rows = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        JButton add = new JButton("Add attribute"), remove = new JButton("Remove attribute");
+        JButton add = Hints.of(new JButton("Add attribute"), "Add a row for one more attribute of a value."),
+                remove = Hints.of(new JButton("Remove attribute"), "Delete the selected attribute rows.");
         add.addActionListener(e -> { stopEditing(); String s = values.keySet().stream().findFirst().orElse(""); params.addRow(new Object[]{s, values.getOrDefault(s, List.of()).stream().findFirst().orElse(""), "", "text", ""}); });
         remove.addActionListener(e -> { stopEditing(); int[] selected = table.getSelectedRows(); for (int i = selected.length - 1; i >= 0; i--) params.removeRow(selected[i]); });
         rows.add(add); rows.add(remove); attributes.add(rows, BorderLayout.SOUTH);
         JPanel ordering = new JPanel(new BorderLayout(4, 4));
+        Hints.of(orderSheet, "The sheet whose values you put in order.");
+        Hints.of(mode, "How the sheet's values rank: by number, by date, in the list below, or not at all.");
+        Hints.of(orderList, "The sheet's values in their rank, first to last. Select one to move or remove it.");
+        Hints.of(orderValue, "A value of the sheet to add to the end of the ranked list.");
         JPanel choices = new JPanel(new java.awt.GridLayout(0, 1)); choices.add(SieveRuleEditor.labeled("Sheet", orderSheet)); choices.add(SieveRuleEditor.labeled("Order", mode));
-        ordering.add(choices, BorderLayout.NORTH); ordering.add(new JScrollPane(orderList));
+        ordering.add(choices, BorderLayout.NORTH); ordering.add(FieldNames.titled(orderList, "Ranked values"));
         orderList.setCellRenderer(new DefaultListCellRenderer() {
             @Override public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean selected, boolean focus) {
                 return super.getListCellRendererComponent(list, value instanceof RuleValue.Text t ? t.value() : ConstraintBonds.pythonJson((RuleValue) value, false, false) + " [JSON]", index, selected, focus);
             }
         });
-        JPanel controls = new JPanel(new FlowLayout(FlowLayout.LEADING)); orderValue.setEditable(true); orderValue.setPrototypeDisplayValue("Choose a value…"); controls.add(orderValue);
-        JButton append = new JButton("Add value"), up = new JButton("↑"), down = new JButton("↓"), drop = new JButton("Remove");
+        JPanel controls = new JPanel(new FlowLayout(FlowLayout.LEADING)); orderValue.setEditable(true); orderValue.setPrototypeDisplayValue("Choose a value…");
+        controls.add(FieldNames.label("Value", orderValue)); controls.add(orderValue);
+        JButton append = Hints.of(new JButton("Add value"), "Put the value beside it at the end of the ranked list."),
+                up = Hints.of(new JButton("↑"), "Move the selected value one rank up."),
+                down = Hints.of(new JButton("↓"), "Move the selected value one rank down."),
+                drop = Hints.of(new JButton("Remove"), "Take the selected value out of the ranked list.");
         append.addActionListener(e -> { Object v = orderValue.getSelectedItem(); if (v != null) { mode.setSelectedItem("list"); ranks.addElement(new RuleValue.Text(v.toString())); storeOrder(); } });
         up.addActionListener(e -> move(-1)); down.addActionListener(e -> move(1));
         drop.addActionListener(e -> { int i = orderList.getSelectedIndex(); if (i >= 0) { ranks.remove(i); storeOrder(); } });
         controls.add(append); controls.add(up); controls.add(down); controls.add(drop); ordering.add(controls, BorderLayout.SOUTH);
         JTabbedPane tabs = new JTabbedPane(); tabs.addTab("Parameters", attributes); tabs.addTab("Value orders", ordering); root.add(tabs);
-        JPanel actions = new JPanel(new FlowLayout(FlowLayout.LEADING)); JButton use = new JButton("Apply data"), revert = new JButton("Discard data draft");
-        use.addActionListener(e -> { try { apply.accept(draft()); } catch (RuntimeException failure) { JOptionPane.showMessageDialog(root, failure.getMessage(), "Parameters and orders", JOptionPane.ERROR_MESSAGE); } });
+        attributes.putClientProperty(Hints.TAB, "Numbers and other attributes attached to the values of each sheet.");
+        ordering.putClientProperty(Hints.TAB, "The order in which the values of a sheet rank, for rules that compare them.");
+        JPanel actions = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        JButton use = Hints.of(new JButton("Apply data"), "Use the attributes and orders as edited; they are checked before they are used."),
+                revert = Hints.of(new JButton("Discard data draft"), "Throw away the changes to attributes and orders.");
+        use.addActionListener(e -> { try { apply.accept(draft()); } catch (RuntimeException failure) { problem.accept("Parameters and orders were not applied: " + failure.getMessage()); } });
         revert.addActionListener(e -> discard.run()); actions.add(use); actions.add(revert); root.add(actions, BorderLayout.SOUTH);
         params.addTableModelListener(e -> { if (!loading) { paramsDirty = true; touch(); } });
         orderSheet.addActionListener(e -> { if (!loading) showOrder(); });

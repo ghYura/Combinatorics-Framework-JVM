@@ -1,0 +1,1650 @@
+[
+  {
+    "id": "t0_toggle_hints_on_f1",
+    "tab": 0,
+    "kind": "toggle",
+    "name": "Hints on (F1)",
+    "hint": "Shows or hides the pop-up hints that explain each part of the desktop, tooltips included. The F1 key does t…",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_list_groups_of_examples",
+    "tab": 1,
+    "kind": "list",
+    "name": "Groups of examples",
+    "hint": "The groups of example scenarios. Pick one to list its examples.",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_table_scenarios_of_the_selected_suite_documented_counts_and_sources",
+    "tab": 1,
+    "kind": "table",
+    "name": "Scenarios of the selected suite: documented counts and sources",
+    "hint": "The examples of the chosen group, with the number of test cases each one should make. Select one to read ab…",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_text_area_about_the_selected_example",
+    "tab": 1,
+    "kind": "text area",
+    "name": "About the selected example",
+    "hint": "About the selected example: its name, what it checks, the counts it should give, and where its file is. Fil…",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_open_the_example_library",
+    "tab": 1,
+    "kind": "button",
+    "name": "Open the example library",
+    "hint": "Open the library of verified examples found next to this checkout.",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_open_a_library",
+    "tab": 1,
+    "kind": "button",
+    "name": "Open a library...",
+    "hint": "Choose a library: the generator_trunk folder of a QA edition checkout, or the verified_examples.json file i…",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_auto_search",
+    "tab": 1,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search this checkout, the checkouts next to it and your folders for libraries of examples.",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_open_in_the_scenario_tab",
+    "tab": 1,
+    "kind": "button",
+    "name": "Open in the Scenario tab",
+    "hint": "Use the selected example: it becomes the scenario of step 3, and the desktop switches there.",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_check_the_candidate_count",
+    "tab": 1,
+    "kind": "button",
+    "name": "Check the candidate count",
+    "hint": "Count the test cases of the selected example and compare the number with the one the library expects.",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_use_python",
+    "tab": 1,
+    "kind": "button",
+    "name": "Use Python",
+    "hint": "Choose the Python runner with the settings of step 3. The installed Python add-on must be available. Applyi…",
+    "occurrence": 0
+  },
+  {
+    "id": "t1_button_runner_settings_step_3",
+    "tab": 1,
+    "kind": "button",
+    "name": "Runner settings (step 3)",
+    "hint": "Go to step 3 to choose the runner, its add-on paths, and the Python interpreter, import directories, workin…",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_new",
+    "tab": 2,
+    "kind": "button",
+    "name": "New",
+    "hint": "Start a new, empty scenario.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_open",
+    "tab": 2,
+    "kind": "button",
+    "name": "Open...",
+    "hint": "Open a scenario file to change it.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_auto_search",
+    "tab": 2,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where scenario files usually are, then open one here to change it.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_save",
+    "tab": 2,
+    "kind": "button",
+    "name": "Save",
+    "hint": "Save the scenario to its file. It also becomes the scenario of step 3.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_save_as",
+    "tab": 2,
+    "kind": "button",
+    "name": "Save as...",
+    "hint": "Save the scenario to a new file. It also becomes the scenario of step 3.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_validate",
+    "tab": 2,
+    "kind": "button",
+    "name": "Validate",
+    "hint": "Check the scenario for mistakes without saving it. The result appears in tab 2.2 Validation.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_list_sheets",
+    "tab": 2,
+    "kind": "list",
+    "name": "Sheets",
+    "hint": "The scenario's sheets. Each sheet is a list of values; the sheet FW_Seq says how they are combined. Pick a …",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_add_sheet",
+    "tab": 2,
+    "kind": "button",
+    "name": "Add sheet",
+    "hint": "Add a new sheet (a list of values) with a name you choose.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_rename",
+    "tab": 2,
+    "kind": "button",
+    "name": "Rename",
+    "hint": "Give the selected sheet a new name.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_remove",
+    "tab": 2,
+    "kind": "button",
+    "name": "Remove",
+    "hint": "Delete the selected sheet with all its values.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_insert_row",
+    "tab": 2,
+    "kind": "button",
+    "name": "Insert row",
+    "hint": "Add an empty row above the selected row.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_remove_row",
+    "tab": 2,
+    "kind": "button",
+    "name": "Remove row",
+    "hint": "Delete the selected row.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_table_cells_of_sheet_fw_seq",
+    "tab": 2,
+    "kind": "table",
+    "name": "Cells of sheet FW_Seq",
+    "hint": "The values of the selected sheet, one per row. Click a cell and type, or fill it from the templates on the …",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_list_cell_templates",
+    "tab": 2,
+    "kind": "list",
+    "name": "Cell templates",
+    "hint": "Ready-made cell contents that say how a sheet's values are picked, ordered or joined. Rest the pointer on o…",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_insert_into_the_selected_cell",
+    "tab": 2,
+    "kind": "button",
+    "name": "Insert into the selected cell",
+    "hint": "Put the template chosen in the list into the selected cell of the sheet.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_sub_tab_2_1_control_sheets",
+    "tab": 2,
+    "kind": "sub-tab",
+    "name": "2.1 · Control sheets",
+    "hint": "Step 2.1: the three special sheets: code that runs once before the test cases, the arguments every test cas…",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_sub_tab_2_2_validation",
+    "tab": 2,
+    "kind": "sub-tab",
+    "name": "2.2 · Validation",
+    "hint": "Step 2.2: what the last check of the scenario found.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_sub_tab_2_3_operand_dependencies",
+    "tab": 2,
+    "kind": "sub-tab",
+    "name": "2.3 · Operand dependencies",
+    "hint": "Step 2.3: how the sheets feed each other where they are joined.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_sub_tab_2_4_dependency_graph",
+    "tab": 2,
+    "kind": "sub-tab",
+    "name": "2.4 · Dependency graph",
+    "hint": "Step 2.4: a diagram of how the sheets depend on each other.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_load_from_the_document",
+    "tab": 2,
+    "kind": "button",
+    "name": "Load from the document",
+    "hint": "Fill these three boxes from the scenario's control sheets.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_apply_to_the_document",
+    "tab": 2,
+    "kind": "button",
+    "name": "Apply to the document",
+    "hint": "Write these three boxes back into the scenario's control sheets.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_add_verdict",
+    "tab": 2,
+    "kind": "button",
+    "name": "Add verdict",
+    "hint": "Add a row for one of your own result codes and its name.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_remove_verdict",
+    "tab": 2,
+    "kind": "button",
+    "name": "Remove verdict",
+    "hint": "Delete the selected result code.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_text_area_fw_runmefirstonce_code_run_once_before_the_test_cases",
+    "tab": 2,
+    "kind": "text area",
+    "name": "FW_RunMeFirstOnce: code run once before the test cases",
+    "hint": "FW_RunMeFirstOnce: Java code that runs once before all test cases, for example to prepare data. Filled from…",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_text_area_fw_arguments_arguments_one_per_line",
+    "tab": 2,
+    "kind": "text area",
+    "name": "FW_Arguments: arguments, one per line",
+    "hint": "FW_Arguments: the arguments every test case gets, one per line. Filled from the scenario when you press Loa…",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_table_fw_custom_var_verdict_codes_and_their_names",
+    "tab": 2,
+    "kind": "table",
+    "name": "FW_CUSTOM_VAR: verdict codes and their names",
+    "hint": "FW_CUSTOM_VAR: your own result codes, each with a name, used instead of a plain pass or fail.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_text_area_check_results",
+    "tab": 2,
+    "kind": "text area",
+    "name": "Check results",
+    "hint": "What the last check of the scenario found: problems to fix, and a summary. Filled after you press Validate.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_table_operand_dependencies_each_joiner_s_operands_and_their_lifetimes",
+    "tab": 2,
+    "kind": "table",
+    "name": "Operand dependencies: each joiner's operands and their lifetimes",
+    "hint": "Each place where two sheets are joined: which sheets it reads, how their rows are paired, and whether those…",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_copy_dot",
+    "tab": 2,
+    "kind": "button",
+    "name": "Copy DOT",
+    "hint": "Copy the diagram as text in the Graphviz DOT format, to paste into a diagram tool.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_button_save_dot_or_json",
+    "tab": 2,
+    "kind": "button",
+    "name": "Save DOT or JSON...",
+    "hint": "Save the diagram to a file, as Graphviz DOT or as JSON.",
+    "occurrence": 0
+  },
+  {
+    "id": "t2_text_area_problems_in_the_diagram",
+    "tab": 2,
+    "kind": "text area",
+    "name": "Problems in the diagram",
+    "hint": "Problems found in the diagram, such as a sheet that is used before it is built. Filled after you press Vali…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_area_check_results",
+    "tab": 3,
+    "kind": "text area",
+    "name": "Check results",
+    "hint": "What the last check found: problems to fix, and a summary of how the scenario is built. Filled after you pr…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_table_fw_seq_plan_each_sheet_s_role_values_and_directives",
+    "tab": 3,
+    "kind": "table",
+    "name": "FW_Seq plan: each sheet's role, values and directives",
+    "hint": "One row per sheet of the scenario: whether its values are always used, optional or only helpers for other s…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_scenario_file_xlsx_json_yaml_or_toml",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Scenario file (xlsx, json, yaml or toml)",
+    "hint": "The scenario file the next steps work on. Filled when you choose a file with Browse... or send an example f…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_browse",
+    "tab": 3,
+    "kind": "button",
+    "name": "Browse...",
+    "hint": "Choose the scenario file from a folder.",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_auto_search",
+    "tab": 3,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where scenario files usually are, then pick one from the list it shows.",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_use_the_example",
+    "tab": 3,
+    "kind": "button",
+    "name": "Use the example",
+    "hint": "Put the showcase example scenario that comes with the framework into the box.",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_validate_and_plan",
+    "tab": 3,
+    "kind": "button",
+    "name": "Validate and plan",
+    "hint": "Check the scenario for mistakes and work out how its sheets are combined. Problems appear above, the plan i…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_use",
+    "tab": 3,
+    "kind": "button",
+    "name": "Use",
+    "hint": "Put the suggested file into the box next to it.",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_choice_runner",
+    "tab": 3,
+    "kind": "choice",
+    "name": "Runner",
+    "hint": "Choose what runs the test cases: Java in this JVM, Python through its installed add-on, or a named plugin. …",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_add_on_and_dependency_paths",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Add-on and dependency paths",
+    "hint": "Jars or directories, separated by ':'. Filled from the current configuration, by typing paths or with Add..…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_python_interpreter",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Python interpreter",
+    "hint": "The Python executable or its full path. Filled from the current configuration, by typing or with Browse...;…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_python_import_directories",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Python import directories",
+    "hint": "Directories for Python imports, separated by ':'. Filled from the current configuration, by typing or with …",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_python_working_directory",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Python working directory",
+    "hint": "Where Python test cases work. Filled from the current configuration, by typing or with Browse...; leave emp…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_python_environment_variables",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Python environment variables",
+    "hint": "NAME=VALUE assignments separated by ';'. Filled from the current configuration or by typing. They affect on…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_text_field_python_sandbox",
+    "tab": 3,
+    "kind": "text field",
+    "name": "Python sandbox",
+    "hint": "Where each Python test case runs. Filled from the current configuration or by typing: empty runs it directl…",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_add",
+    "tab": 3,
+    "kind": "button",
+    "name": "Add...",
+    "hint": "Choose a jar or a class folder to add to the add-on and dependency paths.",
+    "occurrence": 0
+  },
+  {
+    "id": "t3_button_browse_2",
+    "tab": 3,
+    "kind": "button",
+    "name": "Browse...",
+    "hint": "Choose the Python program that runs the test cases.",
+    "occurrence": 1
+  },
+  {
+    "id": "t3_button_add_2",
+    "tab": 3,
+    "kind": "button",
+    "name": "Add...",
+    "hint": "Choose a folder of Python modules to add to the import directories.",
+    "occurrence": 1
+  },
+  {
+    "id": "t3_button_browse_3",
+    "tab": 3,
+    "kind": "button",
+    "name": "Browse...",
+    "hint": "Choose the folder where each Python test case starts.",
+    "occurrence": 2
+  },
+  {
+    "id": "t3_button_auto_search_2",
+    "tab": 3,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search this application, this checkout and your folders for runner add-ons, then pick one to add.",
+    "occurrence": 1
+  },
+  {
+    "id": "t3_button_auto_search_3",
+    "tab": 3,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search your PATH and your virtual environments for Python interpreters, then pick one of them.",
+    "occurrence": 2
+  },
+  {
+    "id": "t3_button_auto_search_4",
+    "tab": 3,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search around the step 3 scenario for folders of Python modules, then pick one to add.",
+    "occurrence": 3
+  },
+  {
+    "id": "t3_button_auto_search_5",
+    "tab": 3,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "List the folders a Python test case can start in, the scenario's own first, then pick one.",
+    "occurrence": 4
+  },
+  {
+    "id": "t3_button_apply_runner_settings",
+    "tab": 3,
+    "kind": "button",
+    "name": "Apply runner settings",
+    "hint": "Use these settings for the next validation, candidate preview, run or campaign. An already started run keep…",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_open_step_3_scenario",
+    "tab": 4,
+    "kind": "button",
+    "name": "Open step 3 scenario",
+    "hint": "Load the scenario chosen in step 3 with its rules, to see and edit them here; no file dialog opens.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_import_constraints",
+    "tab": 4,
+    "kind": "button",
+    "name": "Import constraints…",
+    "hint": "Replace the rules shown with the rules of another constraints file; nothing is saved until you press Save f…",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_auto_search",
+    "tab": 4,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where constraints files usually are, then import the rules of one here.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_export_json",
+    "tab": 4,
+    "kind": "button",
+    "name": "Export JSON…",
+    "hint": "Save a copy of the rules as a JSON file; runs keep reading the scenario's own rules file.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_save_for_scenario",
+    "tab": 4,
+    "kind": "button",
+    "name": "Save for scenario",
+    "hint": "Save the rules beside the scenario as the rules file that every run and preview reads.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_face_2_sieve",
+    "tab": 4,
+    "kind": "button",
+    "name": "Face 2 (Sieve) ↗",
+    "hint": "Open the Face 2 web editor in your browser; its Submit button saves the rules for this scenario.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_undo",
+    "tab": 4,
+    "kind": "button",
+    "name": "Undo",
+    "hint": "Take back the last change to the rules or the layout.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_redo",
+    "tab": 4,
+    "kind": "button",
+    "name": "Redo",
+    "hint": "Make again the change that Undo took back.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_validate",
+    "tab": 4,
+    "kind": "button",
+    "name": "Validate",
+    "hint": "Check the rules for mistakes without counting test cases.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_check_impact",
+    "tab": 4,
+    "kind": "button",
+    "name": "Check impact",
+    "hint": "Count how many test cases each rule removes; nothing is run.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_spinner_unnamed",
+    "tab": 4,
+    "kind": "spinner",
+    "name": "(unnamed)",
+    "hint": "The most test cases each counting pass looks at; a smaller number answers faster.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_cancel_work",
+    "tab": 4,
+    "kind": "button",
+    "name": "Cancel work",
+    "hint": "Stop the counting or saving that is still going.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_sieve_graph",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Sieve graph",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_bond_matrix",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Bond matrix",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_parameters_orders",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Parameters / orders",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_advanced_json",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Advanced JSON",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_text_field_unnamed",
+    "tab": 4,
+    "kind": "text field",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_fit",
+    "tab": 4,
+    "kind": "button",
+    "name": "Fit",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_plus",
+    "tab": 4,
+    "kind": "button",
+    "name": "+",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_minus",
+    "tab": 4,
+    "kind": "button",
+    "name": "−",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_arrange",
+    "tab": 4,
+    "kind": "button",
+    "name": "Arrange",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_unnamed",
+    "tab": 4,
+    "kind": "choice",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_group_selected_values",
+    "tab": 4,
+    "kind": "button",
+    "name": "Group selected values",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_unnamed_2",
+    "tab": 4,
+    "kind": "choice",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_text_field_unnamed_2",
+    "tab": 4,
+    "kind": "text field",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_choice_unnamed_3",
+    "tab": 4,
+    "kind": "choice",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 2
+  },
+  {
+    "id": "t4_text_field_unnamed_3",
+    "tab": 4,
+    "kind": "text field",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 2
+  },
+  {
+    "id": "t4_button_add_pair_at_cell",
+    "tab": 4,
+    "kind": "button",
+    "name": "Add pair at cell",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_edit_cell_rule",
+    "tab": 4,
+    "kind": "button",
+    "name": "Edit cell rule",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_table_unnamed",
+    "tab": 4,
+    "kind": "table",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_parameters",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Parameters",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_value_orders",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Value orders",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_table_unnamed_2",
+    "tab": 4,
+    "kind": "table",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_button_add_attribute",
+    "tab": 4,
+    "kind": "button",
+    "name": "Add attribute",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_remove_attribute",
+    "tab": 4,
+    "kind": "button",
+    "name": "Remove attribute",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_sheet",
+    "tab": 4,
+    "kind": "choice",
+    "name": "Sheet",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_order",
+    "tab": 4,
+    "kind": "choice",
+    "name": "Order",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_list_unnamed",
+    "tab": 4,
+    "kind": "list",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_unnamed_4",
+    "tab": 4,
+    "kind": "choice",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 3
+  },
+  {
+    "id": "t4_button_add_value",
+    "tab": 4,
+    "kind": "button",
+    "name": "Add value",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_up",
+    "tab": 4,
+    "kind": "button",
+    "name": "↑",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_down",
+    "tab": 4,
+    "kind": "button",
+    "name": "↓",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_remove",
+    "tab": 4,
+    "kind": "button",
+    "name": "Remove",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_apply_data",
+    "tab": 4,
+    "kind": "button",
+    "name": "Apply data",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_discard_data_draft",
+    "tab": 4,
+    "kind": "button",
+    "name": "Discard data draft",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_text_area_sieve_execution_json",
+    "tab": 4,
+    "kind": "text area",
+    "name": "#Sieve execution JSON",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_apply_json",
+    "tab": 4,
+    "kind": "button",
+    "name": "Apply JSON",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_discard_json_draft",
+    "tab": 4,
+    "kind": "button",
+    "name": "Discard JSON draft",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_text_field_unnamed_4",
+    "tab": 4,
+    "kind": "text field",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 3
+  },
+  {
+    "id": "t4_choice_unnamed_5",
+    "tab": 4,
+    "kind": "choice",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 4
+  },
+  {
+    "id": "t4_button_new_rule",
+    "tab": 4,
+    "kind": "button",
+    "name": "New rule",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_duplicate",
+    "tab": 4,
+    "kind": "button",
+    "name": "Duplicate",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_delete",
+    "tab": 4,
+    "kind": "button",
+    "name": "Delete",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_up_2",
+    "tab": 4,
+    "kind": "button",
+    "name": "↑",
+    "hint": "—",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_button_down_2",
+    "tab": 4,
+    "kind": "button",
+    "name": "↓",
+    "hint": "—",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_button_find_on_graph",
+    "tab": 4,
+    "kind": "button",
+    "name": "Find on graph",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_table_unnamed_3",
+    "tab": 4,
+    "kind": "table",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 2
+  },
+  {
+    "id": "t4_text_field_rule_id",
+    "tab": 4,
+    "kind": "text field",
+    "name": "Rule ID",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_text_field_description",
+    "tab": 4,
+    "kind": "text field",
+    "name": "Description",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_unnamed_6",
+    "tab": 4,
+    "kind": "choice",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 5
+  },
+  {
+    "id": "t4_check_box_adjacent",
+    "tab": 4,
+    "kind": "check box",
+    "name": "Adjacent",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_check_box_within",
+    "tab": 4,
+    "kind": "check box",
+    "name": "Within",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_spinner_unnamed_2",
+    "tab": 4,
+    "kind": "spinner",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_sub_tab_rule_body",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Rule body",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_sub_tab_only_when",
+    "tab": 4,
+    "kind": "sub-tab",
+    "name": "Only when",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_condition",
+    "tab": 4,
+    "kind": "button",
+    "name": "+ condition",
+    "hint": "Add a simple test next to the selected one. Inside a group it joins that group; otherwise both are grouped …",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_all_of",
+    "tab": 4,
+    "kind": "button",
+    "name": "all of",
+    "hint": "Make the selected group \"all of\" (every part must hold), or put the selected test into a new \"all of\" group.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_any_of",
+    "tab": 4,
+    "kind": "button",
+    "name": "any of",
+    "hint": "Make the selected group \"any of\" (one part is enough), or put the selected test into a new \"any of\" group.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_not",
+    "tab": 4,
+    "kind": "button",
+    "name": "not",
+    "hint": "Turn the selected part into its opposite, or remove a \"not\".",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_delete_2",
+    "tab": 4,
+    "kind": "button",
+    "name": "Delete",
+    "hint": "Delete the selected part.",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_button_up_3",
+    "tab": 4,
+    "kind": "button",
+    "name": "Up",
+    "hint": "Move the selected part up.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_down_3",
+    "tab": 4,
+    "kind": "button",
+    "name": "Down",
+    "hint": "Move the selected part down.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_tree_parts_of_the_condition",
+    "tab": 4,
+    "kind": "tree",
+    "name": "Parts of the condition",
+    "hint": "The condition as a tree: \"all of\" (every part must hold), \"any of\" (one part is enough), \"not\" (the opposit…",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_sheet_2",
+    "tab": 4,
+    "kind": "choice",
+    "name": "sheet",
+    "hint": "The sheet the test looks at.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_test",
+    "tab": 4,
+    "kind": "choice",
+    "name": "test",
+    "hint": "How the test compares: is, is not, any of, none of, contains, a number comparison, a count, whether the she…",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_value",
+    "tab": 4,
+    "kind": "choice",
+    "name": "value",
+    "hint": "The value the sheet is compared with.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_list_values",
+    "tab": 4,
+    "kind": "list",
+    "name": "Values",
+    "hint": "The values for an \"any of\" or \"none of\" test; select several.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_present",
+    "tab": 4,
+    "kind": "choice",
+    "name": "present",
+    "hint": "Yes or no, for a test that asks whether the sheet takes part.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_choice_other_column",
+    "tab": 4,
+    "kind": "choice",
+    "name": "other column",
+    "hint": "The other column, for a test that compares two columns.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_spinner_count",
+    "tab": 4,
+    "kind": "spinner",
+    "name": "count",
+    "hint": "The number, for a test that counts values.",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_text_field_json",
+    "tab": 4,
+    "kind": "text field",
+    "name": "JSON",
+    "hint": "The selected part as JSON text. Filled when you select a part of the condition; type to change it, then pre…",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_apply_json_2",
+    "tab": 4,
+    "kind": "button",
+    "name": "Apply JSON",
+    "hint": "Use the JSON text for the selected part.",
+    "occurrence": 1
+  },
+  {
+    "id": "t4_button_apply_rule",
+    "tab": 4,
+    "kind": "button",
+    "name": "Apply rule",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_button_discard_draft",
+    "tab": 4,
+    "kind": "button",
+    "name": "Discard draft",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t4_text_area_unnamed",
+    "tab": 4,
+    "kind": "text area",
+    "name": "(unnamed)",
+    "hint": "—",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_text_field_look_at_most_at_test_cases",
+    "tab": 5,
+    "kind": "text field",
+    "name": "Look at most at (test cases)",
+    "hint": "The most test cases the preview looks at. Filled with 1000000 at the start; type a smaller number for a fas…",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_spinner_rows_per_page",
+    "tab": 5,
+    "kind": "spinner",
+    "name": "Rows per page",
+    "hint": "How many test cases one page shows.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_check_box_executable_only",
+    "tab": 5,
+    "kind": "check box",
+    "name": "Executable only",
+    "hint": "Show only the test cases that will really run, not the ones a rule removes.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_button_preview",
+    "tab": 5,
+    "kind": "button",
+    "name": "Preview",
+    "hint": "Count the test cases of the scenario of step 3 and show the first page.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_button_next_page",
+    "tab": 5,
+    "kind": "button",
+    "name": "Next page",
+    "hint": "Show the next page of test cases.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_button_cancel",
+    "tab": 5,
+    "kind": "button",
+    "name": "Cancel",
+    "hint": "Stop the preview while it is still counting.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_table_plan_estimates_each_count_with_its_confidence_and_formula",
+    "tab": 5,
+    "kind": "table",
+    "name": "Plan estimates: each count with its confidence and formula",
+    "hint": "How many test cases each stage makes, whether the number is exact or an estimate, and how it is worked out.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_table_rule_impact_what_each_rule_reads_and_the_candidates_it_removes",
+    "tab": 5,
+    "kind": "table",
+    "name": "Rule impact: what each rule reads and the candidates it removes",
+    "hint": "Each rule of step 4: the sheets it looks at and how many test cases it removes.",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_table_candidate_page_each_candidate_s_ids_and_fate_under_the_rules",
+    "tab": 5,
+    "kind": "table",
+    "name": "Candidate page: each candidate's ids and fate under the rules",
+    "hint": "The test cases of this page: their number, their names, and whether they run or a rule removes them. Select…",
+    "occurrence": 0
+  },
+  {
+    "id": "t5_text_area_code_of_the_selected_test_case",
+    "tab": 5,
+    "kind": "text area",
+    "name": "Code of the selected test case",
+    "hint": "The code of the selected test case, exactly as it will run. Filled when you select a test case in the table…",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_text_area_run_report",
+    "tab": 6,
+    "kind": "text area",
+    "name": "Run report",
+    "hint": "Progress and results of the run: how many test cases passed, failed or could not run, and their result code…",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_run",
+    "tab": 6,
+    "kind": "button",
+    "name": "Run",
+    "hint": "Run all test cases of the scenario of step 3.",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_pause",
+    "tab": 6,
+    "kind": "button",
+    "name": "Pause",
+    "hint": "Pause the run; test cases already started finish first.",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_resume",
+    "tab": 6,
+    "kind": "button",
+    "name": "Resume",
+    "hint": "Continue a paused run.",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_cancel",
+    "tab": 6,
+    "kind": "button",
+    "name": "Cancel",
+    "hint": "Stop the run. The results so far are kept.",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_choice_save_as",
+    "tab": 6,
+    "kind": "choice",
+    "name": "Save as",
+    "hint": "What to save: a summary report, every result row, a table of measurements (CSV), the metrics that step 8 an…",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_export",
+    "tab": 6,
+    "kind": "button",
+    "name": "Export...",
+    "hint": "Save the chosen kind of results to a file.",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_use_python",
+    "tab": 6,
+    "kind": "button",
+    "name": "Use Python",
+    "hint": "Choose the Python runner with the settings of step 3. The installed Python add-on must be available. Applyi…",
+    "occurrence": 0
+  },
+  {
+    "id": "t6_button_runner_settings_step_3",
+    "tab": 6,
+    "kind": "button",
+    "name": "Runner settings (step 3)",
+    "hint": "Go to step 3 to choose the runner, its add-on paths, and the Python interpreter, import directories, workin…",
+    "occurrence": 0
+  },
+  {
+    "id": "t7_button_run_campaign",
+    "tab": 7,
+    "kind": "button",
+    "name": "Run campaign",
+    "hint": "Start a campaign: several runs of the scenario of step 3, each steered by the best results of the one before.",
+    "occurrence": 0
+  },
+  {
+    "id": "t7_button_pause",
+    "tab": 7,
+    "kind": "button",
+    "name": "Pause",
+    "hint": "Pause the campaign after the current step.",
+    "occurrence": 0
+  },
+  {
+    "id": "t7_button_resume",
+    "tab": 7,
+    "kind": "button",
+    "name": "Resume",
+    "hint": "Continue a paused campaign.",
+    "occurrence": 0
+  },
+  {
+    "id": "t7_button_cancel",
+    "tab": 7,
+    "kind": "button",
+    "name": "Cancel",
+    "hint": "Stop the campaign. The rounds so far are kept.",
+    "occurrence": 0
+  },
+  {
+    "id": "t7_table_campaign_lineage_each_iteration_s_run_counts_winners_and_front",
+    "tab": 7,
+    "kind": "table",
+    "name": "Campaign lineage: each iteration's run, counts, winners and front",
+    "hint": "One row per round: its run, how many test cases it made and ran, its best results, and whether they have st…",
+    "occurrence": 0
+  },
+  {
+    "id": "t7_text_area_campaign_report",
+    "tab": 7,
+    "kind": "text area",
+    "name": "Campaign report",
+    "hint": "What the campaign reports while it runs. Filled while a campaign runs (press Run campaign).",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_text_field_metrics_file_kv",
+    "tab": 8,
+    "kind": "text field",
+    "name": "Metrics file (.kv)",
+    "hint": "The metrics file to study: one line per test case of key=value measurements ending with its verdict FW_VAR.…",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_button_browse",
+    "tab": 8,
+    "kind": "button",
+    "name": "Browse...",
+    "hint": "Choose the metrics file to study.",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_button_auto_search",
+    "tab": 8,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where runs save metrics files, then pick one from the list it shows.",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_button_use_the_example",
+    "tab": 8,
+    "kind": "button",
+    "name": "Use the example",
+    "hint": "Put an example metrics file from the library of examples into the box.",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_button_use",
+    "tab": 8,
+    "kind": "button",
+    "name": "Use",
+    "hint": "Put the suggested file into the box next to it.",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_choice_code_coverage_optional",
+    "tab": 8,
+    "kind": "choice",
+    "name": "Code coverage (optional)",
+    "hint": "The kind of code-coverage report given below, or none.",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_text_field_report_file",
+    "tab": 8,
+    "kind": "text field",
+    "name": "report file",
+    "hint": "Optional: a code-coverage report to read with the results. Filled by you: type its path or choose it with B…",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_button_browse_2",
+    "tab": 8,
+    "kind": "button",
+    "name": "Browse...",
+    "hint": "Choose the code-coverage report your coverage tool wrote.",
+    "occurrence": 1
+  },
+  {
+    "id": "t8_button_auto_search_2",
+    "tab": 8,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where reports of the chosen coverage kind usually are, then pick one from the list.",
+    "occurrence": 1
+  },
+  {
+    "id": "t8_button_analyze",
+    "tab": 8,
+    "kind": "button",
+    "name": "Analyze",
+    "hint": "Study the metrics file: measurements, the best combinations, and code coverage when a report is given.",
+    "occurrence": 0
+  },
+  {
+    "id": "t8_text_area_analysis_report",
+    "tab": 8,
+    "kind": "text area",
+    "name": "Analysis report",
+    "hint": "The analysis: measurements per setting, the best combinations, and how much of the code the tests reached. …",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_text_field_text_file_to_score",
+    "tab": 9,
+    "kind": "text field",
+    "name": "Text file to score",
+    "hint": "The text file to score; every line is scored on its own. Filled when you choose a file with Browse...; you …",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_browse",
+    "tab": 9,
+    "kind": "button",
+    "name": "Browse...",
+    "hint": "Choose the text file.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_auto_search",
+    "tab": 9,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where logs and other texts usually are, then pick one to score.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_use",
+    "tab": 9,
+    "kind": "button",
+    "name": "Use",
+    "hint": "Put the suggested file into the box next to it.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_spinner_lines_per_learned_pattern",
+    "tab": 9,
+    "kind": "spinner",
+    "name": "Lines per learned pattern",
+    "hint": "How many lines must share a pattern before the scorer learns it.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_spinner_patterns_kept",
+    "tab": 9,
+    "kind": "spinner",
+    "name": "Patterns kept",
+    "hint": "How many learned patterns are kept.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_spinner_worth_improving_from_score",
+    "tab": 9,
+    "kind": "spinner",
+    "name": "Worth improving from score",
+    "hint": "Lines scoring at least this much are marked as worth improving.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_spinner_watch_from_score",
+    "tab": 9,
+    "kind": "spinner",
+    "name": "Watch from score",
+    "hint": "Lines scoring at least this much are marked to watch.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_load_rules",
+    "tab": 9,
+    "kind": "button",
+    "name": "Load rules...",
+    "hint": "Load scoring rules from a JSON file.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_auto_plan",
+    "tab": 9,
+    "kind": "button",
+    "name": "Auto-plan",
+    "hint": "Suggest the two thresholds from the scores.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_score",
+    "tab": 9,
+    "kind": "button",
+    "name": "Score",
+    "hint": "Give every line of the text a score.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_export_csv",
+    "tab": 9,
+    "kind": "button",
+    "name": "Export CSV...",
+    "hint": "Save the scored lines as a table (CSV) for a spreadsheet.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_optimization_charts",
+    "tab": 9,
+    "kind": "button",
+    "name": "Optimization charts",
+    "hint": "Open a window with charts of the scores.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_button_auto_search_2",
+    "tab": 9,
+    "kind": "button",
+    "name": "Auto-search…",
+    "hint": "Search the folders where scoring rules files usually are, then load one into the box.",
+    "occurrence": 1
+  },
+  {
+    "id": "t9_text_area_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_",
+    "tab": 9,
+    "kind": "text area",
+    "name": "Your scoring rules as JSON (required_tokens, token_weights, numeric_ranges, optimizations, ...)",
+    "hint": "Your scoring rules as JSON: words that must appear, how much each word weighs, allowed number ranges, and w…",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_text_field_show_lines_containing",
+    "tab": 9,
+    "kind": "text field",
+    "name": "Show lines containing",
+    "hint": "Show only the lines that contain this text; empty shows every line. Filled by you: type the text to look for.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_table_scored_lines_each_line_s_score_decision_and_features",
+    "tab": 9,
+    "kind": "table",
+    "name": "Scored lines: each line's score, decision and features",
+    "hint": "Every line with its score, the decision it led to, and the features that made the score. Select a line to s…",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_text_area_why_this_score",
+    "tab": 9,
+    "kind": "text area",
+    "name": "Why this score",
+    "hint": "Why the selected line got its score. Filled when you select a line in the table above.",
+    "occurrence": 0
+  },
+  {
+    "id": "t9_text_area_summary_of_all_scores",
+    "tab": 9,
+    "kind": "text area",
+    "name": "Summary of all scores",
+    "hint": "A summary of all scores. Filled after you press Score.",
+    "occurrence": 0
+  }
+]

@@ -130,7 +130,7 @@ final class CampaignView {
         if (busy || closing) return CompletableFuture.completedFuture(null);
         Path file = scenario.get();
         if (file == null) {
-            output.setText("Choose a scenario on the scenario tab first.\n");
+            output.setText("Choose a scenario in step 3 first, or send an example there from step 1 · Library.\n");
             return CompletableFuture.completedFuture(null);
         }
         busy = true;

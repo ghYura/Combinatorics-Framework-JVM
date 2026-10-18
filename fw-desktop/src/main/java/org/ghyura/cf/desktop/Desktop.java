@@ -83,7 +83,7 @@ final class Desktop {
         this.trail = trail;
         trail.watch(Path.of("").toAbsolutePath());
         this.navigator = new Navigator(trail, this::currentScenario);
-        runners = new RunnerSettings(session);
+        runners = RunnerSettings.withChoosers(session, navigator);
         scenario = new ScenarioView(runners::session, scenarioFile, navigator);
         candidates = new CandidatesView(runners::session, scenario::scenario);
         authoring = new AuthoringView(runners::session, scenario::setScenario, navigator);

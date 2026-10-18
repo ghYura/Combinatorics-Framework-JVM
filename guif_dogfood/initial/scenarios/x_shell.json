@@ -1,0 +1,162 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "hints",
+        "FW_Combi(1)"
+      ],
+      [
+        "cells",
+        "FW_Combi(1)"
+      ],
+      [
+        "visits",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t0_toggle_hints_on_f1",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_tabs",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_hints",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_zebra",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_lifecycle",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "hints": [
+      [
+        "o.put(\"hints\",\"on\");"
+      ],
+      [
+        "o.put(\"hints\",\"off\");"
+      ],
+      [
+        "o.put(\"hints\",\"f1\");"
+      ]
+    ],
+    "cells": [
+      [
+        "o.put(\"cells\",\"text\");"
+      ],
+      [
+        "o.put(\"cells\",\"number\");"
+      ],
+      [
+        "o.put(\"cells\",\"boolean\");"
+      ]
+    ],
+    "visits": [
+      [
+        "o.put(\"visits\",\"forward\");"
+      ],
+      [
+        "o.put(\"visits\",\"reverse\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"x_shell\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t0_toggle_hints_on_f1": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t0_toggle_hints_on_f1\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_tabs": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_tabs\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_hints": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_hints\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_zebra": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_zebra\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_lifecycle": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_lifecycle\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T0_TOGGLE_HINTS_ON_F1_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_X_TABS_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_X_HINTS_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_X_ZEBRA_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_X_LIFECYCLE_INVARIANT"
+      ]
+    ]
+  }
+}

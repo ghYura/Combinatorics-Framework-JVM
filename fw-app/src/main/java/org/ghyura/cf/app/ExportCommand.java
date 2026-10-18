@@ -32,6 +32,7 @@ import org.ghyura.cf.config.ConfigResolver;
 import org.ghyura.cf.config.LegacyImporter;
 import org.ghyura.cf.artifacts.CheckpointCodec;
 import org.ghyura.cf.artifacts.ResultsExport;
+import org.ghyura.cf.desktop.session.CorpusExport;
 import org.ghyura.cf.desktop.session.RunReportPage;
 import org.ghyura.cf.model.AtomicFiles;
 import org.ghyura.cf.model.Diagnostic;
@@ -46,9 +47,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 /**
- * {@code export --input CHECKPOINT --output FILE [--kind report|results|csv|html]} (work package M07): a checkpoint's committed
+ * {@code export --input CHECKPOINT --output FILE [--kind report|results|csv|html|metrics]} (work package M07): a checkpoint's committed
  * observations as a summary report (XML), as the legacy results_v2 rows (CSV, one row per attempt), as a metrics table of
- * the final samples (CSV) or as the self-contained page of the run (HTML, the legacy bundle report; M09). The input is refused when it is not an intact checkpoint (CHECKPOINT_CORRUPT); a failed write is
+ * the final samples (CSV), as the self-contained page of the run (HTML, the legacy bundle report; M09) or as the metrics
+ * corpus {@code analyze --results} reads (the desktop's metrics export, so a batch run reaches the same analysis). The input is refused when it is not an intact checkpoint (CHECKPOINT_CORRUPT); a failed write is
  * RESULT_EXPORT_FAILED and leaves the previous output file as it was.
  */
 final class ExportCommand implements CommandHandler {
@@ -66,6 +68,7 @@ final class ExportCommand implements CommandHandler {
         Checkpoint checkpoint = CheckpointCodec.read(input, budget);
         try (MemoryBudget.Lease retained = budget.reserve(MemorySizes.retained(checkpoint), "checkpoint retained during export")) {
             byte[] bytes = kind.equals("html") ? RunReportPage.encode(checkpoint, input.toString(), budget)
+                    : kind.equals("metrics") ? CorpusExport.encode(checkpoint, budget)
                     : ResultsExport.encode(checkpoint, kind, budget);
             AtomicFiles.write(output, bytes);
         } catch (IOException | RuntimeException e) {
