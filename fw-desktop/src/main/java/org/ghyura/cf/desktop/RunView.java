@@ -36,17 +36,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListCellRenderer;
 import javax.swing.Timer;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 /**
  * The run tab: run the chosen scenario under the session's configuration, pause, resume and cancel it, watch its state
  * and committed samples (polled four times a second from the latest progress, never queued), read its report and export it
- * as the export command does (report, results, csv) or as a checkpoint for resume.
+ * as the export command does (report, results, csv), as a checkpoint for resume, or as the metrics corpus step 8 analyzes.
  */
 final class RunView {
 
@@ -57,7 +59,13 @@ final class RunView {
     private final JButton pause = Hints.of(new JButton("Pause"), "Pause the run; test cases already started finish first.");
     private final JButton resume = Hints.of(new JButton("Resume"), "Continue a paused run.");
     private final JButton cancel = Hints.of(new JButton("Cancel"), "Stop the run. The results so far are kept.");
-    private final JComboBox<String> exportKind = Hints.of(new JComboBox<>(new String[]{"report", "results", "csv", "checkpoint"}), "What to save: a summary report, every result row, a table of measurements (CSV), or a checkpoint to continue the run later.");
+    /** What each export kind is, as the list shows it. */
+    private static final Map<String, String> KINDS = Map.of("report", "summary report (.xml)", "results", "every attempt (.csv)",
+            "csv", "measurements table (.csv)", "metrics", "metrics for step 8 (.kv)", "checkpoint", "checkpoint to resume (.checkpoint)");
+
+    private final JComboBox<String> exportKind = Hints.of(new JComboBox<>(new String[]{"report", "results", "csv", "metrics", "checkpoint"}),
+            "What to save: a summary report, every result row, a table of measurements (CSV), the metrics that step 8 analyzes, or a "
+            + "checkpoint to continue the run later.");
     private final JButton export = Hints.of(new JButton("Export..."), "Save the chosen kind of results to a file.");
     private final JLabel status = new JLabel("No run yet.");
     private final JTextArea output = Hints.of(new JTextArea(), "Progress and results of the run: how many test cases passed, failed or could not run, and their result codes. Filled while a run goes and when it ends (press Run).");
@@ -89,6 +97,9 @@ final class RunView {
         });
         navigator.bind(export, () -> Navigator.Purpose.export((String) exportKind.getSelectedItem()), () -> null);
         exportKind.addActionListener(e -> navigator.refreshHints());
+        ListCellRenderer<? super String> plain = exportKind.getRenderer();
+        exportKind.setRenderer((list, kind, index, selected, focus) ->
+                plain.getListCellRendererComponent(list, KINDS.getOrDefault(kind, kind), index, selected, focus));
         JPanel buttons = new JPanel();
         for (JButton b : new JButton[]{run, pause, resume, cancel}) {
             buttons.add(b);
@@ -129,7 +140,7 @@ final class RunView {
         if (busy || closing) return CompletableFuture.completedFuture(null);
         Path file = scenario.get();
         if (file == null) {
-            output.setText("Choose a scenario on the scenario tab first.\n");
+            output.setText("Choose a scenario in step 3 first, or send an example there from step 1 · Library.\n");
             return CompletableFuture.completedFuture(null);
         }
         exported = "";
@@ -160,7 +171,7 @@ final class RunView {
             return target;
         }, written -> {
             busy = false;
-            exported = "exported the run's " + kind + " to " + target;
+            exported = "exported the run's " + kind + " to " + target + (kind.equals("metrics") ? "; study it in step 8 · Results analysis" : "");
             navigator.trail().record(target);
             refresh();
         }, failure -> {

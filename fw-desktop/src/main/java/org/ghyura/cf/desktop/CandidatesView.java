@@ -143,7 +143,7 @@ final class CandidatesView {
     CompletableFuture<CandidatePreview> preview() {
         Path file = scenario.get();
         if (file == null) {
-            status.setText("Choose a scenario on the Scenario tab first.");
+            status.setText("Choose a scenario in step 3 first, or send an example there from step 1 · Library.");
             return CompletableFuture.completedFuture(null);
         }
         return load(file, BigInteger.ZERO, true);

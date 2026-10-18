@@ -64,11 +64,14 @@ import java.util.concurrent.TimeUnit;
  */
 public final class FileTrail implements AutoCloseable {
 
-    /** The kinds of files the framework reads and writes. */
+    /**
+     * The kinds of files the framework reads and writes. RESULTS are the run's exported tables; METRICS are metrics corpora
+     * (key=value lines with FW_VAR), the only results file the analysis reads.
+     */
     public enum Kind {
         SCENARIO("scenario"), CONSTRAINTS("constraint sidecar"), SETTINGS("settings"), REPORT("run report"), RESULTS("results"),
         CHECKPOINT("checkpoint"), PAGE("run page"), GRAPH("dependency graph"), RULES("scoring rules"), SCORES("scores"),
-        TEXT("text"), LIBRARY("library");
+        TEXT("text"), LIBRARY("library"), METRICS("metrics file");
 
         private final String label;
 
@@ -256,8 +259,8 @@ public final class FileTrail implements AutoCloseable {
             case "dot" -> Kind.GRAPH;
             case "txt", "log", "out", "sh", "cmd", "bash", "zsh", "ps1" -> Kind.TEXT;
             case "xml" -> head.contains("<cf-export kind=\"report\"") || name.contains("report") ? Kind.REPORT : null;
-            case "kv" -> Kind.RESULTS;
-            case "csv" -> head.startsWith("candidate_id,repeat_idx") ? Kind.RESULTS
+            case "kv" -> Kind.METRICS;
+            case "csv" -> head.startsWith("candidate_id,repeat_idx") || head.startsWith("run_id,candidate_id,attempt") ? Kind.RESULTS
                     : head.toLowerCase(Locale.ROOT).contains("score") || name.contains("score") ? Kind.SCORES : null;
             case "json" -> json(head, name);
             default -> null;

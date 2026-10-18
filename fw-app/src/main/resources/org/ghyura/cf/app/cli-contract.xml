@@ -80,7 +80,7 @@
       <summary>Convert a checkpoint artifact into a report, legacy results_v2 rows or a metrics table.</summary>
       <option name="--input" value="FILE" repeatable="false">Checkpoint artifact to read (run --checkpoint PATH writes one).</option>
       <option name="--output" value="FILE" repeatable="false">File to write; replaced only once complete.</option>
-      <option name="--kind" value="report|results|csv|html" repeatable="false">What to export: report (XML summary, the default), results (legacy results_v2 rows, one per attempt, CSV), csv (final samples with their metrics) or html (the run as one self-contained page with its triage findings, the legacy bundle report).</option>
+      <option name="--kind" value="report|results|csv|html|metrics" repeatable="false">What to export: report (XML summary, the default), results (legacy results_v2 rows, one per attempt, CSV), csv (final samples with their metrics), html (the run as one self-contained page with its triage findings, the legacy bundle report) or metrics (the metrics corpus analyze --results reads: one key=value line per sample with its verdict as FW_VAR).</option>
     </command>
     <command name="score" owner="M09" required="--input">
       <summary>Score the logical lines of a text file with the legacy analyzer&apos;s heuristic rules: a frozen corpus profile, named contributions and opt/watch/reject decisions. Runs nothing; decisions never make a sample eligible.</summary>

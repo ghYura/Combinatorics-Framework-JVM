@@ -25,6 +25,8 @@
 
 package org.ghyura.cf.desktop;
 
+import org.ghyura.cf.desktop.session.FileSeeker;
+import org.ghyura.cf.desktop.session.FileTrail;
 import org.ghyura.cf.desktop.session.ScenarioValidation;
 import org.ghyura.cf.desktop.session.Session;
 import org.ghyura.cf.model.Diagnostic;
@@ -41,6 +43,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
@@ -71,23 +74,41 @@ final class ScenarioView {
             Path chosen = navigator.choose(panel, Navigator.Purpose.SCENARIO_OPEN, current());
             if (chosen != null) {
                 file.setText(chosen.toString());
+                String problem = notAScenario(chosen);
+                if (problem != null) output.setText(problem);
             }
         });
         navigator.bind(browse, () -> Navigator.Purpose.SCENARIO_OPEN, this::current);
         validate.addActionListener(e -> validate());
+        Path example = navigator.example(Navigator.Purpose.SCENARIO_OPEN);
+        FieldNames.placeholder(file, "for example " + (example == null ? "shop.xlsx" : shortest(example))
+                + "; or send an example here from step 1");
         JPanel row = new JPanel(new BorderLayout(6, 6));
         row.add(FieldNames.label("Scenario file (xlsx, json, yaml or toml):", file), BorderLayout.WEST);
         row.add(file, BorderLayout.CENTER);
         JPanel buttons = new JPanel();
         buttons.add(browse);
+        buttons.add(new AutoSearch(navigator).button(() -> FileSeeker.Kind.SCENARIO, this::current, this::setScenario,
+                "Search the folders where scenario files usually are, then pick one from the list it shows."));
+        if (example != null) {
+            JButton use = Hints.of(new JButton("Use the example"), "Put the showcase example scenario that comes with the framework into the box.");
+            use.setToolTipText(example.toString());
+            use.addActionListener(e -> setScenario(example));
+            buttons.add(use);
+        }
         buttons.add(validate);
         row.add(buttons, BorderLayout.EAST);
         output.setEditable(false);
         output.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
         panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        JPanel under = new JPanel(new BorderLayout(4, 0));
+        under.add(FieldNames.note("A scenario is a workbook (.xlsx) whose sheets list the values to combine, or the same sheets as "
+                + ".json, .yaml or .toml. Its rules (.constraints.json) and settings (.properties) beside it are found by themselves."),
+                BorderLayout.NORTH);
+        under.add(navigator.hint(file, Navigator.Purpose.SCENARIO_OPEN), BorderLayout.SOUTH);
         JPanel north = new JPanel(new BorderLayout(4, 0));
         north.add(row, BorderLayout.NORTH);
-        north.add(navigator.hint(file, Navigator.Purpose.SCENARIO_OPEN), BorderLayout.SOUTH);
+        north.add(under, BorderLayout.SOUTH);
         panel.add(north, BorderLayout.NORTH);
         JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, FieldNames.titled(output, "Check results"), TableTitles.titled(Hints.of(new JTable(plan), "One row per sheet of the scenario: whether its values are always used, optional or only helpers for other sheets, how many values it has, and the instructions (from the FW_Seq sheet) that combine them."), "FW_Seq plan: each sheet's role, values and directives"));
         split.setResizeWeight(0.6);
@@ -127,6 +148,55 @@ final class ScenarioView {
         return output.getText();
     }
 
+    /**
+     * Why a file is not a scenario, in plain words with what to choose instead; null when it may be one (a scenario, a file
+     * of no known kind, or a missing file, which validation reports).
+     */
+    static String notAScenario(Path file) {
+        if (Files.isDirectory(file)) {
+            return file + " is a folder. Choose a scenario file inside it: a workbook (.xlsx), or a .json, .yaml or .toml scenario.\n";
+        }
+        FileTrail.Kind kind = Files.isRegularFile(file) ? FileTrail.classify(file) : null;
+        if (kind == null || kind == FileTrail.Kind.SCENARIO) {
+            return null;
+        }
+        String name = file.getFileName().toString();
+        return switch (kind) {
+            case CONSTRAINTS -> name + " holds the rules (constraints) of a scenario, not the scenario. Choose the scenario itself"
+                    + beside(file) + "; its rules are found by themselves.\n";
+            case SETTINGS -> name + " holds the settings of a scenario, not the scenario. Choose the scenario itself" + beside(file)
+                    + "; its settings are found by themselves.\n";
+            case LIBRARY -> name + " lists the examples of a library. Open it in step 1 · Library and send an example here.\n";
+            case METRICS, RESULTS, REPORT, CHECKPOINT, PAGE -> name + " holds the results of a run, not a scenario. Study results in "
+                    + "step 8 · Results analysis.\n";
+            case TEXT, RULES, SCORES -> name + " belongs to the text scorer of step 9, not to a scenario.\n";
+            default -> name + " is not a scenario. Choose a workbook (.xlsx), or a .json, .yaml or .toml scenario.\n";
+        };
+    }
+
+    /** " (name in the same folder)" for the scenario a rules or settings file belongs to, when it is there; else "". */
+    private static String beside(Path file) {
+        String name = file.getFileName().toString();
+        String stem = name.substring(0, name.indexOf('.') > 0 ? name.indexOf('.') : name.length());
+        for (String extension : new String[]{"xlsx", "json", "yaml", "yml", "toml"}) {
+            Path scenario = file.resolveSibling(stem + "." + extension);
+            if (Files.isRegularFile(scenario) && FileTrail.classify(scenario) == FileTrail.Kind.SCENARIO) {
+                return " (" + scenario.getFileName() + " in the same folder)";
+            }
+        }
+        return "";
+    }
+
+    /** The path relative to the working folder when that is shorter, for an example shown in a box. */
+    private static String shortest(Path path) {
+        try {
+            Path relative = Path.of("").toAbsolutePath().relativize(path.toAbsolutePath());
+            return relative.toString().length() < path.toString().length() ? relative.toString() : path.toString();
+        } catch (IllegalArgumentException e) {
+            return path.toString();
+        }
+    }
+
     /** Whether the output shows its first line (a long summary is read from the top). */
     boolean outputAtTop() {
         return output.getCaretPosition() == 0;
@@ -136,7 +206,13 @@ final class ScenarioView {
     CompletableFuture<ScenarioValidation.Summary> validate() {
         Path scenario = scenario();
         if (scenario == null) {
-            output.setText("Choose a scenario file first.\n");
+            output.setText("Choose a scenario file first: press Browse..., or pick an example in step 1 · Library.\n");
+            return CompletableFuture.completedFuture(null);
+        }
+        String problem = notAScenario(scenario);
+        if (problem != null) {
+            plan.show(null);
+            output.setText(problem);
             return CompletableFuture.completedFuture(null);
         }
         validate.setEnabled(false);

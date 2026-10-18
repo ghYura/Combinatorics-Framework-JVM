@@ -27,6 +27,7 @@ package org.ghyura.cf.desktop;
 
 import org.ghyura.cf.desktop.session.CellTemplates;
 import org.ghyura.cf.desktop.session.ControlSheets;
+import org.ghyura.cf.desktop.session.FileSeeker;
 import org.ghyura.cf.desktop.session.OperandDependencies;
 import org.ghyura.cf.desktop.session.ScenarioDocument;
 import org.ghyura.cf.desktop.session.ScenarioValidation;
@@ -121,6 +122,8 @@ final class AuthoringView {
             }
         });
         navigator.bind(open, () -> Navigator.Purpose.DOCUMENT_OPEN, () -> file);
+        JButton search = new AutoSearch(navigator).button(() -> FileSeeker.Kind.SCENARIO, () -> file, this::open,
+                "Search the folders where scenario files usually are, then open one here to change it.");
         JButton save = Hints.of(new JButton("Save"), "Save the scenario to its file. It also becomes the scenario of step 3.");
         save.addActionListener(e -> {
             if (file != null) {
@@ -135,7 +138,7 @@ final class AuthoringView {
         JButton validate = Hints.of(new JButton("Validate"), "Check the scenario for mistakes without saving it. The result appears in tab 2.2 Validation.");
         validate.addActionListener(e -> validate());
         JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
-        for (JButton b : new JButton[]{create, open, save, saveAs, validate}) {
+        for (JButton b : new JButton[]{create, open, search, save, saveAs, validate}) {
             top.add(b);
         }
         top.add(fileLabel);

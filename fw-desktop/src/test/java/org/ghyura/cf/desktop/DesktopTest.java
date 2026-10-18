@@ -32,6 +32,8 @@ import org.ghyura.cf.config.ConfigResolver;
 import org.ghyura.cf.desktop.session.FileTrail;
 import org.ghyura.cf.desktop.session.Session;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.io.TempDir;
 
 import javax.swing.AbstractButton;
@@ -784,15 +786,38 @@ class DesktopTest {
         String report = edt(() -> desktop.run().output());
         assertTrue(report.contains("desk") && report.contains("32"), report);
         assertTrue(edt(() -> desktop.run().status()).contains("COMPLETED, 32 samples committed"));
-        for (String kind : List.of("report", "results", "csv", "checkpoint")) {
+        for (String kind : List.of("report", "results", "csv", "metrics", "checkpoint")) {
             Path out = dir.resolve("run." + kind);
             edt(() -> desktop.run().export(kind, out)).get(60, TimeUnit.SECONDS);
             assertTrue(edt(() -> desktop.run().status()).contains("exported the run's " + kind), kind);
             assertTrue(Files.size(out) > 0, kind);
         }
         assertTrue(Files.readString(dir.resolve("run.results")).startsWith(String.join(",", org.ghyura.cf.artifacts.ResultsExport.RESULTS_V2_COLUMNS)));
-        assertEquals(32, org.ghyura.cf.artifacts.CheckpointCodec.read(dir.resolve("run.checkpoint")).observations().size(),
-                "the desktop's checkpoint is the artifact resume reads");
+        var checkpoint = org.ghyura.cf.artifacts.CheckpointCodec.read(dir.resolve("run.checkpoint"));
+        assertEquals(32, checkpoint.observations().size(), "the desktop's checkpoint is the artifact resume reads");
+
+        // the metrics the run saves are what step 8 reads, and step 8 reads them as the run's own analysis read its samples
+        edt(() -> {
+            desktop.analysis().choose(dir.resolve("run.metrics"), null, null);
+            return desktop.analysis().analyze();
+        }).get(60, TimeUnit.SECONDS);
+        String fromRun = edt(() -> desktop.analysis().output());
+        String own = org.ghyura.cf.analysis.Analysis.analyzeObservations(org.ghyura.cf.desktop.session.CorpusExport.finals(checkpoint),
+                org.ghyura.cf.analysis.Analysis.Options.of(session.configuration().config()), session.analysisBudget()).toText();
+        // every count, measure, front and score alike; only which of tied samples is named first may differ, as the corpus
+        // names samples by their display ids where the run's own analysis breaks ties by candidate id
+        java.util.function.UnaryOperator<String> unnamed = text -> text.replaceAll("\\b\\d+_\\d+_\\d+\\b", "#");
+        assertTrue(fromRun.contains("(32 samples, 0 without a verdict)") && unnamed.apply(fromRun).contains(unnamed.apply(own)),
+                fromRun + "\n---\n" + own);
+        // the run's tables and report are refused with the way to its metrics, not misread as metrics
+        for (String kind : List.of("csv", "report")) {
+            edt(() -> {
+                desktop.analysis().choose(dir.resolve("run." + kind), null, null);
+                return desktop.analysis().analyze();
+            }).get(60, TimeUnit.SECONDS);
+            String refused = edt(() -> desktop.analysis().output());
+            assertTrue(refused.contains("metrics for step 8 (.kv)") && !refused.contains("samples"), kind + ": " + refused);
+        }
 
         controller.observe(p -> {
             if (p.committed() == 3) controller.cancel();
@@ -982,8 +1007,14 @@ class DesktopTest {
         assertEquals("3 · Scenario", edt(() -> opened.tabs().getTitleAt(opened.tabs().getSelectedIndex())), "a desktop opened on a scenario starts at step 3");
     }
 
-    /** Whether the component belongs to another control (a combo box's arrow, a spinner's field, a scroll bar's button). */
+    /**
+     * Whether the component belongs to another control (a combo box's arrow, a spinner's field, a scroll bar's button) or is
+     * a part the look and feel adds by itself (the scroll arrows of a tab strip that scrolls, as the FlatLaf desktop's does).
+     */
     private static boolean partOfAnotherControl(Component c) {
+        if (c instanceof javax.swing.plaf.UIResource) {
+            return true;
+        }
         for (Component k = c.getParent(); k != null; k = k.getParent()) {
             if (k instanceof JComboBox || k instanceof JSpinner || k instanceof JScrollBar || k instanceof JTable) {
                 return true;
@@ -993,9 +1024,10 @@ class DesktopTest {
     }
 
     /** The author's rules: hovering over any element shows a hint, and every hint is clear to any user. */
-    @Test
-    void everyElementAndEveryTabHasAHintInPlainWords() throws Exception {
-        Desktop desktop = edt(() -> new Desktop(session(), null));
+    @ParameterizedTest(name = "guif: {0}")
+    @ValueSource(booleans = {false, true})
+    void everyElementAndEveryTabHasAHintInPlainWords(boolean flat) throws Exception {
+        Desktop desktop = edt(() -> new Desktop(session(), null, FileTrail.inMemory(), flat));
         List<String> missing = new ArrayList<>();
         List<String> hints = new ArrayList<>();
         edt(() -> {
@@ -1224,9 +1256,10 @@ class DesktopTest {
     }
 
     /** The author's rule: every field shows its own name, the name its screen reader reads; names differ within a step. */
-    @Test
-    void everyFieldShowsItsOwnName() throws Exception {
-        Desktop desktop = edt(() -> new Desktop(session(), null));
+    @ParameterizedTest(name = "guif: {0}")
+    @ValueSource(booleans = {false, true})
+    void everyFieldShowsItsOwnName(boolean flat) throws Exception {
+        Desktop desktop = edt(() -> new Desktop(session(), null, FileTrail.inMemory(), flat));
         List<String> problems = new ArrayList<>();
         edt(() -> {
             JTabbedPane tabs = desktop.tabs();
@@ -1264,9 +1297,10 @@ class DesktopTest {
     }
 
     /** The author's rule: an empty text field or area says in its hint what fills it. */
-    @Test
-    void everyTextFieldAndAreaSaysInItsHintWhenItIsFilled() throws Exception {
-        Desktop desktop = edt(() -> new Desktop(session(), null));
+    @ParameterizedTest(name = "guif: {0}")
+    @ValueSource(booleans = {false, true})
+    void everyTextFieldAndAreaSaysInItsHintWhenItIsFilled(boolean flat) throws Exception {
+        Desktop desktop = edt(() -> new Desktop(session(), null, FileTrail.inMemory(), flat));
         List<String> problems = new ArrayList<>();
         java.util.regex.Pattern filled = java.util.regex.Pattern.compile("\\bFilled (when|after|while|by|from|with|as)\\b");
         edt(() -> {

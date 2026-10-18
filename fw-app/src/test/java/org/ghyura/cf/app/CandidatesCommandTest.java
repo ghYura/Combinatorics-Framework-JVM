@@ -165,4 +165,31 @@ class CandidatesCommandTest {
         assertEquals(coverage.getAttribute("feasible"), coverage.getAttribute("covered"));
         assertFalse(covered.out().contains("optimal"));
     }
+
+    /** A coverage budget that holds every row keeps them all; the reports say so instead of naming a covering method (D003). */
+    @Test
+    void aBudgetThatHoldsEveryRowKeepsThemAllAndTheReportsSaySo(@TempDir Path dir) throws Exception {
+        Path four = write(dir, "four.json", "{\"sheets\": {\"FW_Seq\": [[\"A\", \"FW_Combi(1)\"], [\"B\", \"FW_Combi(1)\"]], "
+                + "\"A\": [[\"a1\"], [\"a2\"]], \"B\": [[\"b1\"], [\"b2\"]]}}");
+        String[] budget = {"--set", "cf.plan.autoPromoteSingleVerb=false", "--set", "cf.coverage.strength=2", "--set",
+                "cf.coverage.method=set-cover", "--set", "cf.coverage.budget=99"};
+        Result text = run(concat(new String[]{"candidates", "--scenario", four.toString()}, budget));
+        assertEquals(0, text.code(), text.err());
+        assertTrue(text.out().contains("every row kept: the coverage budget holds all 4 mandatory rows"), text.out());
+        assertTrue(text.out().contains("  executable    4\n"), text.out());
+        Result xml = run(concat(new String[]{"candidates", "--scenario", four.toString(), "--format", "xml"}, budget));
+        assertEquals(0, xml.code(), xml.err());
+        Element coverage = (Element) root(xml.out()).getElementsByTagName("coverage").item(0);
+        assertEquals("none", coverage.getAttribute("method"));
+        assertEquals("4", coverage.getAttribute("kept"));
+        Result plan = run(concat(new String[]{"plan", "--scenario", four.toString()}, budget));
+        assertEquals(0, plan.code(), plan.err());
+        assertTrue(plan.out().contains("every row: the coverage budget holds all of them"), plan.out());
+    }
+
+    private static String[] concat(String[] a, String[] b) {
+        String[] all = java.util.Arrays.copyOf(a, a.length + b.length);
+        System.arraycopy(b, 0, all, a.length, b.length);
+        return all;
+    }
 }
