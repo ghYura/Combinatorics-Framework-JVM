@@ -1,0 +1,243 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "control",
+        "FW_Combi(1)"
+      ],
+      [
+        "timing",
+        "FW_Combi(1)"
+      ],
+      [
+        "export",
+        "FW_Combi(1)"
+      ],
+      [
+        "sudden",
+        "FW_Combi(1)",
+        "FW_Optional"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_text_area_run_report",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_run",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_pause",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_resume",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_cancel",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_choice_save_as",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_export",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_use_python",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t6_button_runner_settings_step_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_run_roundtrip",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "control": [
+      [
+        "o.put(\"control\",\"finish\");"
+      ],
+      [
+        "o.put(\"control\",\"pause\");"
+      ],
+      [
+        "o.put(\"control\",\"cancel\");"
+      ]
+    ],
+    "timing": [
+      [
+        "o.put(\"timing\",\"first\");"
+      ],
+      [
+        "o.put(\"timing\",\"later\");"
+      ]
+    ],
+    "export": [
+      [
+        "o.put(\"export\",\"report\");"
+      ],
+      [
+        "o.put(\"export\",\"results\");"
+      ],
+      [
+        "o.put(\"export\",\"csv\");"
+      ],
+      [
+        "o.put(\"export\",\"metrics\");"
+      ],
+      [
+        "o.put(\"export\",\"checkpoint\");"
+      ]
+    ],
+    "sudden": [
+      [
+        "o.put(\"sudden\",\"cancel\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t6_run\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t6_text_area_run_report": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_text_area_run_report\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_run": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_run\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_pause": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_pause\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_resume": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_resume\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_cancel": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_cancel\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_choice_save_as": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_choice_save_as\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_export": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_export\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_use_python": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_use_python\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t6_button_runner_settings_step_3": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t6_button_runner_settings_step_3\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_run_roundtrip": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_run_roundtrip\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "7",
+        "GUIF_T6_TEXT_AREA_RUN_REPORT_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T6_BUTTON_RUN_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T6_BUTTON_PAUSE_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T6_BUTTON_RESUME_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T6_BUTTON_CANCEL_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T6_CHOICE_SAVE_AS_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T6_BUTTON_EXPORT_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T6_BUTTON_USE_PYTHON_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T6_BUTTON_RUNNER_SETTINGS_STEP_3_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_X_RUN_ROUNDTRIP_INVARIANT"
+      ]
+    ]
+  }
+}
