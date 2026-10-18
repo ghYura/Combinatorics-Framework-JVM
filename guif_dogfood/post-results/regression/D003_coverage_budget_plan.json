@@ -1,0 +1,394 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "runner",
+        "FW_Combi(1)"
+      ],
+      [
+        "settings",
+        "FW_Combi(1)"
+      ],
+      [
+        "input",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_area_check_results",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_table_fw_seq_plan_each_sheet_s_role_values_and_directives",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_scenario_file_xlsx_json_yaml_or_toml",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_browse",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_auto_search",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_use_the_example",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_validate_and_plan",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_use",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_choice_runner",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_add_on_and_dependency_paths",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_python_interpreter",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_python_import_directories",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_python_working_directory",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_python_environment_variables",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_text_field_python_sandbox",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_add",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_browse_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_add_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_browse_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_auto_search_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_auto_search_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_auto_search_4",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_auto_search_5",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t3_button_apply_runner_settings",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "runner": [
+      [
+        "o.put(\"runner\",\"generated-java\");"
+      ]
+    ],
+    "settings": [
+      [
+        "o.put(\"settings\",\"valid\");"
+      ]
+    ],
+    "input": [
+      [
+        "o.put(\"input\",\"valid\");"
+      ]
+    ],
+    "act": [
+      [
+        "o.put(\"repro\",\"coverage_plan\"); GuifProbe p=GuifProbe.execute(\"t3_runner\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t3_text_area_check_results": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_table_fw_seq_plan_each_sheet_s_role_values_and_directives": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_scenario_file_xlsx_json_yaml_or_toml": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_browse": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_auto_search": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_use_the_example": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_validate_and_plan": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t3_button_validate_and_plan\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t3_button_use": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_choice_runner": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_add_on_and_dependency_paths": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_python_interpreter": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_python_import_directories": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_python_working_directory": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_python_environment_variables": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_text_field_python_sandbox": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_add": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_browse_2": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_add_2": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_browse_3": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_auto_search_2": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_auto_search_3": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_auto_search_4": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_auto_search_5": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "w_t3_button_apply_runner_settings": [
+      [
+        "/* other watchers retained for evidence; focus verdict on this reproducer */"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T3_TEXT_AREA_CHECK_RESULTS_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_T3_TABLE_FW_SEQ_PLAN_EACH_SHEET_S_ROLE_VALUES_AND_DIRECTIVES_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T3_TEXT_FIELD_SCENARIO_FILE_XLSX_JSON_YAML_OR_TOML_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T3_BUTTON_BROWSE_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T3_BUTTON_AUTO_SEARCH_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T3_BUTTON_USE_THE_EXAMPLE_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T3_BUTTON_VALIDATE_AND_PLAN_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T3_BUTTON_USE_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T3_CHOICE_RUNNER_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T3_TEXT_FIELD_ADD_ON_AND_DEPENDENCY_PATHS_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T3_TEXT_FIELD_PYTHON_INTERPRETER_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_T3_TEXT_FIELD_PYTHON_IMPORT_DIRECTORIES_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_T3_TEXT_FIELD_PYTHON_WORKING_DIRECTORY_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_T3_TEXT_FIELD_PYTHON_ENVIRONMENT_VARIABLES_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_T3_TEXT_FIELD_PYTHON_SANDBOX_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_T3_BUTTON_ADD_INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_T3_BUTTON_BROWSE_2_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_T3_BUTTON_ADD_2_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_T3_BUTTON_BROWSE_3_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_T3_BUTTON_AUTO_SEARCH_2_INVARIANT"
+      ],
+      [
+        "26",
+        "GUIF_T3_BUTTON_AUTO_SEARCH_3_INVARIANT"
+      ],
+      [
+        "27",
+        "GUIF_T3_BUTTON_AUTO_SEARCH_4_INVARIANT"
+      ],
+      [
+        "28",
+        "GUIF_T3_BUTTON_AUTO_SEARCH_5_INVARIANT"
+      ],
+      [
+        "29",
+        "GUIF_T3_BUTTON_APPLY_RUNNER_SETTINGS_INVARIANT"
+      ]
+    ]
+  }
+}

@@ -30,6 +30,7 @@ import org.ghyura.cf.analysis.CorpusProfile;
 import org.ghyura.cf.analysis.RuleSet;
 import org.ghyura.cf.analysis.ScoreBreakdown;
 import org.ghyura.cf.analysis.TextScoring;
+import org.ghyura.cf.desktop.session.FileSeeker;
 import org.ghyura.cf.desktop.session.Session;
 import org.ghyura.cf.model.AtomicFiles;
 import org.ghyura.cf.model.Json;
@@ -80,7 +81,8 @@ final class ScorerView {
     private final Navigator navigator;
     /** The desktop's Hints button, which the chart window's hints follow. */
     private final AbstractButton hintsSwitch;
-    private final JTextField file = Hints.of(new JTextField(), "The text file to score; every line is scored on its own. Filled when you choose a file with Browse...; you can also type its path.");
+    private final JTextField file = FieldNames.placeholder(Hints.of(new JTextField(), "The text file to score; every line is scored on its own. Filled when you choose a file with Browse...; you can also type its path."),
+            "for example a log or a program's output: sut.log, run.out, notes.txt");
     private final JTextArea rules = Hints.of(new JTextArea("{}", 8, 40), "Your scoring rules as JSON: words that must appear, how much each word weighs, allowed number ranges, and what counts as worth improving. Filled with {} (no rules) at the start; type rules or press Load rules...");
     private final JSpinner minSupport = Hints.of(new JSpinner(new SpinnerNumberModel(3, 1, 1000, 1)), "How many lines must share a pattern before the scorer learns it.");
     private final JSpinner topK = Hints.of(new JSpinner(new SpinnerNumberModel(12, 1, 1000, 1)), "How many learned patterns are kept.");
@@ -116,8 +118,7 @@ final class ScorerView {
         load.addActionListener(e -> {
             Path selected = navigator.choose(panel, Navigator.Purpose.RULES_OPEN, text());
             if (selected != null) {
-                Background.run("load-rules", () -> RuleSet.readText(selected, session.analysisBudget()), rules::setText,
-                        failure -> status.setText("The rules could not be read: " + Background.describe(failure)));
+                loadRules(selected);
             }
         });
         navigator.bind(load, () -> Navigator.Purpose.RULES_OPEN, this::text);
@@ -152,10 +153,15 @@ final class ScorerView {
             if (!e.getValueIsAdjusting()) showSelected();
         });
 
+        AutoSearch search = new AutoSearch(navigator);
         JPanel input = new JPanel(new BorderLayout(6, 6));
         input.add(FieldNames.label("Text file to score:", file), BorderLayout.WEST);
         input.add(file, BorderLayout.CENTER);
-        input.add(browse, BorderLayout.EAST);
+        JPanel inputButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 0));
+        inputButtons.add(browse);
+        inputButtons.add(search.button(() -> FileSeeker.Kind.TEXT, this::text, chosen -> file.setText(chosen.toString()),
+                "Search the folders where logs and other texts usually are, then pick one to score."));
+        input.add(inputButtons, BorderLayout.EAST);
         input.add(navigator.hint(file, Navigator.Purpose.TEXT_OPEN), BorderLayout.SOUTH);
         JPanel tuning = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         tuning.add(FieldNames.label("Lines per learned pattern:", minSupport));
@@ -172,8 +178,12 @@ final class ScorerView {
         tuning.add(export);
         tuning.add(charts);
         JPanel rulesPanel = new JPanel(new BorderLayout(4, 4));
-        rulesPanel.add(FieldNames.label("Your scoring rules as JSON (required_tokens, token_weights, numeric_ranges, optimizations, ...)", rules),
-                BorderLayout.NORTH);
+        JPanel rulesHead = new JPanel(new BorderLayout(6, 0));
+        rulesHead.add(FieldNames.label("Your scoring rules as JSON (required_tokens, token_weights, numeric_ranges, optimizations, ...)", rules),
+                BorderLayout.CENTER);
+        rulesHead.add(search.button(() -> FileSeeker.Kind.RULES, this::text, this::loadRules,
+                "Search the folders where scoring rules files usually are, then load one into the box."), BorderLayout.EAST);
+        rulesPanel.add(rulesHead, BorderLayout.NORTH);
         rulesPanel.add(new JScrollPane(rules), BorderLayout.CENTER);
         JPanel north = new JPanel(new BorderLayout(6, 6));
         north.add(input, BorderLayout.NORTH);
@@ -200,6 +210,12 @@ final class ScorerView {
         panel.add(north, BorderLayout.NORTH);
         panel.add(center, BorderLayout.CENTER);
         panel.add(status, BorderLayout.SOUTH);
+    }
+
+    /** Reads scoring rules from a file into the rules box, off the event thread. */
+    private void loadRules(Path selected) {
+        Background.run("load-rules", () -> RuleSet.readText(selected, session.analysisBudget()), rules::setText,
+                failure -> status.setText("The rules could not be read: " + Background.describe(failure)));
     }
 
     /** The text the field names, or null. */

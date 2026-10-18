@@ -225,6 +225,50 @@ class SieveWorkbenchTest {
         });
     }
 
+    /** The Within distance of a pair rule steps up and down, to its bounds, without mixing number types (D002). */
+    @Test void theWithinDistanceOfAPairRuleStepsWithinItsBoundsWithoutATypeClash() throws Exception {
+        var doc = SieveDocument.parse("""
+                {"version":1,"constraints":[{"id":"near","polarity":"forbid","pairs":[{"A":"a","B":"1"}],"gate":{"within":3}}]}
+                """, "test");
+        edt(() -> {
+            SieveRuleEditor editor = new SieveRuleEditor(r -> { }, () -> { }, () -> { });
+            editor.show(doc, doc.rules().getFirst(), Map.of("A", List.of("a", "b"), "B", List.of("1", "2")));
+            JSpinner within = named(editor.component(), JSpinner.class, "columns apart");
+            assertTrue(within.isEnabled(), "a pair rule may be gated");
+            assertEquals(3L, within.getValue());
+            assertEquals(4L, within.getNextValue());
+            assertEquals(2L, within.getPreviousValue());
+            within.setValue(Long.MAX_VALUE);
+            assertNull(within.getNextValue(), "no step past the largest distance");
+            assertEquals(Long.MAX_VALUE - 1, within.getPreviousValue());
+            within.setValue(0L);
+            assertNull(within.getPreviousValue(), "no negative distance");
+            assertEquals(RuleValue.Int.of(0L), SieveDocument.map(editor.draft().entries().get("gate")).get("within"),
+                    "the rule keeps the distance as edited");
+            return null;
+        });
+    }
+
+    /** A draft that cannot be applied says why in the editor, not in a dialog, so it also works without a display. */
+    @Test void aDraftThatCannotBeAppliedSaysWhyWithoutADialog() throws Exception {
+        var doc = SieveDocument.parse("""
+                {"version":1,"constraints":[{"id":"pair","polarity":"forbid","pairs":[{"A":"a","B":"1"}]}]}
+                """, "test");
+        edt(() -> {
+            List<String> problems = new java.util.ArrayList<>();
+            SieveRuleEditor editor = new SieveRuleEditor(r -> { }, () -> { }, () -> { }, problems::add);
+            editor.show(doc, doc.rules().getFirst(), Map.of("A", List.of("a", "b"), "B", List.of("1", "2")));
+            named(editor.component(), JList.class, "Sheets the rule reads").clearSelection();   // the rule's own sheets come selected
+            find(editor.component(), JButton.class, b -> b.getText().equals("Use chosen sheets")).doClick();
+            assertEquals(List.of("The rule was not applied: Choose at least two sheets."), problems);
+            return null;
+        });
+    }
+
+    private static <T extends Component> T named(Container root, Class<T> type, String name) {
+        return find(root, type, c -> name.equals(c.getAccessibleContext().getAccessibleName()));
+    }
+
     private static JTable table(Container root) {
         for (Component c : root.getComponents()) { if (c instanceof JTable t) return t; if (c instanceof Container child) { JTable found = table(child); if (found != null) return found; } }
         return null;

@@ -1,0 +1,192 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "kind",
+        "FW_Combi(1)"
+      ],
+      [
+        "roots",
+        "FW_Combi(1)"
+      ],
+      [
+        "content",
+        "FW_Combi(1)"
+      ],
+      [
+        "budget",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_search_match",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_search_roots",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_search_budget",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_search_filter",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_x_search_selection",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "kind": [
+      [
+        "o.put(\"kind\",\"SCENARIO\");"
+      ],
+      [
+        "o.put(\"kind\",\"LIBRARY\");"
+      ],
+      [
+        "o.put(\"kind\",\"CONSTRAINTS\");"
+      ],
+      [
+        "o.put(\"kind\",\"METRICS\");"
+      ],
+      [
+        "o.put(\"kind\",\"JACOCO\");"
+      ],
+      [
+        "o.put(\"kind\",\"COVERAGE_PY\");"
+      ],
+      [
+        "o.put(\"kind\",\"GCOV\");"
+      ]
+    ],
+    "roots": [
+      [
+        "o.put(\"roots\",\"likely\");"
+      ],
+      [
+        "o.put(\"roots\",\"duplicate\");"
+      ],
+      [
+        "o.put(\"roots\",\"deep\");"
+      ]
+    ],
+    "content": [
+      [
+        "o.put(\"content\",\"positive\");"
+      ],
+      [
+        "o.put(\"content\",\"misleading\");"
+      ],
+      [
+        "o.put(\"content\",\"hidden\");"
+      ]
+    ],
+    "budget": [
+      [
+        "o.put(\"budget\",\"full\");"
+      ],
+      [
+        "o.put(\"budget\",\"cap\");"
+      ],
+      [
+        "o.put(\"budget\",\"stop\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"x_search_data\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_x_search_match": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_search_match\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_search_roots": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_search_roots\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_search_budget": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_search_budget\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_search_filter": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_search_filter\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_x_search_selection": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"x_search_selection\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "7",
+        "GUIF_X_SEARCH_MATCH_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_X_SEARCH_ROOTS_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_X_SEARCH_BUDGET_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_X_SEARCH_FILTER_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_X_SEARCH_SELECTION_INVARIANT"
+      ]
+    ]
+  }
+}

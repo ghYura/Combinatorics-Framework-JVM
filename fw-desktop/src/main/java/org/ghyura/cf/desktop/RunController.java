@@ -29,6 +29,7 @@ import org.ghyura.cf.campaign.Progress;
 import org.ghyura.cf.campaign.ProgressListener;
 import org.ghyura.cf.campaign.RunState;
 import org.ghyura.cf.campaign.RunSummary;
+import org.ghyura.cf.desktop.session.CorpusExport;
 import org.ghyura.cf.desktop.session.RunReport;
 import org.ghyura.cf.artifacts.CheckpointCodec;
 import org.ghyura.cf.artifacts.ResultsExport;
@@ -154,7 +155,8 @@ final class RunController implements AutoCloseable {
 
     /**
      * Writes the last run's final checkpoint as the {@code export} command's kinds do: report (XML summary), results (legacy
-     * results_v2 rows), csv (final samples with their metrics), or checkpoint (the artifact {@code resume} reads).
+     * results_v2 rows), csv (final samples with their metrics), or checkpoint (the artifact {@code resume} reads); or as
+     * metrics, the metrics corpus results analysis reads (step 8, {@code analyze --results}).
      *
      * @throws FrameworkException RESULT_EXPORT_FAILED when there is no ended run to export or the file cannot be written
      */
@@ -172,7 +174,7 @@ final class RunController implements AutoCloseable {
                 CheckpointCodec.write(target, c, budget);
                 return;
             }
-            byte[] bytes = ResultsExport.encode(c, kind, budget);
+            byte[] bytes = kind.equals("metrics") ? CorpusExport.encode(c, budget) : ResultsExport.encode(c, kind, budget);
             AtomicFiles.write(target, bytes);
         } catch (IOException e) {
             throw new FrameworkException(Diagnostic.error(ErrorCode.RESULT_EXPORT_FAILED, "the " + kind + " export cannot be written: "

@@ -30,8 +30,10 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 /**
@@ -49,6 +51,21 @@ final class FieldNames {
         label.setLabelFor(field);
         field.getAccessibleContext().setAccessibleName(bare(name));
         return label;
+    }
+
+    /** Shows, greyed inside the empty field, an example of what it takes (FlatLaf draws it; other looks keep the hint). */
+    static <T extends JTextField> T placeholder(T field, String example) {
+        field.putClientProperty("JTextField.placeholderText", example);
+        return field;
+    }
+
+    /** A short muted line under a field: what goes in it, in plain words. */
+    static JLabel note(String text) {
+        JLabel note = new JLabel(text);
+        note.setForeground(new Color(0x57606a));
+        note.setFont(note.getFont().deriveFont(note.getFont().getSize2D() - 1f));
+        note.setBorder(BorderFactory.createEmptyBorder(1, 2, 2, 2));
+        return note;
     }
 
     /** The field with its name to its left, in one small row (for fields that take turns in one place). */

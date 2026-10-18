@@ -26,6 +26,7 @@
 package org.ghyura.cf.desktop;
 
 import org.ghyura.cf.desktop.session.CandidatePreview;
+import org.ghyura.cf.desktop.session.FileSeeker;
 import org.ghyura.cf.desktop.session.PlanEstimates;
 import org.ghyura.cf.desktop.session.ScenarioLibrary;
 import org.ghyura.cf.desktop.session.ScenarioValidation;
@@ -68,7 +69,10 @@ final class LibraryView {
 
     private final java.util.function.Supplier<Session> session;
     private final Consumer<Path> open;
-    private final JLabel where = new JLabel("No library opened: open a generator tree or one of its intake manifests.");
+    /** The library found beside this checkout, offered with one button; null when there is none. */
+    private final Path example;
+    private final String guide;
+    private final JLabel where = new JLabel(" ");
     private final DefaultListModel<String> suiteNames = new DefaultListModel<>();
     private final JList<String> suites = Hints.of(new JList<>(suiteNames), "The groups of example scenarios. Pick one to list its examples.");
     private final ListTableModel<ScenarioLibrary.Entry> scenarios = new ListTableModel<>(List.of("Scenario", "Documented", "Source"),
@@ -90,7 +94,19 @@ final class LibraryView {
     LibraryView(java.util.function.Supplier<Session> session, Consumer<Path> open, Navigator navigator) {
         this.session = session;
         this.open = open;
-        JButton choose = Hints.of(new JButton("Open a library..."), "Open a folder of example scenarios, or one of its list files.");
+        this.example = navigator.example(Navigator.Purpose.LIBRARY_OPEN);
+        String place = "the generator_trunk folder of a " + Examples.QA_EDITION + " checkout (the folder that holds "
+                + "intake/verified_examples.json)";
+        this.guide = "How to start\n"
+                + (example != null ? "1. Press \"Open the example library\": it opens " + example + ". Or press \"Open a library...\" and choose "
+                + place + ".\n" : "1. Press \"Open a library...\" and choose " + place + ". Clone that checkout next to this one, and the "
+                + "desktop finds it by itself next time.\n")
+                + "2. Pick a group of examples on the left, then an example in the table.\n"
+                + "3. Press \"Open in the Scenario tab\": the example becomes the scenario of step 3.\n";
+        where.setText(example != null ? "No library open yet: press Open the example library, or choose another with Open a library..."
+                : "No library open yet: choose " + place + " with Open a library...");
+        JButton choose = Hints.of(new JButton("Open a library..."), "Choose a library: the generator_trunk folder of a QA edition checkout, "
+                + "or the verified_examples.json file inside its intake folder.");
         choose.addActionListener(e -> {
             Path chosen = navigator.choose(panel, Navigator.Purpose.LIBRARY_OPEN, null);
             if (chosen != null) {
@@ -102,11 +118,23 @@ final class LibraryView {
         openScenario.addActionListener(e -> openSelected());
         JButton check = Hints.of(new JButton("Check the candidate count"), "Count the test cases of the selected example and compare the number with the one the library expects.");
         check.addActionListener(e -> checkSelected());
-        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
-        top.add(choose);
-        top.add(openScenario);
-        top.add(check);
-        top.add(where);
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
+        if (example != null) {
+            JButton bundled = Hints.of(new JButton("Open the example library"), "Open the library of verified examples found next to this "
+                    + "checkout.");
+            bundled.setToolTipText(example.toString());
+            bundled.addActionListener(e -> open(example));
+            buttons.add(bundled);
+        }
+        buttons.add(choose);
+        buttons.add(new AutoSearch(navigator).button(() -> FileSeeker.Kind.LIBRARY, () -> null, this::open,
+                "Search this checkout, the checkouts next to it and your folders for libraries of examples."));
+        buttons.add(openScenario);
+        buttons.add(check);
+        JPanel top = new JPanel(new BorderLayout(0, 4));
+        top.add(buttons, BorderLayout.NORTH);
+        where.setBorder(BorderFactory.createEmptyBorder(0, 6, 0, 6));
+        top.add(where, BorderLayout.SOUTH);
         suites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         suites.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) showSuite(suites.getSelectedIndex());
@@ -119,6 +147,7 @@ final class LibraryView {
         details.setLineWrap(true);
         details.setWrapStyleWord(true);
         details.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
+        details.setText(guide);
         JPanel suitesBox = new JPanel(new BorderLayout(4, 4));
         suitesBox.add(FieldNames.label("Groups of examples", suites), BorderLayout.NORTH);
         suitesBox.add(new JScrollPane(suites), BorderLayout.CENTER);
@@ -153,7 +182,8 @@ final class LibraryView {
             for (ScenarioLibrary.Suite s : suiteList) {
                 suiteNames.addElement(s.title() + " (" + ScenarioLibrary.inSuite(read, s.id()).size() + ")");
             }
-            where.setText(path + ": " + read.size() + " scenario(s) in " + suiteList.size() + " suite(s)");
+            where.setText(read.isEmpty() ? path + ": no examples here. A library is the generator_trunk folder that holds "
+                    + "intake/verified_examples.json." : path + ": " + read.size() + " scenario(s) in " + suiteList.size() + " suite(s)");
             if (!suiteList.isEmpty()) suites.setSelectedIndex(0);
             else showSuite(-1);
         }, failure -> where.setText("The library cannot be read: " + Background.describe(failure)));
@@ -167,7 +197,7 @@ final class LibraryView {
     private void showSuite(int index) {
         scenarios.show(index < 0 ? List.of() : ScenarioLibrary.inSuite(entries, suiteList.get(index).id()));
         TableTitles.name(tablePane, table, scenariosTitle(index < 0 ? null : suiteList.get(index).title()));
-        details.setText("");
+        details.setText(index < 0 ? guide : "");
         if (scenarios.getRowCount() > 0) table.setRowSelectionInterval(0, 0);
     }
 
@@ -187,6 +217,13 @@ final class LibraryView {
         details.setCaretPosition(0);
     }
 
+    /** A button that needs an example was pressed with none selected: say what to do first. */
+    private void nothingSelected() {
+        details.setText((entries.isEmpty() ? "Open a library first, then select an example in the table.\n\n"
+                : "Select an example in the table first.\n\n") + (entries.isEmpty() ? guide : ""));
+        details.setCaretPosition(0);
+    }
+
     private ScenarioLibrary.Entry selected() {
         int row = table.getSelectedRow();
         return row < 0 ? null : scenarios.row(row);
@@ -195,7 +232,10 @@ final class LibraryView {
     /** Puts the selected static scenario in the Scenario tab. */
     void openSelected() {
         ScenarioLibrary.Entry e = selected();
-        if (e == null) return;
+        if (e == null) {
+            nothingSelected();
+            return;
+        }
         if (e.dynamic()) {
             details.append("\nThis scenario is made fresh by its application, which this edition does not carry: scenarios and specs are inputs, "
                     + "their applications are not ported.\n");
@@ -208,6 +248,7 @@ final class LibraryView {
     /** The plan's executable candidates of the selected scenario against the count the library documents. */
     CompletableFuture<String> checkSelected() {
         ScenarioLibrary.Entry e = selected();
+        if (e == null) nothingSelected();
         if (e == null || e.dynamic() || busy) return CompletableFuture.completedFuture(null);
         busy = true;
         details.append("\nChecking the candidate count of " + e.spec() + " ...\n");

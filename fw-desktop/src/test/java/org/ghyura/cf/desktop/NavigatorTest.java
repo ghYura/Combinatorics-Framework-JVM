@@ -101,20 +101,66 @@ class NavigatorTest {
             assertEquals(scenario, navigator.place(Navigator.Purpose.DOCUMENT_SAVE, scenario).file(), "a saved document saves to its file");
             assertEquals(dir.resolve("shop.graph.dot"), navigator.place(Navigator.Purpose.GRAPH_SAVE, null).file());
 
-            // results exported elsewhere, by anyone: the analysis opens there, the file selected, and exports follow
+            // metrics exported elsewhere, by anyone: the analysis opens there, the file selected, and exports follow
             Path out = Files.createDirectories(dir.resolve("runs"));
             trail.watch(out);
             trail.settle(5_000);
-            Path exported = Files.writeString(out.resolve("shop-results.csv"), "candidate_id,repeat_idx,env_id\n", StandardCharsets.UTF_8);
-            until(() -> exported.equals(navigator.place(Navigator.Purpose.RESULTS_OPEN, null).file()), "the newest results file selected");
-            assertEquals(out.resolve("shop-samples.csv"), navigator.place(Navigator.Purpose.EXPORT_SAMPLES, null).file(),
+            Path table = Files.writeString(out.resolve("shop-results.csv"), "candidate_id,repeat_idx,env_id\n", StandardCharsets.UTF_8);
+            until(() -> out.resolve("shop-samples.csv").equals(navigator.place(Navigator.Purpose.EXPORT_SAMPLES, null).file()),
                     "the next results export goes where the last went");
+            assertNull(navigator.place(Navigator.Purpose.RESULTS_OPEN, null).file(), "a CSV table is not offered to the analysis: "
+                    + table);
+            Path exported = Files.writeString(out.resolve("shop-metrics.kv"), "candidate_id=a latency=1 FW_VAR=0\n", StandardCharsets.UTF_8);
+            until(() -> exported.equals(navigator.place(Navigator.Purpose.RESULTS_OPEN, null).file()), "the newest metrics file selected");
 
             JFileChooser chooser = edt(() -> navigator.chooser(Navigator.Purpose.RESULTS_OPEN, null));
             assertEquals(out.toFile(), chooser.getCurrentDirectory());
             assertEquals(exported.toFile(), chooser.getSelectedFile());
-            assertTrue(chooser.getDialogTitle().startsWith("Open: the newest results"), chooser.getDialogTitle());
+            assertTrue(chooser.getDialogTitle().startsWith("Open a metrics file to analyze · here: the newest metrics file, written "),
+                    chooser.getDialogTitle());
         }
+    }
+
+    /** Every dialog says beside its files what to pick, in plain words; one with an example near has a button to it. */
+    @Test
+    void everyDialogSaysWhatToPickAndShowsTheExampleWhenOneIsNear(@TempDir Path dir) throws Exception {
+        Path showcase = Files.createDirectories(dir.resolve("scenarios/showcase")).resolve("showcase.xlsx");
+        Files.writeString(showcase, "PK", StandardCharsets.UTF_8);
+        Path library = Files.createDirectories(dir.resolve(Examples.QA_EDITION + "/generator_trunk/intake")).getParent();
+        Files.writeString(library.resolve("intake/verified_examples.json"), "[]", StandardCharsets.UTF_8);
+        try (FileTrail trail = FileTrail.inMemory()) {
+            Navigator navigator = new Navigator(trail, () -> null, new Examples(java.util.List.of(dir)));
+            for (Navigator.Purpose purpose : Navigator.Purpose.values()) {
+                JFileChooser chooser = edt(() -> navigator.chooser(purpose, null));
+                String title = chooser.getDialogTitle();
+                assertTrue(title.startsWith((purpose.open() ? "Open " : "Save ") + purpose.what() + " · here: "), title);
+                JPanel guide = (JPanel) chooser.getAccessory();
+                assertEquals("What to pick", guide.getName(), purpose.name());
+                String text = ((javax.swing.JLabel) guide.getComponent(0)).getText();
+                assertTrue(text.contains("What to pick") && purpose.guide().length() > 60, purpose + ": " + text);
+                for (String word : java.util.List.of("legacy", "sidecar", "manifest", "corpus")) {
+                    assertFalse(text.contains(word), purpose + " says the internal word " + word + ": " + text);
+                }
+                Path example = navigator.example(purpose);
+                assertEquals(example != null, guide.getComponentCount() == 2, purpose + " offers its example");
+                if (example != null) {
+                    edt(() -> {
+                        ((JButton) guide.getComponent(1)).doClick();
+                        return null;
+                    });
+                    assertEquals(example.toFile(), chooser.getSelectedFile(), purpose + ": Show the example selects it");
+                }
+            }
+            assertEquals(showcase, navigator.example(Navigator.Purpose.SCENARIO_OPEN));
+            assertEquals(library, navigator.example(Navigator.Purpose.LIBRARY_OPEN));
+            assertNull(navigator.example(Navigator.Purpose.RESULTS_OPEN), "no metrics example in this library");
+            JFileChooser folders = edt(() -> navigator.chooser(Navigator.Purpose.LIBRARY_OPEN, null));
+            assertEquals(JFileChooser.FILES_AND_DIRECTORIES, folders.getFileSelectionMode(), "a library is a folder or its list");
+            assertTrue(folders.getFileFilter().accept(library.toFile()) && folders.getFileFilter().accept(
+                    library.resolve("intake/verified_examples.json").toFile()));
+            assertEquals(JFileChooser.DIRECTORIES_ONLY, edt(() -> navigator.chooser(Navigator.Purpose.WORKDIR_OPEN, null)).getFileSelectionMode());
+        }
+        assertNull(new Examples(java.util.List.of(dir.resolve("elsewhere"))).scenario(), "nothing is offered where nothing is");
     }
 
     @Test
@@ -134,8 +180,8 @@ class NavigatorTest {
             assertTrue(tooltip.contains("Opens in " + dir), tooltip);
             assertFalse(edt(hint::isVisible), "nothing to offer yet");
 
-            Path exported = Files.writeString(dir.resolve("shop-results.csv"), "candidate_id,repeat_idx,env_id\n", StandardCharsets.UTF_8);
-            until(() -> hint.isVisible() && browse.getToolTipText().contains("shop-results.csv"), "the hint and the tooltip follow the trail");
+            Path exported = Files.writeString(dir.resolve("shop-metrics.kv"), "candidate_id=a latency=1 FW_VAR=0\n", StandardCharsets.UTF_8);
+            until(() -> hint.isVisible() && browse.getToolTipText().contains("shop-metrics.kv"), "the hint and the tooltip follow the trail");
             JButton use = edt(() -> (JButton) hint.getComponent(1));
             edt(() -> {
                 use.doClick();
@@ -158,8 +204,11 @@ class NavigatorTest {
             collect(desktop.component(), bound);
             return null;
         });
-        assertEquals(java.util.List.of("Browse...", "Browse...", "Browse...", "Export CSV...", "Export...", "Load rules...", "Open a library...",
-                "Open...", "Save DOT or JSON...", "Save as..."), bound.stream().sorted().toList(), "the file buttons, each with a hint of its place");
+        // scenario, metrics file, coverage report, text to score, Python interpreter and working folder: Browse...; add-ons and
+        // Python import folders: Add...
+        assertEquals(java.util.List.of("Add...", "Add...", "Browse...", "Browse...", "Browse...", "Browse...", "Browse...", "Browse...",
+                "Export CSV...", "Export...", "Load rules...", "Open a library...", "Open...", "Save DOT or JSON...", "Save as..."),
+                bound.stream().sorted().toList(), "the file buttons, each with a hint of its place");
         assertEquals(dir.resolve("shop.json"), desktop.navigator().place(Navigator.Purpose.SCENARIO_OPEN, null).file());
         edt(desktop::close).get(60, java.util.concurrent.TimeUnit.SECONDS);
     }

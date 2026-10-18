@@ -1,0 +1,239 @@
+t0_toggle_hints_on_f1	0	toggle	Hints on (F1)	0
+t1_list_groups_of_examples	1	list	Groups of examples	0
+t1_table_scenarios_of_the_selected_suite_documented_counts_and_sources	1	table	Scenarios of the selected suite: documented counts and sources	0
+t1_text_area_about_the_selected_example	1	text area	About the selected example	0
+t1_button_open_the_example_library	1	button	Open the example library	0
+t1_button_open_a_library	1	button	Open a library...	0
+t1_button_auto_search	1	button	Auto-search…	0
+t1_button_open_in_the_scenario_tab	1	button	Open in the Scenario tab	0
+t1_button_check_the_candidate_count	1	button	Check the candidate count	0
+t1_button_use_python	1	button	Use Python	0
+t1_button_runner_settings_step_3	1	button	Runner settings (step 3)	0
+t2_button_new	2	button	New	0
+t2_button_open	2	button	Open...	0
+t2_button_auto_search	2	button	Auto-search…	0
+t2_button_save	2	button	Save	0
+t2_button_save_as	2	button	Save as...	0
+t2_button_validate	2	button	Validate	0
+t2_list_sheets	2	list	Sheets	0
+t2_button_add_sheet	2	button	Add sheet	0
+t2_button_rename	2	button	Rename	0
+t2_button_remove	2	button	Remove	0
+t2_button_insert_row	2	button	Insert row	0
+t2_button_remove_row	2	button	Remove row	0
+t2_table_cells_of_sheet_fw_seq	2	table	Cells of sheet FW_Seq	0
+t2_list_cell_templates	2	list	Cell templates	0
+t2_button_insert_into_the_selected_cell	2	button	Insert into the selected cell	0
+t2_sub_tab_2_1_control_sheets	2	sub-tab	2.1 · Control sheets	0
+t2_sub_tab_2_2_validation	2	sub-tab	2.2 · Validation	0
+t2_sub_tab_2_3_operand_dependencies	2	sub-tab	2.3 · Operand dependencies	0
+t2_sub_tab_2_4_dependency_graph	2	sub-tab	2.4 · Dependency graph	0
+t2_button_load_from_the_document	2	button	Load from the document	0
+t2_button_apply_to_the_document	2	button	Apply to the document	0
+t2_button_add_verdict	2	button	Add verdict	0
+t2_button_remove_verdict	2	button	Remove verdict	0
+t2_text_area_fw_runmefirstonce_code_run_once_before_the_test_cases	2	text area	FW_RunMeFirstOnce: code run once before the test cases	0
+t2_text_area_fw_arguments_arguments_one_per_line	2	text area	FW_Arguments: arguments, one per line	0
+t2_table_fw_custom_var_verdict_codes_and_their_names	2	table	FW_CUSTOM_VAR: verdict codes and their names	0
+t2_text_area_check_results	2	text area	Check results	0
+t2_table_operand_dependencies_each_joiner_s_operands_and_their_lifetimes	2	table	Operand dependencies: each joiner's operands and their lifetimes	0
+t2_button_copy_dot	2	button	Copy DOT	0
+t2_button_save_dot_or_json	2	button	Save DOT or JSON...	0
+t2_text_area_problems_in_the_diagram	2	text area	Problems in the diagram	0
+t3_text_area_check_results	3	text area	Check results	0
+t3_table_fw_seq_plan_each_sheet_s_role_values_and_directives	3	table	FW_Seq plan: each sheet's role, values and directives	0
+t3_text_field_scenario_file_xlsx_json_yaml_or_toml	3	text field	Scenario file (xlsx, json, yaml or toml)	0
+t3_button_browse	3	button	Browse...	0
+t3_button_auto_search	3	button	Auto-search…	0
+t3_button_use_the_example	3	button	Use the example	0
+t3_button_validate_and_plan	3	button	Validate and plan	0
+t3_button_use	3	button	Use	0
+t3_choice_runner	3	choice	Runner	0
+t3_text_field_add_on_and_dependency_paths	3	text field	Add-on and dependency paths	0
+t3_text_field_python_interpreter	3	text field	Python interpreter	0
+t3_text_field_python_import_directories	3	text field	Python import directories	0
+t3_text_field_python_working_directory	3	text field	Python working directory	0
+t3_text_field_python_environment_variables	3	text field	Python environment variables	0
+t3_text_field_python_sandbox	3	text field	Python sandbox	0
+t3_button_add	3	button	Add...	0
+t3_button_browse_2	3	button	Browse...	1
+t3_button_add_2	3	button	Add...	1
+t3_button_browse_3	3	button	Browse...	2
+t3_button_auto_search_2	3	button	Auto-search…	1
+t3_button_auto_search_3	3	button	Auto-search…	2
+t3_button_auto_search_4	3	button	Auto-search…	3
+t3_button_auto_search_5	3	button	Auto-search…	4
+t3_button_apply_runner_settings	3	button	Apply runner settings	0
+t4_button_open_step_3_scenario	4	button	Open step 3 scenario	0
+t4_button_import_constraints	4	button	Import constraints…	0
+t4_button_auto_search	4	button	Auto-search…	0
+t4_button_export_json	4	button	Export JSON…	0
+t4_button_save_for_scenario	4	button	Save for scenario	0
+t4_button_face_2_sieve	4	button	Face 2 (Sieve) ↗	0
+t4_button_undo	4	button	Undo	0
+t4_button_redo	4	button	Redo	0
+t4_button_validate	4	button	Validate	0
+t4_button_check_impact	4	button	Check impact	0
+t4_spinner_unnamed	4	spinner	Scan ≤	0
+t4_button_cancel_work	4	button	Cancel work	0
+t4_sub_tab_sieve_graph	4	sub-tab	Sieve graph	0
+t4_sub_tab_bond_matrix	4	sub-tab	Bond matrix	0
+t4_sub_tab_parameters_orders	4	sub-tab	Parameters / orders	0
+t4_sub_tab_advanced_json	4	sub-tab	Advanced JSON	0
+t4_text_field_unnamed	4	text field	Find cards	0
+t4_button_fit	4	button	Fit	0
+t4_button_plus	4	button	+	0
+t4_button_minus	4	button	−	0
+t4_button_arrange	4	button	Arrange	0
+t4_choice_unnamed	4	choice	Group as	0
+t4_button_group_selected_values	4	button	Group selected values	0
+t4_choice_unnamed_2	4	choice	Rows	0
+t4_text_field_unnamed_2	4	text field	Row filter	0
+t4_choice_unnamed_3	4	choice	Columns	0
+t4_text_field_unnamed_3	4	text field	Column filter	0
+t4_button_add_pair_at_cell	4	button	Add pair at cell	0
+t4_button_edit_cell_rule	4	button	Edit cell rule	0
+t4_table_unnamed	4	table	(unnamed)	0
+t4_sub_tab_parameters	4	sub-tab	Parameters	0
+t4_sub_tab_value_orders	4	sub-tab	Value orders	0
+t4_table_unnamed_2	4	table	(unnamed)	1
+t4_button_add_attribute	4	button	Add attribute	0
+t4_button_remove_attribute	4	button	Remove attribute	0
+t4_choice_sheet	4	choice	Sheet	0
+t4_choice_order	4	choice	Order	0
+t4_list_unnamed	4	list	Ranked values	0
+t4_choice_unnamed_4	4	choice	Value	0
+t4_button_add_value	4	button	Add value	0
+t4_button_up	4	button	↑	0
+t4_button_down	4	button	↓	0
+t4_button_remove	4	button	Remove	0
+t4_button_apply_data	4	button	Apply data	0
+t4_button_discard_data_draft	4	button	Discard data draft	0
+t4_text_area_sieve_execution_json	4	text area	#Sieve execution JSON	0
+t4_button_apply_json	4	button	Apply JSON	0
+t4_button_discard_json_draft	4	button	Discard JSON draft	0
+t4_text_field_unnamed_4	4	text field	Find rules	0
+t4_choice_unnamed_5	4	choice	Kind	0
+t4_button_new_rule	4	button	New rule	0
+t4_button_duplicate	4	button	Duplicate	0
+t4_button_delete	4	button	Delete	0
+t4_button_up_2	4	button	↑	1
+t4_button_down_2	4	button	↓	1
+t4_button_find_on_graph	4	button	Find on graph	0
+t4_table_unnamed_3	4	table	(unnamed)	2
+t4_text_field_rule_id	4	text field	Rule ID	0
+t4_text_field_description	4	text field	Description	0
+t4_choice_unnamed_6	4	choice	Effect	0
+t4_check_box_adjacent	4	check box	Adjacent	0
+t4_check_box_within	4	check box	Within	0
+t4_spinner_unnamed_2	4	spinner	columns apart	0
+t4_sub_tab_rule_body	4	sub-tab	Rule body	0
+t4_sub_tab_only_when	4	sub-tab	Only when	0
+t4_button_condition	4	button	+ condition	0
+t4_button_all_of	4	button	all of	0
+t4_button_any_of	4	button	any of	0
+t4_button_not	4	button	not	0
+t4_button_delete_2	4	button	Delete	1
+t4_button_up_3	4	button	Up	0
+t4_button_down_3	4	button	Down	0
+t4_tree_parts_of_the_condition	4	tree	Parts of the condition	0
+t4_choice_sheet_2	4	choice	sheet	0
+t4_choice_test	4	choice	test	0
+t4_choice_value	4	choice	value	0
+t4_list_values	4	list	Values	0
+t4_choice_present	4	choice	present	0
+t4_choice_other_column	4	choice	other column	0
+t4_spinner_count	4	spinner	count	0
+t4_text_field_json	4	text field	JSON	0
+t4_button_apply_json_2	4	button	Apply JSON	1
+t4_button_apply_rule	4	button	Apply rule	0
+t4_button_discard_draft	4	button	Discard draft	0
+t4_text_area_unnamed	4	text area	Messages	0
+t5_text_field_look_at_most_at_test_cases	5	text field	Look at most at (test cases)	0
+t5_spinner_rows_per_page	5	spinner	Rows per page	0
+t5_check_box_executable_only	5	check box	Executable only	0
+t5_button_preview	5	button	Preview	0
+t5_button_next_page	5	button	Next page	0
+t5_button_cancel	5	button	Cancel	0
+t5_table_plan_estimates_each_count_with_its_confidence_and_formula	5	table	Plan estimates: each count with its confidence and formula	0
+t5_table_rule_impact_what_each_rule_reads_and_the_candidates_it_removes	5	table	Rule impact: what each rule reads and the candidates it removes	0
+t5_table_candidate_page_each_candidate_s_ids_and_fate_under_the_rules	5	table	Candidate page: each candidate's ids and fate under the rules	0
+t5_text_area_code_of_the_selected_test_case	5	text area	Code of the selected test case	0
+t6_text_area_run_report	6	text area	Run report	0
+t6_button_run	6	button	Run	0
+t6_button_pause	6	button	Pause	0
+t6_button_resume	6	button	Resume	0
+t6_button_cancel	6	button	Cancel	0
+t6_choice_save_as	6	choice	Save as	0
+t6_button_export	6	button	Export...	0
+t6_button_use_python	6	button	Use Python	0
+t6_button_runner_settings_step_3	6	button	Runner settings (step 3)	0
+t7_button_run_campaign	7	button	Run campaign	0
+t7_button_pause	7	button	Pause	0
+t7_button_resume	7	button	Resume	0
+t7_button_cancel	7	button	Cancel	0
+t7_table_campaign_lineage_each_iteration_s_run_counts_winners_and_front	7	table	Campaign lineage: each iteration's run, counts, winners and front	0
+t7_text_area_campaign_report	7	text area	Campaign report	0
+t8_text_field_metrics_file_kv	8	text field	Metrics file (.kv)	0
+t8_button_browse	8	button	Browse...	0
+t8_button_auto_search	8	button	Auto-search…	0
+t8_button_use_the_example	8	button	Use the example	0
+t8_button_use	8	button	Use	0
+t8_choice_code_coverage_optional	8	choice	Code coverage (optional)	0
+t8_text_field_report_file	8	text field	report file	0
+t8_button_browse_2	8	button	Browse...	1
+t8_button_auto_search_2	8	button	Auto-search…	1
+t8_button_analyze	8	button	Analyze	0
+t8_text_area_analysis_report	8	text area	Analysis report	0
+t9_text_field_text_file_to_score	9	text field	Text file to score	0
+t9_button_browse	9	button	Browse...	0
+t9_button_auto_search	9	button	Auto-search…	0
+t9_button_use	9	button	Use	0
+t9_spinner_lines_per_learned_pattern	9	spinner	Lines per learned pattern	0
+t9_spinner_patterns_kept	9	spinner	Patterns kept	0
+t9_spinner_worth_improving_from_score	9	spinner	Worth improving from score	0
+t9_spinner_watch_from_score	9	spinner	Watch from score	0
+t9_button_load_rules	9	button	Load rules...	0
+t9_button_auto_plan	9	button	Auto-plan	0
+t9_button_score	9	button	Score	0
+t9_button_export_csv	9	button	Export CSV...	0
+t9_button_optimization_charts	9	button	Optimization charts	0
+t9_button_auto_search_2	9	button	Auto-search…	1
+t9_text_area_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_	9	text area	Your scoring rules as JSON (required_tokens, token_weights, numeric_ranges, optimizations, ...)	0
+t9_text_field_show_lines_containing	9	text field	Show lines containing	0
+t9_table_scored_lines_each_line_s_score_decision_and_features	9	table	Scored lines: each line's score, decision and features	0
+t9_text_area_why_this_score	9	text area	Why this score	0
+t9_text_area_summary_of_all_scores	9	text area	Summary of all scores	0
+x_run_roundtrip	-1	logic	x_run_roundtrip	0
+x_run_sequence	-1	logic	x_run_sequence	0
+x_dialog_scenario_open	-1	logic	x_dialog_scenario_open	0
+x_dialog_document_open	-1	logic	x_dialog_document_open	0
+x_dialog_document_save	-1	logic	x_dialog_document_save	0
+x_dialog_constraints_open	-1	logic	x_dialog_constraints_open	0
+x_dialog_constraints_save	-1	logic	x_dialog_constraints_save	0
+x_dialog_graph_save	-1	logic	x_dialog_graph_save	0
+x_dialog_export_report	-1	logic	x_dialog_export_report	0
+x_dialog_export_results	-1	logic	x_dialog_export_results	0
+x_dialog_export_samples	-1	logic	x_dialog_export_samples	0
+x_dialog_export_metrics	-1	logic	x_dialog_export_metrics	0
+x_dialog_export_checkpoint	-1	logic	x_dialog_export_checkpoint	0
+x_dialog_results_open	-1	logic	x_dialog_results_open	0
+x_dialog_coverage_open	-1	logic	x_dialog_coverage_open	0
+x_dialog_text_open	-1	logic	x_dialog_text_open	0
+x_dialog_rules_open	-1	logic	x_dialog_rules_open	0
+x_dialog_scores_save	-1	logic	x_dialog_scores_save	0
+x_dialog_library_open	-1	logic	x_dialog_library_open	0
+x_dialog_addon_open	-1	logic	x_dialog_addon_open	0
+x_dialog_program_open	-1	logic	x_dialog_program_open	0
+x_dialog_imports_open	-1	logic	x_dialog_imports_open	0
+x_dialog_workdir_open	-1	logic	x_dialog_workdir_open	0
+x_trail	-1	logic	x_trail	0
+x_search_match	-1	logic	x_search_match	0
+x_search_roots	-1	logic	x_search_roots	0
+x_search_budget	-1	logic	x_search_budget	0
+x_search_filter	-1	logic	x_search_filter	0
+x_search_selection	-1	logic	x_search_selection	0
+x_tabs	-1	logic	x_tabs	0
+x_hints	-1	logic	x_hints	0
+x_zebra	-1	logic	x_zebra	0
+x_lifecycle	-1	logic	x_lifecycle	0

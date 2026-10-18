@@ -158,7 +158,11 @@ public record PlanEstimates(BigInteger scan, List<Stage> candidates, List<Stage>
         stages.add(new Stage("mandatory", Cardinality.exact(mandatory, formula)));
         if (assembly.coverage() != null) {
             var s = assembly.coverage();
-            stages.add(new Stage("selected rows", Cardinality.exact(BigInteger.valueOf(s.kept().length), "t=" + s.strength() + " "
+            // a selection without a method kept every row: the coverage budget holds all of them
+            stages.add(new Stage("selected rows", s.method() == null
+                    ? Cardinality.exact(BigInteger.valueOf(s.kept().length), "every row: the coverage budget holds all of them",
+                    "no covering selection was needed; the count is exact")
+                    : Cardinality.exact(BigInteger.valueOf(s.kept().length), "t=" + s.strength() + " "
                     + s.method().name().toLowerCase(Locale.ROOT).replace('_', '-') + " covering of " + s.feasible() + " feasible tuples",
                     "greedy covering selection; the count is exact, not a proven minimum")));
         }

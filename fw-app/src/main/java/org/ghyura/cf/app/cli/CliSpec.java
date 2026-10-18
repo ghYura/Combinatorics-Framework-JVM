@@ -110,9 +110,10 @@ public final class CliSpec {
             new CommandSpec("export", "Convert a checkpoint artifact into a report, legacy results_v2 rows or a metrics table.", "M07",
                     List.of(new OptionSpec("--input", "FILE", false, "Checkpoint artifact to read (run --checkpoint PATH writes one)."),
                             new OptionSpec("--output", "FILE", false, "File to write; replaced only once complete."),
-                            new OptionSpec("--kind", "report|results|csv|html", false, "What to export: report (XML summary, the default), "
-                                    + "results (legacy results_v2 rows, one per attempt, CSV), csv (final samples with their metrics) or html "
-                                    + "(the run as one self-contained page with its triage findings, the legacy bundle report).")),
+                            new OptionSpec("--kind", "report|results|csv|html|metrics", false, "What to export: report (XML summary, the "
+                                    + "default), results (legacy results_v2 rows, one per attempt, CSV), csv (final samples with their metrics), "
+                                    + "html (the run as one self-contained page with its triage findings, the legacy bundle report) or metrics "
+                                    + "(the metrics corpus analyze --results reads: one key=value line per sample with its verdict as FW_VAR).")),
                     List.of("--input", "--output")),
             new CommandSpec("score",
                     "Score the logical lines of a text file with the legacy analyzer's heuristic rules: a frozen corpus profile, "
@@ -189,7 +190,7 @@ public final class CliSpec {
                     "M00", List.of(), List.of()));
 
     /** Values accepted by {@code export --kind}. */
-    public static final List<String> EXPORT_KINDS = List.of("report", "results", "csv", "html");
+    public static final List<String> EXPORT_KINDS = List.of("report", "results", "csv", "html", "metrics");
 
     private CliSpec() {
     }
