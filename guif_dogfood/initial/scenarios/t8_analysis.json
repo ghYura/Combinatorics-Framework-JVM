@@ -1,0 +1,246 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "corpus",
+        "FW_Combi(1)"
+      ],
+      [
+        "coverage",
+        "FW_Combi(1)"
+      ],
+      [
+        "timing",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_text_field_metrics_file_kv",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_browse",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_auto_search",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_use_the_example",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_use",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_choice_code_coverage_optional",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_text_field_report_file",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_browse_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_auto_search_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_button_analyze",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t8_text_area_analysis_report",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "corpus": [
+      [
+        "o.put(\"corpus\",\"valid\");"
+      ],
+      [
+        "o.put(\"corpus\",\"unverdicted\");"
+      ],
+      [
+        "o.put(\"corpus\",\"csv\");"
+      ],
+      [
+        "o.put(\"corpus\",\"checkpoint\");"
+      ]
+    ],
+    "coverage": [
+      [
+        "o.put(\"coverage\",\"none\");"
+      ],
+      [
+        "o.put(\"coverage\",\"jacoco\");"
+      ],
+      [
+        "o.put(\"coverage\",\"coverage-py\");"
+      ],
+      [
+        "o.put(\"coverage\",\"gcov\");"
+      ]
+    ],
+    "timing": [
+      [
+        "o.put(\"timing\",\"single\");"
+      ],
+      [
+        "o.put(\"timing\",\"double\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t8_analysis\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t8_text_field_metrics_file_kv": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_text_field_metrics_file_kv\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_browse": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_browse\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_auto_search": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_auto_search\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_use_the_example": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_use_the_example\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_use": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_use\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_choice_code_coverage_optional": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_choice_code_coverage_optional\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_text_field_report_file": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_text_field_report_file\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_browse_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_browse_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_auto_search_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_auto_search_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_button_analyze": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_button_analyze\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t8_text_area_analysis_report": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t8_text_area_analysis_report\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T8_TEXT_FIELD_METRICS_FILE_KV_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_T8_BUTTON_BROWSE_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T8_BUTTON_AUTO_SEARCH_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T8_BUTTON_USE_THE_EXAMPLE_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T8_BUTTON_USE_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T8_CHOICE_CODE_COVERAGE_OPTIONAL_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T8_TEXT_FIELD_REPORT_FILE_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T8_BUTTON_BROWSE_2_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T8_BUTTON_AUTO_SEARCH_2_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T8_BUTTON_ANALYZE_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T8_TEXT_AREA_ANALYSIS_REPORT_INVARIANT"
+      ]
+    ]
+  }
+}

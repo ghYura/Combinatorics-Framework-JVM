@@ -1,0 +1,182 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "strategy",
+        "FW_Combi(1)"
+      ],
+      [
+        "iterations",
+        "FW_Combi(1)"
+      ],
+      [
+        "control",
+        "FW_Combi(1)"
+      ],
+      [
+        "sudden",
+        "FW_Combi(1)",
+        "FW_Optional"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t7_button_run_campaign",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t7_button_pause",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t7_button_resume",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t7_button_cancel",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t7_table_campaign_lineage_each_iteration_s_run_counts_winners_and_front",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t7_text_area_campaign_report",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "strategy": [
+      [
+        "o.put(\"strategy\",\"bias\");"
+      ],
+      [
+        "o.put(\"strategy\",\"noop\");"
+      ]
+    ],
+    "iterations": [
+      [
+        "o.put(\"iterations\",\"1\");"
+      ],
+      [
+        "o.put(\"iterations\",\"2\");"
+      ]
+    ],
+    "control": [
+      [
+        "o.put(\"control\",\"finish\");"
+      ],
+      [
+        "o.put(\"control\",\"pause\");"
+      ],
+      [
+        "o.put(\"control\",\"cancel\");"
+      ]
+    ],
+    "sudden": [
+      [
+        "o.put(\"sudden\",\"cancel\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t7_campaign\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t7_button_run_campaign": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t7_button_run_campaign\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t7_button_pause": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t7_button_pause\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t7_button_resume": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t7_button_resume\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t7_button_cancel": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t7_button_cancel\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t7_table_campaign_lineage_each_iteration_s_run_counts_winners_and_front": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t7_table_campaign_lineage_each_iteration_s_run_counts_winners_and_front\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t7_text_area_campaign_report": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t7_text_area_campaign_report\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "7",
+        "GUIF_T7_BUTTON_RUN_CAMPAIGN_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T7_BUTTON_PAUSE_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T7_BUTTON_RESUME_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T7_BUTTON_CANCEL_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T7_TABLE_CAMPAIGN_LINEAGE_EACH_ITERATION_S_RUN_COUNTS_WINNERS_AND_FRONT_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T7_TEXT_AREA_CAMPAIGN_REPORT_INVARIANT"
+      ]
+    ]
+  }
+}

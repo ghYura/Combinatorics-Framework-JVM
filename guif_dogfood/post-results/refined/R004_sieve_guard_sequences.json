@@ -1,0 +1,563 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "body",
+        "FW_Combi(1)"
+      ],
+      [
+        "edit",
+        "FW_Combi(1)"
+      ],
+      [
+        "resolution",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_unnamed_4",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_unnamed_5",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_new_rule",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_duplicate",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_delete",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_up_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_down_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_find_on_graph",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_table_unnamed_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_rule_id",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_description",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_unnamed_6",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_check_box_adjacent",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_check_box_within",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_spinner_unnamed_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_rule_body",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_only_when",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_condition",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_all_of",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_any_of",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_not",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_delete_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_up_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_down_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_tree_parts_of_the_condition",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_sheet_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_test",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_value",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_list_values",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_present",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_other_column",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_spinner_count",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_json",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_apply_json_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_apply_rule",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_discard_draft",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_area_unnamed",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "body": [
+      [
+        "o.put(\"body\",\"pair\");"
+      ]
+    ],
+    "edit": [
+      [
+        "o.put(\"edit\",\"valid\");"
+      ]
+    ],
+    "resolution": [
+      [
+        "o.put(\"resolution\",\"apply\");"
+      ]
+    ],
+    "act": [
+      [
+        "o.put(\"extension\",\"controls\"); GuifProbe p=GuifProbe.execute(\"t4_rules\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t4_text_field_unnamed_4": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_unnamed_5": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_new_rule": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_duplicate": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_delete": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_up_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_up_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_down_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_down_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_find_on_graph": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_table_unnamed_3": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_text_field_rule_id": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_text_field_description": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_unnamed_6": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_check_box_adjacent": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_check_box_within": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_spinner_unnamed_2": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_sub_tab_rule_body": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_sub_tab_only_when": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_condition": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_condition\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_all_of": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_all_of\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_any_of": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_any_of\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_not": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_not\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_delete_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_delete_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_up_3": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_up_3\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_down_3": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_down_3\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_tree_parts_of_the_condition": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_sheet_2": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_test": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_value": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_list_values": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_present": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_choice_other_column": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_spinner_count": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_text_field_json": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_apply_json_2": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_apply_rule": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_button_discard_draft": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "w_t4_text_area_unnamed": [
+      [
+        "/* unrelated watcher observed; not a deciding oracle for this focused sequence */"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T4_TEXT_FIELD_UNNAMED_4_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_T4_CHOICE_UNNAMED_5_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T4_BUTTON_NEW_RULE_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T4_BUTTON_DUPLICATE_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T4_BUTTON_DELETE_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T4_BUTTON_UP_2_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T4_BUTTON_DOWN_2_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T4_BUTTON_FIND_ON_GRAPH_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T4_TABLE_UNNAMED_3_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T4_TEXT_FIELD_RULE_ID_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T4_TEXT_FIELD_DESCRIPTION_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_T4_CHOICE_UNNAMED_6_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_T4_CHECK_BOX_ADJACENT_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_T4_CHECK_BOX_WITHIN_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_T4_SPINNER_UNNAMED_2_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_T4_SUB_TAB_RULE_BODY_INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_T4_SUB_TAB_ONLY_WHEN_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_T4_BUTTON_CONDITION_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_T4_BUTTON_ALL_OF_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_T4_BUTTON_ANY_OF_INVARIANT"
+      ],
+      [
+        "26",
+        "GUIF_T4_BUTTON_NOT_INVARIANT"
+      ],
+      [
+        "27",
+        "GUIF_T4_BUTTON_DELETE_2_INVARIANT"
+      ],
+      [
+        "28",
+        "GUIF_T4_BUTTON_UP_3_INVARIANT"
+      ],
+      [
+        "29",
+        "GUIF_T4_BUTTON_DOWN_3_INVARIANT"
+      ],
+      [
+        "30",
+        "GUIF_T4_TREE_PARTS_OF_THE_CONDITION_INVARIANT"
+      ],
+      [
+        "31",
+        "GUIF_T4_CHOICE_SHEET_2_INVARIANT"
+      ],
+      [
+        "32",
+        "GUIF_T4_CHOICE_TEST_INVARIANT"
+      ],
+      [
+        "33",
+        "GUIF_T4_CHOICE_VALUE_INVARIANT"
+      ],
+      [
+        "34",
+        "GUIF_T4_LIST_VALUES_INVARIANT"
+      ],
+      [
+        "35",
+        "GUIF_T4_CHOICE_PRESENT_INVARIANT"
+      ],
+      [
+        "36",
+        "GUIF_T4_CHOICE_OTHER_COLUMN_INVARIANT"
+      ],
+      [
+        "37",
+        "GUIF_T4_SPINNER_COUNT_INVARIANT"
+      ],
+      [
+        "38",
+        "GUIF_T4_TEXT_FIELD_JSON_INVARIANT"
+      ],
+      [
+        "39",
+        "GUIF_T4_BUTTON_APPLY_JSON_2_INVARIANT"
+      ],
+      [
+        "40",
+        "GUIF_T4_BUTTON_APPLY_RULE_INVARIANT"
+      ],
+      [
+        "41",
+        "GUIF_T4_BUTTON_DISCARD_DRAFT_INVARIANT"
+      ],
+      [
+        "42",
+        "GUIF_T4_TEXT_AREA_UNNAMED_INVARIANT"
+      ]
+    ]
+  }
+}

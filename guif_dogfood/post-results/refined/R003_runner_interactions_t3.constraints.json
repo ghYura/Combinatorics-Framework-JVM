@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "python_only_badenv",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "runner": "o.put(\"runner\",\"generated-java\");",
+          "settings": "o.put(\"settings\",\"badenv\");"
+        }
+      ]
+    },
+    {
+      "id": "python_only_badsandbox",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "runner": "o.put(\"runner\",\"generated-java\");",
+          "settings": "o.put(\"settings\",\"badsandbox\");"
+        }
+      ]
+    }
+  ]
+}

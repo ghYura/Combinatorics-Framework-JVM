@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "selection_requires_library_empty",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "source": "o.put(\"source\",\"empty\");",
+          "selection": "o.put(\"selection\",\"first\");"
+        }
+      ]
+    },
+    {
+      "id": "selection_requires_library_malformed",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "source": "o.put(\"source\",\"malformed\");",
+          "selection": "o.put(\"selection\",\"first\");"
+        }
+      ]
+    }
+  ]
+}

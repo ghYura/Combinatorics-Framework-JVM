@@ -1,0 +1,356 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "draft",
+        "FW_Combi(1)"
+      ],
+      [
+        "switch",
+        "FW_Combi(1)"
+      ],
+      [
+        "resolution",
+        "FW_Combi(1)"
+      ],
+      [
+        "order",
+        "FW_Combi(1)"
+      ],
+      [
+        "sudden",
+        "FW_Combi(1)",
+        "FW_Optional"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_parameters",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_value_orders",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_table_unnamed_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_add_attribute",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_remove_attribute",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_sheet",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_order",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_list_unnamed",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_unnamed_4",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_add_value",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_up",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_down",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_remove",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_apply_data",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_discard_data_draft",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_area_sieve_execution_json",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_apply_json",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_discard_json_draft",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "draft": [
+      [
+        "o.put(\"draft\",\"json\");"
+      ],
+      [
+        "o.put(\"draft\",\"data\");"
+      ],
+      [
+        "o.put(\"draft\",\"rule\");"
+      ]
+    ],
+    "switch": [
+      [
+        "o.put(\"switch\",\"graph\");"
+      ],
+      [
+        "o.put(\"switch\",\"data\");"
+      ],
+      [
+        "o.put(\"switch\",\"json\");"
+      ]
+    ],
+    "resolution": [
+      [
+        "o.put(\"resolution\",\"discard\");"
+      ],
+      [
+        "o.put(\"resolution\",\"apply\");"
+      ]
+    ],
+    "order": [
+      [
+        "o.put(\"order\",\"before\");"
+      ],
+      [
+        "o.put(\"order\",\"after\");"
+      ]
+    ],
+    "sudden": [
+      [
+        "o.put(\"sudden\",\"undo\");"
+      ],
+      [
+        "o.put(\"sudden\",\"validate\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t4_data\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t4_sub_tab_parameters": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_sub_tab_parameters\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_sub_tab_value_orders": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_sub_tab_value_orders\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_table_unnamed_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_table_unnamed_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_add_attribute": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_add_attribute\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_remove_attribute": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_remove_attribute\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_choice_sheet": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_choice_sheet\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_choice_order": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_choice_order\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_list_unnamed": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_list_unnamed\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_choice_unnamed_4": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_choice_unnamed_4\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_add_value": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_add_value\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_up": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_up\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_down": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_down\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_remove": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_remove\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_apply_data": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_apply_data\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_discard_data_draft": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_discard_data_draft\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_text_area_sieve_execution_json": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_text_area_sieve_execution_json\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_apply_json": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_apply_json\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_discard_json_draft": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_discard_json_draft\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "8",
+        "GUIF_T4_SUB_TAB_PARAMETERS_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T4_SUB_TAB_VALUE_ORDERS_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T4_TABLE_UNNAMED_2_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T4_BUTTON_ADD_ATTRIBUTE_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T4_BUTTON_REMOVE_ATTRIBUTE_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T4_CHOICE_SHEET_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T4_CHOICE_ORDER_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T4_LIST_UNNAMED_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T4_CHOICE_UNNAMED_4_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_T4_BUTTON_ADD_VALUE_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_T4_BUTTON_UP_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_T4_BUTTON_DOWN_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_T4_BUTTON_REMOVE_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_T4_BUTTON_APPLY_DATA_INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_T4_BUTTON_DISCARD_DATA_DRAFT_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_T4_TEXT_AREA_SIEVE_EXECUTION_JSON_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_T4_BUTTON_APPLY_JSON_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_T4_BUTTON_DISCARD_JSON_DRAFT_INVARIANT"
+      ]
+    ]
+  }
+}

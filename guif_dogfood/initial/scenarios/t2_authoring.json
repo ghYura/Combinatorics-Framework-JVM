@@ -1,0 +1,503 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "format",
+        "FW_Combi(1)"
+      ],
+      [
+        "edit",
+        "FW_Combi(1)"
+      ],
+      [
+        "controls",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_new",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_open",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_auto_search",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_save",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_save_as",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_validate",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_list_sheets",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_add_sheet",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_rename",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_remove",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_insert_row",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_remove_row",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_table_cells_of_sheet_fw_seq",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_list_cell_templates",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_insert_into_the_selected_cell",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_sub_tab_2_1_control_sheets",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_sub_tab_2_2_validation",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_sub_tab_2_3_operand_dependencies",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_sub_tab_2_4_dependency_graph",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_load_from_the_document",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_apply_to_the_document",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_add_verdict",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_remove_verdict",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_text_area_fw_runmefirstonce_code_run_once_before_the_test_cases",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_text_area_fw_arguments_arguments_one_per_line",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_table_fw_custom_var_verdict_codes_and_their_names",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_text_area_check_results",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_table_operand_dependencies_each_joiner_s_operands_and_their_lifetimes",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_copy_dot",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_button_save_dot_or_json",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t2_text_area_problems_in_the_diagram",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "format": [
+      [
+        "o.put(\"format\",\"json\");"
+      ],
+      [
+        "o.put(\"format\",\"yaml\");"
+      ],
+      [
+        "o.put(\"format\",\"toml\");"
+      ],
+      [
+        "o.put(\"format\",\"xlsx\");"
+      ]
+    ],
+    "edit": [
+      [
+        "o.put(\"edit\",\"normal\");"
+      ],
+      [
+        "o.put(\"edit\",\"duplicate\");"
+      ],
+      [
+        "o.put(\"edit\",\"boundary\");"
+      ]
+    ],
+    "controls": [
+      [
+        "o.put(\"controls\",\"empty\");"
+      ],
+      [
+        "o.put(\"controls\",\"named\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t2_authoring\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t2_button_new": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_new\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_open": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_open\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_auto_search": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_auto_search\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_save": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_save\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_save_as": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_save_as\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_validate": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_validate\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_list_sheets": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_list_sheets\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_add_sheet": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_add_sheet\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_rename": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_rename\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_remove": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_remove\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_insert_row": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_insert_row\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_remove_row": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_remove_row\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_table_cells_of_sheet_fw_seq": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_table_cells_of_sheet_fw_seq\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_list_cell_templates": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_list_cell_templates\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_insert_into_the_selected_cell": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_insert_into_the_selected_cell\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_sub_tab_2_1_control_sheets": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_sub_tab_2_1_control_sheets\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_sub_tab_2_2_validation": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_sub_tab_2_2_validation\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_sub_tab_2_3_operand_dependencies": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_sub_tab_2_3_operand_dependencies\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_sub_tab_2_4_dependency_graph": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_sub_tab_2_4_dependency_graph\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_load_from_the_document": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_load_from_the_document\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_apply_to_the_document": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_apply_to_the_document\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_add_verdict": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_add_verdict\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_remove_verdict": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_remove_verdict\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_text_area_fw_runmefirstonce_code_run_once_before_the_test_cases": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_text_area_fw_runmefirstonce_code_run_once_before_the_test_cases\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_text_area_fw_arguments_arguments_one_per_line": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_text_area_fw_arguments_arguments_one_per_line\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_table_fw_custom_var_verdict_codes_and_their_names": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_table_fw_custom_var_verdict_codes_and_their_names\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_text_area_check_results": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_text_area_check_results\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_table_operand_dependencies_each_joiner_s_operands_and_their_lifetimes": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_table_operand_dependencies_each_joiner_s_operands_and_their_lifetimes\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_copy_dot": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_copy_dot\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_button_save_dot_or_json": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_button_save_dot_or_json\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t2_text_area_problems_in_the_diagram": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t2_text_area_problems_in_the_diagram\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T2_BUTTON_NEW_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_T2_BUTTON_OPEN_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T2_BUTTON_AUTO_SEARCH_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T2_BUTTON_SAVE_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T2_BUTTON_SAVE_AS_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T2_BUTTON_VALIDATE_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T2_LIST_SHEETS_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T2_BUTTON_ADD_SHEET_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T2_BUTTON_RENAME_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T2_BUTTON_REMOVE_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T2_BUTTON_INSERT_ROW_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_T2_BUTTON_REMOVE_ROW_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_T2_TABLE_CELLS_OF_SHEET_FW_SEQ_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_T2_LIST_CELL_TEMPLATES_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_T2_BUTTON_INSERT_INTO_THE_SELECTED_CELL_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_T2_SUB_TAB_2_1_CONTROL_SHEETS_INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_T2_SUB_TAB_2_2_VALIDATION_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_T2_SUB_TAB_2_3_OPERAND_DEPENDENCIES_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_T2_SUB_TAB_2_4_DEPENDENCY_GRAPH_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_T2_BUTTON_LOAD_FROM_THE_DOCUMENT_INVARIANT"
+      ],
+      [
+        "26",
+        "GUIF_T2_BUTTON_APPLY_TO_THE_DOCUMENT_INVARIANT"
+      ],
+      [
+        "27",
+        "GUIF_T2_BUTTON_ADD_VERDICT_INVARIANT"
+      ],
+      [
+        "28",
+        "GUIF_T2_BUTTON_REMOVE_VERDICT_INVARIANT"
+      ],
+      [
+        "29",
+        "GUIF_T2_TEXT_AREA_FW_RUNMEFIRSTONCE_CODE_RUN_ONCE_BEFORE_THE_TEST_CASES_INVARIANT"
+      ],
+      [
+        "30",
+        "GUIF_T2_TEXT_AREA_FW_ARGUMENTS_ARGUMENTS_ONE_PER_LINE_INVARIANT"
+      ],
+      [
+        "31",
+        "GUIF_T2_TABLE_FW_CUSTOM_VAR_VERDICT_CODES_AND_THEIR_NAMES_INVARIANT"
+      ],
+      [
+        "32",
+        "GUIF_T2_TEXT_AREA_CHECK_RESULTS_INVARIANT"
+      ],
+      [
+        "33",
+        "GUIF_T2_TABLE_OPERAND_DEPENDENCIES_EACH_JOINER_S_OPERANDS_AND_THEIR_LIFETIMES_INVARIANT"
+      ],
+      [
+        "34",
+        "GUIF_T2_BUTTON_COPY_DOT_INVARIANT"
+      ],
+      [
+        "35",
+        "GUIF_T2_BUTTON_SAVE_DOT_OR_JSON_INVARIANT"
+      ],
+      [
+        "36",
+        "GUIF_T2_TEXT_AREA_PROBLEMS_IN_THE_DIAGRAM_INVARIANT"
+      ]
+    ]
+  }
+}

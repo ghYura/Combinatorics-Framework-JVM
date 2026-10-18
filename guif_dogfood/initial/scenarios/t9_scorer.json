@@ -1,0 +1,356 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "text",
+        "FW_Combi(1)"
+      ],
+      [
+        "rules",
+        "FW_Combi(1)"
+      ],
+      [
+        "filter",
+        "FW_Combi(1)"
+      ],
+      [
+        "threshold",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_text_field_text_file_to_score",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_browse",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_auto_search",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_use",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_spinner_lines_per_learned_pattern",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_spinner_patterns_kept",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_spinner_worth_improving_from_score",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_spinner_watch_from_score",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_load_rules",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_auto_plan",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_score",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_export_csv",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_optimization_charts",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_button_auto_search_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_text_area_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_text_field_show_lines_containing",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_table_scored_lines_each_line_s_score_decision_and_features",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_text_area_why_this_score",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t9_text_area_summary_of_all_scores",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "text": [
+      [
+        "o.put(\"text\",\"normal\");"
+      ],
+      [
+        "o.put(\"text\",\"empty\");"
+      ]
+    ],
+    "rules": [
+      [
+        "o.put(\"rules\",\"valid\");"
+      ],
+      [
+        "o.put(\"rules\",\"jsonbad\");"
+      ],
+      [
+        "o.put(\"rules\",\"regexbad\");"
+      ]
+    ],
+    "filter": [
+      [
+        "o.put(\"filter\",\"all\");"
+      ],
+      [
+        "o.put(\"filter\",\"ERROR\");"
+      ],
+      [
+        "o.put(\"filter\",\"absent\");"
+      ]
+    ],
+    "threshold": [
+      [
+        "o.put(\"threshold\",\"normal\");"
+      ],
+      [
+        "o.put(\"threshold\",\"boundary\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t9_scorer\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t9_text_field_text_file_to_score": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_text_field_text_file_to_score\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_browse": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_browse\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_auto_search": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_auto_search\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_use": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_use\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_spinner_lines_per_learned_pattern": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_spinner_lines_per_learned_pattern\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_spinner_patterns_kept": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_spinner_patterns_kept\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_spinner_worth_improving_from_score": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_spinner_worth_improving_from_score\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_spinner_watch_from_score": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_spinner_watch_from_score\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_load_rules": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_load_rules\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_auto_plan": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_auto_plan\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_score": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_score\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_export_csv": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_export_csv\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_optimization_charts": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_optimization_charts\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_button_auto_search_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_button_auto_search_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_text_area_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_text_area_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_text_field_show_lines_containing": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_text_field_show_lines_containing\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_table_scored_lines_each_line_s_score_decision_and_features": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_table_scored_lines_each_line_s_score_decision_and_features\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_text_area_why_this_score": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_text_area_why_this_score\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t9_text_area_summary_of_all_scores": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t9_text_area_summary_of_all_scores\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "7",
+        "GUIF_T9_TEXT_FIELD_TEXT_FILE_TO_SCORE_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T9_BUTTON_BROWSE_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T9_BUTTON_AUTO_SEARCH_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T9_BUTTON_USE_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T9_SPINNER_LINES_PER_LEARNED_PATTERN_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T9_SPINNER_PATTERNS_KEPT_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T9_SPINNER_WORTH_IMPROVING_FROM_SCORE_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T9_SPINNER_WATCH_FROM_SCORE_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T9_BUTTON_LOAD_RULES_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T9_BUTTON_AUTO_PLAN_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_T9_BUTTON_SCORE_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_T9_BUTTON_EXPORT_CSV_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_T9_BUTTON_OPTIMIZATION_CHARTS_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_T9_BUTTON_AUTO_SEARCH_2_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_T9_TEXT_AREA_YOUR_SCORING_RULES_AS_JSON_REQUIRED_TOKENS_TOKEN_WEIGHTS_NUMERIC_RANGES__INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_T9_TEXT_FIELD_SHOW_LINES_CONTAINING_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_T9_TABLE_SCORED_LINES_EACH_LINE_S_SCORE_DECISION_AND_FEATURES_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_T9_TEXT_AREA_WHY_THIS_SCORE_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_T9_TEXT_AREA_SUMMARY_OF_ALL_SCORES_INVARIANT"
+      ]
+    ]
+  }
+}

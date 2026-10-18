@@ -1,0 +1,487 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      [
+        "HEAD",
+        "FW_Combi(1)"
+      ],
+      [
+        "rules",
+        "FW_Combi(1)"
+      ],
+      [
+        "operation",
+        "FW_Combi(1)"
+      ],
+      [
+        "scan",
+        "FW_Combi(1)"
+      ],
+      [
+        "act",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_open_step_3_scenario",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_import_constraints",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_auto_search",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_export_json",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_save_for_scenario",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_face_2_sieve",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_undo",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_redo",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_validate",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_check_impact",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_spinner_unnamed",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_cancel_work",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_sieve_graph",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_bond_matrix",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_parameters_orders",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_sub_tab_advanced_json",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_unnamed",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_fit",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_plus",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_minus",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_arrange",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_unnamed",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_group_selected_values",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_unnamed_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_unnamed_2",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_choice_unnamed_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_text_field_unnamed_3",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_add_pair_at_cell",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_button_edit_cell_rule",
+        "FW_Combi(1)"
+      ],
+      [
+        "w_t4_table_unnamed",
+        "FW_Combi(1)"
+      ],
+      [
+        "TAIL",
+        "FW_Combi(1)"
+      ]
+    ],
+    "HEAD": [
+      [
+        "import java.util.*; import org.ghyura.cf.desktop.GuifProbe; public class GuifCase { public static int FW_VAR=0; public static void main(String[] args) throws Exception { Map<String,String> o=new LinkedHashMap<>();"
+      ]
+    ],
+    "rules": [
+      [
+        "o.put(\"rules\",\"empty\");"
+      ],
+      [
+        "o.put(\"rules\",\"pair\");"
+      ],
+      [
+        "o.put(\"rules\",\"invalid\");"
+      ]
+    ],
+    "operation": [
+      [
+        "o.put(\"operation\",\"save\");"
+      ],
+      [
+        "o.put(\"operation\",\"undo\");"
+      ],
+      [
+        "o.put(\"operation\",\"import\");"
+      ]
+    ],
+    "scan": [
+      [
+        "o.put(\"scan\",\"1\");"
+      ],
+      [
+        "o.put(\"scan\",\"100\");"
+      ]
+    ],
+    "act": [
+      [
+        "GuifProbe p=GuifProbe.execute(\"t4_graph\",o); if(p.infrastructureCode()!=0) { FW_VAR=p.infrastructureCode(); }"
+      ]
+    ],
+    "w_t4_button_open_step_3_scenario": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_open_step_3_scenario\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_import_constraints": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_import_constraints\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_auto_search": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_auto_search\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_export_json": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_export_json\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_save_for_scenario": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_save_for_scenario\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_face_2_sieve": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_face_2_sieve\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_undo": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_undo\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_redo": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_redo\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_validate": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_validate\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_check_impact": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_check_impact\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_spinner_unnamed": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_spinner_unnamed\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_cancel_work": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_cancel_work\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_sub_tab_sieve_graph": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_sub_tab_sieve_graph\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_sub_tab_bond_matrix": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_sub_tab_bond_matrix\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_sub_tab_parameters_orders": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_sub_tab_parameters_orders\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_sub_tab_advanced_json": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_sub_tab_advanced_json\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_text_field_unnamed": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_text_field_unnamed\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_fit": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_fit\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_plus": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_plus\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_minus": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_minus\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_arrange": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_arrange\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_choice_unnamed": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_choice_unnamed\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_group_selected_values": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_group_selected_values\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_choice_unnamed_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_choice_unnamed_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_text_field_unnamed_2": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_text_field_unnamed_2\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_choice_unnamed_3": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_choice_unnamed_3\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_text_field_unnamed_3": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_text_field_unnamed_3\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_add_pair_at_cell": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_add_pair_at_cell\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_button_edit_cell_rule": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_button_edit_cell_rule\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "w_t4_table_unnamed": [
+      [
+        "if (FW_VAR == 0 && p.violated(\"t4_table_unnamed\")) { FW_VAR = FW_EXIT_CODE; }"
+      ]
+    ],
+    "TAIL": [
+      [
+        "p.emit(FW_VAR); } }"
+      ]
+    ],
+    "FW_CUSTOM_VAR": [
+      [
+        "0",
+        "PASS"
+      ],
+      [
+        "-1",
+        "GUIF_HARNESS_ERROR"
+      ],
+      [
+        "-2",
+        "GUIF_EDT_TIMEOUT"
+      ],
+      [
+        "-3",
+        "GUIF_CLOSE_TIMEOUT"
+      ],
+      [
+        "-4",
+        "GUIF_THREAD_LEAK"
+      ],
+      [
+        "6",
+        "GUIF_T4_BUTTON_OPEN_STEP_3_SCENARIO_INVARIANT"
+      ],
+      [
+        "7",
+        "GUIF_T4_BUTTON_IMPORT_CONSTRAINTS_INVARIANT"
+      ],
+      [
+        "8",
+        "GUIF_T4_BUTTON_AUTO_SEARCH_INVARIANT"
+      ],
+      [
+        "9",
+        "GUIF_T4_BUTTON_EXPORT_JSON_INVARIANT"
+      ],
+      [
+        "10",
+        "GUIF_T4_BUTTON_SAVE_FOR_SCENARIO_INVARIANT"
+      ],
+      [
+        "11",
+        "GUIF_T4_BUTTON_FACE_2_SIEVE_INVARIANT"
+      ],
+      [
+        "12",
+        "GUIF_T4_BUTTON_UNDO_INVARIANT"
+      ],
+      [
+        "13",
+        "GUIF_T4_BUTTON_REDO_INVARIANT"
+      ],
+      [
+        "14",
+        "GUIF_T4_BUTTON_VALIDATE_INVARIANT"
+      ],
+      [
+        "15",
+        "GUIF_T4_BUTTON_CHECK_IMPACT_INVARIANT"
+      ],
+      [
+        "16",
+        "GUIF_T4_SPINNER_UNNAMED_INVARIANT"
+      ],
+      [
+        "17",
+        "GUIF_T4_BUTTON_CANCEL_WORK_INVARIANT"
+      ],
+      [
+        "18",
+        "GUIF_T4_SUB_TAB_SIEVE_GRAPH_INVARIANT"
+      ],
+      [
+        "19",
+        "GUIF_T4_SUB_TAB_BOND_MATRIX_INVARIANT"
+      ],
+      [
+        "20",
+        "GUIF_T4_SUB_TAB_PARAMETERS_ORDERS_INVARIANT"
+      ],
+      [
+        "21",
+        "GUIF_T4_SUB_TAB_ADVANCED_JSON_INVARIANT"
+      ],
+      [
+        "22",
+        "GUIF_T4_TEXT_FIELD_UNNAMED_INVARIANT"
+      ],
+      [
+        "23",
+        "GUIF_T4_BUTTON_FIT_INVARIANT"
+      ],
+      [
+        "24",
+        "GUIF_T4_BUTTON_PLUS_INVARIANT"
+      ],
+      [
+        "25",
+        "GUIF_T4_BUTTON_MINUS_INVARIANT"
+      ],
+      [
+        "26",
+        "GUIF_T4_BUTTON_ARRANGE_INVARIANT"
+      ],
+      [
+        "27",
+        "GUIF_T4_CHOICE_UNNAMED_INVARIANT"
+      ],
+      [
+        "28",
+        "GUIF_T4_BUTTON_GROUP_SELECTED_VALUES_INVARIANT"
+      ],
+      [
+        "29",
+        "GUIF_T4_CHOICE_UNNAMED_2_INVARIANT"
+      ],
+      [
+        "30",
+        "GUIF_T4_TEXT_FIELD_UNNAMED_2_INVARIANT"
+      ],
+      [
+        "31",
+        "GUIF_T4_CHOICE_UNNAMED_3_INVARIANT"
+      ],
+      [
+        "32",
+        "GUIF_T4_TEXT_FIELD_UNNAMED_3_INVARIANT"
+      ],
+      [
+        "33",
+        "GUIF_T4_BUTTON_ADD_PAIR_AT_CELL_INVARIANT"
+      ],
+      [
+        "34",
+        "GUIF_T4_BUTTON_EDIT_CELL_RULE_INVARIANT"
+      ],
+      [
+        "35",
+        "GUIF_T4_TABLE_UNNAMED_INVARIANT"
+      ]
+    ]
+  }
+}
