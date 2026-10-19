@@ -168,7 +168,7 @@ public final class Doctor {
                     sources = preview.page().rows().stream().filter(row -> row.status() == CandidatePreview.Status.KEPT)
                             .map(CandidatePreview.Row::source).toList();
                     boolean partial = preview.page().next() != null || preview.page().rows().stream()
-                            .anyMatch(row -> row.status() == CandidatePreview.Status.KEPT && row.source().length()>CandidatePreview.MAX_SOURCE_CHARS);
+                            .anyMatch(row -> row.status() == CandidatePreview.Status.KEPT && row.rendered().truncated());
                     extra.add(check("python_import_scope",partial?Severity.WARNING:Severity.OK,
                             "Read-only preview visited "+preview.page().visited()+" of "+preview.generated()+" generated positions",
                             "Only kept, untruncated sources in that page are inspected; later candidates may import other modules. Neither candidates nor preprocessing are executed."));

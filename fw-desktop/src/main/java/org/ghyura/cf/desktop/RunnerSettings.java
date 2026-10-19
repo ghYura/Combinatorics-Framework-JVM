@@ -128,6 +128,19 @@ final class RunnerSettings {
                 + "isolates it with a read-only file system and no network; bwrap-network keeps the network; docker:IMAGE or "
                 + "docker:IMAGE@NETWORK runs it in a read-only container. Press Apply runner settings.",
                 "empty: runs directly; or bwrap, bwrap-network, docker:IMAGE");
+        // which combinations become test cases: the covering selection, which the wizard (step 0) fills in too
+        field(8, "cf.coverage.strength", "Covering strength t:",
+                "Which combinations become test cases: 0 runs every one, 2 keeps enough that every pair of values of any two sheets "
+                + "appears (pairwise), 3 every triple. Filled from the current configuration, by typing, or by the wizard of step 0. "
+                + "Press Apply runner settings.", "0: every combination; 2: pairwise; 3: every triple");
+        field(9, "cf.coverage.budget", "Most covering rows:",
+                "When more than 0, the strongest covering that keeps at most this many rows is chosen, and the strength above is not "
+                + "used. Filled from the current configuration, by typing, or by the wizard of step 0. Press Apply runner settings.",
+                "0: no budget; or the most rows to keep, such as 100");
+        field(10, "cf.coverage.method", "Covering method:",
+                "How the covering rows are chosen: greedy keeps a row when it covers something new, set-cover takes the row that "
+                + "covers most each time and usually keeps fewer. Filled from the current configuration, by typing, or by the wizard of "
+                + "step 0. Press Apply runner settings.", "greedy or set-cover");
         if (navigator != null) {
             chooser(2, "cf.execution.classpath", "Add...", Navigator.Purpose.ADDON_OPEN, true,
                     "Choose a jar or a class folder to add to the add-on and dependency paths.");
@@ -156,9 +169,9 @@ final class RunnerSettings {
         bottom.add(apply);
         bottom.add(status);
         GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 8; c.gridwidth = GridBagConstraints.REMAINDER; c.fill = GridBagConstraints.HORIZONTAL; c.weightx = 1;
+        c.gridy = 11; c.gridwidth = GridBagConstraints.REMAINDER; c.fill = GridBagConstraints.HORIZONTAL; c.weightx = 1;
         panel.add(bottom, c);
-        panel.setBorder(BorderFactory.createTitledBorder("Runner settings (optional): what runs the test cases"));
+        panel.setBorder(BorderFactory.createTitledBorder("Runner settings (optional): what runs the test cases, and which of them"));
     }
 
     /** The Python boxes and their buttons are active only while the Python runner is chosen. */
@@ -243,6 +256,12 @@ final class RunnerSettings {
     JComponent component() { return panel; }
     String status() { return status.getText(); }
 
+    /** The covering selection a design chose (the wizard's), applied with the runner settings shown; false with the reason in the status. */
+    boolean select(Map<String, String> selection) {
+        selection.forEach((key, value) -> fields.get(key).setText(value));
+        return apply();
+    }
+
     /** Explicit Python selection from Run or Library; imports no interpreter and starts no process. */
     boolean python() {
         runner.setSelectedItem("python");
@@ -272,7 +291,10 @@ final class RunnerSettings {
             }
             current = chosen;
             for (JLabel summary : summaries) summary.setText("Runner: " + id);
-            status.setText("Applied: " + id + ". Prepared runs keep their settings.");
+            var config = chosen.configuration().config();
+            String covering = config.coverageBudget() > 0 ? ", covering within " + config.coverageBudget() + " rows"
+                    : config.coverageStrength() > 0 ? ", covering t = " + config.coverageStrength() : "";
+            status.setText("Applied: " + id + covering + ". Prepared runs keep their settings.");
             return true;
         } catch (RuntimeException failure) {
             status.setText("Settings could not be applied: " + Background.describe(failure).strip());

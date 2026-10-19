@@ -36,16 +36,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerNumberModel;
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.math.BigInteger;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -81,7 +78,7 @@ final class CandidatesView {
             List.<Function<CandidatePreview.Row, Object>>of(CandidatePreview.Row::ordinal, CandidatePreview.Row::display,
                     r -> r.id().substring(0, 12), CandidatePreview.Row::status, r -> String.join(", ", r.rules())));
     private final JTable rowTable = Hints.of(new JTable(rows), "The test cases of this page: their number, their names, and whether they run or a rule removes them. Select one to see its code on the right.");
-    private final JTextArea source = Hints.of(new JTextArea(), "The code of the selected test case, exactly as it will run. Filled when you select a test case in the table on the left.");
+    private final CandidateCodeView source = new CandidateCodeView();
     private final JPanel panel = new JPanel(new BorderLayout(8, 8));
     private CancellationSource running;
     private BigInteger nextFirst;
@@ -103,12 +100,10 @@ final class CandidatesView {
         cancel.setEnabled(false);
         rowTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rowTable.getSelectionModel().addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) return;
             int selected = rowTable.getSelectedRow();
-            source.setText(selected < 0 ? "" : rows.row(rowTable.convertRowIndexToModel(selected)).source());
-            source.setCaretPosition(0);
+            source.show(selected < 0 ? null : rows.row(rowTable.convertRowIndexToModel(selected)).rendered());
         });
-        source.setEditable(false);
-        source.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
         JPanel controls = new JPanel();
         controls.add(FieldNames.label("Look at most at (test cases):", scan));
         controls.add(scan);
@@ -126,7 +121,7 @@ final class CandidatesView {
                 TableTitles.titled(Hints.of(new JTable(rules), "Each rule of step 4: the sheets it looks at and how many test cases it removes."), "Rule impact: what each rule reads and the candidates it removes"));
         counts.setResizeWeight(0.65);
         JSplitPane candidates = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                TableTitles.titled(rowTable, "Candidate page: each candidate's ids and fate under the rules"), FieldNames.titled(source, "Code of the selected test case"));
+                TableTitles.titled(rowTable, "Candidate page: each candidate's ids and fate under the rules"), source.component());
         candidates.setResizeWeight(0.5);
         JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, counts, candidates);
         split.setResizeWeight(0.4);
@@ -194,7 +189,7 @@ final class CandidatesView {
             }
             rules.show(result.rules());
             rows.show(result.page().rows());
-            source.setText("");
+            source.show(null);
             shown = file;
             nextFirst = result.page().next();
             status.setText(describe(result));
@@ -211,7 +206,7 @@ final class CandidatesView {
         closing = true;
         cancel();
         busy(running != null);
-        return pending.handle((result, failure) -> null);
+        return CompletableFuture.allOf(pending.handle((result, failure) -> null), source.close());
     }
 
     private static String describe(CandidatePreview result) {
@@ -249,7 +244,7 @@ final class CandidatesView {
     }
 
     String source() {
-        return source.getText();
+        return source.source();
     }
 
     void select(int row) {
