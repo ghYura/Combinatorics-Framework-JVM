@@ -35,6 +35,9 @@
   the author's LICENSE and NOTICE.md (LicenseRef-BUSL-1.1, named in every source header).
 -->
 <third-party schema="1" distribution="fw-app.jar">
+  <component group="com.github.javaparser" artifact="javaparser-core" version="3.28.2" license="Apache-2.0"
+             packages="com/github/javaparser/" files="META-INF/licenses/javaparser-core/LICENSE"
+             note="Preview-only Java parsing and formatting. Apache license chosen from upstream's dual licensing; license copied from the 3.28.2 release tag."/>
   <component group="com.formdev" artifact="flatlaf" version="3.7.2" license="Apache-2.0" packages="com/formdev/flatlaf/"
              files="META-INF/licenses/flatlaf/LICENSE"
              note="guif only. Optional native libraries are excluded; native integration and animations are disabled by its launcher."/>

@@ -35,6 +35,7 @@ import org.ghyura.cf.generation.CandidateRenderer;
 import org.ghyura.cf.generation.Generation;
 import org.ghyura.cf.generation.GenerationOptions;
 import org.ghyura.cf.generation.RenderOptions;
+import org.ghyura.cf.generation.RenderedSource;
 import org.ghyura.cf.model.Diagnostic;
 import org.ghyura.cf.model.ErrorCode;
 import org.ghyura.cf.model.FrameworkException;
@@ -113,9 +114,20 @@ public record CandidatePreview(PlanEstimates estimates, List<Rule> rules, BigInt
     }
 
     /** One generated candidate: its ordinal, legacy display id, identity, fate, the rules it breaks and its source. */
-    public record Row(BigInteger ordinal, String display, String id, Status status, List<String> rules, String source) {
+    public record Row(BigInteger ordinal, String display, String id, Status status, List<String> rules, RenderedSource rendered) {
         public Row {
             rules = List.copyOf(rules);
+            Objects.requireNonNull(rendered, "rendered");
+        }
+
+        /** The unformatted execution source, bounded by the preview limit. */
+        public String source() {
+            return rendered.text();
+        }
+
+        /** Compatibility for callers supplying a source without provenance. */
+        public Row(BigInteger ordinal, String display, String id, Status status, List<String> rules, String source) {
+            this(ordinal, display, id, status, rules, new RenderedSource(source, List.of(), false));
         }
     }
 
@@ -171,10 +183,7 @@ public record CandidatePreview(PlanEstimates estimates, List<Rule> rules, BigInt
                 continue;
             }
             List<String> names = broken.stream().mapToObj(engine::name).toList();
-            String source = renderer.renderText(c);
-            if (source.length() > MAX_SOURCE_CHARS) {
-                source = source.substring(0, MAX_SOURCE_CHARS) + "…";
-            }
+            RenderedSource source = renderer.renderWithOrigins(c, MAX_SOURCE_CHARS);
             rows.add(new Row(c.ordinal(), c.display(), c.id().hex(), status, names, source));
         }
         cancellation.throwIfCancelled();

@@ -39,6 +39,8 @@ import org.ghyura.cf.store.MemoryBudget;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,9 +71,11 @@ public final class CandidateRenderer implements AutoCloseable {
     private final byte[][] separator;
     private final byte[][] glue;
     private final MemoryBudget.Lease lease;
+    private final SeqPlan plan;
+    private final KeyDictionary dictionary;
 
     private CandidateRenderer(Assembly assembly, RenderOptions options, int firstLabel, byte[][] values, byte[][] prefix,
-                              byte[][] separator, byte[][] glue, MemoryBudget.Lease lease) {
+                              byte[][] separator, byte[][] glue, MemoryBudget.Lease lease, SeqPlan plan, KeyDictionary dictionary) {
         this.assembly = assembly;
         this.options = options;
         this.firstLabel = firstLabel;
@@ -80,6 +84,8 @@ public final class CandidateRenderer implements AutoCloseable {
         this.separator = separator;
         this.glue = glue;
         this.lease = lease;
+        this.plan = plan;
+        this.dictionary = dictionary;
     }
 
     /**
@@ -129,33 +135,146 @@ public final class CandidateRenderer implements AutoCloseable {
             bytes += values[i].length;
         }
         MemoryBudget.Lease lease = budget.reserve(bytes, "the rendered bytes of every value");
-        return new CandidateRenderer(assembly, options, first, values, prefix, separator, glue, lease);
+        return new CandidateRenderer(assembly, options, first, values, prefix, separator, glue, lease, plan, dictionary);
     }
 
     /** The candidate's source bytes. */
     public byte[] render(Candidate candidate) {
         ByteArrayOutputStream out = new ByteArrayOutputStream(256);
+        int lastSeparator = write(candidate, (bytes, column, occurrence, label, kind) -> out.writeBytes(bytes));
+        byte[] payload = out.toByteArray();
+        if (options.markerReplacement()) {
+            payload = replaceMarkers(payload, candidate.display().getBytes(StandardCharsets.UTF_8));
+        }
+        return java.util.Arrays.copyOf(payload, Math.max(0, payload.length - lastSeparator));
+    }
+
+    @FunctionalInterface
+    private interface SegmentWriter {
+        void write(byte[] bytes, int column, int occurrence, int label, RenderedSource.Kind kind);
+    }
+
+    /** One emission path for execution and provenance; no substring searching to guess a value's origin. */
+    private int write(Candidate candidate, SegmentWriter out) {
         int lastSeparator = 0;
         for (int c = 0; c < prefix.length; c++) {
             if (candidate.states().get(c) == SelectionState.ABSENT) {
                 continue;
             }
             KeyRow keys = candidate.keys(c);
-            out.writeBytes(prefix[c]);
+            out.write(prefix[c], c, 0, 0, RenderedSource.Kind.PREFIX);
             for (int i = 0; i < keys.size(); i++) {
                 if (i > 0) {
-                    out.writeBytes(glue[c]);
+                    out.write(glue[c], c, i + 1, 0, RenderedSource.Kind.VALUE_SEPARATOR);
                 }
-                out.writeBytes(values[keys.label(i) - firstLabel]);
+                out.write(values[keys.label(i) - firstLabel], c, i + 1, keys.label(i), RenderedSource.Kind.VALUE);
             }
-            out.writeBytes(separator[c]);
+            out.write(separator[c], c, 0, 0, RenderedSource.Kind.SHEET_SEPARATOR);
             lastSeparator = separator[c].length;
         }
-        byte[] payload = out.toByteArray();
+        return lastSeparator;
+    }
+
+    /**
+     * The same bytes as {@link #render}, with their origins. Only the bounded preview retains these spans; execution
+     * does not allocate them. Refinement, optional absence, repeated labels, decorations, markers (including markers
+     * split across cells) and the legacy final-separator trimming all follow the execution renderer.
+     */
+    public RenderedSource renderWithOrigins(Candidate candidate, int maxChars) {
+        if (maxChars < 0) throw new IllegalArgumentException("negative source limit");
+        List<String> sheets = assembly.columnSheets();
+        ByteArrayOutputStream raw = new ByteArrayOutputStream();
+        List<RenderedSource.Chunk> spans = new ArrayList<>(); // byte offsets until decoded below
+        int lastSeparator = write(candidate, (bytes, column, occurrence, label, kind) -> {
+            if (bytes.length == 0) return;
+            String assembled = sheets.get(column);
+            String sheet = assembled;
+            SourceLocation location;
+            String detail = "";
+            if (kind == RenderedSource.Kind.VALUE) {
+                ValueCell cell = dictionary.value(label);
+                sheet = plan.sheetByKey(dictionary.sheetOfLabel(label)).orElseThrow().name();
+                location = cell.location();
+                if (cell.refined() || !options.preserveWhitespace() && !cell.text().contains("FW_PATH_FILES_TO")) {
+                    detail = "code refinement applied";
+                }
+                if (cell.optional()) detail += (detail.isEmpty() ? "" : "; ") + "FW_Optional value";
+            } else if (kind == RenderedSource.Kind.VALUE_SEPARATOR) {
+                location = plan.sheet(assembled).orElseThrow().location();
+                detail = "FW_Concatenator of " + assembled;
+            } else if (kind == RenderedSource.Kind.SHEET_SEPARATOR && !options.concatenator().isEmpty()) {
+                location = SourceLocation.ofPath("<render settings>", "cf.render.concatenator");
+            } else {
+                location = plan.decorations().stream().filter(d -> d.sheet().equals(assembled)).findFirst().orElseThrow().location();
+                detail = "FW_SheetNames " + (kind == RenderedSource.Kind.PREFIX ? "prefix" : "ending");
+            }
+            var origin = new RenderedSource.Origin(sheet, assembled, kind == RenderedSource.Kind.VALUE ? label : null,
+                    occurrence, assembly.optionalColumn(column), kind, location, detail);
+            spans.add(new RenderedSource.Chunk(raw.size(), raw.size() + bytes.length, List.of(origin)));
+            raw.writeBytes(bytes);
+        });
+        byte[] bytes = raw.toByteArray();
+        ByteArrayOutputStream replaced = new ByteArrayOutputStream();
+        List<RenderedSource.Chunk> mapped = new ArrayList<>();
+        int from = 0;
         if (options.markerReplacement()) {
-            payload = replaceMarkers(payload, candidate.display().getBytes(StandardCharsets.UTF_8));
+            byte[] replacement = candidate.display().getBytes(StandardCharsets.UTF_8);
+            for (int i = 0; i <= bytes.length - MARKER_BYTES.length;) {
+                if (!matches(bytes, i)) { i++; continue; }
+                copyRange(bytes, spans, from, i, replaced, mapped);
+                var contributors = new LinkedHashSet<RenderedSource.Origin>();
+                for (int j = firstSpan(spans, i); j < spans.size() && spans.get(j).start() < i + MARKER_BYTES.length; j++) {
+                    spans.get(j).origins().forEach(origin -> contributors.add(origin.marker()));
+                }
+                mapped.add(new RenderedSource.Chunk(replaced.size(), replaced.size() + replacement.length, List.copyOf(contributors)));
+                replaced.writeBytes(replacement);
+                i += MARKER_BYTES.length;
+                from = i;
+            }
         }
-        return java.util.Arrays.copyOf(payload, Math.max(0, payload.length - lastSeparator));
+        copyRange(bytes, spans, from, bytes.length, replaced, mapped);
+        byte[] payload = replaced.toByteArray();
+        int end = Math.max(0, payload.length - lastSeparator);
+        StringBuilder text = new StringBuilder();
+        List<RenderedSource.Chunk> chunks = new ArrayList<>();
+        boolean truncated = false;
+        for (var span : mapped) {
+            if (span.start() >= end) break;
+            String part = new String(payload, span.start(), Math.min(end, span.end()) - span.start(), StandardCharsets.UTF_8);
+            int keep = Math.min(part.length(), maxChars - text.length());
+            if (keep < part.length()) {
+                truncated = true;
+                if (keep > 0 && Character.isHighSurrogate(part.charAt(keep - 1))) keep--;
+            }
+            if (keep > 0) {
+                chunks.add(new RenderedSource.Chunk(text.length(), text.length() + keep, span.origins()));
+                text.append(part, 0, keep);
+            }
+            if (truncated) break;
+        }
+        if (truncated) text.append('…');
+        return new RenderedSource(text.toString(), chunks, truncated);
+    }
+
+    private static int firstSpan(List<RenderedSource.Chunk> spans, int offset) {
+        int low = 0, high = spans.size();
+        while (low < high) {
+            int middle = (low + high) >>> 1;
+            if (spans.get(middle).end() <= offset) low = middle + 1;
+            else high = middle;
+        }
+        return low;
+    }
+
+    private static void copyRange(byte[] bytes, List<RenderedSource.Chunk> spans, int from, int to,
+                                  ByteArrayOutputStream out, List<RenderedSource.Chunk> mapped) {
+        for (int i = firstSpan(spans, from); i < spans.size() && spans.get(i).start() < to; i++) {
+            var span = spans.get(i);
+            int start = Math.max(from, span.start()), end = Math.min(to, span.end());
+            if (end <= start) continue;
+            mapped.add(new RenderedSource.Chunk(out.size(), out.size() + end - start, span.origins()));
+            out.write(bytes, start, end - start);
+        }
     }
 
     /** The source as text. */
