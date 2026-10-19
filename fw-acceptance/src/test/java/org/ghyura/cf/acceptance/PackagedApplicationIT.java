@@ -228,8 +228,8 @@ class PackagedApplicationIT {
                 }
             }
             assertEquals(List.of(), undeclared, "third-party entries no declared component owns");
-            // the POI and xmlbeans jars carry no pom.properties; the nine others do, and each version was the declared one
-            assertEquals(9, checkedVersions.size(), "bundled versions checked: " + checkedVersions);
+            // the POI and xmlbeans jars carry no pom.properties; the ten others do, and each version was the declared one
+            assertEquals(10, checkedVersions.size(), "bundled versions checked: " + checkedVersions);
             for (String colliding : List.of("META-INF/LICENSE.txt", "META-INF/NOTICE", "META-INF/NOTICE.txt", "META-INF/DEPENDENCIES")) {
                 assertEquals(null, archive.getJarEntry(colliding), colliding + " would be one upstream jar's file standing for all");
             }
@@ -560,6 +560,7 @@ class PackagedApplicationIT {
      * when it was excluded with POI's Visio support (D67).
      */
     private static final Set<String> APPROVED_THIRD_PARTY = Set.of(
+            "com.github.javaparser:javaparser-core",
             "com.formdev:flatlaf",
             "com.fasterxml.jackson.core:jackson-core",
             "org.apache.poi:poi", "org.apache.poi:poi-ooxml", "org.apache.poi:poi-ooxml-lite",
@@ -588,6 +589,8 @@ class PackagedApplicationIT {
                     "org/ghyura/cf/config/legacy-settings.xml", "org/ghyura/cf/config/compatibility-deltas.xml",
                     "org/ghyura/cf/model/error-taxonomy.xml", "org/ghyura/cf/app/cli-contract.xml",
                     "org/ghyura/cf/app/version.properties", "org/ghyura/cf/desktop/SieveWorkbench.class",
+                    "org/ghyura/cf/desktop/CandidateCodeView.class", "org/ghyura/cf/desktop/CodeFormatter.class",
+                    "org/ghyura/cf/generation/RenderedSource.class", "com/github/javaparser/JavaParser.class",
                     "org/ghyura/cf/desktop/session/Face2Bridge.class", "org/ghyura/cf/desktop/session/Face2Document.class",
                     "org/ghyura/cf/desktop/face2/editor.html", "org/ghyura/cf/desktop/face2/bridge.js")) {
                 assertNotNull(jar.getJarEntry(entry), "missing from the jar: " + entry);

@@ -933,6 +933,7 @@ class DesktopTest {
         List<String> expected = List.of("FW_Seq plan: each sheet's role, values and directives",
                 "Plan estimates: each count with its confidence and formula", "Rule impact: what each rule reads and the candidates it removes",
                 "Candidate page: each candidate's ids and fate under the rules", "Operand dependencies: each joiner's operands and their lifetimes",
+                "Chunk origins in generated order",
                 "FW_CUSTOM_VAR: verdict codes and their names", "Bond matrix: forbidden or required value pairs between two sheets",
                 "Rules of the constraints sidecar, in words", "Value parameters for formulas (the legacy params table)",
                 "Campaign lineage: each iteration's run, counts, winners and front", "Scored lines: each line's score, decision and features",

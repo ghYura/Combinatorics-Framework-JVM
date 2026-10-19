@@ -193,9 +193,10 @@ class ModuleGraphTest {
         assertFalse(BannedDependencies.isBanned("org.hibernateish", "x"));
         assertFalse(BannedDependencies.isBanned("org.junit.jupiter", "junit-jupiter"));
 
-        // D10 input libraries and the author-requested FlatLaf desktop (0162).
+        // D10 input libraries, the author-requested FlatLaf desktop (0162) and JavaParser for the candidate code preview's
+        // Java formatting (2026-10-19; Apache-2.0, in the third-party inventory).
         Set<String> approvedProduction = Set.of("com.fasterxml.jackson.core:jackson-core", "org.apache.poi:poi-ooxml",
-                "com.formdev:flatlaf");
+                "com.formdev:flatlaf", "com.github.javaparser:javaparser-core");
         for (Path pom : Reactor.files("pom.xml")) {
             Document document = parse(pom);
             NodeList dependencies = document.getElementsByTagName("dependency");

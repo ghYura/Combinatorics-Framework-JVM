@@ -101,7 +101,7 @@ class FeatureTraceabilityTest {
                 Path file = Reactor.root().resolve(test.getAttribute("module")).resolve("src/test/java")
                         .resolve(test.getAttribute("class").replace('.', '/') + ".java");
                 String text = Files.isRegularFile(file) ? Files.readString(file, StandardCharsets.UTF_8) : "";
-                if (!Pattern.compile("@(?:Test|ParameterizedTest)\\s+(?:@[^\\n]+\\s+)*void " + Pattern.quote(test.getAttribute("method")) + "\\(")
+                if (!Pattern.compile("@(?:Test|ParameterizedTest)(?:\\([^\\n]*\\))?\\s+(?:@[^\\n]+\\s+)*void " + Pattern.quote(test.getAttribute("method")) + "\\(")
                         .matcher(text).find()) {
                     missing.add(f.getAttribute("id") + ": " + test.getAttribute("class") + "#" + test.getAttribute("method"));
                 }
