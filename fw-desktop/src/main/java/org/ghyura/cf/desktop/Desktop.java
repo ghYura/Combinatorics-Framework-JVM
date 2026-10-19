@@ -40,8 +40,8 @@ import java.util.concurrent.CompletableFuture;
  * The desktop's content: the scenario (validate and plan), its candidates and sieve (bounded pages with their fate),
  * authoring (edit, validate unsaved edits, save, the dependency graph), constraints (bond matrix, graph, rule parts), its run
  * (start, pause, resume, cancel, progress and report), campaigns (iteration progress and lineage), results analysis, the
- * textual scorer and the scenario library, all over one session. It holds no window, so it is built and driven headless
- * in tests.
+ * textual scorer and the scenario library, all over one session; the FlatLaf desktop adds the wizard that composes a first
+ * scenario (step 0). It holds no window, so it is built and driven headless in tests.
  */
 final class Desktop {
 
@@ -56,6 +56,7 @@ final class Desktop {
     private final AnalysisView analysis;
     private final ScorerView scorer;
     private final LibraryView library;
+    private final WizardView wizard;
     private final JTabbedPane tabs = new JTabbedPane();
     private final HintLayer hints = new HintLayer();
     private final JLayer<JComponent> layer;
@@ -97,6 +98,28 @@ final class Desktop {
             scenario.setScenario(chosen);
             tabs.setSelectedComponent(scenario.component());
         }, navigator);
+        // the wizard hands its saved scenario on: to step 3 with its covering selection, then to step 5 or step 2
+        wizard = flatWorkbench ? new WizardView(runners::session, navigator, new WizardView.Handoff() {
+            @Override
+            public String use(Path chosen, java.util.Map<String, String> selection) {
+                runners.select(selection);
+                scenario.setScenario(chosen);
+                tabs.setSelectedComponent(scenario.component());
+                return runners.status();
+            }
+
+            @Override
+            public void testCases() {
+                tabs.setSelectedComponent(candidates.component());
+                candidates.preview();
+            }
+
+            @Override
+            public void edit(Path chosen) {
+                authoring.open(chosen);
+                tabs.setSelectedComponent(authoring.component());
+            }
+        }) : null;
         Runnable runnerSettings = () -> tabs.setSelectedComponent(scenario.component());
         RunnerSettings.attach(scenario.component(), runners.component());
         RunnerSettings.attach(run.component(), runners.compact(runnerSettings, () -> { }));
@@ -125,7 +148,13 @@ final class Desktop {
                 + "measurements, find the best combinations and see how much of the code the tests reached.");
         Steps.add(tabs, "9", "Text scorer", scorer.component(), "Step 9 · Text scorer: give every line of a text, such as a log, a "
                 + "score from rules you write or that are learned, to find the lines worth a closer look.");
-        if (flatWorkbench) tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        if (flatWorkbench) {
+            // after step 9, as the keys 1 to 9 and then 0 lie on a keyboard
+            Steps.add(tabs, "0", "Wizard", wizard.component(), "Step 0 · Wizard: compose your first scenario by answering questions: "
+                    + "what varies, how one test case uses it, what must never or must always come together, and how many test cases "
+                    + "are enough. It shows the instructions that fit and their counts, then saves the scenario for the other steps.");
+            tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        }
         if (scenarioFile != null) {
             tabs.setSelectedComponent(scenario.component());
         }
@@ -207,6 +236,11 @@ final class Desktop {
 
     LibraryView library() {
         return library;
+    }
+
+    /** The wizard of step 0, or null in the Swing desktop. */
+    WizardView wizard() {
+        return wizard;
     }
 
     /** The scenario the scenario tab names, or null (none yet, or text that names no path). */
