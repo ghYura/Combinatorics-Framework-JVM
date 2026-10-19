@@ -70,6 +70,7 @@ class FlatDesktopTest {
                 assertSame(previous, UIManager.getLookAndFeel(), "gui does not install a new look and feel");
                 assertEquals(9, edt(() -> original.tabs().getTabCount()));
                 assertNotNull(original.constraints(), "the existing constraints editor remains in gui");
+                assertNull(original.wizard(), "the Swing desktop keeps its nine steps");
             } finally { edt(original::close).get(30, TimeUnit.SECONDS); }
             flat = edt(() -> {
                 FlatDesktopLauncher.installLookAndFeel();
@@ -81,7 +82,9 @@ class FlatDesktopTest {
             assertNull(desktop.constraints(), "guif uses its Sieve workbench");
             assertNotNull(desktop.sieve());
             edt(() -> {
-                assertEquals(9, desktop.tabs().getTabCount());
+                assertEquals(10, desktop.tabs().getTabCount(), "the nine steps and the wizard");
+                assertEquals("0 · Wizard", desktop.tabs().getTitleAt(9), "the wizard follows step 9, as 0 follows 9 on a keyboard");
+                assertNotNull(desktop.wizard());
                 assertEquals("3 · Scenario", desktop.tabs().getTitleAt(desktop.tabs().getSelectedIndex()));
                 assertTrue(desktop.tabs().getUI().getClass().getName().startsWith("com.formdev.flatlaf."));
                 for (int i = 0; i < desktop.tabs().getTabCount(); i++) {
