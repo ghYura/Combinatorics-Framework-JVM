@@ -136,6 +136,10 @@ class Face2DocumentTest {
         assertTrue(html.contains("id=\"fdlg\""));
         assertTrue(html.contains("id=\"mdlg\""));
         assertTrue(html.contains("jvmRevision"));
+        assertTrue(html.contains("compact-view"), "the packaged page includes its presentation adapter");
+        assertTrue(html.contains(".compact-graph"), "the presentation styles travel with the page");
+        assertTrue(html.indexOf("const baseline = copy(bonds)") < html.indexOf("let compact = false"),
+                "the presentation layer attaches after the existing transport adapter");
         assertTrue(html.getBytes(StandardCharsets.UTF_8).length > 121_540);
     }
 

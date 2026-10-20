@@ -87,9 +87,14 @@ class ArchitectureGateTest {
                     "uses com/sun/net/httpserver/HttpHandler", "uses com/sun/net/httpserver/HttpExchange",
                     "uses com/sun/net/httpserver/HttpContext", "uses com/sun/net/httpserver/Headers"));
 
-    /** The author's required browser UI and its dependency-free JS verification; no general foreign-runtime exception. */
+    /**
+     * The author's required browser UI and its dependency-free JS verification; no general foreign-runtime exception. The
+     * compact visibility layer and its geometry and headless-browser checks were added on 2026-10-20 at the author's request.
+     */
     private static final Set<String> FACE2_WEB_FILES = Set.of(
-            "fw-desktop/src/main/resources/org/ghyura/cf/desktop/face2/bridge.js", "tools/verify-face2-js.cjs");
+            "fw-desktop/src/main/resources/org/ghyura/cf/desktop/face2/bridge.js", "tools/verify-face2-js.cjs",
+            "fw-desktop/src/main/resources/org/ghyura/cf/desktop/face2/visibility.js", "tools/verify-face2-geometry.cjs",
+            "tools/verify-face2-visibility.py");
 
     /**
      * The guif dog-food suites: the author asked on 2026-10-18 for the first and its Python and shell infrastructure to be
