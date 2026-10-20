@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "selected_row_needs_loaded_library",
+      "polarity": "require",
+      "assert": {
+        "any": [
+          {
+            "not": {
+              "sheet": "selection",
+              "eq": "o.put(\"selection\",\"first\");"
+            }
+          },
+          {
+            "sheet": "fixture",
+            "eq": "o.put(\"fixture\",\"valid\");"
+          }
+        ]
+      }
+    },
+    {
+      "id": "clear_is_an_interruption_of_existing_selection",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "selection": "o.put(\"selection\",\"none\");",
+          "sudden": "o.put(\"sudden\",\"clear\");"
+        }
+      ]
+    }
+  ]
+}

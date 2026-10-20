@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "probe_needs_an_explicit_setup_node",
+      "polarity": "require",
+      "assert": {
+        "sheet": "setup",
+        "present": true
+      }
+    }
+  ]
+}
