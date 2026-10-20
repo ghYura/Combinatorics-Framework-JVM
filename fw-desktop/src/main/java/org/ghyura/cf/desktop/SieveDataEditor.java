@@ -58,6 +58,17 @@ final class SieveDataEditor {
     private final Runnable changed;
     /** What edits attributes and orders: off until a scenario's values are shown, so no draft starts with nothing to describe. */
     private final List<JComponent> editing = new ArrayList<>();
+    private JButton removeAttribute, up, down, drop, revert;
+
+    /** Off before a scenario is open; removals and moves need a selection, Discard data draft a draft. */
+    private void gates() {
+        boolean on = !values.isEmpty();
+        int i = orderList.getSelectedIndex();
+        for (JComponent c : editing) c.setEnabled(on);
+        removeAttribute.setEnabled(on && table.getSelectedRow() >= 0);
+        up.setEnabled(on && i > 0); down.setEnabled(on && i >= 0 && i < ranks.size() - 1); drop.setEnabled(on && i >= 0);
+        revert.setEnabled(on && dirty());
+    }
 
     /** @param problem shows why a draft cannot be applied (no dialog, so it also works without a display) */
     SieveDataEditor(Consumer<SieveDocument> apply, Runnable discard, Runnable changed, Consumer<String> problem) {
@@ -72,7 +83,7 @@ final class SieveDataEditor {
                 remove = Hints.of(new JButton("Remove attribute"), "Delete the selected attribute rows.");
         add.addActionListener(e -> { stopEditing(); String s = values.keySet().stream().findFirst().orElse(""); params.addRow(new Object[]{s, values.getOrDefault(s, List.of()).stream().findFirst().orElse(""), "", "text", ""}); });
         remove.addActionListener(e -> { stopEditing(); int[] selected = table.getSelectedRows(); for (int i = selected.length - 1; i >= 0; i--) params.removeRow(selected[i]); });
-        rows.add(add); rows.add(remove); attributes.add(rows, BorderLayout.SOUTH); editing.addAll(List.of(table, add, remove));
+        rows.add(add); rows.add(remove); attributes.add(rows, BorderLayout.SOUTH); editing.addAll(List.of(table, add, remove)); removeAttribute = remove;
         JPanel ordering = new JPanel(new BorderLayout(4, 4));
         Hints.of(orderSheet, "The sheet whose values you put in order.");
         Hints.of(mode, "How the sheet's values rank: by number, by date, in the list below, or not at all.");
@@ -95,7 +106,7 @@ final class SieveDataEditor {
         up.addActionListener(e -> move(-1)); down.addActionListener(e -> move(1));
         drop.addActionListener(e -> { int i = orderList.getSelectedIndex(); if (i >= 0) { ranks.remove(i); storeOrder(); } });
         controls.add(append); controls.add(up); controls.add(down); controls.add(drop); ordering.add(controls, BorderLayout.SOUTH);
-        editing.addAll(List.of(orderSheet, mode, orderList, orderValue, append, up, down, drop));
+        editing.addAll(List.of(orderSheet, mode, orderList, orderValue, append, up, down, drop)); this.up = up; this.down = down; this.drop = drop;
         JTabbedPane tabs = new JTabbedPane(); tabs.addTab("Parameters", attributes); tabs.addTab("Value orders", ordering); root.add(tabs);
         attributes.putClientProperty(Hints.TAB, "To attach numbers and other attributes to the values of each sheet.");
         ordering.putClientProperty(Hints.TAB, "To put a sheet's values in the order that comparing rules rank them by.");
@@ -104,7 +115,8 @@ final class SieveDataEditor {
                 revert = Hints.of(new JButton("Discard data draft"), "Throw away the changes to attributes and orders.");
         use.addActionListener(e -> { try { apply.accept(draft()); } catch (RuntimeException failure) { problem.accept("Parameters and orders were not applied: " + failure.getMessage()); } });
         revert.addActionListener(e -> discard.run()); actions.add(use); actions.add(revert); root.add(actions, BorderLayout.SOUTH);
-        editing.addAll(List.of(use, revert)); editing.forEach(c -> c.setEnabled(false));
+        editing.addAll(List.of(use, revert)); this.revert = revert; editing.forEach(c -> c.setEnabled(false));
+        table.getSelectionModel().addListSelectionListener(e -> gates()); orderList.addListSelectionListener(e -> gates());
         params.addTableModelListener(e -> { if (!loading) { paramsDirty = true; touch(); } });
         orderSheet.addActionListener(e -> { if (!loading) showOrder(); });
         mode.addActionListener(e -> { if (!loading) storeOrder(); });
@@ -123,8 +135,7 @@ final class SieveDataEditor {
             JComboBox<String> sheets = new JComboBox<>(values.keySet().toArray(String[]::new)); sheets.setEditable(true);
             table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(sheets));
             orderSheet.removeAllItems(); var names = new java.util.LinkedHashSet<>(values.keySet()); names.addAll(orders.keySet()); names.forEach(orderSheet::addItem);
-            for (JComponent c : editing) c.setEnabled(!values.isEmpty());
-        } finally { loading = false; dirty = paramsDirty = orderDirty = false; showOrder(); }
+        } finally { loading = false; dirty = paramsDirty = orderDirty = false; showOrder(); gates(); }
     }
 
     private void showOrder() {
@@ -169,5 +180,5 @@ final class SieveDataEditor {
     }
     private String cell(int row, int col) { Object v = params.getValueAt(row, col); return v == null ? "" : v.toString(); }
     private void stopEditing() { if (table.isEditing() && !table.getCellEditor().stopCellEditing()) throw new IllegalStateException("Finish the current cell first."); }
-    private void touch() { dirty = true; changed.run(); }
+    private void touch() { dirty = true; gates(); changed.run(); }
 }

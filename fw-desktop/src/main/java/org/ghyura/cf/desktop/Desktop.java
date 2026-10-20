@@ -92,6 +92,11 @@ final class Desktop {
         sieve = flatWorkbench ? new SieveWorkbench(runners::session, scenario::scenario, navigator) : null;
         run = new RunView(runners::session, scenario::scenario, navigator);
         campaign = new CampaignView(runners::session, scenario::scenario);
+        // the steps that work on the step 3 scenario follow it at once
+        scenario.onChange(candidates::offer);
+        scenario.onChange(run::refresh);
+        scenario.onChange(campaign::refresh);
+        if (sieve != null) scenario.onChange(sieve::offer);
         analysis = new AnalysisView(session, navigator);
         scorer = new ScorerView(session, navigator, hintsButton);
         library = new LibraryView(runners::session, chosen -> {

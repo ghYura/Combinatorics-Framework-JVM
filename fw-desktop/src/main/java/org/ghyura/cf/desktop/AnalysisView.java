@@ -96,6 +96,8 @@ final class AnalysisView {
         format.addActionListener(e -> coverageBoxes());
         coverageBoxes();
         analyze.addActionListener(e -> analyze());
+        results.getDocument().addDocumentListener(FormulaEditor.listener(this::offer));
+        offer();
         JPanel form = new JPanel();
         form.setLayout(new javax.swing.BoxLayout(form, javax.swing.BoxLayout.Y_AXIS));
         JPanel first = new JPanel(new BorderLayout(6, 6));
@@ -162,6 +164,13 @@ final class AnalysisView {
         } catch (java.nio.file.InvalidPathException e) {
             return null;
         }
+    }
+
+    private boolean analyzing;
+
+    /** Analyze needs a metrics file in the box, and no analysis going. */
+    private void offer() {
+        analyze.setEnabled(!analyzing && !results.getText().isBlank());
     }
 
     /** The coverage report box and its buttons are active only while a coverage format is chosen. */
@@ -258,7 +267,8 @@ final class AnalysisView {
             output.setText(e.getMessage() + "\n");
             return CompletableFuture.completedFuture(null);
         }
-        analyze.setEnabled(false);
+        analyzing = true;
+        offer();
         output.setText("Analysing " + file + " ...\n");
         return Background.run("analyze", () -> session.analyze(Path.of(file), coverage), analyzed -> {
             StringBuilder text = new StringBuilder("results: ").append(file).append(" (").append(analyzed.samples()).append(" samples, ")
@@ -272,10 +282,12 @@ final class AnalysisView {
                 text.append(d).append('\n');
             }
             output.setText(text.toString());
-            analyze.setEnabled(true);
+            analyzing = false;
+            offer();
         }, failure -> {
             output.setText("The analysis failed:\n" + Background.describe(failure));
-            analyze.setEnabled(true);
+            analyzing = false;
+            offer();
         });
     }
 }

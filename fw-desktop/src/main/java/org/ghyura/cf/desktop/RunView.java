@@ -181,6 +181,11 @@ final class RunView {
         });
     }
 
+    /** Whether step 3 names a scenario to run. */
+    private boolean chosen() {
+        try { return scenario.get() != null; } catch (java.nio.file.InvalidPathException e) { return false; }
+    }
+
     /** Shows the latest state; enables what the state allows. */
     void refresh() {
         RunController.View v = controller.view();
@@ -188,7 +193,7 @@ final class RunView {
         boolean going = s != null && !s.terminal();
         status.setText((s == null ? "No run yet." : "  " + s + ", " + v.committed() + " samples committed")
                 + (exported.isEmpty() ? "" : "; " + exported));
-        run.setEnabled(!busy && !closing && !going);
+        run.setEnabled(!busy && !closing && !going && chosen());
         pause.setEnabled(!closing && s == RunState.RUNNING);
         resume.setEnabled(!closing && (s == RunState.PAUSED || s == RunState.PAUSING));
         cancel.setEnabled(!closing && going);

@@ -209,11 +209,36 @@ final class SieveWorkbench {
                 + "validate or check impact, then press Save for scenario.\nGraph, matrix and inspector share one document. "
                 + "Forbid/require, gates and conditions retain Framework semantics.");
         root.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override public void componentShown(java.awt.event.ComponentEvent e) { if (opened == null) waiting(); }
+            @Override public void componentShown(java.awt.event.ComponentEvent e) { offer(); }
         });
+        // what each action needs: the step 3 scenario, an opened one, history, a selected rule and its neighbours, chosen values, a draft
+        need(fileBar, "Open step 3 scenario", () -> stepThree() != null); need(fileBar, "Face 2 (Sieve) ↗", () -> stepThree() != null);
+        for (String t : List.of("Import constraints…", "Auto-search…", "Export JSON…", "Save for scenario")) need(fileBar, t, () -> opened != null);
+        need(workBar, "Undo", () -> !undo.isEmpty()); need(workBar, "Redo", () -> !redo.isEmpty());
+        for (String t : List.of("Validate", "Check impact")) need(workBar, t, () -> opened != null);
+        for (String t : List.of("Fit", "+", "−", "Arrange")) need(graphBar, t, () -> opened != null);
+        need(groupBar, "Group selected values", () -> canvas.chosenValues().stream().map(SieveCanvas.Value::sheet).distinct().count() >= 2);
+        need(rawActions, "Apply JSON", () -> opened != null); need(rawActions, "Discard JSON draft", () -> jsonDirty);
+        need(ruleBar, "New rule", () -> opened != null);
+        for (String t : List.of("Duplicate", "Delete", "Find on graph")) need(ruleActions, t, () -> selected >= 0);
+        need(ruleActions, "↑", () -> selected > 0); need(ruleActions, "↓", () -> selected >= 0 && selected < document.rules().size() - 1);
+        canvas.onChosen(this::gates);
         waiting();
         refresh();
     }
+
+    /** Each action's need, applied by gates() after every change; while work runs, everything but Cancel work stays off. */
+    private final List<Runnable> needs = new ArrayList<>();
+    private void need(Container panel, String text, java.util.function.BooleanSupplier holds) {
+        for (Component c : panel.getComponents()) if (c instanceof AbstractButton b && text.equals(b.getText())) { needs.add(() -> b.setEnabled(holds.getAsBoolean())); return; }
+        throw new IllegalStateException("no button " + text);
+    }
+    private void gates() { if (busy || closed) return; needs.forEach(Runnable::run); editor.discardable(newDraft || editor.dirty()); }
+    /** The step 3 scenario changed or this step is shown again: what needs it follows. */
+    void offer() { if (opened == null) waiting(); gates(); }
+    private Path stepThree() { try { return scenario.get(); } catch (java.nio.file.InvalidPathException e) { return null; } }
+    /** The selected value cell of the matrix as row and column, or null for none or the row label. */
+    private int[] cell() { int r = matrix.getSelectedRow(), c = matrix.getSelectedColumn(); return r >= 0 && c > 0 ? new int[]{r, c} : null; }
 
     /** Before a scenario is opened, the location line says which one Open step 3 scenario loads. */
     private void waiting() {
@@ -247,6 +272,7 @@ final class SieveWorkbench {
     private void status() {
         state.setText((busy ? "Working… " : "") + (dirty() ? "Unsaved edits · " : "") + document.rules().size() + " rules"
                 + (drafts() ? " · pending draft: apply or discard" : "") + " · " + (opened == null ? "" : "Save for scenario makes these rules available to every Framework entry point."));
+        gates();
     }
 
     CompletableFuture<?> open() {
@@ -450,6 +476,9 @@ final class SieveWorkbench {
                 int first = model.first[r][c - 1]; if (first >= 0) selectRule(first); else output.setText("No tuple/set rule in this cell.");
             }
         }), "Select the rule that the selected cell counts, to edit it below.");
+        need(matrixActions, "Add pair at cell", () -> cell() != null);
+        need(matrixActions, "Edit cell rule", () -> cell() != null && matrix.getModel() instanceof Matrix m && m.first[cell()[0]][cell()[1] - 1] >= 0);
+        matrix.getSelectionModel().addListSelectionListener(e -> gates()); matrix.getColumnModel().getSelectionModel().addListSelectionListener(e -> gates());
         SieveRuleEditor.listen(rowFilter, () -> { if (!refreshing) matrix.setModel(new Matrix()); });
         SieveRuleEditor.listen(colFilter, () -> { if (!refreshing) matrix.setModel(new Matrix()); });
         Hints.of(matrix, "Row values against column values: F counts the rules that forbid a pair, R those that require it.");
