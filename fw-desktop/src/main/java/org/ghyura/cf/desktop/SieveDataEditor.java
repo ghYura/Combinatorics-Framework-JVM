@@ -56,6 +56,8 @@ final class SieveDataEditor {
     private boolean loading, dirty, paramsDirty, orderDirty;
     private String currentSheet;
     private final Runnable changed;
+    /** What edits attributes and orders: off until a scenario's values are shown, so no draft starts with nothing to describe. */
+    private final List<JComponent> editing = new ArrayList<>();
 
     /** @param problem shows why a draft cannot be applied (no dialog, so it also works without a display) */
     SieveDataEditor(Consumer<SieveDocument> apply, Runnable discard, Runnable changed, Consumer<String> problem) {
@@ -70,7 +72,7 @@ final class SieveDataEditor {
                 remove = Hints.of(new JButton("Remove attribute"), "Delete the selected attribute rows.");
         add.addActionListener(e -> { stopEditing(); String s = values.keySet().stream().findFirst().orElse(""); params.addRow(new Object[]{s, values.getOrDefault(s, List.of()).stream().findFirst().orElse(""), "", "text", ""}); });
         remove.addActionListener(e -> { stopEditing(); int[] selected = table.getSelectedRows(); for (int i = selected.length - 1; i >= 0; i--) params.removeRow(selected[i]); });
-        rows.add(add); rows.add(remove); attributes.add(rows, BorderLayout.SOUTH);
+        rows.add(add); rows.add(remove); attributes.add(rows, BorderLayout.SOUTH); editing.addAll(List.of(table, add, remove));
         JPanel ordering = new JPanel(new BorderLayout(4, 4));
         Hints.of(orderSheet, "The sheet whose values you put in order.");
         Hints.of(mode, "How the sheet's values rank: by number, by date, in the list below, or not at all.");
@@ -93,14 +95,16 @@ final class SieveDataEditor {
         up.addActionListener(e -> move(-1)); down.addActionListener(e -> move(1));
         drop.addActionListener(e -> { int i = orderList.getSelectedIndex(); if (i >= 0) { ranks.remove(i); storeOrder(); } });
         controls.add(append); controls.add(up); controls.add(down); controls.add(drop); ordering.add(controls, BorderLayout.SOUTH);
+        editing.addAll(List.of(orderSheet, mode, orderList, orderValue, append, up, down, drop));
         JTabbedPane tabs = new JTabbedPane(); tabs.addTab("Parameters", attributes); tabs.addTab("Value orders", ordering); root.add(tabs);
-        attributes.putClientProperty(Hints.TAB, "Numbers and other attributes attached to the values of each sheet.");
-        ordering.putClientProperty(Hints.TAB, "The order in which the values of a sheet rank, for rules that compare them.");
+        attributes.putClientProperty(Hints.TAB, "To attach numbers and other attributes to the values of each sheet.");
+        ordering.putClientProperty(Hints.TAB, "To put a sheet's values in the order that comparing rules rank them by.");
         JPanel actions = new JPanel(new FlowLayout(FlowLayout.LEADING));
         JButton use = Hints.of(new JButton("Apply data"), "Use the attributes and orders as edited; they are checked before they are used."),
                 revert = Hints.of(new JButton("Discard data draft"), "Throw away the changes to attributes and orders.");
         use.addActionListener(e -> { try { apply.accept(draft()); } catch (RuntimeException failure) { problem.accept("Parameters and orders were not applied: " + failure.getMessage()); } });
         revert.addActionListener(e -> discard.run()); actions.add(use); actions.add(revert); root.add(actions, BorderLayout.SOUTH);
+        editing.addAll(List.of(use, revert)); editing.forEach(c -> c.setEnabled(false));
         params.addTableModelListener(e -> { if (!loading) { paramsDirty = true; touch(); } });
         orderSheet.addActionListener(e -> { if (!loading) showOrder(); });
         mode.addActionListener(e -> { if (!loading) storeOrder(); });
@@ -119,6 +123,7 @@ final class SieveDataEditor {
             JComboBox<String> sheets = new JComboBox<>(values.keySet().toArray(String[]::new)); sheets.setEditable(true);
             table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(sheets));
             orderSheet.removeAllItems(); var names = new java.util.LinkedHashSet<>(values.keySet()); names.addAll(orders.keySet()); names.forEach(orderSheet::addItem);
+            for (JComponent c : editing) c.setEnabled(!values.isEmpty());
         } finally { loading = false; dirty = paramsDirty = orderDirty = false; showOrder(); }
     }
 

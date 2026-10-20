@@ -146,7 +146,8 @@ final class FormulaEditor {
         JPanel row = WrapLayout.row();
         row.add(new JLabel("palette:"));
         for (Kind kind : Kind.values()) {
-            JButton b = Hints.of(new JButton(kind.label()), "Add a \"" + kind.label() + "\" block to the formula at the selected empty place.");
+            JButton b = Hints.of(new JButton(kind.label()), "Put a new \"" + kind.label() + "\" block in the selected place of the formula; a block "
+                    + "already there is replaced, with all it holds.");
             b.addActionListener(e -> put(kind));
             palette.put(kind, b);
             row.add(b);
@@ -278,7 +279,7 @@ final class FormulaEditor {
         moving = null;
         blocksMode.setSelected(true);
         cards.show(BLOCKS);
-        hint.setText("Select a + slot or a block, then press a palette block to put it there; right click for more.");
+        hint.setText("Select a + slot or a block, then press a palette block to put it there (it replaces a block that is there); right click for more.");
         rebuild("");
         changed.run();
         return true;
@@ -321,13 +322,18 @@ final class FormulaEditor {
                     + "; this slot takes " + (FormulaBlocks.slot(root, at) == FormulaBlocks.Type.BOOL ? "a truth value" : "a number") + ".");
             return false;
         }
+        Block replaced = FormulaBlocks.at(root, at);
         edit(FormulaBlocks.with(root, at, FormulaBlocks.newNode(kind, sheets, paramsOf)), at);
+        // replacing takes a whole branch away: say what went, and how to get it back
+        hint.setText(replaced == null ? " " : "Replaced " + FormulaBlocks.compileOrLabel(replaced) + " with a new " + kind.label()
+                + " block. Discard draft returns to the rule as last applied.");
         return true;
     }
 
     void delete() {
         String at = selected();
         if (FormulaBlocks.at(root, at) != null) {
+            hint.setText(" ");
             edit(FormulaBlocks.with(root, at, null), at);
         }
     }

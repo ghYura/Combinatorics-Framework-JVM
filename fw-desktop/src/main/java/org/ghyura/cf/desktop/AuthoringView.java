@@ -225,10 +225,10 @@ final class AuthoringView {
         graphTab = graphPanel();
         Steps.add(results, "2.1", "Control sheets", controlsTab, "Step 2.1: the three special sheets: code that runs once before the test "
                 + "cases, the arguments every test case gets, and your own result codes.");
-        Steps.add(results, "2.2", "Validation", validationPane, "Step 2.2: what the last check of the scenario found.");
+        Steps.add(results, "2.2", "Validation", validationPane, "Step 2.2: to see what the last check of the scenario found, and fix it before a run.");
         Steps.add(results, "2.3", "Operand dependencies", TableTitles.titled(Hints.of(new JTable(dependencies), "Each place where two sheets are joined: which sheets it reads, how their rows are paired, and whether those sheets still hold their values when they are needed."),
-                "Operand dependencies: each joiner's operands and their lifetimes"), "Step 2.3: how the sheets feed each other where they are joined.");
-        Steps.add(results, "2.4", "Dependency graph", graphTab, "Step 2.4: a diagram of how the sheets depend on each other.");
+                "Operand dependencies: each joiner's operands and their lifetimes"), "Step 2.3: to see where sheets are joined, and whether each still holds its values when another needs them.");
+        Steps.add(results, "2.4", "Dependency graph", graphTab, "Step 2.4: to see how the sheets depend on each other as a diagram, and copy or save it.");
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, withPalette);
         JSplitPane vertical = new JSplitPane(JSplitPane.VERTICAL_SPLIT, split, results);
         vertical.setResizeWeight(0.75);

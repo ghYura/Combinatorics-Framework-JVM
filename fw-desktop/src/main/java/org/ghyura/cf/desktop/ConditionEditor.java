@@ -97,12 +97,15 @@ final class ConditionEditor {
     private final JComboBox<String> other = Hints.of(new JComboBox<String>(), "The other column, for a test that compares two columns.");
     private final JSpinner count = Hints.of(new JSpinner(new SpinnerNumberModel(1, 0, Integer.MAX_VALUE, 1)), "The number, for a test that counts values.");
     private final JTextField json = Hints.of(new JTextField(34), "The selected part as JSON text. Filled when you select a part of the condition; type to change it, then press Apply JSON.");
+    private final JButton applyJson = Hints.of(new JButton("Apply JSON"), "Use the JSON text for the selected part.");
     private final JLabel hint = new JLabel(" ");
     private final String empty;
     private final Runnable changed;
     private RuleValue root;
     private Map<String, List<String>> sheetValues = Map.of();
     private boolean updating;
+    /** Whether there is something to give a condition: an editor for no rule offers no edit, so it starts no draft. */
+    private boolean active = true;
 
     ConditionEditor(String title, String empty, Runnable changed) {
         this.empty = empty;
@@ -180,7 +183,6 @@ final class ConditionEditor {
         leaf.add(FieldNames.label("test:", op));
         leaf.add(op);
         leaf.add(operand);
-        JButton applyJson = Hints.of(new JButton("Apply JSON"), "Use the JSON text for the selected part.");
         applyJson.addActionListener(e -> applyJson(json.getText()));
         json.addActionListener(e -> applyJson(json.getText()));
         JPanel jsonRow = new JPanel(new java.awt.BorderLayout(4, 0));
@@ -205,6 +207,14 @@ final class ConditionEditor {
         rebuild(List.of());
     }
 
+    /** On while a rule is shown; off, nothing here can change and every control says so by being off. */
+    void active(boolean on) {
+        active = on;
+        tree.setEnabled(on);
+        json.setEnabled(on);
+        showSelected();
+    }
+
     /** The tree as edited, null for none. */
     RuleValue condition() {
         return root;
@@ -226,6 +236,7 @@ final class ConditionEditor {
     }
 
     void add() {
+        if (!active) return;
         List<Integer> at = selected();
         ConditionBlocks.Added added = ConditionBlocks.add(root, at == null ? List.of() : at, ConditionBlocks.newLeaf(sheetValues));
         edit(added.root(), added.path());
@@ -289,8 +300,12 @@ final class ConditionEditor {
 
     /** The legacy JSON fallback: a tree as JSON replaces the edited one (an empty text removes it). */
     String applyJson(String text) {
+        if (!active) {
+            hint.setText("Select a rule first: there is no condition to set.");
+            return hint.getText();
+        }
         if (text.isBlank()) {
-            edit(null, List.of());
+            if (root != null) edit(null, List.of());
             return null;
         }
         try {
@@ -299,7 +314,8 @@ final class ConditionEditor {
                 hint.setText("bad JSON: a condition is an object");
                 return hint.getText();
             }
-            edit(parsed, List.of());
+            // the same condition again changes nothing, so it leaves no draft behind
+            if (!parsed.equals(root)) edit(parsed, List.of());
             return null;
         } catch (FrameworkException e) {
             hint.setText("bad JSON: " + e.diagnostics().getFirst().message());
@@ -371,7 +387,9 @@ final class ConditionEditor {
         ConditionBlocks.Leaf l = selectedLeaf();
         updating = true;
         try {
-            boolean some = root != null && at != null;
+            boolean some = active && root != null && at != null;
+            add.setEnabled(active);
+            applyJson.setEnabled(active);
             all.setEnabled(some);
             any.setEnabled(some);
             not.setEnabled(some);
