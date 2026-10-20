@@ -1,0 +1,96 @@
+/* SPDX-License-Identifier: LicenseRef-BUSL-1.1
+ * (c) Yurii Baranov. See LICENSE and NOTICE.md for the binding terms.
+ * Presentation only; the upstream template and bridge remain independent. */
+html { height:100%; }
+body { height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+header { flex:0 0 auto; gap:8px 12px; }
+header h1 { overflow-wrap:anywhere; }
+header .grow { min-width:0; }
+main { flex:1 1 auto; height:auto; min-height:0; min-width:0; }
+#stagewrap { min-width:0; }
+aside { width:clamp(320px,31vw,420px); min-width:320px; overscroll-behavior:contain; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible,
+#edges [role=button]:focus-visible { outline:3px solid #264fa3; outline-offset:3px; }
+button:disabled { opacity:.5; cursor:default; }
+.row .txt, .type-card > span, .select-row .field, .field, .blk { min-width:0; overflow-wrap:anywhere; }
+.row .pill, .row .x { flex-shrink:0; }
+.visual-chip, .rule-token, #nodeinfo .ni-chip, .chip { white-space:normal; overflow-wrap:anywhere; max-width:100%; }
+.inline-fields { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.inline-fields.three { grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; }
+.type-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.ct-row { flex-wrap:wrap; }
+.ct-row select, .ct-row input, .le-row select, .blk select, .blk input { max-width:100%; min-width:0; }
+.cond-build { margin-left:8px; padding-left:12px; border-left:2px solid #b8c5dc; }
+.ftree, .blk { flex-wrap:wrap; }
+#fbuilt { max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+table.params { table-layout:fixed; }
+table.params td { overflow-wrap:anywhere; }
+dialog { max-height:calc(100dvh - 24px); overflow:auto; }
+dialog .dlg { overflow-wrap:anywhere; }
+dialog input[type=text] { max-width:100%; }
+.dlg-actions { flex-wrap:wrap; }
+#tray { max-width:calc(100% - 24px); flex-wrap:wrap; max-height:40vh; overflow:auto; }
+#traychips { display:flex; flex-wrap:wrap; gap:4px; }
+#arm-popover { max-height:calc(100% - 24px); overflow:auto; }
+
+#compact-view[aria-pressed=true] { background:#e8eef6; border-color:#617999; color:#243a58; font-weight:650; }
+#graph-tools { flex:0 0 auto; display:flex; gap:8px 16px; align-items:center; flex-wrap:wrap;
+  padding:7px 16px; border-bottom:1px solid var(--line); background:#fff; color:#475569; font-size:12px; }
+#graph-tools .key { display:inline-flex; align-items:center; gap:7px; }
+#graph-tools .sample { width:24px; height:0; border-top:3px solid #28734c; }
+#graph-tools .sample.forbid { border-color:#a84650; border-top-style:dashed; }
+#graph-help { flex:1; min-width:170px; }
+#zoomctl { right:10px; bottom:10px; padding:5px; background:#ffffffed; border-radius:10px; }
+#zoomctl #zactual { width:42px; font-size:11px; }
+#graph-status { font-size:12px; font-variant-numeric:tabular-nums; }
+#connection-summary { flex-basis:100%; min-height:22px; max-height:84px; overflow:auto; overflow-wrap:anywhere;
+  padding-left:10px; border-left:3px solid #879bb7; color:#26364c; }
+#connection-summary:empty::before { content:""; }
+
+body.compact-graph { --forbid:#a84650; --require:#28734c; }
+.compact-graph .node { padding:7px 10px; font-size:13px; line-height:19px; border-radius:8px;
+  white-space:normal; overflow-wrap:anywhere; overflow:visible; text-overflow:clip; max-width:none;
+  background:#fff; box-shadow:0 1px 2px #26344512; }
+.compact-graph .col-h { border-radius:7px; padding:6px 8px; white-space:normal; overflow-wrap:anywhere;
+  text-align:center; line-height:18px; font-size:13px; box-shadow:none; background:#edf1f6; }
+.compact-graph .bdots { white-space:nowrap; }
+.compact-graph svg .edge { fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round;
+  pointer-events:stroke; cursor:pointer; }
+.compact-graph svg .edge.f { stroke-dasharray:7 4; }
+.compact-graph svg .edge.hot, .compact-graph svg .edge:hover, .compact-graph svg .edge:focus { stroke-width:4; }
+.compact-graph svg .edge.bad { stroke-dasharray:2 4; stroke-width:3.5; filter:none; }
+.compact-graph svg .edge-halo { fill:none; stroke:#f6f7f9; stroke-width:7; stroke-linecap:round;
+  stroke-linejoin:round; pointer-events:stroke; cursor:pointer; }
+.compact-graph svg .edge.arm-hot { stroke-width:5.5; }
+.compact-graph .armctl { stroke-width:1.6; r:4.5; filter:none; }
+.compact-graph .armctl:hover, .compact-graph .armctl:focus { r:6; }
+.compact-graph .armctl.arm-hot { fill:#cad9ed; stroke:#264fa3; stroke-width:2.5; r:6; }
+.compact-graph .hub { stroke:#fff; stroke-width:2; }
+.compact-graph #canvas.spotlight .node:not(.hl-self):not(.hl-f):not(.hl-r):not(.hl-ctx) { opacity:.65; }
+.compact-graph .edge.dim { opacity:.45; }
+.connection-ref { flex:0 0 auto; display:inline-grid; place-items:center; min-width:23px; height:23px;
+  padding:0 4px; border:1px solid #bac6d6; border-radius:5px; background:#f3f6fa; color:#344054; font-size:11px; font-weight:700; }
+.connection-number { pointer-events:all; cursor:pointer; }
+.connection-number rect { fill:#fff; stroke:#788ba5; stroke-width:1; }
+.connection-number text { text-anchor:middle; fill:#344054; font:600 11px system-ui,sans-serif; pointer-events:none; }
+.connection-number.hot rect, .connection-number:hover rect { stroke:var(--accent); stroke-width:2; }
+body:not(.compact-graph) #graph-tools .sample.forbid { border-top-style:solid; }
+
+@media (max-width:850px) {
+  main { flex-direction:column; overflow:auto; }
+  #stagewrap { flex:0 0 max(320px,48dvh); }
+  aside { flex:1 0 auto; width:100%; min-width:0; overflow:visible; border-left:0; border-top:1px solid var(--line); }
+  header { padding:8px 10px; }
+  header h1 { flex-basis:100%; }
+  #graph-tools { padding:6px 10px; gap:6px 12px; }
+  #graph-help { flex-basis:100%; }
+}
+@media (max-width:450px) {
+  header button.btn { padding:7px 9px; }
+  header .grow, #srcinfo:empty { display:none; }
+  aside { padding:10px; }
+  .inline-fields.three { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .type-grid { grid-template-columns:1fr; }
+  dialog .dlg { padding:14px 12px; }
+  .cond-build { margin-left:3px; padding-left:8px; }
+}

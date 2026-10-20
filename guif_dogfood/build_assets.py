@@ -34,7 +34,7 @@ BASE = ROOT / 'guif_dogfood'
 INITIAL = BASE / 'initial'
 
 def inventory():
-    text = (ROOT/'CODEX_TASK_guif_dogfooding.md').read_text().split('## Appendix A:')[1].split('## Appendix B')[0]
+    text = (INITIAL/'gui_object_inventory.md').read_text()   # the inventory of the brief's Appendix A, kept as data
     rows, counts, selector_counts = [], Counter(), Counter()
     for line in text.splitlines():
         if not re.match(r'\| [0-9] ·', line): continue
