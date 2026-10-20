@@ -154,6 +154,10 @@ final class WizardView {
     private final JComboBox<Role> role = Hints.of(new JComboBox<>(Role.values()), "What the selected factor is: a static parameter, set "
             + "before any action and covered by pairwise; a sequence of actions, done in order; or a sudden action, which may or may "
             + "not happen.");
+    private final JButton removeButton = Hints.of(new JButton("Remove the factor"), "Remove the selected factor, with the rules that name it.");
+    private final JButton upButton = Hints.of(new JButton("Move up"), "Move the selected factor up: the test cases' code follows the factors' order.");
+    private final JButton downButton = Hints.of(new JButton("Move down"), "Move the selected factor down: the test cases' code follows the factors' "
+            + "order.");
 
     // 0.3 how each varies
     private final DefaultListModel<String> factorNames = new DefaultListModel<>();
@@ -200,6 +204,8 @@ final class WizardView {
             List.<Function<Rule, Object>>of(Rule::words, Rule::written));
     private final JTable ruleTable = Hints.of(new JTable(ruleRows), "The rules of your scenario, each in words and as the constraints "
             + "file beside the scenario holds it. Select one to remove it.");
+    private final JButton addRuleButton = Hints.of(new JButton("Add the rule"), "Add the rule the sentence below says to the scenario.");
+    private final JButton removeRuleButton = Hints.of(new JButton("Remove the rule"), "Remove the rule selected in the table.");
 
     // 0.5 how many
     private final JTextArea counts = text(9, "How many combinations your answers make, which selection fits them and why, and what the "
@@ -365,15 +371,12 @@ final class WizardView {
         JButton add = Hints.of(new JButton("Add a factor"), "Add a new static parameter with two example values, then name it, say its "
                 + "kind and type its values.");
         add.addActionListener(e -> addFactor());
-        JButton remove = Hints.of(new JButton("Remove the factor"), "Remove the selected factor, with the rules that name it.");
-        remove.addActionListener(e -> removeFactor());
-        JButton up = Hints.of(new JButton("Move up"), "Move the selected factor up: the test cases' code follows the factors' order.");
-        up.addActionListener(e -> move(-1));
-        JButton down = Hints.of(new JButton("Move down"), "Move the selected factor down: the test cases' code follows the factors' order.");
-        down.addActionListener(e -> move(1));
+        removeButton.addActionListener(e -> removeFactor());
+        upButton.addActionListener(e -> move(-1));
+        downButton.addActionListener(e -> move(1));
         JPanel south = new JPanel(new BorderLayout(0, 4));
         south.add(form, BorderLayout.NORTH);
-        south.add(row(add, remove, up, down), BorderLayout.CENTER);
+        south.add(row(add, removeButton, upButton, downButton), BorderLayout.CENTER);
         south.add(FieldNames.note("Values are plain words; a value may hold spaces but no quote, backslash or comma. Rules and the "
                 + "test cases' results name them as you write them."), BorderLayout.SOUTH);
         page.add(south, BorderLayout.SOUTH);
@@ -502,18 +505,17 @@ final class WizardView {
             sentence();
         });
         for (JComboBox<?> box : List.of(kind, ruleValue, otherValue)) box.addActionListener(e -> sentence());
-        JButton add = Hints.of(new JButton("Add the rule"), "Add the rule the sentence below says to the scenario.");
-        add.addActionListener(e -> addRule());
-        JButton remove = Hints.of(new JButton("Remove the rule"), "Remove the rule selected in the table.");
-        remove.addActionListener(e -> {
+        addRuleButton.addActionListener(e -> addRule());
+        removeRuleButton.addActionListener(e -> {
             int row = ruleTable.getSelectedRow();
             if (row >= 0) change(design.removingRule(row));
         });
         JPanel top = new JPanel(new BorderLayout(0, 4));
         top.add(form, BorderLayout.NORTH);
         top.add(sentence, BorderLayout.CENTER);
-        top.add(row(add, remove), BorderLayout.SOUTH);
+        top.add(row(addRuleButton, removeRuleButton), BorderLayout.SOUTH);
         ruleTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ruleTable.getSelectionModel().addListSelectionListener(e -> removeRuleButton.setEnabled(ruleTable.getSelectedRow() >= 0));
         JPanel middle = new JPanel(new BorderLayout(0, 6));
         middle.add(top, BorderLayout.NORTH);
         middle.add(TableTitles.titled(ruleTable, "Rules of the scenario, in words and as the constraints file writes them"), BorderLayout.CENTER);
@@ -734,11 +736,16 @@ final class WizardView {
         String ov = (String) otherValue.getSelectedItem();
         if (f == null || v == null || o == null || ov == null) {
             say(sentence, design.factors().isEmpty() ? "Add factors first (page 0.2): a rule relates two of their values." : " ", false);
+            addRuleButton.setEnabled(false);
             return;
         }
         Rule rule = new Rule((Kind) kind.getSelectedItem(), f, v, o, ov);
         List<String> problems = rule.problems(design.factors());
-        say(sentence, problems.isEmpty() ? "The rule: " + rule.words() + "." : problems.getFirst(), !problems.isEmpty());
+        boolean known = design.rules().contains(rule);
+        say(sentence, !problems.isEmpty() ? problems.getFirst() : known ? "The scenario has this rule already: " + rule.words() + "."
+                : "The rule: " + rule.words() + ".", !problems.isEmpty() || known);
+        // a rule that cannot work, or one the scenario has, is not offered; the sentence says which
+        addRuleButton.setEnabled(problems.isEmpty() && !known);
     }
 
     private void selectionChosen() {
@@ -779,10 +786,15 @@ final class WizardView {
                 factorName.setText("");
                 factorValues.setText("");
                 meaning.setText("Add a factor on page 0.2 first, then select it here to say how one test case uses its values.");
+                for (JComponent c : List.of(count, fewest, most, group, sequence, repeat)) c.setEnabled(false);
             }
-            for (JComponent c : List.of(factorName, factorValues, role)) c.setEnabled(selected >= 0);
+            // what acts on the selected factor needs one; a move needs a neighbour on that side
+            for (JComponent c : List.of(factorName, factorValues, role, removeButton, one, exactly, range, optional)) c.setEnabled(selected >= 0);
+            upButton.setEnabled(selected > 0);
+            downButton.setEnabled(selected >= 0 && selected < design.factors().size() - 1);
             ruleChoices();
             ruleRows.show(design.rules());
+            removeRuleButton.setEnabled(ruleTable.getSelectedRow() >= 0);
             selection();
             sheets();
             check.setSelected(design.check());
@@ -939,9 +951,12 @@ final class WizardView {
         } else {
             say(problemLine, "To fix: " + problems.getFirst() + (problems.size() > 1 ? " (and " + (problems.size() - 1) + " more)" : ""), true);
         }
-        checkButton.setEnabled(!busy);
-        saveButton.setEnabled(!busy);
-        for (JButton b : List.of(useButton, casesButton, editButton)) b.setEnabled(!busy && saved != null);
+        // checking and saving need a design without problems: the line above says what to fix
+        checkButton.setEnabled(!busy && problems.isEmpty());
+        saveButton.setEnabled(!busy && problems.isEmpty());
+        // handing on saves a changed design again first, which needs it without problems too
+        boolean handOn = !busy && saved != null && (design.equals(savedDesign) || problems.isEmpty());
+        for (JButton b : List.of(useButton, casesButton, editButton)) b.setEnabled(handOn);
     }
 
     /** The moves name the pages they go to. */
@@ -1194,6 +1209,11 @@ final class WizardView {
     /** Page 0.6's arguments of the bootstrap, typed as a user does. */
     void bootstrapArguments(String text) {
         arguments.setText(text);
+    }
+
+    /** Page 0.4's sentence about the rule its choices make. */
+    String ruleSentence() {
+        return sentence.getText();
     }
 
     /** Page 0.4's rule, chosen and added as a user does; the sentence the page shows. */

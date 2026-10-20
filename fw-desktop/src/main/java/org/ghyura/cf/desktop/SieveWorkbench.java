@@ -158,10 +158,10 @@ final class SieveWorkbench {
         Hints.of(button(rawActions, "Apply JSON", () -> applyJson(json.getText())), "Use the JSON text as the rules; it is checked before it is used.");
         Hints.of(button(rawActions, "Discard JSON draft", () -> { refreshJson(); status(); }), "Throw away the changes to the JSON text and show the rules again.");
         rawActions.add(new JLabel("Framework sidecar format; layout is saved separately.")); raw.add(rawActions, BorderLayout.SOUTH); views.addTab("Advanced JSON", raw);
-        String[] viewHints = {"The rules drawn as cards and links between the values of the scenario's sheets.",
-                "Every value of one sheet against every value of another, with how many rules forbid or require each pair.",
-                "Numbers attached to values, which formula rules use, and the order in which each sheet's values rank.",
-                "The rules as JSON text, for what the other editors cannot show."};
+        String[] viewHints = {"To see and draw the rules as cards, with links between the values of the scenario's sheets.",
+                "To find and add pair rules on a grid of one sheet's values against another's, with how many rules forbid or require each pair.",
+                "To give values the numbers that formula rules use, and to rank each sheet's values.",
+                "To read or change the rules as JSON text, for what the other editors cannot show."};
         for (int i = 0; i < viewHints.length; i++) ((JComponent) views.getComponentAt(i)).putClientProperty(Hints.TAB, viewHints[i]);
         int[] activeView = {0};
         views.addChangeListener(e -> {
