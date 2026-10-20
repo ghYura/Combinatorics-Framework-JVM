@@ -80,6 +80,8 @@ final class ScenarioView {
         });
         navigator.bind(browse, () -> Navigator.Purpose.SCENARIO_OPEN, this::current);
         validate.addActionListener(e -> validate());
+        file.getDocument().addDocumentListener(FormulaEditor.listener(this::offer));
+        offer();
         Path example = navigator.example(Navigator.Purpose.SCENARIO_OPEN);
         FieldNames.placeholder(file, "for example " + (example == null ? "shop.xlsx" : shortest(example))
                 + "; or send an example here from step 1");
@@ -122,6 +124,18 @@ final class ScenarioView {
 
     JComponent component() {
         return panel;
+    }
+
+    private boolean validating;
+
+    /** Validate and plan needs a scenario file named in the box, and no validation going. */
+    private void offer() {
+        validate.setEnabled(!validating && current() != null);
+    }
+
+    /** Runs whenever the box names another scenario: the steps that work on it follow at once. */
+    void onChange(Runnable listener) {
+        file.getDocument().addDocumentListener(FormulaEditor.listener(listener));
     }
 
     /** The chosen scenario, or null. */
@@ -215,7 +229,8 @@ final class ScenarioView {
             output.setText(problem);
             return CompletableFuture.completedFuture(null);
         }
-        validate.setEnabled(false);
+        validating = true;
+        offer();
         output.setText("Validating " + scenario + " ...\n");
         navigator.trail().record(scenario);
         return Background.run("validate", () -> session.get().validate(scenario), summary -> {
@@ -226,12 +241,14 @@ final class ScenarioView {
             output.setText(text.toString());
             output.setCaretPosition(0);
             plan.show(summary.plan());
-            validate.setEnabled(true);
+            validating = false;
+            offer();
         }, failure -> {
             plan.show(null);
             output.setText("The scenario is not valid:\n" + Background.describe(failure));
             output.setCaretPosition(0);
-            validate.setEnabled(true);
+            validating = false;
+            offer();
         });
     }
 }

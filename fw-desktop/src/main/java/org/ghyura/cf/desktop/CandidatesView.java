@@ -96,8 +96,7 @@ final class CandidatesView {
         preview.addActionListener(e -> preview());
         next.addActionListener(e -> nextPage());
         cancel.addActionListener(e -> cancel());
-        next.setEnabled(false);
-        cancel.setEnabled(false);
+        offer();
         rowTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rowTable.getSelectionModel().addListSelectionListener(e -> {
             if (e.getValueIsAdjusting()) return;
@@ -217,12 +216,20 @@ final class CandidatesView {
     }
 
     private void busy(boolean working) {
-        preview.setEnabled(!closing && !working);
-        next.setEnabled(!closing && !working && nextFirst != null);
-        cancel.setEnabled(!closing && working);
         if (!working) {
             running = null;
         }
+        offer();
+    }
+
+    /** Preview needs a step 3 scenario and no preview going; Next page another page of that same scenario. */
+    void offer() {
+        boolean working = running != null;
+        Path chosen;
+        try { chosen = scenario.get(); } catch (java.nio.file.InvalidPathException e) { chosen = null; }
+        preview.setEnabled(!closing && !working && chosen != null);
+        next.setEnabled(!closing && !working && nextFirst != null && chosen != null && chosen.equals(shown));
+        cancel.setEnabled(!closing && working);
     }
 
     // ---- for tests, on the event thread ------------------------------------------------------------------------------
