@@ -174,6 +174,47 @@ class FlatDesktopTest {
         if (value == null) System.clearProperty(key); else System.setProperty(key, value);
     }
 
+    /** Every tab's name, in a scrolling row or not, says what its tab is for, in words no other tab uses. */
+    @Test
+    void everyTabNameSaysWhatItsTabIsFor() throws Exception {
+        Desktop desktop = edt(() -> new Desktop(Session.resolve(null, java.util.Map.of(), List.of()), null, FileTrail.inMemory(), true));
+        try {
+            List<String> shown = edt(() -> {
+                @SuppressWarnings("unchecked") javax.swing.JLayer<JComponent> layer = (javax.swing.JLayer<JComponent>) desktop.component();
+                layer.setSize(1400, 900);
+                List<String> texts = new java.util.ArrayList<>();
+                for (javax.swing.JTabbedPane tabs : panes(layer)) {
+                    for (java.awt.Component p = tabs; p != null; p = p.getParent())
+                        if (p.getParent() instanceof javax.swing.JTabbedPane outer) outer.setSelectedComponent(p);
+                    layout(layer);
+                    for (int i = 0; i < tabs.getTabCount(); i++) {
+                        java.awt.Rectangle r = tabs.getBoundsAt(i);
+                        String text = desktop.hints().hintAt(layer, javax.swing.SwingUtilities.convertPoint(tabs, (int) r.getCenterX(), (int) r.getCenterY(), layer));
+                        assertNotNull(text, tabs.getTitleAt(i));
+                        assertTrue(text.startsWith("What is “" + tabs.getTitleAt(i) + "” for?\n"), text);
+                        texts.add(text.substring(text.indexOf('\n') + 1));
+                    }
+                }
+                return texts;
+            });
+            assertTrue(shown.size() >= 29, "the ten steps, their inner tabs and the wizard's pages: " + shown.size());
+            assertEquals(shown.size(), new java.util.HashSet<>(shown).size(), "each tab explains itself in its own words: " + shown);
+        } finally {
+            edt(desktop::close).get(30, TimeUnit.SECONDS);
+        }
+    }
+
+    private static List<javax.swing.JTabbedPane> panes(java.awt.Component c) {
+        List<javax.swing.JTabbedPane> found = new java.util.ArrayList<>();
+        if (c instanceof javax.swing.JTabbedPane t) found.add(t);
+        if (c instanceof java.awt.Container k) for (java.awt.Component child : k.getComponents()) found.addAll(panes(child));
+        return found;
+    }
+
+    private static void layout(java.awt.Component c) {
+        if (c instanceof java.awt.Container k) { k.doLayout(); for (java.awt.Component child : k.getComponents()) layout(child); }
+    }
+
     private static <T> T edt(Callable<T> work) throws Exception {
         FutureTask<T> task = new FutureTask<>(work);
         SwingUtilities.invokeAndWait(task);

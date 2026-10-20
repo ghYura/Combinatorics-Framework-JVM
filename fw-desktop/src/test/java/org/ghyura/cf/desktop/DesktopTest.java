@@ -1088,7 +1088,7 @@ class DesktopTest {
                     desktop.hints().hover(l, point);
                     assertEquals(null, desktop.hints().text(), "the previous pop-up goes as soon as the pointer moves on");
                     desktop.hints().settle(l);
-                    assertEquals(Hints.tab(tabs, i), desktop.hints().text(), "the hint of " + tabs.getTitleAt(i));
+                    assertEquals(Hints.purpose(tabs, i), desktop.hints().text(), "the hint of " + tabs.getTitleAt(i));
                     HintLayerTest.replay(recorder, layer, screen);
                     assertEquals(0, HintLayerTest.differing(screen, HintLayerTest.paint(layer)), "after resting on " + tabs.getTitleAt(i));
                 }
@@ -1232,7 +1232,7 @@ class DesktopTest {
             };
             assertNotNull(HintLayerTest.move(charts, header.apply(1)), "a move in the chart window reaches its hints");
             hints.settle(charts);
-            assertTrue(hints.text() != null && hints.text().startsWith("Chart 9.2"), "a chart tab explains itself: " + hints.text());
+            assertTrue(hints.text() != null && hints.text().startsWith("What is “9.2"), "a chart tab explains itself: " + hints.text());
             assertEquals("cf.hints.toggle", charts.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).get(javax.swing.KeyStroke.getKeyStroke("F1")));
             charts.getActionMap().get("cf.hints.toggle").actionPerformed(new java.awt.event.ActionEvent(charts, 0, "F1"));
             assertEquals("Hints off", desktop.hintsButton().getText(), "F1 in the chart window presses the desktop's button");
@@ -1245,7 +1245,7 @@ class DesktopTest {
             assertEquals("Hints on", desktop.hintsButton().getText());
             HintLayerTest.move(charts, header.apply(2));
             hints.settle(charts);
-            assertTrue(hints.text() != null && hints.text().startsWith("Chart 9.3"), "hints are back in the chart window: " + hints.text());
+            assertTrue(hints.text() != null && hints.text().startsWith("What is “9.3"), "hints are back in the chart window: " + hints.text());
             return null;
         });
     }

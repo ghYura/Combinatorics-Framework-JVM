@@ -66,6 +66,15 @@ final class Hints {
     }
 
     /**
+     * What the tab at the index is for, as the pointer on its name shows it: the question, then the tab's hint without the
+     * step label its name already shows ("Step 3 · Scenario: ", "Page 0.2 · Factors: ", "Step 2.1: ").
+     */
+    static String purpose(JTabbedPane tabs, int index) {
+        String hint = tab(tabs, index).replaceFirst("^(Step|Page|Chart) [0-9.]+( · [^:]+)?: ", "");
+        return "What is “" + tabs.getTitleAt(index) + "” for?\n" + Character.toUpperCase(hint.charAt(0)) + hint.substring(1);
+    }
+
+    /**
      * The component whose hint is shown for c: c itself or the nearest ancestor with a hint, a table header's table, a
      * table that only shows its title; or, failing those, the content of the tab c is on. Null when nothing explains c.
      */

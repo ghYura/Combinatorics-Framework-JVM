@@ -265,6 +265,78 @@ class SieveWorkbenchTest {
         });
     }
 
+    /** With no rule shown the rule editor has nothing to change, so none of its gates, conditions or buttons can start a draft. */
+    @Test void withNoRuleShownTheRuleEditorStartsNoDraft() throws Exception {
+        var doc = SieveDocument.parse("""
+                {"version":1,"constraints":[{"id":"pair","polarity":"forbid","pairs":[{"A":"a","B":"1"}],"condition":{"sheet":"A","eq":"a"}}]}
+                """, "test");
+        var values = Map.of("A", List.of("a", "b"), "B", List.of("1", "2"));
+        edt(() -> {
+            int[] changes = {0};
+            SieveRuleEditor editor = new SieveRuleEditor(r -> { }, () -> { }, () -> changes[0]++);
+            for (boolean shown : new boolean[]{false, true, false}) {
+                editor.show(doc, shown ? doc.rules().getFirst() : null, values);
+                for (String text : List.of("Adjacent", "Within", "+ condition", "Apply JSON", "Apply rule", "Discard draft")) {
+                    AbstractButton b = find(editor.component(), AbstractButton.class, c -> text.equals(c.getText()));
+                    assertEquals(shown, b.isEnabled(), text + (shown ? " with a rule shown" : " with none"));
+                    if (!shown) b.doClick();
+                }
+                assertEquals(shown, field(editor.component(), "Rule ID").isEnabled());
+                if (shown) find(editor.component(), JButton.class, c -> "Apply JSON".equals(c.getText())).doClick();
+            }
+            assertEquals(0, changes[0], "pressing what is off, or applying the condition the rule already has, is no edit");
+            assertFalse(editor.dirty());
+            return null;
+        });
+    }
+
+    /** Before a scenario is opened the data editor has no values to describe; with no rule selected there is no gate to set. */
+    @Test void beforeAScenarioOrARuleIsChosenNothingStartsADraft(@TempDir Path dir) throws Exception {
+        Path file = scenario(dir); Session session = session(); FileTrail trail = FileTrail.inMemory();
+        SieveWorkbench view = edt(() -> new SieveWorkbench(() -> session, () -> file, new Navigator(trail, () -> file)));
+        try {
+            edt(() -> {
+                for (String text : List.of("Add attribute", "Add value", "Apply data", "Discard data draft"))
+                    assertFalse(find(view.component(), JButton.class, b -> text.equals(b.getText())).isEnabled(), text + " before a scenario is opened");
+                return null;
+            });
+            edt(view::open).get(30, TimeUnit.SECONDS);
+            edt(() -> view.applyJson("""
+                    {"version":1,"constraints":[{"id":"pair","polarity":"forbid","pairs":[{"A":"a","B":"1"}]}]}
+                    """)).get(30, TimeUnit.SECONDS);
+            AbstractButton adjacent = edt(() -> {
+                assertTrue(find(view.component(), JButton.class, b -> "Add attribute".equals(b.getText())).isEnabled(), "an opened scenario has values");
+                AbstractButton gate = find(view.component(), AbstractButton.class, b -> "Adjacent".equals(b.getText()));
+                assertFalse(gate.isEnabled(), "no rule is selected after the rules arrive");
+                gate.doClick();
+                return gate;
+            });
+            edt(() -> view.validate(false)).get(30, TimeUnit.SECONDS);
+            assertFalse(edt(view::output).contains("pending"), "nothing pressed left a draft to apply or discard: " + edt(view::output));
+            edt(() -> { assertTrue(view.selectRule(0)); assertTrue(adjacent.isEnabled(), "a selected pair rule may be gated"); return null; });
+        } finally { edt(view::close).get(30, TimeUnit.SECONDS); trail.close(); }
+    }
+
+    /** A palette block put on a filled place replaces that block, as its hint says, and the editor says what went. */
+    @Test void aPaletteBlockOnAFilledPlaceSaysWhatItReplaced() throws Exception {
+        edt(() -> {
+            FormulaEditor f = new FormulaEditor(() -> { });
+            f.show("1 > 2", List.of("A", "B"), s -> List.of("cost"));
+            assertTrue(f.toBlocks());
+            f.select("");
+            assertTrue(f.paletteEnabled(FormulaBlocks.Kind.NOT), "a filled place takes a block of its type, which replaces it");
+            JButton not = find(f.component(), JButton.class, b -> "not".equals(b.getText()));
+            assertTrue(Hints.own(not).contains("replaced"), Hints.own(not));
+            assertTrue(f.put(FormulaBlocks.Kind.NOT));
+            assertEquals("Replaced (1 > 2) with a new not block. Discard draft returns to the rule as last applied.", f.hint());
+            f.select("");
+            f.delete();
+            assertTrue(f.put(FormulaBlocks.Kind.CMP));
+            assertFalse(f.hint().startsWith("Replaced"), "an empty place loses nothing: " + f.hint());
+            return null;
+        });
+    }
+
     private static <T extends Component> T named(Container root, Class<T> type, String name) {
         return find(root, type, c -> name.equals(c.getAccessibleContext().getAccessibleName()));
     }

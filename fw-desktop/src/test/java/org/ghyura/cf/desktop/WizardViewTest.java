@@ -193,6 +193,75 @@ class WizardViewTest {
         }
     }
 
+    private static boolean offered(WizardView w, String text) {
+        return find(w.component(), text).isEnabled();
+    }
+
+    private static javax.swing.AbstractButton find(java.awt.Component c, String text) {
+        if (c instanceof javax.swing.AbstractButton b && text.equals(b.getText())) return b;
+        if (c instanceof java.awt.Container k) for (java.awt.Component child : k.getComponents()) {
+            javax.swing.AbstractButton found = find(child, text);
+            if (found != null) return found;
+        }
+        return null;
+    }
+
+    /** A button is pressable exactly when what it acts on is there: a factor, a neighbour, a rule, a design without problems. */
+    @Test
+    void theWizardOffersOnlyWhatTheDesignAllows(@TempDir Path dir) throws Exception {
+        Desktop desktop = edt(() -> new Desktop(Session.resolve(null, Map.of(), List.of()), null, FileTrail.inMemory(), true));
+        List<String> forAFactor = List.of("Remove the factor", "Exactly one of them", "A fixed number of them", "Any number of them, within bounds",
+                "It may or may not happen: a sudden action");
+        try {
+            WizardView w = desktop.wizard();
+            edt(() -> {
+                w.fill(Situation.OWN);
+                for (String b : forAFactor) assertFalse(offered(w, b), b + " with no factor");
+                for (String b : List.of("Move up", "Move down", "Add the rule", "Remove the rule", "Check with the Framework", "Save the scenario..."))
+                    assertFalse(offered(w, b), b + " with no factor");
+                assertTrue(offered(w, "Add a factor"));
+                w.fill(Situation.WORKFLOW);
+                for (String b : forAFactor) assertTrue(offered(w, b), b + " with the first factor selected");
+                assertFalse(offered(w, "Move up"), "the first factor has none above it");
+                assertTrue(offered(w, "Move down"));
+                w.select(w.design().factors().size() - 1);
+                assertTrue(offered(w, "Move up"));
+                assertFalse(offered(w, "Move down"), "the last factor has none below it");
+                assertTrue(offered(w, "Add the rule"), "the rule the choices make is new and can work");
+                assertFalse(offered(w, "Remove the rule"), "no rule is selected");
+                return null;
+            });
+            String added = edt(() -> w.rule(Kind.NEVER, "user", "guest", "device", "phone"));
+            assertTrue(added.startsWith("Added:"), added);
+            edt(() -> {
+                assertFalse(offered(w, "Add the rule"), "the scenario has this rule now");
+                w.select(0);
+                assertTrue(w.ruleSentence().startsWith("The scenario has this rule already"), w.ruleSentence());
+                return null;
+            });
+            edt(() -> {
+                w.addFactorForTest();
+                w.type("FW_x", "a, a");
+                assertFalse(offered(w, "Check with the Framework"), "a design with problems is not checked");
+                assertFalse(offered(w, "Save the scenario..."), "a design with problems is not saved");
+                w.type("tier", "free, paid");
+                assertTrue(offered(w, "Check with the Framework") && offered(w, "Save the scenario..."), w.problems());
+                return null;
+            });
+            edt(() -> w.save(dir.resolve("offered"))).get(30, TimeUnit.SECONDS);
+            edt(() -> {
+                assertTrue(offered(w, "Use it in step 3"), "a saved design can be handed on");
+                w.type("FW_y", "a, a");
+                assertFalse(offered(w, "Use it in step 3"), "a changed design is saved again first, which its problems forbid");
+                w.type("tier", "free, paid");
+                assertTrue(offered(w, "Use it in step 3"));
+                return null;
+            });
+        } finally {
+            edt(desktop::close).get(30, TimeUnit.SECONDS);
+        }
+    }
+
     @Test
     void aDesignWithProblemsSaysWhatToFixAndIsNeitherCheckedNorSaved(@TempDir Path dir) throws Exception {
         Desktop desktop = edt(() -> new Desktop(Session.resolve(null, Map.of(), List.of()), null, FileTrail.inMemory(), true));
