@@ -39,7 +39,7 @@ public final class Face2Document {
         }
     }
 
-    /** Original HTML/CSS/JS, with only its documented data/title slots and an appended bridge. */
+    /** Original template with its data slots, transport adapter and a separate presentation layer. */
     public String html(Map<String, List<String>> sheets, Set<String> optional, String base) {
         return html(sheets, optional, base, 0);
     }
@@ -61,7 +61,9 @@ public final class Face2Document {
         String json = ConstraintBonds.pretty(data).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e");
         return resource("editor.html").replace("__TITLE__", "Face 2 (Sieve) · Combinatorics Framework")
                 .replace("/*__DATA__*/null", json)
-                .replace("</body></html>", "<script>\n" + resource("bridge.js") + "\n</script></body></html>");
+                .replace("</head>", "<style>\n" + resource("visibility.css") + "\n</style></head>")
+                .replace("</body></html>", "<script>\n" + resource("bridge.js") + "\n</script><script>\n"
+                        + resource("visibility.js") + "\n</script></body></html>");
     }
 
     /** Apply a browser delta to the authoritative Java snapshot. Semantic validation is the Session's job. */
