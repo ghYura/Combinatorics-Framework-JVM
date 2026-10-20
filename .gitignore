@@ -1,3 +1,7 @@
 **/target/
 __pycache__/
 *.pyc
+
+# instructions and handoffs written for AI agents stay local
+CODEX_TASK_guif_dogfooding.md
+guif_dogfood/RESUME.md
