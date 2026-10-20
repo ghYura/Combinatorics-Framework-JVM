@@ -57,6 +57,8 @@ final class SieveRuleEditor {
     // set later could not be compared with Double bounds)
     private final JSpinner within = new JSpinner(new SpinnerNumberModel(Long.valueOf(0), Long.valueOf(0), Long.valueOf(Long.MAX_VALUE), Long.valueOf(1)));
     private final JLabel kind = new JLabel("Select or create a rule");
+    private final JButton applyRule = Hints.of(new JButton("Apply rule"), "Use the rule as edited; it is checked before it is used."),
+            discardDraft = Hints.of(new JButton("Discard draft"), "Throw away the changes to this rule.");
     private final DefaultListModel<String> sheetNames = new DefaultListModel<>();
     private final JList<String> sheets = new JList<>(sheetNames);
     private final JTable table = new JTable();
@@ -107,14 +109,12 @@ final class SieveRuleEditor {
         ((JSpinner.DefaultEditor) within.getEditor()).getTextField().setColumns(6);
         form.add(metadata, BorderLayout.NORTH);
         parts.addTab("Rule body", body); parts.addTab("Only when", guard.component()); parts.setPreferredSize(new java.awt.Dimension(420, 360)); form.add(parts);
-        body.putClientProperty(Hints.TAB, "What the rule matches: value pairs, sets, a formula, a mapping or an assertion.");
-        guard.component().putClientProperty(Hints.TAB, "A condition that must hold for the rule to apply at all; empty means always.");
+        body.putClientProperty(Hints.TAB, "To say what the rule matches: value pairs, sets, a formula, a mapping or an assertion.");
+        guard.component().putClientProperty(Hints.TAB, "To limit the rule to a condition that must hold for it to apply; empty means always.");
         scroll.getVerticalScrollBar().setUnitIncrement(18); root.add(scroll);
         JPanel actions = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        JButton use = Hints.of(new JButton("Apply rule"), "Use the rule as edited; it is checked before it is used."),
-                revert = Hints.of(new JButton("Discard draft"), "Throw away the changes to this rule.");
-        use.addActionListener(e -> { try { this.apply.accept(draft()); } catch (RuntimeException failure) { error(failure); } });
-        revert.addActionListener(e -> discard.run()); actions.add(use); actions.add(revert); root.add(actions, BorderLayout.SOUTH);
+        applyRule.addActionListener(e -> { try { this.apply.accept(draft()); } catch (RuntimeException failure) { error(failure); } });
+        discardDraft.addActionListener(e -> discard.run()); actions.add(applyRule); actions.add(discardDraft); root.add(actions, BorderLayout.SOUTH);
         listen(id, this::touch); listen(description, this::touch);
         polarity.addActionListener(e -> touch()); adjacent.addActionListener(e -> touch()); distance.addActionListener(e -> touch());
         within.addChangeListener(e -> touch());
@@ -122,6 +122,7 @@ final class SieveRuleEditor {
         sheets.setVisibleRowCount(3); sheets.setToolTipText("Select the sheets, then click Use chosen sheets. Ctrl/Shift selects several.");
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); table.putClientProperty("terminateEditOnFocusLost", true);
         root.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
+        shown(false);
     }
 
     @SuppressWarnings("serial")
@@ -136,6 +137,11 @@ final class SieveRuleEditor {
 
     JComponent component() { return root; }
     boolean dirty() { return dirty || table.isEditing(); }
+    /** With no rule shown there is nothing to edit, apply or discard: its controls are off, so no draft can start for no rule. */
+    private void shown(boolean rule) {
+        for (JComponent c : List.of(id, description, polarity, adjacent, distance, within, applyRule, discardDraft)) c.setEnabled(rule);
+        guard.active(rule);
+    }
     void editable(boolean allowed) {
         if (editable == allowed) return;
         editable = allowed;
@@ -155,7 +161,7 @@ final class SieveRuleEditor {
             body.removeAll(); sheetNames.clear();
             if (rule == null) {
                 kind.setText("Select a rule, or create one from the toolbar.");
-                id.setText(""); description.setText(""); guard.show(null, values);
+                id.setText(""); description.setText(""); shown(false); guard.show(null, values);
                 return;
             }
             String type = SieveDocument.kind(rule); kind.setText(switch (type) {
@@ -165,6 +171,7 @@ final class SieveRuleEditor {
                 case "when" -> "Formula · predicate over the chosen sheets";
                 default -> "Assertion · condition tree";
             });
+            shown(true);
             boolean mappingRule = type.equals("mapping"), gated = !mappingRule && !type.equals("assert");
             polarity.setEnabled(!mappingRule); adjacent.setEnabled(gated); distance.setEnabled(gated); within.setEnabled(gated);
             kind.setToolTipText(mappingRule ? "For each declared source value, every present target value must be allowed. Undeclared source values are unrestricted. Only when still applies."

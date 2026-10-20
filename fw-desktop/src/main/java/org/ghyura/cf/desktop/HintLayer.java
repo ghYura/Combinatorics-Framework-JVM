@@ -101,7 +101,11 @@ final class HintLayer extends LayerUI<JComponent> {
     }
 
     /** What a pop-up explains: the element, the words, the rectangle to stand beside, and where the pointer rested. */
-    record Target(JComponent holder, String text, Rectangle anchor, Point pointer) {
+    record Target(JComponent holder, String text, Rectangle anchor, Point pointer, boolean tab) {
+        Target(JComponent holder, String text, Rectangle anchor, Point pointer) {
+            this(holder, text, anchor, pointer, false);
+        }
+
         boolean same(Target other) {
             return other != null && holder == other.holder && text.equals(other.text);
         }
@@ -234,6 +238,12 @@ final class HintLayer extends LayerUI<JComponent> {
         return button != null ? button.isSelected() : on;
     }
 
+    /** What a pop-up at the point would say, or null: for tests, without waiting for the pointer to rest. */
+    String hintAt(JLayer<? extends JComponent> layer, Point point) {
+        Target t = target(layer, point);
+        return t == null ? null : t.text();
+    }
+
     /** The shown hint, or null. */
     String text() {
         return shown == null ? null : shown.text();
@@ -341,7 +351,7 @@ final class HintLayer extends LayerUI<JComponent> {
     }
 
     private void show(JLayer<? extends JComponent> layer, Target target) {
-        bubble = place(layer, target.anchor(), target.pointer(), measure(layer, target.text()));
+        bubble = place(layer, target.anchor(), target.pointer(), measure(layer, target.text(), target.tab()));
         shown = target;
         layer.repaint(bubble);
     }
@@ -363,11 +373,14 @@ final class HintLayer extends LayerUI<JComponent> {
         }
         Point inView = SwingUtilities.convertPoint(layer, point, view);
         Component deepest = SwingUtilities.getDeepestComponentAt(view, inView.x, inView.y);
-        if (deepest instanceof JTabbedPane tabs) {
+        // a tab's name says what the tab is for; a scrolling row of names lies in a strip inside the pane, not on the pane
+        JTabbedPane tabs = deepest instanceof JTabbedPane t ? t : (JTabbedPane) SwingUtilities.getAncestorOfClass(JTabbedPane.class, deepest);
+        if (tabs != null) {
             Point inTabs = SwingUtilities.convertPoint(layer, point, tabs);
             int index = tabs.indexAtLocation(inTabs.x, inTabs.y);
             if (index >= 0 && Hints.tab(tabs, index) != null && tabs.getComponentAt(index) instanceof JComponent content) {
-                return new Target(content, Hints.tab(tabs, index), SwingUtilities.convertRectangle(tabs, tabs.getBoundsAt(index), layer), point);
+                return new Target(content, Hints.purpose(tabs, index), SwingUtilities.convertRectangle(tabs, tabs.getBoundsAt(index), layer),
+                        point, true);
             }
         }
         if (deepest == null) {
@@ -434,12 +447,14 @@ final class HintLayer extends LayerUI<JComponent> {
         return lines;
     }
 
-    private static Dimension measure(JComponent layer, String hint) {
+    /** A tab's pop-up starts with its question in bold, so it reads apart from an element's hint. */
+    private static Dimension measure(JComponent layer, String hint, boolean tab) {
         FontMetrics metrics = layer.getFontMetrics(font(layer));
+        FontMetrics bold = layer.getFontMetrics(font(layer).deriveFont(Font.BOLD));
         int width = 0;
         List<String> lines = lines(metrics, hint);
-        for (String line : lines) {
-            width = Math.max(width, metrics.stringWidth(line));
+        for (int i = 0; i < lines.size(); i++) {
+            width = Math.max(width, (tab && i == 0 ? bold : metrics).stringWidth(lines.get(i)));
         }
         return new Dimension(width + 2 * PAD + 2, lines.size() * metrics.getHeight() + 2 * PAD + 2);
     }
@@ -490,6 +505,7 @@ final class HintLayer extends LayerUI<JComponent> {
             FontMetrics metrics = g2.getFontMetrics();
             int line = 0;
             for (String s : lines(metrics, shown.text())) {
+                g2.setFont(shown.tab() && line == 0 ? font.deriveFont(Font.BOLD) : font);
                 g2.drawString(s, bubble.x + PAD + 1, bubble.y + PAD + 1 + metrics.getAscent() + line++ * metrics.getHeight());
             }
         } finally {
