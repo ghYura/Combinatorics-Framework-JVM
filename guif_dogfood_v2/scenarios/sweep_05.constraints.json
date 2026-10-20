@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "probe_needs_an_explicit_setup_node",
+      "polarity": "require",
+      "assert": {
+        "sheet": "setup",
+        "present": true
+      }
+    },
+    {
+      "id": "nothing_to_miss_for_buttons_that_need_nothing",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "button": "o.put(\"button\",\"t10_0_7_finish_add_a_check_sheet_where_your_test_decides_its_verdict_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        }
+      ]
+    }
+  ]
+}

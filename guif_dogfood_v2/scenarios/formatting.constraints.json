@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "interrupt_requires_started_formatter_blank",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "input": "o.put(\"input\",\"blank\");",
+          "sudden": "o.put(\"sudden\",\"original\");"
+        },
+        {
+          "input": "o.put(\"input\",\"blank\");",
+          "sudden": "o.put(\"sudden\",\"select\");"
+        }
+      ]
+    },
+    {
+      "id": "interrupt_requires_started_formatter_truncated",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "input": "o.put(\"input\",\"truncated\");",
+          "sudden": "o.put(\"sudden\",\"original\");"
+        },
+        {
+          "input": "o.put(\"input\",\"truncated\");",
+          "sudden": "o.put(\"sudden\",\"select\");"
+        }
+      ]
+    }
+  ]
+}

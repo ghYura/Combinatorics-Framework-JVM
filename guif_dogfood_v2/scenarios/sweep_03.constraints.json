@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "probe_needs_an_explicit_setup_node",
+      "polarity": "require",
+      "assert": {
+        "sheet": "setup",
+        "present": true
+      }
+    },
+    {
+      "id": "nothing_to_miss_for_buttons_that_need_nothing",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "button": "o.put(\"button\",\"t05_executable_only_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t06_use_python_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t06_runner_settings_step_3_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t08_browse_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t08_auto_search_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t08_use_the_example_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        }
+      ]
+    }
+  ]
+}

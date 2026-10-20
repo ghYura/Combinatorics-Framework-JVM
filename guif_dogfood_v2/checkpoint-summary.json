@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "selected": 976,
+  "families": 41,
+  "outcomes": {
+    "DOMAIN_FAIL": 492,
+    "PASS": 464
+  },
+  "buttons": 175,
+  "buttons_by_verdict": {
+    "PASS": 97,
+    "SOFT": 78
+  },
+  "buttons_with_ready_checks": 175,
+  "buttons_with_missing_checks": 124,
+  "buttons_pressed": 175,
+  "hard_findings": 0,
+  "soft_findings": 78,
+  "listened_nonbutton_elements": 300,
+  "listener_failures": 0,
+  "protected": 1100,
+  "changed": [
+    "/home/yb/16102026/Combinatorics-Framework-JVM/fw-desktop/src/main/java/org/ghyura/cf/desktop/ConditionEditor.java",
+    "/home/yb/16102026/Combinatorics-Framework-JVM/fw-desktop/src/main/java/org/ghyura/cf/desktop/FormulaEditor.java",
+    "/home/yb/16102026/Combinatorics-Framework-JVM/fw-desktop/src/main/java/org/ghyura/cf/desktop/SieveDataEditor.java",
+    "/home/yb/16102026/Combinatorics-Framework-JVM/fw-desktop/src/main/java/org/ghyura/cf/desktop/SieveRuleEditor.java",
+    "/home/yb/16102026/Combinatorics-Framework-JVM/fw-desktop/src/test/java/org/ghyura/cf/desktop/SieveWorkbenchTest.java"
+  ],
+  "pending_families": []
+}

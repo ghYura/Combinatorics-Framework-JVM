@@ -1,0 +1,306 @@
+# Independent non-button listeners
+
+Attached-only rows are monitored elements, not interaction coverage. Fields, outputs, labels, choices, spinners, lists, tables, trees and tabs have their own listeners; dynamic instances may have separate IDs.
+
+| Element | Type / name | Events | After attachment | Omitted tail | Violations |
+|---|---|---:|---:|---:|---:|
+| element_dialog_addon_open_jlabel_what_to_pick_a_runner_add_on_such_as_addons_fw_python_jar_beside_the_application_or_a_jar_or_class_folder_your_plugin_needs_it_is_added_to_the_list_1 | JLabel / What to pick A runner add-on, such as addons/fw-python.jar beside the application, or a jar or class folder your plugin needs. It is added to the list. | 1 | 0 | 0 | 0 |
+| element_dialog_constraints_open_jlabel_what_to_pick_rules_that_forbid_or_require_combinations_of_values_as_json_usually_a_scenario_constraints_json_beside_a_scenario_importing_replaces_the_rules_shown_they_reach_the_scenario_when_you_press_save_for_scenario_1 | JLabel / What to pick Rules that forbid or require combinations of values, as JSON: usually a <scenario>.constraints.json beside a scenario. Importing replaces the rules shown; they reach the scenario when you press Save for scenario. | 1 | 0 | 0 | 0 |
+| element_dialog_constraints_save_jlabel_what_to_pick_a_copy_of_the_rules_as_json_runs_read_only_scenario_constraints_json_beside_the_scenario_which_save_for_scenario_writes_a_file_of_any_other_name_is_a_copy_to_import_later_1 | JLabel / What to pick A copy of the rules as JSON. Runs read only <scenario>.constraints.json beside the scenario, which Save for scenario writes; a file of any other name is a copy to import later. | 1 | 0 | 0 | 0 |
+| element_dialog_coverage_open_jlabel_what_to_pick_a_report_your_coverage_tool_already_wrote_jacoco_xml_coverage_py_json_or_gcov_output_nothing_is_run_for_one_report_per_results_line_put_lineno_in_the_path_where_the_line_number_goes_1 | JLabel / What to pick A report your coverage tool already wrote: JaCoCo XML, coverage.py JSON or gcov output. Nothing is run. For one report per results line, put {lineNo} in the path where the line number goes. | 1 | 0 | 0 | 0 |
+| element_dialog_document_open_jlabel_what_to_pick_a_scenario_is_a_workbook_whose_sheets_list_the_values_to_combine_its_fw_seq_sheet_says_how_they_are_combined_pick_an_xlsx_workbook_or_the_same_sheets_saved_as_json_yaml_or_toml_not_a_constraints_json_or_properties_file_those_sit_beside_a_scenario_and_are_found_with_it_1 | JLabel / What to pick A scenario is a workbook whose sheets list the values to combine; its FW_Seq sheet says how they are combined. Pick an .xlsx workbook, or the same sheets saved as .json, .yaml or .toml. Not a *.constraints.json or *.properties file: those sit beside a scenario and are found with it. | 1 | 0 | 0 | 0 |
+| element_dialog_document_save_jlabel_what_to_pick_where_the_scenario_goes_xlsx_keeps_the_workbook_json_yaml_and_toml_save_the_same_sheets_as_text_1 | JLabel / What to pick Where the scenario goes. .xlsx keeps the workbook; .json, .yaml and .toml save the same sheets as text. | 1 | 0 | 0 | 0 |
+| element_dialog_export_checkpoint_jlabel_what_to_pick_the_run_s_exact_state_to_resume_it_later_resume_checkpoint_or_to_export_it_again_1 | JLabel / What to pick The run's exact state, to resume it later (resume --checkpoint) or to export it again. | 1 | 0 | 0 | 0 |
+| element_dialog_export_metrics_jlabel_what_to_pick_one_line_per_test_case_its_key_value_measurements_and_its_verdict_as_fw_var_0_pass_this_is_the_file_step_8_results_analysis_and_analyze_results_read_1 | JLabel / What to pick One line per test case: its key=value measurements and its verdict as FW_VAR (0 = pass). This is the file step 8 (Results analysis) and analyze --results read. | 1 | 0 | 0 | 0 |
+| element_dialog_export_report_jlabel_what_to_pick_an_xml_summary_of_the_run_its_counts_and_verdicts_for_people_and_tools_step_8_does_not_read_it_save_the_metrics_for_step_8_instead_1 | JLabel / What to pick An XML summary of the run: its counts and verdicts, for people and tools. Step 8 does not read it: save the metrics for step 8 instead. | 1 | 0 | 0 | 0 |
+| element_dialog_export_results_jlabel_what_to_pick_one_csv_row_per_attempt_the_results_v2_table_outcome_verdict_and_duration_for_a_spreadsheet_step_8_does_not_read_it_save_the_metrics_for_step_8_instead_1 | JLabel / What to pick One CSV row per attempt (the results_v2 table): outcome, verdict and duration, for a spreadsheet. Step 8 does not read it: save the metrics for step 8 instead. | 1 | 0 | 0 | 0 |
+| element_dialog_export_samples_jlabel_what_to_pick_one_csv_row_per_test_case_with_a_column_per_measurement_for_a_spreadsheet_step_8_does_not_read_it_save_the_metrics_for_step_8_instead_1 | JLabel / What to pick One CSV row per test case with a column per measurement, for a spreadsheet. Step 8 does not read it: save the metrics for step 8 instead. | 1 | 0 | 0 | 0 |
+| element_dialog_graph_save_jlabel_what_to_pick_a_file_ending_in_dot_opens_in_graphviz_and_other_diagram_tools_json_keeps_the_graph_as_data_1 | JLabel / What to pick A file ending in .dot opens in Graphviz and other diagram tools; .json keeps the graph as data. | 1 | 0 | 0 | 0 |
+| element_dialog_imports_open_jlabel_what_to_pick_a_folder_that_holds_python_modules_your_test_cases_import_such_as_your_sut_s_package_it_is_added_to_the_list_1 | JLabel / What to pick A folder that holds Python modules your test cases import, such as your SUT's package. It is added to the list. | 1 | 0 | 0 | 0 |
+| element_dialog_library_open_jlabel_what_to_pick_the_generator_trunk_folder_of_a_combinatorics_framework_qa_edition_checkout_the_folder_that_holds_intake_verified_examples_json_select_the_folder_and_press_open_or_open_intake_and_pick_that_json_file_1 | JLabel / What to pick The generator_trunk folder of a Combinatorics-Framework-QA-edition checkout: the folder that holds intake/verified_examples.json. Select the folder and press Open, or open intake and pick that .json file. | 1 | 0 | 0 | 0 |
+| element_dialog_program_open_jlabel_what_to_pick_the_python_program_itself_for_example_usr_bin_python3_or_the_bin_python_of_a_virtual_environment_1 | JLabel / What to pick The Python program itself, for example /usr/bin/python3 or the bin/python of a virtual environment. | 1 | 0 | 0 | 0 |
+| element_dialog_results_open_jlabel_what_to_pick_a_text_file_with_one_line_per_test_case_key_value_measurements_ending_with_the_verdict_for_example_candidate_id_7_latency_ms_4_6_fw_var_0_fw_var_0_means_pass_make_one_in_step_6_save_as_metrics_for_step_8_kv_not_the_report_results_or_csv_exports_of_step_6_1 | JLabel / What to pick A text file with one line per test case: key=value measurements ending with the verdict, for example candidate_id=7 latency_ms=4.6 FW_VAR=0 (FW_VAR 0 means pass). Make one in step 6: Save as "metrics for step 8 (.kv)". Not the report, results or CSV exports of step 6. | 1 | 0 | 0 | 0 |
+| element_dialog_rules_open_jlabel_what_to_pick_a_json_file_of_scoring_rules_such_as_required_tokens_token_weights_it_replaces_the_rules_in_the_box_1 | JLabel / What to pick A JSON file of scoring rules, such as {"required_tokens": [...], "token_weights": {...}}. It replaces the rules in the box. | 1 | 0 | 0 | 0 |
+| element_dialog_scenario_open_jlabel_what_to_pick_a_scenario_is_a_workbook_whose_sheets_list_the_values_to_combine_its_fw_seq_sheet_says_how_they_are_combined_pick_an_xlsx_workbook_or_the_same_sheets_saved_as_json_yaml_or_toml_not_a_constraints_json_or_properties_file_those_sit_beside_a_scenario_and_are_found_with_it_1 | JLabel / What to pick A scenario is a workbook whose sheets list the values to combine; its FW_Seq sheet says how they are combined. Pick an .xlsx workbook, or the same sheets saved as .json, .yaml or .toml. Not a *.constraints.json or *.properties file: those sit beside a scenario and are found with it. | 1 | 0 | 0 | 0 |
+| element_dialog_scores_save_jlabel_what_to_pick_a_csv_table_of_every_scored_line_with_its_score_and_decision_for_a_spreadsheet_1 | JLabel / What to pick A CSV table of every scored line with its score and decision, for a spreadsheet. | 1 | 0 | 0 | 0 |
+| element_dialog_text_open_jlabel_what_to_pick_any_text_whose_lines_you_want_ranked_such_as_a_log_or_a_program_s_output_txt_log_out_every_line_is_scored_on_its_own_1 | JLabel / What to pick Any text whose lines you want ranked, such as a log or a program's output (.txt, .log, .out). Every line is scored on its own. | 1 | 0 | 0 | 0 |
+| element_dialog_workdir_open_jlabel_what_to_pick_the_folder_each_python_test_case_starts_in_relative_paths_in_your_sut_are_read_from_here_leave_the_box_empty_to_use_the_scenario_s_folder_1 | JLabel / What to pick The folder each Python test case starts in; relative paths in your SUT are read from here. Leave the box empty to use the scenario's folder. | 1 | 0 | 0 | 0 |
+| element_search_found_scenario_files_likeliest_first_jtable_found_scenario_files_likeliest_first_1 | JTable / Found scenario files, likeliest first | 40 | 36 | 0 | 0 |
+| element_search_jlabel_1 | JLabel /   | 8 | 4 | 0 | 0 |
+| element_search_jlabel_searching_the_folders_where_scenario_files_usually_are_0_folders_so_far_1 | JLabel / Searching the folders where scenario files usually are… 0 folders so far. | 8 | 4 | 0 | 0 |
+| element_search_jlabel_show_only_1 | JLabel / Show only: | 4 | 0 | 0 | 0 |
+| element_search_jtextfield_show_only_1 | JTextField / Show only | 20 | 16 | 0 | 0 |
+| element_shell_jtabbedpane_1_library_1 | JTabbedPane / 1 · Library | 2714 | 1758 | 0 | 0 |
+| element_t01_about_the_selected_example_jtextarea_about_the_selected_example_1 | JTextArea / About the selected example | 1072 | 116 | 0 | 0 |
+| element_t01_jlabel_groups_of_examples_1 | JLabel / Groups of examples | 956 | 0 | 0 | 0 |
+| element_t01_jlabel_no_library_open_yet_press_open_the_example_library_or_choose_another_with_open_a_library_1 | JLabel / No library open yet: press Open the example library, or choose another with Open a library... | 981 | 25 | 0 | 0 |
+| element_t01_jlabel_runner_inline_metrics_1 | JLabel / Runner: inline-metrics | 956 | 0 | 0 | 0 |
+| element_t01_jlist_groups_of_examples_1 | JList / Groups of examples | 980 | 24 | 0 | 0 |
+| element_t01_scenarios_of_the_selected_suite_documented_counts_and_sources_jtable_scenarios_of_the_selected_suite_documented_counts_and_sources_1 | JTable / Scenarios of the selected suite: documented counts and sources | 983 | 27 | 0 | 0 |
+| element_t01_uiresource_verified_examples_1_1 | UIResource / Verified examples (1) | 9 | 0 | 0 | 0 |
+| element_t02_2_1_control_sheets_fw_custom_var_verdict_codes_and_their_names_jtable_fw_custom_var_verdict_codes_and_their_names_1 | JTable / FW_CUSTOM_VAR: verdict codes and their names | 1030 | 74 | 0 | 0 |
+| element_t02_2_1_control_sheets_jlabel_1 | JLabel /   | 974 | 18 | 0 | 0 |
+| element_t02_2_1_control_sheets_jlabel_fw_arguments_arguments_one_per_line_1 | JLabel / FW_Arguments: arguments, one per line | 956 | 0 | 0 | 0 |
+| element_t02_2_1_control_sheets_jlabel_fw_runmefirstonce_code_run_once_before_the_test_cases_1 | JLabel / FW_RunMeFirstOnce: code run once before the test cases | 956 | 0 | 0 | 0 |
+| element_t02_2_1_control_sheets_jtextarea_fw_arguments_arguments_one_per_line_1 | JTextArea / FW_Arguments: arguments, one per line | 956 | 0 | 0 | 0 |
+| element_t02_2_1_control_sheets_jtextarea_fw_runmefirstonce_code_run_once_before_the_test_cases_1 | JTextArea / FW_RunMeFirstOnce: code run once before the test cases | 956 | 0 | 0 | 0 |
+| element_t02_2_2_validation_check_results_jtextarea_check_results_1 | JTextArea / Check results | 1926 | 970 | 0 | 0 |
+| element_t02_2_3_operand_dependencies_operand_dependencies_each_joiner_s_operands_and_their_lifetimes_jtable_operand_dependencies_each_joiner_s_operands_and_their_lifetimes_1 | JTable / Operand dependencies: each joiner's operands and their lifetimes | 978 | 22 | 0 | 0 |
+| element_t02_2_4_dependency_graph_jlabel_validate_the_scenario_to_see_its_fw_seq_dependency_graph_1 | JLabel / Validate the scenario to see its FW_Seq dependency graph. | 985 | 29 | 0 | 0 |
+| element_t02_2_4_dependency_graph_problems_in_the_diagram_jtextarea_problems_in_the_diagram_1 | JTextArea / Problems in the diagram | 995 | 39 | 0 | 0 |
+| element_t02_cells_of_sheet_fw_seq_jtable_cells_of_sheet_fw_seq_1 | JTable / Cells of sheet FW_Seq | 1382 | 426 | 0 | 0 |
+| element_t02_jlabel_cell_templates_1 | JLabel / Cell templates | 956 | 0 | 0 | 0 |
+| element_t02_jlabel_sheets_1 | JLabel / Sheets | 956 | 0 | 0 | 0 |
+| element_t02_jlabel_untitled_1 | JLabel / untitled | 1066 | 110 | 0 | 0 |
+| element_t02_jlist_cell_templates_1 | JList / Cell templates | 958 | 2 | 0 | 0 |
+| element_t02_jlist_sheets_1 | JList / Sheets | 2444 | 1488 | 0 | 0 |
+| element_t02_jtabbedpane_2_1_control_sheets_1 | JTabbedPane / 2.1 · Control sheets | 1001 | 45 | 0 | 0 |
+| element_t02_replacere_1 |  / ReplaceRE | 2 | 0 | 0 | 0 |
+| element_t02_uiresource_fw_seq_1 | UIResource / FW_Seq | 2831 | 1875 | 0 | 0 |
+| element_t03_check_results_jtextarea_check_results_1 | JTextArea / Check results | 1016 | 60 | 0 | 0 |
+| element_t03_fw_seq_plan_each_sheet_s_role_values_and_directives_jtable_fw_seq_plan_each_sheet_s_role_values_and_directives_1 | JTable / FW_Seq plan: each sheet's role, values and directives | 964 | 8 | 0 | 0 |
+| element_t03_jlabel_1 | JLabel /  | 998 | 42 | 0 | 0 |
+| element_t03_jlabel_a_scenario_is_a_workbook_xlsx_whose_sheets_list_the_values_to_combine_or_the_same_sheets_as_json_yaml_or_toml_its_rules_constraints_json_and_settings_properties_beside_it_are_found_by_themselves_1 | JLabel / A scenario is a workbook (.xlsx) whose sheets list the values to combine, or the same sheets as .json, .yaml or .toml. Its rules (.constraints.json) and settings (.properties) beside it are found by themselves. | 956 | 0 | 0 | 0 |
+| element_t03_jlabel_scenario_file_xlsx_json_yaml_or_toml_1 | JLabel / Scenario file (xlsx, json, yaml or toml): | 956 | 0 | 0 | 0 |
+| element_t03_jtextfield_scenario_file_xlsx_json_yaml_or_toml_1 | JTextField / Scenario file (xlsx, json, yaml or toml) | 2362 | 1406 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jcombobox_runner_1 | JComboBox / Runner | 1080 | 124 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_add_on_and_dependency_paths_1 | JLabel / Add-on and dependency paths: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_covering_method_1 | JLabel / Covering method: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_covering_strength_t_1 | JLabel / Covering strength t: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_most_covering_rows_1 | JLabel / Most covering rows: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_python_environment_variables_1 | JLabel / Python environment variables: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_python_import_directories_1 | JLabel / Python import directories: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_python_interpreter_1 | JLabel / Python interpreter: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_python_sandbox_1 | JLabel / Python sandbox: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_python_working_directory_1 | JLabel / Python working directory: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_runner_1 | JLabel / Runner: | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_settings_apply_to_the_next_operation_prepared_runs_keep_their_settings_1 | JLabel / Settings apply to the next operation. Prepared runs keep their settings. | 996 | 40 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jlabel_the_default_runner_generated_java_needs_nothing_below_the_python_boxes_are_used_only_when_the_runner_is_python_1 | JLabel / The default runner, generated-java, needs nothing below. The Python boxes are used only when the runner is python. | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_add_on_and_dependency_paths_1 | JTextField / Add-on and dependency paths | 956 | 0 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_covering_method_1 | JTextField / Covering method | 1164 | 208 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_covering_strength_t_1 | JTextField / Covering strength t | 1164 | 208 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_most_covering_rows_1 | JTextField / Most covering rows | 1164 | 208 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_python_environment_variables_1 | JTextField / Python environment variables | 988 | 32 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_python_import_directories_1 | JTextField / Python import directories | 988 | 32 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_python_interpreter_1 | JTextField / Python interpreter | 988 | 32 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_python_sandbox_1 | JTextField / Python sandbox | 988 | 32 | 0 | 0 |
+| element_t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_jtextfield_python_working_directory_1 | JTextField / Python working directory | 988 | 32 | 0 | 0 |
+| element_t04_advanced_json_constraints_as_json_jtextarea_constraints_as_json_1 | JTextArea / Constraints as JSON | 3752 | 2796 | 0 | 0 |
+| element_t04_advanced_json_jlabel_framework_sidecar_format_layout_is_saved_separately_1 | JLabel / Framework sidecar format; layout is saved separately. | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jcombobox_columns_1 | JComboBox / Columns | 3870 | 2914 | 0 | 0 |
+| element_t04_bond_matrix_jcombobox_rows_1 | JComboBox / Rows | 3168 | 2212 | 0 | 0 |
+| element_t04_bond_matrix_jlabel_column_filter_1 | JLabel / Column filter | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jlabel_columns_1 | JLabel / Columns | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jlabel_forbid_require_counts_first_50_matching_values_per_axis_use_filters_to_find_other_values_1 | JLabel / Forbid/require counts · first 50 matching values per axis · use filters to find other values. | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jlabel_row_filter_1 | JLabel / Row filter | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jlabel_rows_1 | JLabel / Rows | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jtable_1 | JTable /  | 2446 | 1490 | 0 | 0 |
+| element_t04_bond_matrix_jtextfield_column_filter_1 | JTextField / Column filter | 1828 | 872 | 0 | 0 |
+| element_t04_bond_matrix_jtextfield_row_filter_1 | JTextField / Row filter | 1828 | 872 | 0 | 0 |
+| element_t04_jcombobox_effect_1 | JComboBox / Effect | 3294 | 2338 | 0 | 0 |
+| element_t04_jcombobox_kind_1 | JComboBox / Kind | 2700 | 1744 | 0 | 0 |
+| element_t04_jformattedtextfield_1 | JFormattedTextField /  | 1947 | 991 | 0 | 0 |
+| element_t04_jformattedtextfield_2 | JFormattedTextField /  | 2006 | 1050 | 0 | 0 |
+| element_t04_jlabel_0_rules_1 | JLabel / 0 rules ·  | 2961 | 2005 | 0 | 0 |
+| element_t04_jlabel_columns_apart_1 | JLabel / columns apart | 1892 | 936 | 0 | 0 |
+| element_t04_jlabel_description_1 | JLabel / Description | 1892 | 936 | 0 | 0 |
+| element_t04_jlabel_effect_1 | JLabel / Effect | 1892 | 936 | 0 | 0 |
+| element_t04_jlabel_find_rules_1 | JLabel / Find rules | 1828 | 872 | 0 | 0 |
+| element_t04_jlabel_kind_1 | JLabel / Kind | 1828 | 872 | 0 | 0 |
+| element_t04_jlabel_no_scenario_is_chosen_in_step_3_yet_choose_one_there_then_press_open_step_3_scenario_1 | JLabel / No scenario is chosen in step 3 yet: choose one there, then press Open step 3 scenario. | 2080 | 1124 | 0 | 0 |
+| element_t04_jlabel_rule_id_1 | JLabel / Rule ID | 1892 | 936 | 0 | 0 |
+| element_t04_jlabel_scan_1 | JLabel / Scan ≤ | 1828 | 872 | 0 | 0 |
+| element_t04_jlabel_select_a_rule_or_create_one_from_the_toolbar_1 | JLabel / Select a rule, or create one from the toolbar. | 2058 | 1102 | 0 | 0 |
+| element_t04_jspinner_columns_apart_1 | JSpinner / columns apart | 1892 | 936 | 0 | 0 |
+| element_t04_jspinner_scan_1 | JSpinner / Scan ≤ | 1828 | 872 | 0 | 0 |
+| element_t04_jtabbedpane_rule_body_1 | JTabbedPane / Rule body | 1924 | 968 | 0 | 0 |
+| element_t04_jtabbedpane_sieve_graph_1 | JTabbedPane / Sieve graph | 1916 | 960 | 0 | 0 |
+| element_t04_jtable_1 | JTable /  | 2581 | 1625 | 0 | 0 |
+| element_t04_jtextfield_description_1 | JTextField / Description | 1892 | 936 | 0 | 0 |
+| element_t04_jtextfield_find_rules_1 | JTextField / Find rules | 1828 | 872 | 0 | 0 |
+| element_t04_jtextfield_rule_id_1 | JTextField / Rule ID | 2552 | 1596 | 0 | 0 |
+| element_t04_messages_jtextarea_messages_1 | JTextArea / Messages | 3372 | 2416 | 0 | 0 |
+| element_t04_only_when_borderlesstextfield_value_1 | BorderlessTextField / value: | 1488 | 532 | 0 | 0 |
+| element_t04_only_when_jcombobox_other_column_1 | JComboBox / other column | 4200 | 3244 | 0 | 0 |
+| element_t04_only_when_jcombobox_present_1 | JComboBox / present | 4200 | 3244 | 0 | 0 |
+| element_t04_only_when_jcombobox_sheet_1 | JComboBox / sheet | 12620 | 11664 | 0 | 0 |
+| element_t04_only_when_jcombobox_test_1 | JComboBox / test | 4320 | 3364 | 0 | 0 |
+| element_t04_only_when_jcombobox_value_1 | JComboBox / value | 4752 | 3796 | 0 | 0 |
+| element_t04_only_when_jformattedtextfield_1 | JFormattedTextField /  | 1056 | 100 | 0 | 0 |
+| element_t04_only_when_jlabel_1 | JLabel /   | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_count_1 | JLabel / count: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_json_1 | JLabel / JSON: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_only_when_1 | JLabel / Only when | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_other_column_1 | JLabel / other column: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_present_1 | JLabel / present: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_selected_condition_1 | JLabel / selected condition: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_sheet_1 | JLabel / sheet: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_test_1 | JLabel / test: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jlabel_value_1 | JLabel / value: | 1892 | 936 | 0 | 0 |
+| element_t04_only_when_jspinner_count_1 | JSpinner / count | 1056 | 100 | 0 | 0 |
+| element_t04_only_when_jtextfield_json_1 | JTextField / JSON | 2184 | 1228 | 0 | 0 |
+| element_t04_only_when_parts_of_the_condition_defaulttreecellrenderer_always_active_no_guard_1 | DefaultTreeCellRenderer / Always active (no guard) | 2882 | 1926 | 0 | 0 |
+| element_t04_only_when_parts_of_the_condition_jtree_parts_of_the_condition_1 | JTree / Parts of the condition | 4084 | 3128 | 0 | 0 |
+| element_t04_only_when_values_jlist_values_1 | JList / Values | 1056 | 100 | 0 | 0 |
+| element_t04_parameters_orders_jtabbedpane_parameters_1 | JTabbedPane / Parameters | 1852 | 896 | 0 | 0 |
+| element_t04_parameters_orders_parameters_jtable_1 | JTable /  | 1972 | 1016 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_borderlesstextfield_value_1 | BorderlessTextField / Value | 3454 | 2498 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_jcombobox_order_1 | JComboBox / Order | 3288 | 2332 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_jcombobox_sheet_1 | JComboBox / Sheet | 4208 | 3252 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_jcombobox_value_1 | JComboBox / Value | 4208 | 3252 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_jlabel_order_1 | JLabel / Order | 1828 | 872 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_jlabel_sheet_1 | JLabel / Sheet | 1828 | 872 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_jlabel_value_1 | JLabel / Value | 1828 | 872 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_ranked_values_jlist_ranked_values_1 | JList / Ranked values | 1994 | 1038 | 0 | 0 |
+| element_t04_parameters_orders_value_orders_ranked_values_latency_1_1 |  / latency=1; | 18 | 0 | 0 | 0 |
+| element_t04_rule_body_blocks_of_the_formula_defaulttreecellrenderer_condition_slot_empty_1 | DefaultTreeCellRenderer / + condition slot (empty) | 1182 | 1134 | 0 | 0 |
+| element_t04_rule_body_blocks_of_the_formula_jtree_blocks_of_the_formula_1 | JTree / Blocks of the formula | 534 | 486 | 0 | 0 |
+| element_t04_rule_body_jcombobox_operation_1 | JComboBox / operation | 1120 | 1072 | 0 | 0 |
+| element_t04_rule_body_jcombobox_parameter_1 | JComboBox / parameter | 136 | 88 | 0 | 0 |
+| element_t04_rule_body_jcombobox_sheet_1 | JComboBox / sheet | 136 | 88 | 0 | 0 |
+| element_t04_rule_body_jlabel_1 | JLabel / . | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_2 | JLabel /   | 140 | 92 | 0 | 0 |
+| element_t04_rule_body_jlabel_formula_over_the_sheets_parameters_1 | JLabel / Formula over the sheets' parameters: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_makes_1 | JLabel / makes: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_number_1 | JLabel / number: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_operation_1 | JLabel / operation: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_palette_1 | JLabel / palette: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_parameter_1 | JLabel / parameter: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_selected_1 | JLabel / selected: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jlabel_sheet_1 | JLabel / sheet: | 64 | 16 | 0 | 0 |
+| element_t04_rule_body_jtable_1 | JTable /  | 609 | 517 | 0 | 0 |
+| element_t04_rule_body_jtextarea_makes_1 | JTextArea / makes | 856 | 808 | 0 | 0 |
+| element_t04_rule_body_jtextfield_formula_over_the_sheets_parameters_1 | JTextField / Formula over the sheets' parameters | 288 | 240 | 0 | 0 |
+| element_t04_rule_body_jtextfield_number_1 | JTextField / number | 196 | 148 | 0 | 0 |
+| element_t04_rule_body_sheets_the_rule_reads_jlist_sheets_the_rule_reads_1 | JList / Sheets the rule reads | 1207 | 1071 | 0 | 0 |
+| element_t04_rule_body_sheets_the_rule_reads_uiresource_b_1 | UIResource / B | 763 | 627 | 0 | 0 |
+| element_t04_sieve_graph_jcombobox_group_as_1 | JComboBox / Group as | 2700 | 1744 | 0 | 0 |
+| element_t04_sieve_graph_jlabel_drag_right_pin_value_pair_shift_click_values_group_wheel_zoom_empty_space_space_pan_0_fit_1 | JLabel / Drag right pin → value: pair. Shift-click values: group. Wheel: zoom · empty space/Space: pan · 0: fit | 1828 | 872 | 0 | 0 |
+| element_t04_sieve_graph_jlabel_find_cards_1 | JLabel / Find cards | 1828 | 872 | 0 | 0 |
+| element_t04_sieve_graph_jlabel_group_as_1 | JLabel / Group as | 1828 | 872 | 0 | 0 |
+| element_t04_sieve_graph_jtextfield_find_cards_1 | JTextField / Find cards | 1828 | 872 | 0 | 0 |
+| element_t05_candidate_page_each_candidate_s_ids_and_fate_under_the_rules_jtable_candidate_page_each_candidate_s_ids_and_fate_under_the_rules_1 | JTable / Candidate page: each candidate's ids and fate under the rules | 1060 | 104 | 0 | 0 |
+| element_t05_chunk_origins_in_generated_order_jtable_chunk_origins_in_generated_order_1 | JTable / Chunk origins in generated order | 1141 | 185 | 0 | 0 |
+| element_t05_code_of_the_selected_test_case_code_of_the_selected_test_case_1 |  / Code of the selected test case | 1202 | 246 | 0 | 0 |
+| element_t05_jcombobox_code_language_1 | JComboBox / Code language | 3178 | 2222 | 0 | 0 |
+| element_t05_jcombobox_origins_1 | JComboBox / Origins | 956 | 0 | 0 | 0 |
+| element_t05_jformattedtextfield_1 | JFormattedTextField /  | 1112 | 156 | 0 | 0 |
+| element_t05_jlabel_code_language_1 | JLabel / Code language: | 956 | 0 | 0 | 0 |
+| element_t05_jlabel_look_at_most_at_test_cases_1 | JLabel / Look at most at (test cases): | 956 | 0 | 0 | 0 |
+| element_t05_jlabel_no_preview_yet_1 | JLabel / No preview yet. | 1094 | 138 | 0 | 0 |
+| element_t05_jlabel_origins_1 | JLabel / Origins: | 956 | 0 | 0 | 0 |
+| element_t05_jlabel_rows_per_page_1 | JLabel / Rows per page: | 956 | 0 | 0 | 0 |
+| element_t05_jlabel_select_a_test_case_to_inspect_its_code_and_origins_1 | JLabel / Select a test case to inspect its code and origins. | 1047 | 91 | 0 | 0 |
+| element_t05_jspinner_rows_per_page_1 | JSpinner / Rows per page | 982 | 26 | 0 | 0 |
+| element_t05_jtextfield_look_at_most_at_test_cases_1 | JTextField / Look at most at (test cases) | 1068 | 112 | 0 | 0 |
+| element_t05_plan_estimates_each_count_with_its_confidence_and_formula_jtable_plan_estimates_each_count_with_its_confidence_and_formula_1 | JTable / Plan estimates: each count with its confidence and formula | 1010 | 54 | 0 | 0 |
+| element_t05_rule_impact_what_each_rule_reads_and_the_candidates_it_removes_jtable_rule_impact_what_each_rule_reads_and_the_candidates_it_removes_1 | JTable / Rule impact: what each rule reads and the candidates it removes | 1018 | 62 | 0 | 0 |
+| element_t05_selected_chunk_origin_jtextarea_selected_chunk_origin_1 | JTextArea / Selected chunk origin | 1493 | 537 | 0 | 0 |
+| element_t06_jcombobox_save_as_1 | JComboBox / Save as | 956 | 0 | 0 | 0 |
+| element_t06_jlabel_no_run_yet_1 | JLabel / No run yet. | 1763 | 807 | 0 | 0 |
+| element_t06_jlabel_runner_inline_metrics_1 | JLabel / Runner: inline-metrics | 956 | 0 | 0 | 0 |
+| element_t06_jlabel_save_as_1 | JLabel / Save as: | 956 | 0 | 0 | 0 |
+| element_t06_run_report_jtextarea_run_report_1 | JTextArea / Run report | 2664 | 1708 | 0 | 0 |
+| element_t07_campaign_lineage_each_iteration_s_run_counts_winners_and_front_jtable_campaign_lineage_each_iteration_s_run_counts_winners_and_front_1 | JTable / Campaign lineage: each iteration's run, counts, winners and front | 1048 | 92 | 0 | 0 |
+| element_t07_campaign_report_jtextarea_campaign_report_1 | JTextArea / Campaign report | 1818 | 862 | 0 | 0 |
+| element_t07_jlabel_no_campaign_yet_1 | JLabel / No campaign yet. | 1395 | 439 | 0 | 0 |
+| element_t08_analysis_report_jtextarea_analysis_report_1 | JTextArea / Analysis report | 1980 | 1024 | 0 | 0 |
+| element_t08_jcombobox_code_coverage_optional_1 | JComboBox / Code coverage (optional) | 1184 | 228 | 0 | 0 |
+| element_t08_jlabel_1 | JLabel /  | 1120 | 164 | 0 | 0 |
+| element_t08_jlabel_code_coverage_optional_1 | JLabel / Code coverage (optional): | 956 | 0 | 0 | 0 |
+| element_t08_jlabel_metrics_file_kv_1 | JLabel / Metrics file (.kv): | 956 | 0 | 0 | 0 |
+| element_t08_jlabel_one_line_per_test_case_key_value_measurements_and_its_verdict_e_g_candidate_id_7_latency_ms_4_6_fw_var_0_0_pass_step_6_saves_one_save_as_metrics_for_step_8_kv_then_export_1 | JLabel / One line per test case: key=value measurements and its verdict, e.g. candidate_id=7 latency_ms=4.6 FW_VAR=0 (0 = pass). Step 6 saves one: Save as "metrics for step 8 (.kv)", then Export... | 956 | 0 | 0 | 0 |
+| element_t08_jlabel_report_file_1 | JLabel / report file: | 956 | 0 | 0 | 0 |
+| element_t08_jtextfield_metrics_file_kv_1 | JTextField / Metrics file (.kv) | 1344 | 388 | 0 | 0 |
+| element_t08_jtextfield_report_file_1 | JTextField / report file | 980 | 24 | 0 | 0 |
+| element_t09_jformattedtextfield_1 | JFormattedTextField /  | 956 | 0 | 0 | 0 |
+| element_t09_jformattedtextfield_2 | JFormattedTextField /  | 956 | 0 | 0 | 0 |
+| element_t09_jformattedtextfield_3 | JFormattedTextField /  | 956 | 0 | 0 | 0 |
+| element_t09_jformattedtextfield_4 | JFormattedTextField /  | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_1 | JLabel /  | 958 | 2 | 0 | 0 |
+| element_t09_jlabel_idle_1 | JLabel / Idle | 1002 | 46 | 0 | 0 |
+| element_t09_jlabel_lines_per_learned_pattern_1 | JLabel / Lines per learned pattern: | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_patterns_kept_1 | JLabel / Patterns kept: | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_show_lines_containing_1 | JLabel / Show lines containing: | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_text_file_to_score_1 | JLabel / Text file to score: | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_watch_from_score_1 | JLabel / Watch from score: | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_worth_improving_from_score_1 | JLabel / Worth improving from score: | 956 | 0 | 0 | 0 |
+| element_t09_jlabel_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_optimizations_1 | JLabel / Your scoring rules as JSON (required_tokens, token_weights, numeric_ranges, optimizations, ...) | 956 | 0 | 0 | 0 |
+| element_t09_jspinner_lines_per_learned_pattern_1 | JSpinner / Lines per learned pattern | 956 | 0 | 0 | 0 |
+| element_t09_jspinner_patterns_kept_1 | JSpinner / Patterns kept | 956 | 0 | 0 | 0 |
+| element_t09_jspinner_watch_from_score_1 | JSpinner / Watch from score | 956 | 0 | 0 | 0 |
+| element_t09_jspinner_worth_improving_from_score_1 | JSpinner / Worth improving from score | 956 | 0 | 0 | 0 |
+| element_t09_jtextarea_your_scoring_rules_as_json_required_tokens_token_weights_numeric_ranges_optimizations_1 | JTextArea / Your scoring rules as JSON (required_tokens, token_weights, numeric_ranges, optimizations, ...) | 1068 | 112 | 0 | 0 |
+| element_t09_jtextfield_show_lines_containing_1 | JTextField / Show lines containing | 956 | 0 | 0 | 0 |
+| element_t09_jtextfield_text_file_to_score_1 | JTextField / Text file to score | 1020 | 64 | 0 | 0 |
+| element_t09_scored_lines_each_line_s_score_decision_and_features_jtable_scored_lines_each_line_s_score_decision_and_features_1 | JTable / Scored lines: each line's score, decision and features | 966 | 10 | 0 | 0 |
+| element_t09_summary_of_all_scores_jtextarea_summary_of_all_scores_1 | JTextArea / Summary of all scores | 1020 | 64 | 0 | 0 |
+| element_t09_why_this_score_jtextarea_why_this_score_1 | JTextArea / Why this score | 956 | 0 | 0 | 0 |
+| element_t10_0_1_situation_jlabel_scenario_name_1 | JLabel / Scenario name: | 956 | 0 | 0 | 0 |
+| element_t10_0_1_situation_jlabel_the_wizard_composes_your_first_scenario_in_seven_short_pages_a_test_case_is_one_combination_of_values_the_wizard_asks_what_varies_and_what_kind_of_thing_each_is_a_static_parameter_a_sequence_of_actions_or_a_sudden_action_how_one_test_case_uses_it_what_must_not_happen_how_many_test_cases_are_enough_and_what_the_bootstrap_prepares_once_first_for_all_of_them_every_answer_shows_at_once_how_many_test_cases_it_makes_nothing_runs_until_you_choose_to_1 | JLabel / The wizard composes your first scenario in seven short pages. A test case is one combination of values: the wizard asks what varies and what kind of thing each is (a static parameter, a sequence of actions or a sudden action), how one test case uses it, what must not happen, how many test cases are enough, and what the bootstrap prepares once, first, for all of them. Every answer shows at once how many test cases it makes; nothing runs until you choose to. | 956 | 0 | 0 | 0 |
+| element_t10_0_1_situation_jlabel_what_are_you_testing_1 | JLabel / What are you testing? | 956 | 0 | 0 | 0 |
+| element_t10_0_1_situation_jtextfield_scenario_name_1 | JTextField / Scenario name | 956 | 0 | 0 | 0 |
+| element_t10_0_1_situation_what_fits_this_situation_jtextarea_what_fits_this_situation_1 | JTextArea / What fits this situation | 1016 | 60 | 0 | 0 |
+| element_t10_0_2_factors_factors_of_the_scenario_their_values_how_a_test_case_uses_them_and_their_ways_jtable_factors_of_the_scenario_their_values_how_a_test_case_uses_them_and_their_ways_1 | JTable / Factors of the scenario: their values, how a test case uses them and their ways | 3796 | 2840 | 0 | 0 |
+| element_t10_0_2_factors_jcombobox_kind_of_factor_1 | JComboBox / Kind of factor | 2248 | 1292 | 0 | 0 |
+| element_t10_0_2_factors_jlabel_a_factor_is_one_thing_that_varies_between_test_cases_its_values_are_what_it_can_be_say_what_kind_it_is_a_static_parameter_is_set_before_any_action_like_the_browser_chrome_firefox_safari_a_sequence_of_actions_is_done_in_order_like_the_steps_of_a_workflow_login_search_pay_a_sudden_action_may_or_may_not_happen_like_a_timeout_a_selection_treats_them_apart_pairwise_covers_the_static_parameters_each_factor_becomes_a_sheet_of_the_scenario_and_each_value_a_row_of_it_1 | JLabel / A factor is one thing that varies between test cases; its values are what it can be. Say what kind it is: a static parameter is set before any action, like the browser (chrome, firefox, safari); a sequence of actions is done in order, like the steps of a workflow (login, search, pay); a sudden action may or may not happen, like a timeout. A selection treats them apart: pairwise covers the static parameters. Each factor becomes a sheet of the scenario and each value a row of it. | 956 | 0 | 0 | 0 |
+| element_t10_0_2_factors_jlabel_factor_name_1 | JLabel / Factor name: | 956 | 0 | 0 | 0 |
+| element_t10_0_2_factors_jlabel_kind_of_factor_1 | JLabel / Kind of factor: | 956 | 0 | 0 | 0 |
+| element_t10_0_2_factors_jlabel_values_are_plain_words_a_value_may_hold_spaces_but_no_quote_backslash_or_comma_rules_and_the_test_cases_results_name_them_as_you_write_them_1 | JLabel / Values are plain words; a value may hold spaces but no quote, backslash or comma. Rules and the test cases' results name them as you write them. | 956 | 0 | 0 | 0 |
+| element_t10_0_2_factors_jlabel_values_separated_by_commas_1 | JLabel / Values, separated by commas: | 956 | 0 | 0 | 0 |
+| element_t10_0_2_factors_jtextfield_factor_name_1 | JTextField / Factor name | 1276 | 320 | 0 | 0 |
+| element_t10_0_2_factors_jtextfield_values_separated_by_commas_1 | JTextField / Values, separated by commas | 1264 | 308 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jformattedtextfield_1 | JFormattedTextField /  | 1280 | 324 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jformattedtextfield_2 | JFormattedTextField /  | 1096 | 140 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jformattedtextfield_3 | JFormattedTextField /  | 1486 | 530 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_at_least_1 | JLabel / At least: | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_at_most_1 | JLabel / At most: | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_does_their_order_matter_1 | JLabel / Does their order matter? | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_factor_to_describe_1 | JLabel / Factor to describe: | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_for_each_factor_say_how_one_test_case_uses_its_values_the_wizard_answers_with_the_instructions_of_the_factor_s_fw_seq_row_the_verb_is_dictated_by_the_shape_of_the_freedom_never_chosen_to_hit_a_number_1 | JLabel / For each factor, say how one test case uses its values. The wizard answers with the instructions of the factor's FW_Seq row: the verb is dictated by the shape of the freedom, never chosen to hit a number. | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_how_many_of_its_values_does_one_test_case_use_1 | JLabel / How many of its values does one test case use? | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlabel_number_of_values_1 | JLabel / Number of values: | 956 | 0 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jlist_factor_to_describe_1 | JList / Factor to describe | 5778 | 4822 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jspinner_at_least_1 | JSpinner / At least | 1096 | 140 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jspinner_at_most_1 | JSpinner / At most | 1161 | 205 | 0 | 0 |
+| element_t10_0_3_how_each_varies_jspinner_number_of_values_1 | JSpinner / Number of values | 1130 | 174 | 0 | 0 |
+| element_t10_0_3_how_each_varies_uiresource_account_3_ways_1 | UIResource / account: 3 ways | 767 | 761 | 0 | 0 |
+| element_t10_0_3_how_each_varies_uiresource_country_3_ways_1 | UIResource / country: 3 ways | 291 | 287 | 0 | 0 |
+| element_t10_0_3_how_each_varies_uiresource_coupon_3_ways_1 | UIResource / coupon: 3 ways | 276 | 272 | 0 | 0 |
+| element_t10_0_3_how_each_varies_uiresource_duplicate_submit_2_ways_1 | UIResource / duplicate_submit: 2 ways | 451 | 447 | 0 | 0 |
+| element_t10_0_3_how_each_varies_uiresource_factor1_2_ways_1 | UIResource / factor1: 2 ways | 22 | 16 | 0 | 0 |
+| element_t10_0_3_how_each_varies_uiresource_session_expires_2_ways_1 | UIResource / session_expires: 2 ways | 1824 | 1760 | 0 | 0 |
+| element_t10_0_3_how_each_varies_what_your_answers_mean_jtextarea_what_your_answers_mean_1 | JTextArea / What your answers mean | 3711 | 2755 | 0 | 0 |
+| element_t10_0_3_how_each_varies_which_instructions_fit_which_freedom_the_fw_seq_row_and_its_ways_for_n_values_jtable_which_instructions_fit_which_freedom_the_fw_seq_row_and_its_ways_for_n_values_1 | JTable / Which instructions fit which freedom: the FW_Seq row and its ways for n values | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jcombobox_factor_1 | JComboBox / Factor | 1162 | 206 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jcombobox_kind_of_rule_1 | JComboBox / Kind of rule | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jcombobox_other_factor_1 | JComboBox / Other factor | 1414 | 458 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jcombobox_other_value_1 | JComboBox / Other value | 1140 | 184 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jcombobox_value_1 | JComboBox / Value | 1140 | 184 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_add_factors_first_page_0_2_a_rule_relates_two_of_their_values_1 | JLabel / Add factors first (page 0.2): a rule relates two of their values. | 1174 | 218 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_factor_1 | JLabel / Factor: | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_kind_of_rule_1 | JLabel / Kind of rule: | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_other_factor_1 | JLabel / Other factor: | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_other_value_1 | JLabel / Other value: | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_rules_the_sieve_remove_combinations_before_any_test_runs_write_one_when_a_combination_cannot_happen_or_makes_no_sense_for_your_system_like_safari_on_linux_or_paying_with_nothing_in_the_cart_do_not_write_rules_to_have_fewer_test_cases_a_rule_that_removes_valid_combinations_can_hide_a_defect_when_valid_combinations_are_only_too_many_keep_them_and_let_a_selection_choose_page_0_5_when_a_factor_is_freer_than_it_really_is_change_its_answers_page_0_3_1 | JLabel / Rules, the sieve, remove combinations before any test runs. Write one when a combination cannot happen or makes no sense for your system, like safari on linux, or paying with nothing in the cart. Do not write rules to have fewer test cases: a rule that removes valid combinations can hide a defect. When valid combinations are only too many, keep them and let a selection choose (page 0.5); when a factor is freer than it really is, change its answers (page 0.3). | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_the_rules_are_saved_beside_the_scenario_as_name_constraints_json_step_4_opens_that_file_to_draw_more_rules_and_shows_how_many_test_cases_each_one_removes_1 | JLabel / The rules are saved beside the scenario as <name>.constraints.json; step 4 opens that file to draw more rules and shows how many test cases each one removes. | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_jlabel_value_1 | JLabel / Value: | 956 | 0 | 0 | 0 |
+| element_t10_0_4_rules_sieve_rules_of_the_scenario_in_words_and_as_the_constraints_file_writes_them_jtable_rules_of_the_scenario_in_words_and_as_the_constraints_file_writes_them_1 | JTable / Rules of the scenario, in words and as the constraints file writes them | 1523 | 567 | 0 | 0 |
+| element_t10_0_5_how_many_how_many_and_what_fits_jtextarea_how_many_and_what_fits_1 | JTextArea / How many, and what fits | 3741 | 2785 | 0 | 0 |
+| element_t10_0_5_how_many_jformattedtextfield_1 | JFormattedTextField /  | 1006 | 50 | 0 | 0 |
+| element_t10_0_5_how_many_jlabel_most_rows_1 | JLabel / Most rows: | 956 | 0 | 0 | 0 |
+| element_t10_0_5_how_many_jlabel_rules_decide_which_combinations_may_happen_the_selection_decides_how_many_of_them_to_try_pairwise_is_for_static_parameters_it_keeps_fewer_test_cases_while_every_value_of_each_meets_every_value_of_every_other_in_at_least_one_of_them_and_most_defects_come_from_one_value_or_two_values_together_sequences_of_actions_and_sudden_actions_are_of_another_kind_each_kept_combination_runs_every_order_of_a_sequence_and_every_sudden_action_happens_or_not_in_every_combination_with_the_others_1 | JLabel / Rules decide which combinations may happen; the selection decides how many of them to try. Pairwise is for static parameters: it keeps fewer test cases while every value of each meets every value of every other in at least one of them, and most defects come from one value or two values together. Sequences of actions and sudden actions are of another kind: each kept combination runs every order of a sequence, and every sudden action happens or not, in every combination with the others. | 956 | 0 | 0 | 0 |
+| element_t10_0_5_how_many_jlabel_the_selection_is_a_run_setting_use_it_in_step_3_puts_it_into_step_3_s_run_settings_and_the_scenario_s_properties_file_keeps_it_for_the_command_line_1 | JLabel / The selection is a run setting: Use it in step 3 puts it into step 3's run settings, and the scenario's .properties file keeps it for the command line. | 956 | 0 | 0 | 0 |
+| element_t10_0_5_how_many_jlabel_which_combinations_become_test_cases_1 | JLabel / Which combinations become test cases? | 956 | 0 | 0 | 0 |
+| element_t10_0_5_how_many_jspinner_most_rows_1 | JSpinner / Most rows | 1006 | 50 | 0 | 0 |
+| element_t10_0_6_bootstrap_jlabel_after_saving_step_2_shows_it_in_2_1_control_sheets_where_you_write_your_own_preparation_1 | JLabel / After saving, step 2 shows it in 2.1 · Control sheets, where you write your own preparation. | 956 | 0 | 0 | 0 |
+| element_t10_0_6_bootstrap_jlabel_arguments_it_receives_separated_by_spaces_1 | JLabel / Arguments it receives, separated by spaces: | 956 | 0 | 0 | 0 |
+| element_t10_0_6_bootstrap_jlabel_the_bootstrap_fw_runmefirstonce_is_not_a_factor_and_is_never_combined_it_runs_once_and_really_first_for_the_whole_bunch_of_test_cases_a_run_executes_after_it_put_there_what_they_all_share_start_or_check_the_system_you_test_read_a_configuration_seed_data_and_do_it_so_that_running_it_again_changes_nothing_it_receives_the_fw_arguments_line_and_the_fw_args_it_leaves_split_at_spaces_is_what_every_test_case_s_main_receives_the_test_cases_keep_it_in_shared_what_varies_between_test_cases_belongs_in_factors_never_in_the_bootstrap_1 | JLabel / The bootstrap, FW_RunMeFirstOnce, is not a factor and is never combined: it runs once, and really first, for the whole bunch of test cases a run executes after it. Put there what they all share: start or check the system you test, read a configuration, seed data, and do it so that running it again changes nothing. It receives the FW_Arguments line, and the FW_ARGS it leaves, split at spaces, is what every test case's main receives (the test cases keep it in shared). What varies between test cases belongs in factors, never in the bootstrap. | 956 | 0 | 0 | 0 |
+| element_t10_0_6_bootstrap_jtextfield_arguments_it_receives_separated_by_spaces_1 | JTextField / Arguments it receives, separated by spaces | 982 | 26 | 0 | 0 |
+| element_t10_0_6_bootstrap_the_bootstrap_the_wizard_writes_fw_runmefirstonce_jtextarea_the_bootstrap_the_wizard_writes_fw_runmefirstonce_1 | JTextArea / The bootstrap the wizard writes (FW_RunMeFirstOnce) | 3741 | 2785 | 0 | 0 |
+| element_t10_0_7_finish_framework_check_and_saved_files_jtextarea_framework_check_and_saved_files_1 | JTextArea / Framework check and saved files | 1430 | 474 | 0 | 0 |
+| element_t10_0_7_finish_jlabel_each_test_case_is_a_small_java_program_head_starts_it_each_static_parameter_s_line_sets_it_each_sequence_s_line_does_its_actions_in_order_and_each_sudden_action_s_line_makes_it_happen_the_check_decides_the_verdict_and_tail_prints_the_values_and_the_verdict_for_the_results_analysis_step_8_1 | JLabel / Each test case is a small Java program: HEAD starts it; each static parameter's line sets it, each sequence's line does its actions in order and each sudden action's line makes it happen; the check decides the verdict, and TAIL prints the values and the verdict for the results analysis (step 8). | 956 | 0 | 0 | 0 |
+| element_t10_0_7_finish_sheets_the_wizard_writes_each_sheet_s_fw_seq_row_values_and_ways_jtable_sheets_the_wizard_writes_each_sheet_s_fw_seq_row_values_and_ways_1 | JTable / Sheets the wizard writes: each sheet's FW_Seq row, values and ways | 1513 | 557 | 0 | 0 |
+| element_t10_jlabel_no_factors_yet_6_of_127_labels_1 | JLabel / No factors yet · 6 of 127 labels | 1295 | 339 | 0 | 0 |
+| element_t10_jlabel_to_fix_add_at_least_one_factor_a_thing_that_varies_between_test_cases_1 | JLabel / To fix: Add at least one factor: a thing that varies between test cases. | 1052 | 96 | 0 | 0 |
+| element_t10_jtabbedpane_0_1_situation_1 | JTabbedPane / 0.1 · Situation | 1312 | 356 | 0 | 0 |

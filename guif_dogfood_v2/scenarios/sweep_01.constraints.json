@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "probe_needs_an_explicit_setup_node",
+      "polarity": "require",
+      "assert": {
+        "sheet": "setup",
+        "present": true
+      }
+    },
+    {
+      "id": "nothing_to_miss_for_buttons_that_need_nothing",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "button": "o.put(\"button\",\"shell_hints\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t01_open_the_example_library_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t01_open_a_library_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t01_auto_search_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t01_use_python_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t01_runner_settings_step_3_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_new_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_open_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_auto_search_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_save_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_save_as_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_validate_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_add_sheet_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_2_1_control_sheets_load_from_the_document_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_2_1_control_sheets_apply_to_the_document_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t02_2_1_control_sheets_add_verdict_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t03_browse_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t03_auto_search_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t03_use_the_example_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_add_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_auto_search_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t03_runner_settings_optional_what_runs_the_test_cases_and_which_of_them_apply_runner_settings_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        }
+      ]
+    }
+  ]
+}
