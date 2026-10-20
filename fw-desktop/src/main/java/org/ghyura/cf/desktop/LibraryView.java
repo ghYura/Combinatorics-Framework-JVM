@@ -114,9 +114,9 @@ final class LibraryView {
             }
         });
         navigator.bind(choose, () -> Navigator.Purpose.LIBRARY_OPEN, () -> null);
-        JButton openScenario = Hints.of(new JButton("Open in the Scenario tab"), "Use the selected example: it becomes the scenario of step 3, and the desktop switches there.");
+        openScenario = Hints.of(new JButton("Open in the Scenario tab"), "Use the selected example: it becomes the scenario of step 3, and the desktop switches there.");
         openScenario.addActionListener(e -> openSelected());
-        JButton check = Hints.of(new JButton("Check the candidate count"), "Count the test cases of the selected example and compare the number with the one the library expects.");
+        check = Hints.of(new JButton("Check the candidate count"), "Count the test cases of the selected example and compare the number with the one the library expects.");
         check.addActionListener(e -> checkSelected());
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
         if (example != null) {
@@ -142,7 +142,9 @@ final class LibraryView {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) showDetails(table.getSelectedRow());
+            offer();
         });
+        offer();
         details.setEditable(false);
         details.setLineWrap(true);
         details.setWrapStyleWord(true);
@@ -224,6 +226,16 @@ final class LibraryView {
         details.setCaretPosition(0);
     }
 
+    private JButton openScenario, check;
+
+    /** Both need a selected example that is read, not made by its application; a count also needs none going. */
+    private void offer() {
+        ScenarioLibrary.Entry e = selected();
+        boolean usable = e != null && !e.dynamic();
+        openScenario.setEnabled(usable);
+        check.setEnabled(usable && !busy);
+    }
+
     private ScenarioLibrary.Entry selected() {
         int row = table.getSelectedRow();
         return row < 0 ? null : scenarios.row(row);
@@ -251,6 +263,7 @@ final class LibraryView {
         if (e == null) nothingSelected();
         if (e == null || e.dynamic() || busy) return CompletableFuture.completedFuture(null);
         busy = true;
+        offer();
         details.append("\nChecking the candidate count of " + e.spec() + " ...\n");
         return Background.run("library-check", () -> {
             Session chosenSession = session.get();
@@ -263,10 +276,12 @@ final class LibraryView {
                     + grouped(summary) : 0);
         }, verdict -> {
             busy = false;
+            offer();
             details.append(verdict + "\n");
             details.setCaretPosition(details.getDocument().getLength());
         }, failure -> {
             busy = false;
+            offer();
             details.append("The scenario cannot be planned: " + Background.describe(failure) + "\n");
             details.setCaretPosition(details.getDocument().getLength());
         });

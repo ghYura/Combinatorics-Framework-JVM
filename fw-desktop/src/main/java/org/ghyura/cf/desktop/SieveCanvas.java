@@ -53,6 +53,7 @@ final class SieveCanvas extends JComponent {
     private final Map<String, Point2D.Double> positions = new LinkedHashMap<>();
     private final Map<String, Node> byKey = new LinkedHashMap<>();
     private final Set<Value> chosen = new LinkedHashSet<>();
+    private Runnable chosenChanged = () -> { };
     private final IntPredicate select;
     private final BiConsumer<Value, Value> link;
     private final Consumer<String> layoutChanged;
@@ -85,7 +86,7 @@ final class SieveCanvas extends JComponent {
         addComponentListener(new ComponentAdapter() { @Override public void componentResized(ComponentEvent e) { if (fitPending) fit(); } });
         addFocusListener(new FocusAdapter() { @Override public void focusLost(FocusEvent e) { space = false; cancelGesture(); } });
         key("pressed SPACE", "pan-on", () -> space = true); key("released SPACE", "pan-off", () -> space = false);
-        key("ESCAPE", "cancel", () -> { cancelGesture(); chosen.clear(); repaint(); });
+        key("ESCAPE", "cancel", () -> { cancelGesture(); chosen.clear(); chosenChanged.run(); repaint(); });
         key("DELETE", "delete-rule", () -> { if (selected >= 0) delete.run(); });
         key("EQUALS", "zoom-in", () -> zoomAt(center(), 1.2)); key("MINUS", "zoom-out", () -> zoomAt(center(), 1 / 1.2));
         key("0", "fit", this::fit);
@@ -102,7 +103,11 @@ final class SieveCanvas extends JComponent {
     }
     Mode mode() { return mode; }
     List<Value> chosenValues() { return List.copyOf(chosen); }
-    void clearChosen() { chosen.clear(); repaint(); }
+    void clearChosen() { chosen.clear(); chosenChanged.run(); repaint(); }
+    /** Who hears that the chosen values changed (the group button depends on them). */
+    void onChosen(Runnable listener) { chosenChanged = listener; }
+    /** Chooses or unchooses a value as a shift-click does. */
+    void choose(Value value) { if (!chosen.add(value)) chosen.remove(value); chosenChanged.run(); repaint(); }
     void select(int rule) { selected = rule; repaint(); }
     String note() { return note; }
 
@@ -224,7 +229,7 @@ final class SieveCanvas extends JComponent {
         Node node = hit(pointer);
         if (node != null) {
             if (node.rule() >= 0 && !select.test(node.rule())) return;
-            if (node.value() != null && e.isShiftDown()) { if (!chosen.add(node.value())) chosen.remove(node.value()); repaint(); return; }
+            if (node.value() != null && e.isShiftDown()) { choose(node.value()); return; }
             dragged = node;
             if (node.value() != null && pin(node).distance(pointer) <= 10 / zoom) mode = Mode.DRAW_LINK;
             else { mode = Mode.DRAG_NODE; beforeDrag = layoutJson(); }

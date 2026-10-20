@@ -143,6 +143,10 @@ final class ScorerView {
         });
         charts.setEnabled(false);
         autoPlan.addActionListener(e -> autoPlan());
+        // a report belongs to the text and rules it scored: another text or other rules leave nothing to export or chart
+        file.getDocument().addDocumentListener(FormulaEditor.listener(() -> { stale(); offer(); }));
+        rules.getDocument().addDocumentListener(FormulaEditor.listener(this::stale));
+        offer();
         filter.getDocument().addDocumentListener(new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent e) { applyFilter(); }
             @Override public void removeUpdate(DocumentEvent e) { applyFilter(); }
@@ -260,7 +264,8 @@ final class ScorerView {
             status.setText(e.getMessage());
             return CompletableFuture.completedFuture(null);
         }
-        score.setEnabled(false);
+        scoring = true;
+        offer();
         status.setText("Scoring " + path + " ...");
         return Background.run("score", () -> session.score(Path.of(path), RuleSet.parse(json, "rules editor"), settings), report -> {
             last = report;
@@ -269,14 +274,31 @@ final class ScorerView {
             summary.setText(summaryText(report));
             status.setText(report.lines().size() + " lines: opt " + report.count(ScoreBreakdown.OPT) + ", watch "
                     + report.count(ScoreBreakdown.WATCH) + ", reject " + report.count(ScoreBreakdown.REJECT));
-            score.setEnabled(true);
+            scoring = false;
+            offer();
             export.setEnabled(true);
             charts.setEnabled(true);
         }, failure -> {
             status.setText("Scoring failed");
             summary.setText(Background.describe(failure));
-            score.setEnabled(true);
+            scoring = false;
+            offer();
+            stale();
         });
+    }
+
+    private boolean scoring;
+
+    /** Score and Auto-plan need a text file in the box; Score also no scoring going. */
+    private void offer() {
+        boolean text = !file.getText().isBlank();
+        score.setEnabled(!scoring && text);
+        autoPlan.setEnabled(text);
+    }
+
+    private void stale() {
+        export.setEnabled(false);
+        charts.setEnabled(false);
     }
 
     /**

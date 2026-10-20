@@ -252,15 +252,22 @@ class SieveWorkbenchTest {
     /** A draft that cannot be applied says why in the editor, not in a dialog, so it also works without a display. */
     @Test void aDraftThatCannotBeAppliedSaysWhyWithoutADialog() throws Exception {
         var doc = SieveDocument.parse("""
-                {"version":1,"constraints":[{"id":"pair","polarity":"forbid","pairs":[{"A":"a","B":"1"}]}]}
+                {"version":1,"constraints":[{"id":"pair","polarity":"forbid","pairs":[{"A":"a","B":"1"}]},
+                 {"id":"mapping","sheets":["B","A"],"mapping":{"source":"A","target":"B","allow":{"a":["1"]}}}]}
                 """, "test");
+        var values = Map.of("A", List.of("a", "b"), "B", List.of("1", "2"));
         edt(() -> {
             List<String> problems = new java.util.ArrayList<>();
             SieveRuleEditor editor = new SieveRuleEditor(r -> { }, () -> { }, () -> { }, problems::add);
-            editor.show(doc, doc.rules().getFirst(), Map.of("A", List.of("a", "b"), "B", List.of("1", "2")));
-            named(editor.component(), JList.class, "Sheets the rule reads").clearSelection();   // the rule's own sheets come selected
-            find(editor.component(), JButton.class, b -> b.getText().equals("Use chosen sheets")).doClick();
-            assertEquals(List.of("The rule was not applied: Choose at least two sheets."), problems);
+            editor.show(doc, doc.rules().getFirst(), values);
+            JButton use = find(editor.component(), JButton.class, b -> b.getText().equals("Use chosen sheets"));
+            assertTrue(use.isEnabled(), "the rule's own two sheets come selected");
+            named(editor.component(), JList.class, "Sheets the rule reads").clearSelection();
+            assertFalse(use.isEnabled(), "fewer than two sheets are no choice to use");
+            editor.show(doc, doc.rules().get(1), values);
+            table(editor.component()).setValueAt(RuleValue.Int.of(1L), 0, 0);
+            find(editor.component(), JButton.class, b -> b.getText().equals("Apply rule")).doClick();
+            assertEquals(List.of("The rule was not applied: Mapping source keys must be text."), problems);
             return null;
         });
     }
