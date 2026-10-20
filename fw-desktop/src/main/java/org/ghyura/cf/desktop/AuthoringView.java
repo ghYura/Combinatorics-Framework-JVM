@@ -149,12 +149,12 @@ final class AuthoringView {
         });
         JButton add = Hints.of(new JButton("Add sheet"), "Add a new sheet (a list of values) with a name you choose.");
         add.addActionListener(e -> ask("Name of the new sheet:", "").ifPresent(this::addSheet));
-        JButton rename = Hints.of(new JButton("Rename"), "Give the selected sheet a new name.");
+        JButton rename = gate(Hints.of(new JButton("Rename"), "Give the selected sheet a new name."), () -> sheets.getSelectedIndex() >= 0);
         rename.addActionListener(e -> {
             int i = sheets.getSelectedIndex();
             if (i >= 0) ask("New name:", sheetNames.get(i)).ifPresent(name -> renameSheet(i, name));
         });
-        JButton remove = Hints.of(new JButton("Remove"), "Delete the selected sheet with all its values.");
+        JButton remove = gate(Hints.of(new JButton("Remove"), "Delete the selected sheet with all its values."), () -> sheets.getSelectedIndex() >= 0);
         remove.addActionListener(e -> removeSheet(sheets.getSelectedIndex()));
         JPanel sheetButtons = new JPanel(new GridLayout(0, 1, 4, 4));
         sheetButtons.add(add);
@@ -166,9 +166,9 @@ final class AuthoringView {
         left.add(sheetButtons, BorderLayout.SOUTH);
         left.setPreferredSize(new Dimension(220, 400));
 
-        JButton insertRow = Hints.of(new JButton("Insert row"), "Add an empty row above the selected row.");
+        JButton insertRow = gate(Hints.of(new JButton("Insert row"), "Add an empty row above the selected row."), () -> sheets.getSelectedIndex() >= 0);
         insertRow.addActionListener(e -> insertRow(Math.max(0, table.getSelectedRow())));
-        JButton removeRow = Hints.of(new JButton("Remove row"), "Delete the selected row.");
+        JButton removeRow = gate(Hints.of(new JButton("Remove row"), "Delete the selected row."), () -> table.getSelectedRow() >= 0);
         removeRow.addActionListener(e -> {
             if (table.getSelectedRow() >= 0) removeRow(table.getSelectedRow());
         });
@@ -207,7 +207,8 @@ final class AuthoringView {
                 if (e.getClickCount() == 2 && palette.getSelectedValue() != null) insert(palette.getSelectedValue().id());
             }
         });
-        JButton insert = Hints.of(new JButton("Insert into the selected cell"), "Put the template chosen in the list into the selected cell of the sheet.");
+        JButton insert = gate(Hints.of(new JButton("Insert into the selected cell"), "Put the template chosen in the list into the selected cell of the sheet."),
+                () -> palette.getSelectedValue() != null && table.getSelectedRow() >= 0 && table.getSelectedColumn() >= 0);
         insert.addActionListener(e -> {
             if (palette.getSelectedValue() != null) insert(palette.getSelectedValue().id());
         });
@@ -223,6 +224,12 @@ final class AuthoringView {
         output.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
         controlsTab = controlsPanel();
         graphTab = graphPanel();
+        // a button that acts on a selection or a drawn graph is pressable only while there is one
+        sheets.addListSelectionListener(e -> gates());
+        table.getSelectionModel().addListSelectionListener(e -> gates());
+        table.getColumnModel().getSelectionModel().addListSelectionListener(e -> gates());
+        palette.addListSelectionListener(e -> gates());
+        gates();
         Steps.add(results, "2.1", "Control sheets", controlsTab, "Step 2.1: the three special sheets: code that runs once before the test "
                 + "cases, the arguments every test case gets, and your own result codes.");
         Steps.add(results, "2.2", "Validation", validationPane, "Step 2.2: to see what the last check of the scenario found, and fix it before a run.");
@@ -259,6 +266,18 @@ final class AuthoringView {
 
     private java.util.Optional<String> ask(String question, String initial) {
         return java.util.Optional.ofNullable(JOptionPane.showInputDialog(panel, question, initial)).map(String::trim).filter(s -> !s.isEmpty());
+    }
+
+    /** Each button that acts on a selection or a drawn graph, with what it needs; gates() applies them after every change. */
+    private final List<Runnable> gates = new ArrayList<>();
+
+    private <B extends javax.swing.AbstractButton> B gate(B button, java.util.function.BooleanSupplier needs) {
+        gates.add(() -> button.setEnabled(needs.getAsBoolean()));
+        return button;
+    }
+
+    private void gates() {
+        gates.forEach(Runnable::run);
     }
 
     void newDocument() {
@@ -345,13 +364,14 @@ final class AuthoringView {
     private JComponent graphPanel() {
         graphIssues.setEditable(false);
         graphIssues.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-        JButton copy = Hints.of(new JButton("Copy DOT"), "Copy the diagram as text in the Graphviz DOT format, to paste into a diagram tool.");
+        JButton copy = gate(Hints.of(new JButton("Copy DOT"), "Copy the diagram as text in the Graphviz DOT format, to paste into a diagram tool."),
+                () -> graphView.graph() != null);
         copy.addActionListener(e -> {
             if (graphView.graph() != null) {
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(graphView.graph().dot()), null);
             }
         });
-        JButton save = Hints.of(new JButton("Save DOT or JSON..."), "Save the diagram to a file, as Graphviz DOT or as JSON.");
+        JButton save = gate(Hints.of(new JButton("Save DOT or JSON..."), "Save the diagram to a file, as Graphviz DOT or as JSON."), () -> graphView.graph() != null);
         save.addActionListener(e -> {
             if (graphView.graph() != null) {
                 Path chosen = navigator.choose(panel, Navigator.Purpose.GRAPH_SAVE, file);
@@ -387,6 +407,7 @@ final class AuthoringView {
         }
         graphIssues.setText(issues.isEmpty() ? (summary == null ? "" : "No issues.") : issues.toString());
         graphIssues.setCaretPosition(0);
+        gates();
     }
 
     /** Writes the shown graph: Graphviz DOT when the name ends in .dot, its JSON otherwise. */
@@ -455,7 +476,8 @@ final class AuthoringView {
         JButton add = Hints.of(new JButton("Add verdict"), "Add a row for one of your own result codes and its name.");
         add.addActionListener(e -> verdicts.addRow(new Object[]{"", ""}));
         JTable verdictTable = Hints.of(new JTable(verdicts), "FW_CUSTOM_VAR: your own result codes, each with a name, used instead of a plain pass or fail.");
-        JButton remove = Hints.of(new JButton("Remove verdict"), "Delete the selected result code.");
+        JButton remove = gate(Hints.of(new JButton("Remove verdict"), "Delete the selected result code."), () -> verdictTable.getSelectedRow() >= 0);
+        verdictTable.getSelectionModel().addListSelectionListener(e -> gates());
         remove.addActionListener(e -> {
             if (verdictTable.getSelectedRow() >= 0) verdicts.removeRow(verdictTable.getSelectedRow());
         });

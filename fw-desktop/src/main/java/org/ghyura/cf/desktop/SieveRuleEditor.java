@@ -76,6 +76,7 @@ final class SieveRuleEditor {
     private List<String> columns = List.of();
     private final Map<java.awt.Component, Boolean> readOnly = new java.util.IdentityHashMap<>();
     private boolean editable = true;
+    private JButton useSheets, removeRow;
     private boolean loading, dirty, bodyDirty, guardDirty, sheetsDirty, mappingSheetsDirty;
 
     /** An editor on its own: why a draft cannot be applied shows in its heading. */
@@ -116,6 +117,9 @@ final class SieveRuleEditor {
         applyRule.addActionListener(e -> { try { this.apply.accept(draft()); } catch (RuntimeException failure) { error(failure); } });
         discardDraft.addActionListener(e -> discard.run()); actions.add(applyRule); actions.add(discardDraft); root.add(actions, BorderLayout.SOUTH);
         listen(id, this::touch); listen(description, this::touch);
+        // made anew with each rule's body: Use chosen sheets needs two sheets, Remove row a selected row
+        sheets.addListSelectionListener(e -> { if (useSheets != null) useSheets.setEnabled(sheets.getSelectedValuesList().size() >= 2); });
+        table.getSelectionModel().addListSelectionListener(e -> { if (removeRow != null) removeRow.setEnabled(table.getSelectedRow() >= 0); });
         polarity.addActionListener(e -> touch()); adjacent.addActionListener(e -> touch()); distance.addActionListener(e -> touch());
         within.addChangeListener(e -> touch());
         source.addActionListener(e -> { if (!loading) { mappingSheetsDirty = true; mappingChoices(); bodyChanged(); } }); target.addActionListener(e -> { if (!loading) { mappingSheetsDirty = true; mappingChoices(); bodyChanged(); } });
@@ -141,6 +145,11 @@ final class SieveRuleEditor {
     private void shown(boolean rule) {
         for (JComponent c : List.of(id, description, polarity, adjacent, distance, within, applyRule, discardDraft)) c.setEnabled(rule);
         guard.active(rule);
+    }
+    /** Discard draft is pressable only while there is a draft: a changed rule, or a new one not applied yet. */
+    void discardable(boolean draft) {
+        boolean on = original != null && draft;
+        if (editable) discardDraft.setEnabled(on); else readOnly.put(discardDraft, on);
     }
     void editable(boolean allowed) {
         if (editable == allowed) return;
@@ -232,7 +241,8 @@ final class SieveRuleEditor {
 
     private JComponent sheetChooser() {
         JPanel panel = new JPanel(new BorderLayout()); panel.add(FieldNames.titled(sheets, "Sheets the rule reads"));
-        JButton use = Hints.of(new JButton("Use chosen sheets"), "Make the rule read the sheets selected above."); use.addActionListener(e -> {
+        JButton use = Hints.of(new JButton("Use chosen sheets"), "Make the rule read the sheets selected above."); useSheets = use;
+        use.setEnabled(sheets.getSelectedValuesList().size() >= 2); use.addActionListener(e -> {
             if (sheets.getSelectedValuesList().size() < 2) { error(new IllegalArgumentException("Choose at least two sheets.")); return; }
             List<String> previous = columns; columns = sheets.getSelectedValuesList();
             if (SieveDocument.kind(original).equals("when")) formula.offer(columns);
@@ -298,6 +308,7 @@ final class SieveRuleEditor {
                 remove = Hints.of(new JButton("Remove row"), "Delete the selected rows of the rule.");
         add.addActionListener(e -> { stopEditing(); ((DefaultTableModel) table.getModel()).addRow(new Object[table.getColumnCount()]); });
         remove.addActionListener(e -> { stopEditing(); int[] selected = table.getSelectedRows(); for (int i = selected.length - 1; i >= 0; i--) ((DefaultTableModel) table.getModel()).removeRow(selected[i]); });
+        removeRow = remove; remove.setEnabled(table.getSelectedRow() >= 0);
         buttons.add(add); buttons.add(remove); buttons.setToolTipText("Choose existing values or type text. Use Advanced JSON for new numeric/boolean literals."); return buttons;
     }
 

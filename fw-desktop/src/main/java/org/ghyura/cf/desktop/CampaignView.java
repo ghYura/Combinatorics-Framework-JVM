@@ -151,6 +151,11 @@ final class CampaignView {
         });
     }
 
+    /** Whether step 3 names a scenario to run. */
+    private boolean chosen() {
+        try { return scenario.get() != null; } catch (java.nio.file.InvalidPathException e) { return false; }
+    }
+
     /** Shows the latest state; enables what the state allows. */
     void refresh() {
         CampaignController.View v = controller.view();
@@ -172,7 +177,7 @@ final class CampaignView {
         if (!lineage.rows().equals(v.iterations())) {
             lineage.show(v.iterations());
         }
-        start.setEnabled(!busy && !closing && !v.going());
+        start.setEnabled(!busy && !closing && !v.going() && chosen());
         pause.setEnabled(!closing && v.going() && s == RunState.RUNNING);
         resume.setEnabled(!closing && v.going() && (s == RunState.PAUSED || s == RunState.PAUSING));
         cancel.setEnabled(!closing && v.going());
