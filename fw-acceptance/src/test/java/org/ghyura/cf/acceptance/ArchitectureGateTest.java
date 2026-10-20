@@ -92,10 +92,11 @@ class ArchitectureGateTest {
             "fw-desktop/src/main/resources/org/ghyura/cf/desktop/face2/bridge.js", "tools/verify-face2-js.cjs");
 
     /**
-     * The guif dog-food suite: the author asked on 2026-10-18 for it and its Python and shell infrastructure to be committed.
-     * It drives the desktop through the Framework from outside; no module builds it and the distribution does not carry it.
+     * The guif dog-food suites: the author asked on 2026-10-18 for the first and its Python and shell infrastructure to be
+     * committed, and on 2026-10-20 for the second (button availability). They drive the desktop through the Framework from
+     * outside; no module builds them and the distribution does not carry them.
      */
-    private static final String DOGFOOD_SUITE = "guif_dogfood/";
+    private static final Set<String> DOGFOOD_SUITES = Set.of("guif_dogfood/", "guif_dogfood_v2/");
 
     private static final List<String> FOREIGN_SUFFIXES = List.of(".py", ".pyw", ".sh", ".bash", ".zsh", ".bat", ".cmd",
             ".ps1", ".js", ".mjs", ".cjs", ".ts", ".rb", ".pl", ".go", ".rs", ".c", ".cc", ".cpp", ".h", ".hpp", ".cs", ".sql",
@@ -193,7 +194,7 @@ class ArchitectureGateTest {
         Path root = Reactor.root();
         for (Path file : Reactor.files(FOREIGN_SUFFIXES.toArray(new String[0]))) {
             String name = root.relativize(file).toString().replace(java.io.File.separatorChar, '/');
-            if (!FACE2_WEB_FILES.contains(name) && !name.startsWith(DOGFOOD_SUITE)) foreign.add(name);
+            if (!FACE2_WEB_FILES.contains(name) && DOGFOOD_SUITES.stream().noneMatch(name::startsWith)) foreign.add(name);
         }
         for (Path file : Reactor.files("Dockerfile", "Makefile", "Jenkinsfile")) {
             foreign.add(root.relativize(file).toString());
@@ -201,7 +202,7 @@ class ArchitectureGateTest {
         assertEquals(List.of(), foreign, "R01: Java source, with only the author-requested Face 2 browser assets and JS check, and the "
                 + "guif dog-food suite");
         for (String file : FACE2_WEB_FILES) assertTrue(Files.isRegularFile(root.resolve(file)), "explicit web allowance must exist: " + file);
-        assertTrue(Files.isDirectory(root.resolve(DOGFOOD_SUITE)), "the dog-food allowance must name an existing suite");
+        for (String suite : DOGFOOD_SUITES) assertTrue(Files.isDirectory(root.resolve(suite)), "the dog-food allowance must name an existing suite: " + suite);
         assertTrue(Reactor.javaSources().stream().anyMatch(p -> p.endsWith("tools/AddLicenseHeaders.java")),
                 "the header utility is Java and lives in tools/");
     }
