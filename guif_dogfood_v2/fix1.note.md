@@ -1,0 +1,7 @@
+What changed in the product (2026-10-20), and why each check below moved:
+
+- **The rule editor is off while no rule is shown.** Rule ID, Description, Effect, Adjacent, Within and its distance, the Only-when condition (+ condition, Apply JSON and its text), Apply rule and Discard draft are disabled until a rule is selected or New rule starts one (`SieveRuleEditor.shown`, `ConditionEditor.active`). Applying a condition the rule already has is no longer a draft.
+- **The data editor is off until a scenario is opened** (`SieveDataEditor`): before that it has no values to describe.
+- **The formula palette keeps replacing, and says so.** Replacing is intended: the palette's rule takes a slot "empty or not" (`FormulaBlocks.fits`), and the right-click menu calls it "Replace with". What was wrong was the button hint promising "the selected empty place" and the silent loss. The hint now says a block there is replaced, and each replacement reports what went: "Replaced (1 > 2) with a new compare block. Discard draft returns to the rule as last applied." The need these six buttons are checked against was corrected to match: a place that takes the block's type.
+
+Buttons still SOFT below are pressable in a state this fix does not cover (a shown rule with no draft for Discard draft; an opened scenario with nothing selected for the data editor's Remove buttons and moves). They belong to the next round.

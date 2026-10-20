@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "probe_needs_an_explicit_setup_node",
+      "polarity": "require",
+      "assert": {
+        "sheet": "setup",
+        "present": true
+      }
+    },
+    {
+      "id": "nothing_to_miss_for_buttons_that_need_nothing",
+      "polarity": "forbid",
+      "pairs": [
+        {
+          "button": "o.put(\"button\",\"t09_browse_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t09_auto_search_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t09_load_rules_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t09_auto_search_2\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_settings_or_a_form_each_setting_takes_one_value_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_a_workflow_steps_whose_order_matters_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_options_that_can_be_switched_on_together_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_repeated_picks_the_same_item_may_come_more_than_once_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_something_that_may_or_may_not_happen_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_none_of_these_i_describe_my_own_factors_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_1_situation_fill_in_this_example_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_2_factors_add_a_factor_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_5_how_many_every_combination_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_5_how_many_every_pair_of_values_pairwise_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_5_how_many_every_triple_of_values_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_5_how_many_the_strongest_covering_within_a_number_of_rows_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        },
+        {
+          "button": "o.put(\"button\",\"t10_0_6_bootstrap_run_a_bootstrap_once_first_before_all_the_test_cases_fw_runmefirstonce_1\");",
+          "setup": "o.put(\"setup\",\"missing\");"
+        }
+      ]
+    }
+  ]
+}
