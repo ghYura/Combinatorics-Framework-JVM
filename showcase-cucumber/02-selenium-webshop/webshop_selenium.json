@@ -1,0 +1,73 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      ["HEAD", "FW_Combi(1)"],
+      ["background", "FW_Combi(1)"],
+      ["stealth", "FW_Combi(1)"],
+      ["window", "FW_Combi(1)"],
+      ["language", "FW_Combi(1)"],
+      ["account", "FW_Combi(1)"],
+      ["coupon", "FW_Combi(1)"],
+      ["shipping", "FW_Combi(1)"],
+      ["actions", "FW_Optional", "FW_Concatenator=|", "FW_Combi(3)", "FW_Permut()"],
+      ["reload", "FW_Optional", "FW_Combi(1)"],
+      ["back_repeat", "FW_Optional", "FW_Combi(1)"],
+      ["pay", "FW_Combi(1)"],
+      ["then_one_order", "FW_Combi(1)"],
+      ["then_shipping", "FW_Combi(1)"],
+      ["then_total", "FW_Combi(1)"],
+      ["TAIL", "FW_Combi(1)"]
+    ],
+    "FW_SheetNames": [
+      ["HEAD", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["background", "        g.background(\"\"\"\n", "\"\"\");\n"],
+      ["stealth", "        g.given(\"stealth\", \"the browser %s that it is automated\", \"", "\");\n"],
+      ["window", "        g.given(\"window\", \"the browser window is %s\", \"", "\");\n"],
+      ["language", "        g.given(\"language\", \"the shop speaks %s\", \"", "\");\n"],
+      ["account", "        g.given(\"account\", \"the customer browses as a %s\", \"", "\");\n"],
+      ["coupon", "        g.given(\"coupon\", \"the customer has the coupon \\\"%s\\\"\", \"", "\");\n"],
+      ["shipping", "        g.given(\"shipping\", \"the shipping option is %s\", \"", "\");\n"],
+      ["actions", "        g.whenEach(\"actions\", \"the customer %s\", \"", "\");\n"],
+      ["reload", "        g.strike(\"reload\", \"the customer reloads the page\", \"", "\");\n"],
+      ["back_repeat", "        g.strike(\"back_repeat\", \"the customer goes back and repeats the last action\", \"", "\");\n"],
+      ["pay", "        g.when(\"\", \"%s\", \"", "\");\n"],
+      ["then_one_order", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["then_shipping", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["then_total", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["TAIL", "FW_EMPTY_STRING", "FW_EMPTY_STRING"]
+    ],
+    "FW_CUSTOM_VAR": [
+      ["0", "PASS"],
+      ["13", "DOUBLE_ORDER"],
+      ["14", "SHIPPING_MISMATCH"],
+      ["15", "WRONG_TOTAL"],
+      ["90", "ACTION_FAILED"]
+    ],
+    "FW_RunMeFirstOnce": [[
+      "public class RunMeFirstOnce {\n    public static String FW_ARGS;\n\n    /* Once per run, before any test case: an empty folder for the generated .feature files, the dummy web shop started\n       on a free loopback port, and one headless browser started against it, so Selenium Manager has resolved the driver\n       before the parallel test cases ask for one. Every test case receives the shop's URL and the folder. */\n    public static void main(String[] args) throws Exception {\n        String folder = org.ghyura.cf.showcase.cucumber.GherkinCase.prepareFolder(args.length > 0 ? args[0]\n                : \"showcase-cucumber/target/generated-features/02-selenium-webshop\");\n        String url = org.ghyura.cf.showcase.cucumber.web.Bootstrap.startShopAndWarmUp();\n        FW_ARGS = url + \" \" + folder;\n    }\n}\n"
+    ]],
+    "FW_Arguments": [
+      ["showcase-cucumber/target/generated-features/02-selenium-webshop"]
+    ],
+    "HEAD": [[
+      "import org.ghyura.cf.showcase.cucumber.GherkinCase;\n\n/* webshop_selenium (showcase-cucumber/02-selenium-webshop): every test case is one Gherkin scenario that drives the dummy\n   web shop through a headless Firefox. The heart of it is the timeline: the customer's three cart actions in one of their\n   6 orders, then paying, with up to two sudden events woven in after any of them (a reload; going back and repeating the\n   last action). Selenium Manager resolves the driver by itself and PicoContainer auto-wires the browser into the glue; the\n   bootstrap started the shop once for the run and passed its URL. The first failing Then gives the verdict, the\n   FW_EXIT_CODE of its own sheet, which FW_CUSTOM_VAR names; a failing Given or When gives 90. */\npublic class WebshopSeleniumCase {\n    public static int FW_VAR = 0;\n    static final GherkinCase g = new GherkinCase(\"Dummy web shop: cart actions in every order, sudden events at every moment\",\n            \"FW_REPLACE_ME_WITH_CURRENT_COMBO_SEQUENCE\");\n\n    /* A Then line with the verdict it gives when it fails; its cell hands the sheet's exit code over through FW_VAR. */\n    static void then(String text, int code) {\n        g.then(text, code);\n        FW_VAR = 0;\n    }\n\n    public static void main(String[] args) {\n        String url = args.length > 0 ? args[0] : \"http://127.0.0.1:8080\";\n        String folder = args.length > 1 ? args[1] : \"showcase-cucumber/target/generated-features/02-selenium-webshop\";\n        g.placeholder(\"base_url\", url);\n        g.onStepFailure(90);\n        g.fact(\"reload\", \"none\");\n        g.fact(\"back_repeat\", \"none\");\n"
+    ]],
+    "background": [["FW_File=fragments/background.feature.txt"]],
+    "stealth": [["hides"], ["shows"]],
+    "window": [["desktop"], ["mobile"]],
+    "language": [["en"], ["uk"]],
+    "account": [["guest"], ["member"]],
+    "coupon": [["SAVE10"], ["FREESHIP"]],
+    "shipping": [["standard"], ["express"]],
+    "actions": [["applies the coupon"], ["chooses the shipping"], ["asks for gift wrap"]],
+    "reload": [["after 1"], ["after 2"], ["after 3"]],
+    "back_repeat": [["after 1"], ["after 2"], ["after 3"], ["after 4"]],
+    "pay": [["the customer pays"]],
+    "then_one_order": [["        then(\"exactly one order exists\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "then_shipping": [["        then(\"the order ships with the chosen shipping\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "then_total": [["        then(\"the total matches the reference price\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "TAIL": [[
+      "        GherkinCase.Outcome outcome = g.run(folder, \"org.ghyura.cf.showcase.cucumber.webshop\");\n        FW_VAR = outcome.verdict();\n        System.out.println(\"app=webshop_selenium case=\" + g.caseId() + \" \" + outcome.metricsText() + \" FW_VAR=\" + FW_VAR);\n    }\n}\n"
+    ]]
+  }
+}
