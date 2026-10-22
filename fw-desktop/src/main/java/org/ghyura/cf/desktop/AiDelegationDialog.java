@@ -25,6 +25,7 @@
 
 package org.ghyura.cf.desktop;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -73,8 +74,9 @@ import java.util.function.Consumer;
  * the manual's absolute path is on the clipboard, written as the operating system in use writes it, and a second window
  * says so, shows the path and offers its other forms (a file URI, forward slashes). Once the choice is remembered (and the
  * agreement has not changed since), a press copies the path at once and only a notice says so; the notice fades away by
- * itself after ten seconds, as if its OK were pressed, and the path stays on the clipboard. The windows' contents are built
- * apart from the windows, so tests build them headless.
+ * itself after ten seconds, as if its OK were pressed, and the path stays on the clipboard. Every element of these
+ * windows explains itself in a hint, shown while the desktop's Hints button is on (F1 there presses it). The windows'
+ * contents are built apart from the windows, so tests build them headless.
  */
 final class AiDelegationDialog {
 
@@ -88,15 +90,18 @@ final class AiDelegationDialog {
     static final int FADE_MILLIS = 3_000;
 
     private final AiDelegation delegation;
+    private final AbstractButton hintsSwitch;
     private final Consumer<String> clipboard;
 
-    AiDelegationDialog(AiDelegation delegation) {
-        this(delegation, AiDelegationDialog::systemClipboard);
+    /** @param hintsSwitch the desktop's Hints button, which the windows' hints follow */
+    AiDelegationDialog(AiDelegation delegation, AbstractButton hintsSwitch) {
+        this(delegation, hintsSwitch, AiDelegationDialog::systemClipboard);
     }
 
     /** @param clipboard takes the text to copy; throws IllegalStateException when the clipboard cannot be reached */
-    AiDelegationDialog(AiDelegation delegation, Consumer<String> clipboard) {
+    AiDelegationDialog(AiDelegation delegation, AbstractButton hintsSwitch, Consumer<String> clipboard) {
         this.delegation = delegation;
+        this.hintsSwitch = hintsSwitch;
         this.clipboard = clipboard;
     }
 
@@ -134,7 +139,7 @@ final class AiDelegationDialog {
                 accepted.set(true);
                 dialog.dispose();
             });
-            show(dialog, panel.component(), panel.ok, owner, new Dimension(880, 760));
+            show(dialog, HintLayer.following(panel.component(), hintsSwitch), panel.ok, owner, new Dimension(880, 760));
             if (!accepted.get()) {
                 return;   // closed without OK: nothing copied, nothing remembered
             }
@@ -148,7 +153,7 @@ final class AiDelegationDialog {
         }
         JDialog dialog = new JDialog(owner, TITLE + " · ready to paste", Dialog.ModalityType.APPLICATION_MODAL);
         Ready ready = new Ready(delegation, manual, clipboard, dialog::dispose);
-        show(dialog, ready.component(), ready.ok, owner, null);
+        show(dialog, HintLayer.following(ready.component(), hintsSwitch), ready.ok, owner, null);
     }
 
     /** The path in the form chosen last, put on the clipboard; null when the clipboard cannot be reached. */
@@ -173,7 +178,7 @@ final class AiDelegationDialog {
             timer.stop();
             window.dispose();
         });
-        window.setContentPane(notice.component());
+        window.setContentPane(HintLayer.following(notice.component(), hintsSwitch));
         window.pack();
         Rectangle screen = near.getGraphicsConfiguration().getBounds();
         var at = near.getLocationOnScreen();
@@ -289,6 +294,16 @@ final class AiDelegationDialog {
             root.add(top, BorderLayout.NORTH);
             root.add(scroll, BorderLayout.CENTER);
             root.add(bottom, BorderLayout.SOUTH);
+            Hints.of(text, "The rules your AI assistant follows and the agreement it will ask you to accept, taken from its "
+                    + "manual, AI_DELEGATION.md.");
+            Hints.of(pledges.get(0), "Tick to state that you respect human work and jobs. OK can be pressed only while both "
+                    + "statements are ticked.");
+            Hints.of(pledges.get(1), "Tick to state that you respect the author's long, hand-made work on this Framework. OK can "
+                    + "be pressed only while both statements are ticked.");
+            Hints.of(remember, "Tick to skip this window from now on: the button will copy the path at once and show a short "
+                    + "notice instead.");
+            Hints.of(ok, "Accepts the agreement and puts the path of the AI's manual on the clipboard, ready to paste into its "
+                    + "chat. It waits until both statements are ticked.");
             ok.setEnabled(false);
             pledges.forEach(p -> p.addItemListener(e -> ok.setEnabled(pledges.stream().allMatch(JCheckBox::isSelected))));
             ok.addActionListener(e -> {
@@ -344,6 +359,12 @@ final class AiDelegationDialog {
             root.add(wrapped("<b>The path of the AI's manual is on the clipboard, ready to paste.</b>"), BorderLayout.NORTH);
             root.add(middle, BorderLayout.CENTER);
             root.add(row, BorderLayout.SOUTH);
+            Hints.of(path, "The absolute path of the AI's manual, written in the form chosen below. It is already on the "
+                    + "clipboard.");
+            Hints.of(form, "How the path is written: as your operating system writes it, as a file address (file:///…), or "
+                    + "with forward slashes. Choosing a form copies it.");
+            Hints.of(copy, "Puts the path on the clipboard once more, in the form chosen beside it.");
+            Hints.of(ok, "Closes this window. The path stays on the clipboard.");
             form.addActionListener(e -> {
                 delegation.format(selected());
                 copy();
@@ -401,6 +422,9 @@ final class AiDelegationDialog {
                     BorderFactory.createEmptyBorder(10, 12, 10, 12)));
             root.add(message, BorderLayout.CENTER);
             root.add(row, BorderLayout.SOUTH);
+            Hints.of(askAgain, "Tick to see the agreement window again the next time you press AI_delegation.");
+            Hints.of(ok, "Closes this notice now. It also closes by itself after ten seconds, and the path stays on the "
+                    + "clipboard.");
             askAgain.addActionListener(e -> {
                 if (askAgain.isSelected()) {
                     delegation.forget();

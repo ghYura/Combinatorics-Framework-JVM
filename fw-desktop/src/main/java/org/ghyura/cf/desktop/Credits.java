@@ -25,6 +25,7 @@
 
 package org.ghyura.cf.desktop;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -35,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.HyperlinkEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dialog;
@@ -44,14 +46,21 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.net.URI;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * The Credits button, last in the row beside Hints, and the window it opens: who made the Combinatorics Framework, in
  * the author's own words. Every statement about him is taken from the LICENSE and NOTICE.md at the top of this
  * checkout ({@link #QUOTED} lists them, and a test keeps them equal to those files); the window copies his contact
- * addresses on request. Its content is built apart from its window, so tests build it headless.
+ * addresses on request and opens his YouTube channel in the browser (when no browser can be opened, the link is copied
+ * instead). Every element of the window explains itself in a hint, shown while the desktop's Hints button is on (F1
+ * there presses it). Its content is built apart from its window, so tests build it headless.
  */
 final class Credits {
 
@@ -60,6 +69,8 @@ final class Credits {
             + "reach him.";
     /** The author's contact addresses, as LICENSE gives them. */
     static final String CONTACTS = "mail4yur@gmail.com, yurii.baranov.22@gmail.com";
+    /** The author's YouTube channel, as he gave it. */
+    static final String CHANNEL = "https://www.youtube.com/@yuriibaranov/videos";
 
     /**
      * The sentences the window quotes, each as it stands in LICENSE or NOTICE.md and on the page (white space, quotation
@@ -102,22 +113,31 @@ final class Credits {
             + "offered for the benefit of people, nature and the living world.<br><br>"
             + "— Yurii Baranov, author, Kyiv, Ukraine</blockquote>"
             + "<h3>Contact</h3>"
-            + "<p>mail4yur@gmail.com or yurii.baranov.22@gmail.com<br>github.com/ghYura</p>"
+            + "<p>mail4yur@gmail.com or yurii.baranov.22@gmail.com<br>github.com/ghYura<br>"
+            + "Videos on YouTube: <a href=\"" + CHANNEL + "\">youtube.com/@yuriibaranov/videos</a></p>"
             + "<p class=\"small\">Business Source License 1.1: free for an individual QA engineer, tester or student, for their own "
             + "learning, exploration, research and professional practice. Each version becomes AGPL-3.0-only on its Change Date: "
             + "2030-08-08. The binding terms are in LICENSE; NOTICE.md also lists the third-party components and their "
             + "licences.</p>"
             + "</body></html>";
 
+    private final AbstractButton hintsSwitch;
     private final Consumer<String> clipboard;
+    private final Function<URI, CompletableFuture<?>> browser;
 
-    Credits() {
-        this(Credits::systemClipboard);
+    /** @param hintsSwitch the desktop's Hints button, which the window's hints follow */
+    Credits(AbstractButton hintsSwitch) {
+        this(hintsSwitch, Credits::systemClipboard, Credits::systemBrowser);
     }
 
-    /** @param clipboard takes the text to copy; throws IllegalStateException when the clipboard cannot be reached */
-    Credits(Consumer<String> clipboard) {
+    /**
+     * @param clipboard takes the text to copy; throws IllegalStateException when the clipboard cannot be reached
+     * @param browser   opens an address in the browser, off the event thread; its future fails when it cannot
+     */
+    Credits(AbstractButton hintsSwitch, Consumer<String> clipboard, Function<URI, CompletableFuture<?>> browser) {
+        this.hintsSwitch = hintsSwitch;
         this.clipboard = clipboard;
+        this.browser = browser;
     }
 
     /** The button; a headless desktop has it but opens nothing. */
@@ -134,8 +154,8 @@ final class Credits {
     private void open(Component parent) {
         Window owner = SwingUtilities.getWindowAncestor(parent);
         JDialog dialog = new JDialog(owner, TITLE + " · Combinatorics Framework", Dialog.ModalityType.APPLICATION_MODAL);
-        Page page = new Page(clipboard, dialog::dispose);
-        dialog.setContentPane(page.component());
+        Page page = new Page(clipboard, browser, dialog::dispose);
+        dialog.setContentPane(HintLayer.following(page.component(), hintsSwitch));
         dialog.getRootPane().setDefaultButton(page.close);
         dialog.getRootPane().registerKeyboardAction(e -> dialog.dispose(), KeyStroke.getKeyStroke("ESCAPE"),
                 JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -150,15 +170,38 @@ final class Credits {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(text), null);
     }
 
-    /** The window's content: the page, then Copy e-mail addresses and Close at the bottom. */
+    /** Opens the address in the system's browser, off the event thread, as the Sieve workbench opens Face 2. */
+    private static CompletableFuture<?> systemBrowser(URI address) {
+        return Background.run("credits-browser", () -> {
+            if (!java.awt.Desktop.isDesktopSupported() || !java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
+                throw new IllegalStateException("Automatic browser opening is unavailable.");
+            }
+            try {
+                java.awt.Desktop.getDesktop().browse(address);
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+            return address;
+        }, opened -> { }, problem -> { });
+    }
+
+    /**
+     * The window's content: the page, whose YouTube link opens the channel, then Copy e-mail addresses, YouTube channel
+     * and Close at the bottom.
+     */
     static final class Page {
         final JEditorPane text = new JEditorPane();
         final JButton copy = new JButton("Copy e-mail addresses");
+        final JButton channel = new JButton("YouTube channel");
         final JButton close = new JButton("Close");
         final JLabel status = new JLabel(" ");
         private final JPanel root = new JPanel(new BorderLayout(0, 8));
+        private final Consumer<String> clipboard;
+        private final Function<URI, CompletableFuture<?>> browser;
 
-        Page(Consumer<String> clipboard, Runnable onClose) {
+        Page(Consumer<String> clipboard, Function<URI, CompletableFuture<?>> browser, Runnable onClose) {
+            this.clipboard = clipboard;
+            this.browser = browser;
             text.setContentType("text/html");
             text.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
             text.setEditable(false);
@@ -169,6 +212,7 @@ final class Credits {
             scroll.setPreferredSize(new Dimension(600, 560));
             JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
             left.add(copy);
+            left.add(channel);
             left.add(status);
             JPanel row = new JPanel(new BorderLayout());
             row.add(left, BorderLayout.WEST);
@@ -184,7 +228,36 @@ final class Credits {
                     status.setText("The clipboard is busy: " + CONTACTS);
                 }
             });
+            Hints.of(text, "Who made the Combinatorics Framework, in the author's own words, with his contacts and the licence. "
+                    + "The YouTube link opens his videos.");
+            Hints.of(copy, "Puts the author's two e-mail addresses on the clipboard.");
+            Hints.of(channel, "Opens the author's YouTube channel with his videos in your browser. Without a browser, it copies "
+                    + "the link.");
+            Hints.of(close, "Closes the Credits window.");
+            channel.addActionListener(e -> openChannel());
+            text.addHyperlinkListener(e -> {
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED && CHANNEL.equals(e.getDescription())) {
+                    openChannel();
+                }
+            });
             close.addActionListener(e -> onClose.run());
+        }
+
+        /** Opens the author's channel in the browser; when none can be opened, copies the link and says so. */
+        void openChannel() {
+            status.setText("Opening your browser…");
+            browser.apply(URI.create(CHANNEL)).whenComplete((opened, problem) -> SwingUtilities.invokeLater(() -> {
+                if (problem == null) {
+                    status.setText("Opened in your browser.");
+                    return;
+                }
+                try {
+                    clipboard.accept(CHANNEL);
+                    status.setText("No browser could be opened; the link is copied.");
+                } catch (IllegalStateException busy) {
+                    status.setText("No browser could be opened: " + CHANNEL);
+                }
+            }));
         }
 
         JComponent component() {

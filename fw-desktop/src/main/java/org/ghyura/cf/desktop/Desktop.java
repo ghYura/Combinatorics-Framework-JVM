@@ -171,8 +171,8 @@ final class Desktop {
         // an opaque pop-up over the desktop says what the element the pointer rests on is for; its own button (or F1) turns it off.
         // In guif, AI_delegation stands before it (the agreement for handing work to an AI assistant, then its manual's path)
         // and Credits, last, after it (the author, in his own words)
-        aiDelegationButton = flatWorkbench ? new AiDelegationDialog(AiDelegation.of(trail, navigator.examples())).button() : null;
-        creditsButton = flatWorkbench ? new Credits().button() : null;
+        aiDelegationButton = flatWorkbench ? new AiDelegationDialog(AiDelegation.of(trail, navigator.examples()), hintsButton).button() : null;
+        creditsButton = flatWorkbench ? new Credits(hintsButton).button() : null;
         JPanel bar = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 6, 2));
         if (aiDelegationButton != null) bar.add(aiDelegationButton);
         bar.add(hintsButton);

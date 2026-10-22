@@ -354,6 +354,71 @@ class AiDelegationTest {
         assertTrue(closed.get());
     }
 
+    /** The author's request: hints work in the AI_delegation windows as on the desktop, following its Hints button. */
+    @Test
+    void everyElementOfTheAiDelegationWindowsExplainsItselfWhileHintsAreOn(@TempDir Path dir) throws Exception {
+        String agreement = AiDelegation.agreement(MANUAL);
+        AiDelegation delegation = new AiDelegation(dir.resolve(AiDelegation.STORE), List.of(dir));
+        delegation.chose(agreement, true);
+        edt(() -> {
+            hintsFollowTheDesktopsButton(new AiDelegationDialog.Agreement(agreement, dir.resolve(AiDelegation.MANUAL), b -> { }).component());
+            hintsFollowTheDesktopsButton(new AiDelegationDialog.Ready(delegation, dir.resolve(AiDelegation.MANUAL), t -> { }, () -> { }).component());
+            hintsFollowTheDesktopsButton(new AiDelegationDialog.Notice(delegation, "/home/someone/AI_DELEGATION.md", () -> { }).component());
+            return null;
+        });
+    }
+
+    /**
+     * Every control of another window's content has a hint in plain words, which its pop-up shows while the desktop's
+     * Hints button is on and not while it is off; F1 in that window presses the desktop's button.
+     */
+    static void hintsFollowTheDesktopsButton(javax.swing.JComponent content) {
+        javax.swing.JToggleButton hintsButton = new javax.swing.JToggleButton("Hints on", true);
+        javax.swing.JLayer<javax.swing.JComponent> layer = HintLayer.following(content, hintsButton);
+        layer.setSize(900, 780);
+        HintLayerTest.layout(layer);
+        HintLayer hints = (HintLayer) layer.getUI();
+        List<Component> controls = new ArrayList<>();
+        controls(content, controls);
+        assertTrue(controls.size() >= 2, "controls found: " + controls);
+        for (Component c : controls) {
+            String own = Hints.own(c);
+            assertTrue(own != null && own.endsWith(".") && own.split(" ").length >= 4, "a hint in plain words for " + c);
+            hints.hover(layer, visibleCenter(c, layer));
+            hints.settle(layer);
+            assertTrue(hints.text() != null && hints.text().startsWith(own), "the pop-up of " + own + ": " + hints.text());
+        }
+        hintsButton.doClick();
+        Component first = controls.getFirst();
+        hints.hover(layer, new java.awt.Point(1, 1));
+        hints.hover(layer, visibleCenter(first, layer));
+        hints.settle(layer);
+        assertNull(hints.text(), "no pop-up while the desktop's hints are off");
+        layer.getActionMap().get("cf.hints.toggle").actionPerformed(new java.awt.event.ActionEvent(layer, 0, "F1"));
+        assertTrue(hintsButton.isSelected(), "F1 in the window presses the desktop's Hints button");
+    }
+
+    /** The middle of the part of c that shows (a long text is taller than its scroll pane). */
+    private static java.awt.Point visibleCenter(Component c, Component root) {
+        java.awt.Rectangle shown = ((javax.swing.JComponent) c).getVisibleRect();
+        return SwingUtilities.convertPoint(c, shown.x + shown.width / 2, shown.y + shown.height / 2, root);
+    }
+
+    private static void controls(Component c, List<Component> out) {
+        if (!c.isVisible() || c.getWidth() <= 0 || c.getHeight() <= 0) {
+            return;
+        }
+        if (c instanceof javax.swing.AbstractButton || c instanceof javax.swing.text.JTextComponent || c instanceof javax.swing.JComboBox) {
+            out.add(c);
+            return;
+        }
+        if (c instanceof java.awt.Container parent) {
+            for (Component child : parent.getComponents()) {
+                controls(child, out);
+            }
+        }
+    }
+
     private static <T> T edt(Callable<T> work) throws Exception {
         AtomicReference<T> value = new AtomicReference<>();
         AtomicReference<Exception> failure = new AtomicReference<>();

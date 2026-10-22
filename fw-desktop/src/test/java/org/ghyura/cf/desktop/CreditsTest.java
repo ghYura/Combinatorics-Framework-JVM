@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import javax.swing.event.HyperlinkEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.nio.charset.StandardCharsets;
@@ -39,7 +40,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.net.URI;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -71,6 +74,22 @@ class CreditsTest {
                 assertTrue(hint != null && hint.endsWith(".") && hint.contains("author"), "the button explains itself: " + hint);
                 credits.doClick();   // headless: opens nothing and throws nothing
                 assertNull(swing.creditsButton());
+                // hint mode works for the row's new buttons as for every element of the desktop
+                var layer = flat.component();
+                layer.setSize(1400, 900);
+                HintLayerTest.layout(layer);
+                @SuppressWarnings("unchecked")
+                javax.swing.JLayer<javax.swing.JComponent> l = (javax.swing.JLayer<javax.swing.JComponent>) layer;
+                for (JButton button : List.of(flat.aiDelegationButton(), credits)) {
+                    flat.hints().hover(l, HintLayerTest.center(button, layer));
+                    flat.hints().settle(l);
+                    assertEquals(Hints.own(button), flat.hints().text(), "the pop-up of " + button.getText());
+                }
+                flat.hintsButton().doClick();
+                flat.hints().hover(l, HintLayerTest.center(flat.aiDelegationButton(), layer));
+                flat.hints().settle(l);
+                assertNull(flat.hints().text(), "and none while hints are off");
+                flat.hintsButton().doClick();
                 return null;
             });
         } finally {
@@ -86,7 +105,7 @@ class CreditsTest {
         String sources = normal(Files.readString(checkout.resolve("NOTICE.md"), StandardCharsets.UTF_8) + "\n"
                 + Files.readString(checkout.resolve("LICENSE"), StandardCharsets.UTF_8));
         String page = edt(() -> {
-            var text = new Credits.Page(s -> { }, () -> { }).text;
+            var text = new Credits.Page(s -> { }, CompletableFuture::completedFuture, () -> { }).text;
             return normal(text.getDocument().getText(0, text.getDocument().getLength()));
         });
         List<String> unsourced = new ArrayList<>();
@@ -106,13 +125,13 @@ class CreditsTest {
         List<String> clipboard = new ArrayList<>();
         AtomicReference<Boolean> closed = new AtomicReference<>(false);
         edt(() -> {
-            var page = new Credits.Page(clipboard::add, () -> closed.set(true));
+            var page = new Credits.Page(clipboard::add, CompletableFuture::completedFuture, () -> closed.set(true));
             page.copy.doClick();
             assertEquals(List.of(Credits.CONTACTS), clipboard);
             assertEquals("Copied.", page.status.getText());
             var busy = new Credits.Page(text -> {
                 throw new IllegalStateException("owned by another application");
-            }, () -> { });
+            }, CompletableFuture::completedFuture, () -> { });
             busy.copy.doClick();
             assertTrue(busy.status.getText().contains(Credits.CONTACTS), "the addresses stay readable when copying fails");
             page.close.doClick();
@@ -123,6 +142,48 @@ class CreditsTest {
         Color quote = Color.decode("#eef3f9");
         assertTrue(CandidateCodeView.contrast(Color.BLACK, quote) >= 4.5 && CandidateCodeView.contrast(Color.BLACK, GrayGradient.BOTTOM) >= 4.5,
                 "the author's statement reads well on its background");
+    }
+
+    /** The author's request: the window links to his YouTube channel; the link and its button open it in the browser. */
+    @Test
+    void theAuthorsYouTubeChannelOpensFromItsLinkAndItsButton() throws Exception {
+        assertEquals("https://www.youtube.com/@yuriibaranov/videos", Credits.CHANNEL);
+        List<URI> opened = new ArrayList<>();
+        List<String> clipboard = new ArrayList<>();
+        var page = edt(() -> new Credits.Page(clipboard::add, address -> {
+            opened.add(address);
+            return CompletableFuture.completedFuture(address);
+        }, () -> { }));
+        edt(() -> {
+            String shown = page.text.getDocument().getText(0, page.text.getDocument().getLength());
+            assertTrue(shown.contains("Videos on YouTube: youtube.com/@yuriibaranov/videos"), shown);
+            assertTrue(Credits.PAGE.contains("<a href=\"" + Credits.CHANNEL + "\">"), "a link the reader can click");
+            page.text.fireHyperlinkUpdate(new HyperlinkEvent(page.text, HyperlinkEvent.EventType.ACTIVATED,
+                    URI.create(Credits.CHANNEL).toURL(), Credits.CHANNEL));
+            page.channel.doClick();
+            return null;
+        });
+        assertEquals(List.of(URI.create(Credits.CHANNEL), URI.create(Credits.CHANNEL)), opened, "the link and the button open the channel");
+        assertEquals("Opened in your browser.", edt(page.status::getText));
+        assertEquals(List.of(), clipboard);
+
+        var noBrowser = edt(() -> new Credits.Page(clipboard::add, address -> CompletableFuture.failedFuture(
+                new IllegalStateException("Automatic browser opening is unavailable.")), () -> { }));
+        edt(() -> {
+            noBrowser.channel.doClick();
+            return null;
+        });
+        assertEquals("No browser could be opened; the link is copied.", edt(noBrowser.status::getText));
+        assertEquals(List.of(Credits.CHANNEL), clipboard, "without a browser the link is on the clipboard");
+    }
+
+    /** The author's request: hints work in the Credits window as on the desktop, following its Hints button. */
+    @Test
+    void everyElementOfTheCreditsWindowExplainsItselfWhileHintsAreOn() throws Exception {
+        edt(() -> {
+            AiDelegationTest.hintsFollowTheDesktopsButton(new Credits.Page(s -> { }, CompletableFuture::completedFuture, () -> { }).component());
+            return null;
+        });
     }
 
     /** White space, quotation marks, markdown emphasis and quote markers aside. */
