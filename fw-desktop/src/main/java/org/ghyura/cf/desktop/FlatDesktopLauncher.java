@@ -85,14 +85,15 @@ public final class FlatDesktopLauncher {
 
     /**
      * Install before constructing any widgets; no optional native integration or animation work. Every table of the FlatLaf
-     * desktop tints its odd rows (checkbox and number columns too); the setting belongs to FlatLaf, so the original desktop's
-     * look is untouched.
+     * desktop tints its odd rows (checkbox and number columns too), and every output (read-only text and tables) shows on a
+     * grayscale gradient ({@link GrayGradient}); the settings belong to FlatLaf, so the original desktop's look is untouched.
      */
     static void installLookAndFeel() {
         System.setProperty("flatlaf.useNativeLibrary", "false");
         System.setProperty("flatlaf.animation", "false");
         Map<String, String> extra = new HashMap<>(Objects.requireNonNullElse(FlatLaf.getGlobalExtraDefaults(), Map.of()));
         extra.put("Table.alternateRowColor", ALTERNATE_ROW);
+        extra.putAll(GrayGradient.uiClasses());
         FlatLaf.setGlobalExtraDefaults(extra);
         if (!FlatLightLaf.setup()) throw unavailable("could not initialize FlatLaf");
     }
