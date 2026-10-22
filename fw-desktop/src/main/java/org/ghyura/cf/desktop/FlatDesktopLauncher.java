@@ -84,15 +84,27 @@ public final class FlatDesktopLauncher {
     static final String ALTERNATE_ROW = "#e4ebf5";
 
     /**
+     * The grey of the example shown inside an empty field. FlatLaf draws it in its disabled grey (#808080, 3.9:1 on white);
+     * guif's examples are instructions, so they get text contrast: 5.3:1 on a field, 4.8:1 on a disabled one, still lighter
+     * than what the user types.
+     */
+    static final String PLACEHOLDER = "#6b6b6b";
+
+    /**
      * Install before constructing any widgets; no optional native integration or animation work. Every table of the FlatLaf
-     * desktop tints its odd rows (checkbox and number columns too); the setting belongs to FlatLaf, so the original desktop's
-     * look is untouched.
+     * desktop tints its odd rows (checkbox and number columns too), every output (read-only text and tables) shows on a
+     * grayscale gradient ({@link GrayGradient}), and the examples inside empty fields read as text ({@link #PLACEHOLDER});
+     * the settings belong to FlatLaf, so the original desktop's look is untouched.
      */
     static void installLookAndFeel() {
         System.setProperty("flatlaf.useNativeLibrary", "false");
         System.setProperty("flatlaf.animation", "false");
         Map<String, String> extra = new HashMap<>(Objects.requireNonNullElse(FlatLaf.getGlobalExtraDefaults(), Map.of()));
         extra.put("Table.alternateRowColor", ALTERNATE_ROW);
+        extra.putAll(GrayGradient.uiClasses());
+        for (String field : new String[]{"TextField", "FormattedTextField", "PasswordField"}) {
+            extra.put(field + ".placeholderForeground", PLACEHOLDER);
+        }
         FlatLaf.setGlobalExtraDefaults(extra);
         if (!FlatLightLaf.setup()) throw unavailable("could not initialize FlatLaf");
     }

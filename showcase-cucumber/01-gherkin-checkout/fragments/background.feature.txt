@@ -1,0 +1,12 @@
+Background:
+  Given the bookshop sells
+    | item     | price |
+    | book     | 12.00 |
+    | pen      |  2.50 |
+    | mug      |  8.00 |
+    | bookmark |  0.05 |
+  And the shipping options cost
+    | option   | price |
+    | standard |  4.90 |
+    | express  |  9.90 |
+    | pickup   |  0.00 |

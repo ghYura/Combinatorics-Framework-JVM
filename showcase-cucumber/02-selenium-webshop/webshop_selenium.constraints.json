@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "constraints": [
+    {
+      "id": "actions_always",
+      "desc": "The cart actions always take place. FW_Optional on the sequence only keeps its 6 orders apart from the covering selection, so every order runs with every kept combination of the static parameters.",
+      "polarity": "require",
+      "assert": {"sheet": "actions", "present": true}
+    },
+    {
+      "id": "freeship_is_a_member_perk",
+      "desc": "Guests never hold FREESHIP: the coupon is mailed to members.",
+      "polarity": "forbid",
+      "pairs": [{"account": "guest", "coupon": "FREESHIP"}]
+    },
+    {
+      "id": "one_sudden_event_at_a_time",
+      "desc": "A reload and a step back never strike at the very same moment: when both happen, they happen after different actions.",
+      "polarity": "forbid",
+      "assert": {"all": [{"sheet": "reload", "present": true}, {"sheet": "reload", "eqSheet": "back_repeat"}]}
+    }
+  ]
+}

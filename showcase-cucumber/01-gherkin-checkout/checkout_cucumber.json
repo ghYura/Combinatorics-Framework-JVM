@@ -1,0 +1,71 @@
+{
+  "sheets": {
+    "FW_Seq": [
+      ["HEAD", "FW_Combi(1)"],
+      ["background", "FW_Combi(1)"],
+      ["channel", "FW_Combi(1)"],
+      ["customer", "FW_Combi(1)"],
+      ["payment", "FW_Combi(1)"],
+      ["start", "FW_Combi(1)"],
+      ["steps", "FW_Optional", "FW_Concatenator=|", "FW_Permut"],
+      ["price_rise", "FW_Optional", "FW_Combi(1)"],
+      ["duplicate", "FW_Optional", "FW_Combi(1)"],
+      ["place", "FW_Combi(1)"],
+      ["then_one_order", "FW_Combi(1)"],
+      ["then_charge", "FW_Combi(1)"],
+      ["then_free_shipping", "FW_Combi(1)"],
+      ["then_total", "FW_Combi(1)"],
+      ["TAIL", "FW_Combi(1)"]
+    ],
+    "FW_SheetNames": [
+      ["HEAD", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["background", "        g.background(\"\"\"\n", "\"\"\");\n"],
+      ["channel", "        g.given(\"channel\", \"the checkout runs on the %s thread\", \"", "\");\n"],
+      ["customer", "        g.given(\"customer\", \"the customer is a %s\", \"", "\");\n"],
+      ["payment", "        g.given(\"payment\", \"the payment method is %s\", \"", "\");\n"],
+      ["start", "        g.given(\"start\", \"the cart starts with %s\", \"", "\");\n"],
+      ["steps", "        g.whenEach(\"steps\", \"the customer %s\", \"", "\");\n"],
+      ["price_rise", "        g.strike(\"price_rise\", \"the price of book rises by 1.00 during checkout\", \"", "\");\n"],
+      ["duplicate", "        g.strike(\"duplicate\", \"the previous request is delivered twice\", \"", "\");\n"],
+      ["place", "        g.when(\"\", \"%s\", \"", "\");\n"],
+      ["then_one_order", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["then_charge", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["then_free_shipping", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["then_total", "FW_EMPTY_STRING", "FW_EMPTY_STRING"],
+      ["TAIL", "FW_EMPTY_STRING", "FW_EMPTY_STRING"]
+    ],
+    "FW_CUSTOM_VAR": [
+      ["0", "PASS"],
+      ["11", "DOUBLE_ORDER"],
+      ["12", "CHARGE_MISMATCH"],
+      ["13", "FREESHIP_LOST"],
+      ["14", "WRONG_TOTAL"],
+      ["90", "ACTION_FAILED"]
+    ],
+    "FW_RunMeFirstOnce": [[
+      "public class RunMeFirstOnce {\n    public static String FW_ARGS;\n\n    /* Once per run, before any test case: an empty folder for this run's generated .feature files, whose absolute\n       path every test case receives as its first argument. */\n    public static void main(String[] args) throws Exception {\n        String folder = args.length > 0 ? args[0] : \"showcase-cucumber/target/generated-features/01-gherkin-checkout\";\n        FW_ARGS = org.ghyura.cf.showcase.cucumber.GherkinCase.prepareFolder(folder);\n    }\n}\n"
+    ]],
+    "FW_Arguments": [
+      ["showcase-cucumber/target/generated-features/01-gherkin-checkout"]
+    ],
+    "HEAD": [[
+      "import org.ghyura.cf.showcase.cucumber.GherkinCase;\n\n/* checkout_cucumber (showcase-cucumber/01-gherkin-checkout): every test case is one Gherkin scenario against the bookshop's\n   checkout engine, composed by the Combinatorics Framework. The heart of it is the timeline: the customer's four actions\n   in one of their 24 orders, with up to two sudden events woven in after any action (a price rise, a duplicate delivery\n   of the last request). Each data sheet adds its Given, When or Then (the values stay plain: FW_SheetNames wraps them\n   into code); TAIL writes the scenario as a .feature file and runs it with Cucumber in this JVM. The first failing Then\n   gives the verdict, the FW_EXIT_CODE of its own sheet, which FW_CUSTOM_VAR names; a failing Given or When gives 90. */\npublic class CheckoutCucumberCase {\n    public static int FW_VAR = 0;\n    static final GherkinCase g = new GherkinCase(\"Bookshop checkout: actions in every order, sudden events at every moment\",\n            \"FW_REPLACE_ME_WITH_CURRENT_COMBO_SEQUENCE\");\n\n    /* A Then line with the verdict it gives when it fails. Its cell hands the sheet's exit code over through FW_VAR,\n       which is taken back at once: the verdict is decided only after Cucumber has run. */\n    static void then(String text, int code) {\n        g.then(text, code);\n        FW_VAR = 0;\n    }\n\n    public static void main(String[] args) {\n        String folder = args.length > 0 ? args[0] : \"showcase-cucumber/target/generated-features/01-gherkin-checkout\";\n        g.onStepFailure(90);\n        g.fact(\"price_rise\", \"none\");\n        g.fact(\"duplicate\", \"none\");\n"
+    ]],
+    "background": [["FW_File=fragments/background.feature.txt"]],
+    "channel": [["test"], ["terminal"]],
+    "customer": [["member"], ["vip"]],
+    "payment": [["card"], ["wallet"], ["invoice"]],
+    "start": [["a bookmark"], ["nothing"]],
+    "steps": [["adds a book"], ["applies SAVE10"], ["applies FREESHIP"], ["chooses express shipping"]],
+    "price_rise": [["after 1"], ["after 2"], ["after 3"], ["after 4"]],
+    "duplicate": [["after 1"], ["after 2"], ["after 3"], ["after 4"], ["after 5"]],
+    "place": [["the customer places the order"]],
+    "then_one_order": [["        then(\"exactly one order is placed\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "then_charge": [["        then(\"the customer is charged exactly the order total\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "then_free_shipping": [["        then(\"free shipping is honoured\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "then_total": [["        then(\"the total matches the reference price\", FW_VAR = FW_EXIT_CODE);\n"]],
+    "TAIL": [[
+      "        GherkinCase.Outcome outcome = g.run(folder, \"org.ghyura.cf.showcase.cucumber.checkout\");\n        FW_VAR = outcome.verdict();\n        System.out.println(\"app=checkout_cucumber case=\" + g.caseId() + \" \" + outcome.metricsText() + \" FW_VAR=\" + FW_VAR);\n    }\n}\n"
+    ]]
+  }
+}

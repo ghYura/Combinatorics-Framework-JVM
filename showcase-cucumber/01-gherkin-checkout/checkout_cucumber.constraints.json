@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "params": {
+    "customer": {
+      "member": {"trust": 2},
+      "vip": {"trust": 3}
+    },
+    "payment": {
+      "card": {"risk": 1},
+      "wallet": {"risk": 2},
+      "invoice": {"risk": 3}
+    }
+  },
+  "constraints": [
+    {
+      "id": "steps_always",
+      "desc": "The actions always take place. FW_Optional on the sequence only keeps its 24 orders apart from the covering selection, so every order runs with every kept combination of the static parameters.",
+      "polarity": "require",
+      "assert": {"sheet": "steps", "present": true}
+    },
+    {
+      "id": "invoice_needs_trust",
+      "desc": "A payment method riskier than the customer's trust is not offered: members cannot pay by invoice.",
+      "polarity": "forbid",
+      "sheets": ["customer", "payment"],
+      "when": "payment.risk > customer.trust"
+    },
+    {
+      "id": "terminal_has_no_wallet",
+      "desc": "The shop's own terminal has no wallet reader.",
+      "polarity": "forbid",
+      "sets": {"channel": ["terminal"], "payment": ["wallet"]}
+    },
+    {
+      "id": "wired_terminal_never_retries",
+      "desc": "The terminal is wired: its order request is never delivered twice (a late rule: it reads a sudden event).",
+      "polarity": "forbid",
+      "pairs": [{"channel": "terminal", "duplicate": "after 5"}]
+    },
+    {
+      "id": "one_sudden_event_at_a_time",
+      "desc": "Two sudden events never strike at the very same moment: when both happen, they happen after different actions.",
+      "polarity": "forbid",
+      "assert": {"all": [{"sheet": "price_rise", "present": true}, {"sheet": "price_rise", "eqSheet": "duplicate"}]}
+    }
+  ]
+}

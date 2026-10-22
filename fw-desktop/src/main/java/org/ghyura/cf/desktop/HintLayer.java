@@ -140,6 +140,16 @@ final class HintLayer extends LayerUI<JComponent> {
     }
 
     /**
+     * Another window's content under hints that follow the desktop's Hints button, F1 there pressing it, as the chart
+     * window's are (the AI_delegation and Credits windows use it).
+     */
+    static JLayer<JComponent> following(JComponent content, AbstractButton toggle) {
+        HintLayer hints = new HintLayer();
+        hints.control(toggle);
+        return new JLayer<>(content, hints);
+    }
+
+    /**
      * The button that shows whether hints are on and turns them on and off; F1 presses it. The layer follows the button's
      * state, so the layer of another window (the chart window) can follow the desktop's button.
      */

@@ -248,6 +248,12 @@ class PythonPluginTest {
     @Test
     void aBwrapSandboxKeepsTheFileSystemReadOnlyAndTheNetworkClosed(@TempDir Path temp) throws Exception {
         Assumptions.assumeTrue(onPath("bwrap"), "bwrap is not installed, so the Python sandbox cannot be verified here");
+        var probe = PythonDoctor.probe("python3", temp, Map.of(), Sandbox.of("bwrap"), List.of("pass\n"));
+        boolean namespacesDenied = probe.stream().flatMap(check -> check.details().stream()).anyMatch(detail ->
+                detail.contains("No permissions to create new namespace")
+                        || detail.contains("Creating new namespace failed: Operation not permitted"));
+        Assumptions.assumeFalse(namespacesDenied,
+                "bwrap cannot create namespaces here: the Python sandbox cannot be verified: " + probe);
         Path work = Files.createDirectories(temp.resolve("work"));
         List<String> host;
         try (var interfaces = Files.list(Path.of("/sys/class/net"))) {

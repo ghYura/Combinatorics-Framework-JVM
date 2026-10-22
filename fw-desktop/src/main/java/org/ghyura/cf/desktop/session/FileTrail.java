@@ -140,6 +140,11 @@ public final class FileTrail implements AutoCloseable {
         return base.resolve("combinatorics-framework").resolve("desktop-places.properties");
     }
 
+    /** The store file this trail is remembered in, or null for a trail of this session only. */
+    public Path store() {
+        return store;
+    }
+
     // ---- what the session tells -----------------------------------------------------------------------------------
 
     /** Learns a file the session read, chose or wrote (its kind from its name and first bytes), and watches its folder. */

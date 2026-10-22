@@ -1,0 +1,4 @@
+Background:
+  Given the web shop runs at "{base_url}"
+  And the browser is a headless Firefox resolved by Selenium Manager
+  And the customer puts a book in the cart
