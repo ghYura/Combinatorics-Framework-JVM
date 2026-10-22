@@ -58,7 +58,7 @@ import java.util.function.Function;
  * The Credits button, last in the row beside Hints, and the window it opens: who made the Combinatorics Framework, in
  * the author's own words. Every statement about him is taken from the LICENSE and NOTICE.md at the top of this
  * checkout ({@link #QUOTED} lists them, and a test keeps them equal to those files); the window copies his contact
- * addresses on request and opens his YouTube channel and this edition's GitHub repository in the browser (when no browser
+ * address on request and opens his YouTube channel and this edition's GitHub repository in the browser (when no browser
  * can be opened, the link is copied instead). Every element of the window explains itself in a hint, shown while the
  * desktop's Hints button is on (F1 there presses it). Its content is built apart from its window, so tests build it headless.
  */
@@ -67,8 +67,8 @@ final class Credits {
     static final String TITLE = "Credits";
     static final String HINT = "Who made the Combinatorics Framework: its author, his statement in his own words, and how to "
             + "reach him.";
-    /** The author's contact addresses, as LICENSE gives them. */
-    static final String CONTACTS = "mail4yur@gmail.com, yurii.baranov.22@gmail.com";
+    /** The author's contact address, as LICENSE gives it. */
+    static final String CONTACTS = "yurii.baranov.22@gmail.com";
     /** The author's YouTube channel, as he gave it. */
     static final String CHANNEL = "https://www.youtube.com/@yuriibaranov/videos";
     /** This edition's GitHub repository, which the author will make public. */
@@ -90,7 +90,7 @@ final class Credits {
                     + "actions, order and constraints, and their composition into verifiable scenarios — belongs to humanity. "
                     + "It is offered for the benefit of people, nature and the living world.",
             "— Yurii Baranov, author, Kyiv, Ukraine",
-            "mail4yur@gmail.com or yurii.baranov.22@gmail.com",
+            "yurii.baranov.22@gmail.com",
             "Change Date: 2030-08-08");
 
     /** The page the window shows. */
@@ -115,7 +115,7 @@ final class Credits {
             + "offered for the benefit of people, nature and the living world.<br><br>"
             + "— Yurii Baranov, author, Kyiv, Ukraine</blockquote>"
             + "<h3>Contact</h3>"
-            + "<p>mail4yur@gmail.com or yurii.baranov.22@gmail.com<br>"
+            + "<p>yurii.baranov.22@gmail.com<br>"
             + "Source code on GitHub: <a href=\"" + REPOSITORY + "\">github.com/ghYura/Combinatorics-Framework-JVM</a><br>"
             + "Videos on YouTube: <a href=\"" + CHANNEL + "\">youtube.com/@yuriibaranov/videos</a></p>"
             + "<p class=\"small\">Business Source License 1.1: free for an individual QA engineer, tester or student, for their own "
@@ -189,12 +189,12 @@ final class Credits {
     }
 
     /**
-     * The window's content: the page, whose links open the repository and the channel, then Copy e-mail addresses, GitHub
+     * The window's content: the page, whose links open the repository and the channel, then Copy e-mail address, GitHub
      * repository, YouTube channel and Close at the bottom.
      */
     static final class Page {
         final JEditorPane text = new JEditorPane();
-        final JButton copy = new JButton("Copy e-mail addresses");
+        final JButton copy = new JButton("Copy e-mail address");
         final JButton repository = new JButton("GitHub repository");
         final JButton channel = new JButton("YouTube channel");
         final JButton close = new JButton("Close");
@@ -237,7 +237,7 @@ final class Credits {
             });
             Hints.of(text, "Who made the Combinatorics Framework, in the author's own words, with his contacts and the licence. "
                     + "Its links open the source code on GitHub and his videos on YouTube.");
-            Hints.of(copy, "Puts the author's two e-mail addresses on the clipboard.");
+            Hints.of(copy, "Puts the author's e-mail address on the clipboard.");
             Hints.of(repository, "Opens the source code of this edition on GitHub in your browser. Without a browser, it copies "
                     + "the link.");
             Hints.of(channel, "Opens the author's YouTube channel with his videos in your browser. Without a browser, it copies "

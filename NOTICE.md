@@ -42,7 +42,7 @@ Use as shared infrastructure of a company or institution, incorporation into a
 product or service, provision of services to third parties, and operation by an
 AI system without a real human QA engineer directing it, are not granted here
 and require a separate licence. See `COMMERCIAL_LICENSING.md` of the
-Combinatorics Framework QA Edition, or contact the author at the addresses in
+Combinatorics Framework QA Edition, or contact the author at the address in
 [LICENSE](LICENSE).
 
 ### Name-holders
