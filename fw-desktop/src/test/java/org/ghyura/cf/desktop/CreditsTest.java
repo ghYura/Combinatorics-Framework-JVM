@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.HyperlinkEvent;
 import java.awt.Color;
 import java.awt.Component;
@@ -144,9 +145,13 @@ class CreditsTest {
                 "the author's statement reads well on its background");
     }
 
-    /** The author's request: the window links to his YouTube channel; the link and its button open it in the browser. */
+    /**
+     * The author's request: the window links to this edition's GitHub repository and to his YouTube channel; each link and
+     * its button open it in the browser, and without a browser the link is copied.
+     */
     @Test
-    void theAuthorsYouTubeChannelOpensFromItsLinkAndItsButton() throws Exception {
+    void theRepositoryAndTheChannelOpenFromTheirLinksAndTheirButtons() throws Exception {
+        assertEquals("https://github.com/ghYura/Combinatorics-Framework-JVM", Credits.REPOSITORY);
         assertEquals("https://www.youtube.com/@yuriibaranov/videos", Credits.CHANNEL);
         List<URI> opened = new ArrayList<>();
         List<String> clipboard = new ArrayList<>();
@@ -155,26 +160,93 @@ class CreditsTest {
             return CompletableFuture.completedFuture(address);
         }, () -> { }));
         edt(() -> {
+            page.text.fireHyperlinkUpdate(new HyperlinkEvent(page.text, HyperlinkEvent.EventType.ACTIVATED, null, null));
+            page.text.fireHyperlinkUpdate(new HyperlinkEvent(page.text, HyperlinkEvent.EventType.ACTIVATED, null,
+                    "https://example.invalid/"));
+            page.text.fireHyperlinkUpdate(new HyperlinkEvent(page.text, HyperlinkEvent.EventType.ENTERED,
+                    URI.create(Credits.REPOSITORY).toURL(), Credits.REPOSITORY));
+            assertEquals(List.of(), opened, "only activating one of the two known links opens the browser");
             String shown = page.text.getDocument().getText(0, page.text.getDocument().getLength());
+            assertTrue(shown.contains("Source code on GitHub: github.com/ghYura/Combinatorics-Framework-JVM"), shown);
             assertTrue(shown.contains("Videos on YouTube: youtube.com/@yuriibaranov/videos"), shown);
-            assertTrue(Credits.PAGE.contains("<a href=\"" + Credits.CHANNEL + "\">"), "a link the reader can click");
-            page.text.fireHyperlinkUpdate(new HyperlinkEvent(page.text, HyperlinkEvent.EventType.ACTIVATED,
-                    URI.create(Credits.CHANNEL).toURL(), Credits.CHANNEL));
+            for (String address : List.of(Credits.REPOSITORY, Credits.CHANNEL)) {
+                assertTrue(Credits.PAGE.contains("<a href=\"" + address + "\">"), "a link the reader can click: " + address);
+                page.text.fireHyperlinkUpdate(new HyperlinkEvent(page.text, HyperlinkEvent.EventType.ACTIVATED,
+                        URI.create(address).toURL(), address));
+            }
+            page.repository.doClick();
             page.channel.doClick();
             return null;
         });
-        assertEquals(List.of(URI.create(Credits.CHANNEL), URI.create(Credits.CHANNEL)), opened, "the link and the button open the channel");
+        URI repository = URI.create(Credits.REPOSITORY);
+        URI channel = URI.create(Credits.CHANNEL);
+        assertEquals(List.of(repository, channel, repository, channel), opened, "each link and each button opens its address");
         assertEquals("Opened in your browser.", edt(page.status::getText));
         assertEquals(List.of(), clipboard);
 
         var noBrowser = edt(() -> new Credits.Page(clipboard::add, address -> CompletableFuture.failedFuture(
                 new IllegalStateException("Automatic browser opening is unavailable.")), () -> { }));
         edt(() -> {
-            noBrowser.channel.doClick();
+            noBrowser.repository.doClick();
             return null;
         });
         assertEquals("No browser could be opened; the link is copied.", edt(noBrowser.status::getText));
-        assertEquals(List.of(Credits.CHANNEL), clipboard, "without a browser the link is on the clipboard");
+        edt(() -> {
+            noBrowser.channel.doClick();
+            return null;
+        });
+        edt(() -> null);   // the copy is queued on the event thread: let it run first
+        assertEquals(List.of(Credits.REPOSITORY, Credits.CHANNEL), clipboard, "without a browser each link is on the clipboard");
+    }
+
+    /** A delayed browser failure still leaves the address readable when the clipboard is unavailable too. */
+    @Test
+    void anUnavailableBrowserAndClipboardLeaveTheRepositoryAddressVisible() throws Exception {
+        var browser = new CompletableFuture<URI>();
+        var page = edt(() -> new Credits.Page(address -> {
+            assertTrue(SwingUtilities.isEventDispatchThread(), "clipboard access belongs on the event thread");
+            assertEquals(Credits.REPOSITORY, address);
+            throw new IllegalStateException("The clipboard is busy.");
+        }, address -> browser, () -> { }));
+        edt(() -> {
+            page.repository.doClick();
+            assertEquals("Opening your browser…", page.status.getText());
+            return null;
+        });
+        browser.completeExceptionally(new IllegalStateException("No browser is available."));
+        assertEquals("No browser could be opened: " + Credits.REPOSITORY, edt(page.status::getText));
+    }
+
+    /** The new repository button must not push status text over Close or outside the actual Credits window. */
+    @Test
+    void theBrowserStatusFitsBelowTheButtons() throws Exception {
+        edt(() -> {
+            var previous = UIManager.getLookAndFeel();
+            try {
+                FlatDesktopLauncher.installLookAndFeel();
+                var page = new Credits.Page(s -> { }, CompletableFuture::completedFuture, () -> { });
+                var content = page.component();
+                content.setSize(636, 740); // the 660-pixel window, allowing room for window decorations
+                for (String message : List.of("Opening your browser…", "Opened in your browser.",
+                        "No browser could be opened; the link is copied.",
+                        "No browser could be opened: " + Credits.REPOSITORY,
+                        "The clipboard is busy: " + Credits.CONTACTS)) {
+                    page.status.setText(message);
+                    HintLayerTest.layout(content);
+                    var status = SwingUtilities.convertRectangle(page.status.getParent(), page.status.getBounds(), content);
+                    assertTrue(content.getBounds().contains(status), message);
+                    assertTrue(page.status.getWidth() >= page.status.getPreferredSize().width, "the whole status fits: " + message);
+                    for (var button : List.of(page.copy, page.repository, page.channel, page.close)) {
+                        var bounds = SwingUtilities.convertRectangle(button.getParent(), button.getBounds(), content);
+                        assertTrue(content.getBounds().contains(bounds), button.getText());
+                        assertTrue(bounds.y + bounds.height <= status.y, button.getText() + " stays above the status");
+                    }
+                }
+            } finally {
+                UIManager.setLookAndFeel(previous);
+            }
+            return null;
+        });
     }
 
     /** The author's request: hints work in the Credits window as on the desktop, following its Hints button. */

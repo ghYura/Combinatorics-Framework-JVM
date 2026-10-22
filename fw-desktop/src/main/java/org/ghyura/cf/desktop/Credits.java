@@ -58,9 +58,9 @@ import java.util.function.Function;
  * The Credits button, last in the row beside Hints, and the window it opens: who made the Combinatorics Framework, in
  * the author's own words. Every statement about him is taken from the LICENSE and NOTICE.md at the top of this
  * checkout ({@link #QUOTED} lists them, and a test keeps them equal to those files); the window copies his contact
- * addresses on request and opens his YouTube channel in the browser (when no browser can be opened, the link is copied
- * instead). Every element of the window explains itself in a hint, shown while the desktop's Hints button is on (F1
- * there presses it). Its content is built apart from its window, so tests build it headless.
+ * addresses on request and opens his YouTube channel and this edition's GitHub repository in the browser (when no browser
+ * can be opened, the link is copied instead). Every element of the window explains itself in a hint, shown while the
+ * desktop's Hints button is on (F1 there presses it). Its content is built apart from its window, so tests build it headless.
  */
 final class Credits {
 
@@ -71,6 +71,8 @@ final class Credits {
     static final String CONTACTS = "mail4yur@gmail.com, yurii.baranov.22@gmail.com";
     /** The author's YouTube channel, as he gave it. */
     static final String CHANNEL = "https://www.youtube.com/@yuriibaranov/videos";
+    /** This edition's GitHub repository, which the author will make public. */
+    static final String REPOSITORY = "https://github.com/ghYura/Combinatorics-Framework-JVM";
 
     /**
      * The sentences the window quotes, each as it stands in LICENSE or NOTICE.md and on the page (white space, quotation
@@ -113,7 +115,8 @@ final class Credits {
             + "offered for the benefit of people, nature and the living world.<br><br>"
             + "— Yurii Baranov, author, Kyiv, Ukraine</blockquote>"
             + "<h3>Contact</h3>"
-            + "<p>mail4yur@gmail.com or yurii.baranov.22@gmail.com<br>github.com/ghYura<br>"
+            + "<p>mail4yur@gmail.com or yurii.baranov.22@gmail.com<br>"
+            + "Source code on GitHub: <a href=\"" + REPOSITORY + "\">github.com/ghYura/Combinatorics-Framework-JVM</a><br>"
             + "Videos on YouTube: <a href=\"" + CHANNEL + "\">youtube.com/@yuriibaranov/videos</a></p>"
             + "<p class=\"small\">Business Source License 1.1: free for an individual QA engineer, tester or student, for their own "
             + "learning, exploration, research and professional practice. Each version becomes AGPL-3.0-only on its Change Date: "
@@ -186,12 +189,13 @@ final class Credits {
     }
 
     /**
-     * The window's content: the page, whose YouTube link opens the channel, then Copy e-mail addresses, YouTube channel
-     * and Close at the bottom.
+     * The window's content: the page, whose links open the repository and the channel, then Copy e-mail addresses, GitHub
+     * repository, YouTube channel and Close at the bottom.
      */
     static final class Page {
         final JEditorPane text = new JEditorPane();
         final JButton copy = new JButton("Copy e-mail addresses");
+        final JButton repository = new JButton("GitHub repository");
         final JButton channel = new JButton("YouTube channel");
         final JButton close = new JButton("Close");
         final JLabel status = new JLabel(" ");
@@ -212,14 +216,17 @@ final class Credits {
             scroll.setPreferredSize(new Dimension(600, 560));
             JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
             left.add(copy);
+            left.add(repository);
             left.add(channel);
-            left.add(status);
             JPanel row = new JPanel(new BorderLayout());
-            row.add(left, BorderLayout.WEST);
+            row.add(left, BorderLayout.CENTER);
             row.add(close, BorderLayout.EAST);
+            JPanel footer = new JPanel(new BorderLayout(0, 6));
+            footer.add(row, BorderLayout.CENTER);
+            footer.add(status, BorderLayout.SOUTH);
             root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
             root.add(scroll, BorderLayout.CENTER);
-            root.add(row, BorderLayout.SOUTH);
+            root.add(footer, BorderLayout.SOUTH);
             copy.addActionListener(e -> {
                 try {
                     clipboard.accept(CONTACTS);
@@ -229,33 +236,37 @@ final class Credits {
                 }
             });
             Hints.of(text, "Who made the Combinatorics Framework, in the author's own words, with his contacts and the licence. "
-                    + "The YouTube link opens his videos.");
+                    + "Its links open the source code on GitHub and his videos on YouTube.");
             Hints.of(copy, "Puts the author's two e-mail addresses on the clipboard.");
+            Hints.of(repository, "Opens the source code of this edition on GitHub in your browser. Without a browser, it copies "
+                    + "the link.");
             Hints.of(channel, "Opens the author's YouTube channel with his videos in your browser. Without a browser, it copies "
                     + "the link.");
             Hints.of(close, "Closes the Credits window.");
-            channel.addActionListener(e -> openChannel());
+            repository.addActionListener(e -> open(REPOSITORY));
+            channel.addActionListener(e -> open(CHANNEL));
             text.addHyperlinkListener(e -> {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED && CHANNEL.equals(e.getDescription())) {
-                    openChannel();
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED
+                        && (REPOSITORY.equals(e.getDescription()) || CHANNEL.equals(e.getDescription()))) {
+                    open(e.getDescription());
                 }
             });
             close.addActionListener(e -> onClose.run());
         }
 
-        /** Opens the author's channel in the browser; when none can be opened, copies the link and says so. */
-        void openChannel() {
+        /** Opens the address in the browser; when none can be opened, copies the link and says so. */
+        void open(String address) {
             status.setText("Opening your browser…");
-            browser.apply(URI.create(CHANNEL)).whenComplete((opened, problem) -> SwingUtilities.invokeLater(() -> {
+            browser.apply(URI.create(address)).whenComplete((opened, problem) -> SwingUtilities.invokeLater(() -> {
                 if (problem == null) {
                     status.setText("Opened in your browser.");
                     return;
                 }
                 try {
-                    clipboard.accept(CHANNEL);
+                    clipboard.accept(address);
                     status.setText("No browser could be opened; the link is copied.");
                 } catch (IllegalStateException busy) {
-                    status.setText("No browser could be opened: " + CHANNEL);
+                    status.setText("No browser could be opened: " + address);
                 }
             }));
         }
