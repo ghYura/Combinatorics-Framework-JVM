@@ -182,8 +182,12 @@ class GrayGradientTest {
             Color below = at(image, pane, viewport, x, viewport.getHeight() - 3);
             assertGray(even);
             assertGray(below);
-            assertTrue(even.getRed() > below.getRed() + 20, "the gradient behind the rows goes on below them: " + even + " " + below);
+            assertTrue(even.getRed() > below.getRed() + 6, "the gradient behind the rows goes on below them: " + even + " " + below);
+            assertTrue(below.getRed() >= GrayGradient.TABLE_BOTTOM.getRed(), "a table's gradient ends lighter than a text's: " + below);
             assertEquals(Color.decode(FlatDesktopLauncher.ALTERNATE_ROW), odd, "odd rows keep their tint");
+            Color tint = Color.decode(FlatDesktopLauncher.ALTERNATE_ROW);
+            assertTrue(CandidateCodeView.contrast(GrayGradient.TABLE_BOTTOM, Color.BLACK) > CandidateCodeView.contrast(tint, Color.BLACK),
+                    "even rows stay lighter than the tinted odd rows at every height, so the stripes never fade into each other");
 
             JTable editable = new JTable(new DefaultTableModel(new Object[][]{{"x"}, {"y"}}, new Object[]{"a"}));
             JScrollPane plain = new JScrollPane(editable);

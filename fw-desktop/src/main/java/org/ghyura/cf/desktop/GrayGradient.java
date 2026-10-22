@@ -54,8 +54,10 @@ import java.util.Map;
  * and the tables none of whose cells can be edited; text that can be edited, tables that can be edited and anything
  * whose code chose its own background keep the plain background. The gradient belongs to the visible area of the
  * enclosing scroll pane, not to the content, so it stays in place while the content scrolls; a table's odd rows keep
- * their tint, its even rows and the empty space below its last row show the gradient. The FlatLaf desktop maps its text
- * area, text pane, editor pane and table UIs to the delegates here; the Swing desktop is left as it is.
+ * their tint, its even rows and the empty space below its last row show the gradient. A table's gradient ends lighter
+ * ({@link #TABLE_BOTTOM}) than a text's, so its even rows stay lighter than the tinted odd rows at every height and the
+ * stripes never fade into each other. The FlatLaf desktop maps its text area, text pane, editor pane and table UIs to
+ * the delegates here; the Swing desktop is left as it is.
  */
 public final class GrayGradient {
 
@@ -63,6 +65,8 @@ public final class GrayGradient {
     static final Color TOP = new Color(0xFB, 0xFB, 0xFB);
     /** The colour at its bottom. */
     static final Color BOTTOM = new Color(0xDF, 0xDF, 0xDF);
+    /** The colour at the bottom of a table, lighter than the odd rows' tint ({@link FlatDesktopLauncher#ALTERNATE_ROW}). */
+    static final Color TABLE_BOTTOM = new Color(0xEE, 0xEE, 0xEE);
 
     /** A gradient anchored to a viewport is repainted, not copied, when the view scrolls. */
     private static final HierarchyListener REPAINT_ON_SCROLL = e -> {
@@ -115,19 +119,19 @@ public final class GrayGradient {
         if (SwingUtilities.getAncestorOfClass(JViewport.class, c) instanceof JViewport viewport) {
             span = SwingUtilities.convertRectangle(viewport, new Rectangle(0, 0, viewport.getWidth(), viewport.getHeight()), c);
         }
-        fill(g, visible, span);
+        fill(g, visible, span, c instanceof JTable ? TABLE_BOTTOM : BOTTOM);
     }
 
-    /** Paints the gradient over a whole viewport (its own coordinates): the space below a table's last row. */
+    /** Paints a table's gradient over a whole viewport (its own coordinates): the space below the table's last row. */
     static void paintBehind(Graphics g, JViewport viewport) {
         Rectangle all = new Rectangle(0, 0, viewport.getWidth(), viewport.getHeight());
-        fill(g, all, all);
+        fill(g, all, all, TABLE_BOTTOM);
     }
 
-    private static void fill(Graphics g, Rectangle area, Rectangle span) {
+    private static void fill(Graphics g, Rectangle area, Rectangle span, Color bottom) {
         Graphics2D g2 = (Graphics2D) g.create();
         try {
-            g2.setPaint(new GradientPaint(0, span.y, TOP, 0, span.y + Math.max(1, span.height), BOTTOM));
+            g2.setPaint(new GradientPaint(0, span.y, TOP, 0, span.y + Math.max(1, span.height), bottom));
             g2.fill(area);
         } finally {
             g2.dispose();
