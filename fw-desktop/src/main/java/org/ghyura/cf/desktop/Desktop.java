@@ -28,6 +28,7 @@ package org.ghyura.cf.desktop;
 import org.ghyura.cf.desktop.session.FileTrail;
 import org.ghyura.cf.desktop.session.Session;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLayer;
 import javax.swing.JPanel;
@@ -62,6 +63,7 @@ final class Desktop {
     private final JLayer<JComponent> layer;
     private final JToggleButton hintsButton = Hints.of(new JToggleButton("Hints on", true), "Shows or hides the pop-up hints that explain each part "
             + "of the desktop, tooltips included. The F1 key does the same.");
+    private final JButton aiDelegationButton;
     private final FileTrail trail;
     private final Navigator navigator;
     private CompletableFuture<Void> closing;
@@ -165,8 +167,11 @@ final class Desktop {
         }
         // every table's columns fit their names and data, and fit again whenever the data changes
         ColumnFit.installAll(tabs);
-        // an opaque pop-up over the desktop says what the element the pointer rests on is for; its own button (or F1) turns it off
+        // an opaque pop-up over the desktop says what the element the pointer rests on is for; its own button (or F1) turns it off.
+        // In guif, AI_delegation stands beside it: the agreement for handing work to an AI assistant, then its manual's path
+        aiDelegationButton = flatWorkbench ? new AiDelegationDialog(AiDelegation.of(trail, navigator.examples())).button() : null;
         JPanel bar = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 6, 2));
+        if (aiDelegationButton != null) bar.add(aiDelegationButton);
         bar.add(hintsButton);
         JPanel root = new JPanel(new java.awt.BorderLayout());
         root.add(bar, java.awt.BorderLayout.NORTH);
@@ -192,6 +197,11 @@ final class Desktop {
 
     HintLayer hints() {
         return hints;
+    }
+
+    /** The AI_delegation button beside Hints, or null in the Swing desktop. */
+    JButton aiDelegationButton() {
+        return aiDelegationButton;
     }
 
     /** The button that turns the hints on and off. */

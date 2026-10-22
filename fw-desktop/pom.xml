@@ -88,4 +88,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <!-- the AI operator's manual travels inside the jar, for the AI_delegation button of an installation without it -->
+      <resource>
+        <directory>${project.basedir}/..</directory>
+        <includes>
+          <include>AI_DELEGATION.md</include>
+        </includes>
+        <targetPath>org/ghyura/cf/desktop</targetPath>
+      </resource>
+    </resources>
+  </build>
 </project>
