@@ -1466,8 +1466,15 @@ throughout. It has two scenarios whose candidates are Gherkin scenarios, which C
 - `02-selenium-webshop`: against a dummy web shop, through headless Firefox and Selenium WebDriver.
 
 Each system under test carries planted defects that hide in the order of actions and in the timing of events. The
-numbers below are measured, not derived. The showcase's `README.md` has the full design and results, and its scenario
-files are executed, working examples to copy from.
+numbers below are measured, not derived. Everything needed to repeat them is in the checkout:
+- `java Showcase.java build|check|smoke|run|report|cucumber|serve`, run from `showcase-cucumber/`, gives every command
+  a space of its own (item 7 of §21.3);
+- the scenario workbooks, with their `.constraints.json` and `.properties`, are executed, working examples to copy
+  from;
+- the code comments of `CheckoutEngine` (D1 to D9) and `DummyWebShop` (W1 to W7) say what each planted defect is and
+  where it hides.
+
+A second run of each design gave the same verdict for every case: 4,128 of 4,128 and 714 of 714.
 
 ### 21.1 What the human corrected, and what it teaches
 
@@ -1557,7 +1564,8 @@ Two traps of these patterns:
    - no `DISPLAY` (`env -u DISPLAY -u WAYLAND_DISPLAY`), `MOZ_HEADLESS=1`;
    - port 0 on loopback for servers.
 
-   Check afterwards that `~/.m2`, `~/.cache/selenium` and the process list are unchanged.
+   Check afterwards that `~/.m2`, `~/.cache/selenium` and the process list are unchanged. `showcase-cucumber/Showcase.java`
+   does all of this for each command it starts.
 8. **A run that found thousands of defects exits 0.** Read the `outcomes` and `verdicts` lines, never the exit code
    alone.
 
