@@ -24,7 +24,8 @@ meaning of correctness; the Framework generates the cases and records the eviden
 latency or cost and compare configurations against your goals.
 
 For a first local run, follow §0.4. The complete reference follows it; §21 explains what worked in larger executed
-examples.
+examples. **Both classic workbook authoring and newer declarative/wizard authoring are supported by the JVM
+edition** (§8.8). Before composing or rearranging `FW_Seq` directives, read §8.3: their position changes their meaning.
 
 ---
 
@@ -459,7 +460,7 @@ its value and origin.
 | `cf.coverage.budget` | 0 | When above 0, the strongest t whose selection keeps at most this many mandatory rows; it overrides `strength` |
 | `cf.coverage.hardCap` | 2000000 | Covering refuses larger mandatory products (`ASSEMBLY_COVERAGE_REFUSED`) |
 | `cf.keys.encoding` | AUTO_PRESERVE | **Set `SIGNED_BYTE`.** Native allocation uses -127..127 first; AUTO_PRESERVE widens beyond 255 labels per namespace, while SIGNED_BYTE refuses (`KEY_CENSUS_OVERFLOW`) |
-| `cf.plan.autoPromoteSingleVerb` | true | A row with exactly one bracketed verb applies it twice (§7.3). The two-verb forms in §7.3 count the same either way |
+| `cf.plan.autoPromoteSingleVerb` | true | Appends the single qualifying verb when there is no joiner; bare `FW_Subsets` also qualifies (§8.3.3). The recommended forms in §7.3 keep their counts either way |
 | `cf.optional.includeAbsent` | true | Each kept row also yields the case where every optional sheet is absent |
 | `cf.render.preserveWhitespace` | false | false: values are cleaned before rendering (comments removed, line breaks joined); always true under Python |
 
@@ -569,9 +570,10 @@ Several values of one factor are joined in the code by `FW_Concatenator=<text>` 
 
 Traps:
 
-- A row with **exactly one bracketed verb** is applied twice by default. That changes nothing for `FW_Combi(1)` and
-  `FW_Combi(k)`, but a lone `FW_CombiR(k)`, `FW_PermutR(k)`, `FW_Permut()` or `FW_Subsets` gives more, repeated rows.
-  Use the two-verb forms above or a bare `FW_Permut`, and check any other lone verb with `plan`.
+- By default the planner **appends the single qualifying verb**, even if helpers or bare verbs follow it. Bracketed
+  combination/permutation verbs and bare `FW_Subsets` qualify; bare `FW_Permut` and `FW_Subsets_MODE(...)` do not.
+  Repeating `FW_Combi(k)` alone preserves its rows, but repeating other verbs can multiply or change them. Use the
+  recommended forms above and inspect the actual stage list; §8.3.3 gives the exact placement rule.
 - `FW_Permut(k)` ignores k and orders all values. Write `FW_Combi(k)`, `FW_Permut()` instead.
 - `FW_Permut` makes no order of an empty group, so an ordered range starts at one value.
 
@@ -629,8 +631,11 @@ simpler model cannot express the problem, and confirm every count with `plan` be
 
 ### 7.7 The label budget
 
-Labels are counted as data sheets, plus every value cell, plus every virtual sheet a joiner creates; the compact
-encoding holds 1–127. `validate` prints `values N (labels a..b)` and the highest label. Keep about 15% headroom.
+The native compact encoding uses all 255 labels from −127 through 127, reserving −128. Value labels and sheet
+labels have separate namespaces: count value cells, and separately data plus virtual sheets. Each namespace must
+fit; the wizard uses the more conservative combined count. Labels shift into the negative range before widening
+or refusal, so numeric `FW_ReplaceRE` patterns must follow the actual label mapping (§8.3.4). `validate` prints
+`values N (labels a..b)`. Keep about 15% headroom.
 To stay small:
 
 - split a large model into focused scenarios (per feature, per screen, per risk);
@@ -664,6 +669,8 @@ To stay small:
 | **Spec document** `bundle.spec/v1` | `.toml` or `.json` with `slots` | A compact authoring layer: slots, aliases, rules, goals and coverage in one file (§8.7) |
 
 The format follows from the extension; an unknown extension is an error. Text files must be UTF-8.
+Both authoring styles below run through the same JVM engine; §8.8 gives equivalent small examples. "Classic"
+means writing the sheet/directive model yourself, including in a JSON workbook, not starting the ancient binary.
 
 ### 8.2 Workbook anatomy
 
@@ -714,8 +721,10 @@ Not supported in this edition (refused with a message): `FW_CSVFile=`, `FW_Separ
 
 ### 8.3 `FW_Seq` rows
 
-- The first cell names the target sheet; the following cells are flags and directives for it, read left to right.
-  Whitespace around tokens does not matter.
+- **Authoring convention:** the first non-empty cell names exactly one target sheet; the following cells are its
+  flags and directives, read left to right. Use one cell per token, except `FW_Group` and its replacements, which
+  share one cell. The parser also accepts hazardous placements described below; acceptance does not imply intent.
+- Whitespace around directive tokens is tolerated; a target sheet name matches exactly, including case and spaces.
 - Flags: `FW_Optional`, `FW_Concatenator=<text>`, and the advanced `FW_Exclude`, `FW_Heading`, `FW_LastInQueue`,
   `FW_Reuse`, `FW_ReuseTableOnly`.
 - Verbs: `FW_Combi`, `FW_CombiR`, `FW_Permut`, `FW_PermutR`, each with `()`, `(n)`, `(size)` or `(all)`;
@@ -724,6 +733,442 @@ Not supported in this edition (refused with a message): `FW_CSVFile=`, `FW_Separ
 - A sheet used in `FW_Seq` that does not exist becomes an empty virtual sheet, with a warning. Check every warning:
   it is usually a typo.
 - A later row for the same sheet replaces the earlier row's directives (`PLAN_ROW_OVERWRITTEN`).
+
+#### 8.3.1 Five different orders: which one changes what?
+
+This section traces the supplied **Multithread2023** source and checks the practical rules against the **current
+JVM implementation**. Historical `fw_*` / `fw2_*` database tables explain the first and subsequent generation
+passes. In the JVM these are computed or memory-budgeted row sources; no PostgreSQL installation, SQL, table
+cleanup, sleeps or thread-priority workaround is needed to author a scenario.
+
+| Order | What it controls in the JVM |
+|---|---|
+| Data-sheet tabs / keys in `sheets` | Stable sheet ordinals and the order of surviving blocks in rendered candidate code. Moving `FW_Seq` rows does not reorder those blocks |
+| Cells within a data sheet, rows top to bottom and cells left to right | Input-value order and which previous value a cell directive modifies |
+| Cells within one `FW_Seq` row | Immediate flag/concatenator targets, then the ordered generation pipeline attached to the last sheet name in that row |
+| Rows of `FW_Seq`, top to bottom | Accumulated flags, replacement of earlier pipelines, and the earlier-joiner history used by `FW_()` |
+| Dependency order during generation | Joiner operands finish before their consumers. Independent sheets use sheet-key order; `FW_LastInQueue` does not override this |
+
+After a join, values from its operand sheets are emitted inside the **join target's block**, with that target's
+decoration and concatenator. The operands' original tab positions do not pull those values back out of the join.
+Place an explicitly declared output sheet where its code belongs; an automatically generated sheet is appended
+after declared data sheets. Prefix/ending text in `FW_SheetNames` is rendering text, not a generation stage.
+
+#### 8.3.2 Targets, flags and row boundaries
+
+The parser keeps a current target while scanning cells. A recognized sheet name changes that target. Flags and
+`FW_Concatenator=` act immediately; verbs are collected and assigned to the **last target at the row's end**.
+Therefore `['A', 'FW_Optional', 'FW_Combi(2)', 'B', 'FW_Permut()']` makes A optional but assigns **both verbs to B**.
+Never use a second standalone sheet name to mean a verb's argument: write `FW_Cartes(B)` in one cell instead.
+
+| Placement / flag | Actual effect and authoring rule |
+|---|---|
+| `[A, flags…, first generator, later generators…]` | Recommended shape. A flag after a verb still configures the sheet as a whole; it is not conditional on that verb's output |
+| A flag before the sheet name | Can hit an automatically generated target or an earlier row's target; the JVM reports `PLAN_AMBIGUOUS_TARGET`. Move the sheet name first |
+| A row starting with `FW_…` | With default planning options, receives a synthetic `FW_VIRTUAL_<row>` target. It is **not a continuation** of the preceding row. With synthesis disabled, the target can carry over instead; never rely on that in new workbooks |
+| A second row naming A | Its non-empty directive list replaces A's earlier list; it does not append. Earlier flags remain. A flags-only row does not clear the existing pipeline |
+| `FW_Optional` | Moves a mandatory sheet into the optional product. This means whole-sheet presence/absence, distinct from the same token inside a data sheet |
+| `FW_Exclude` / `FW_Heading` | Removes a mandatory sheet from independent final assembly, while allowing its generated rows to feed a join. Heading also records a heading flag; it does not automatically render the sheet first |
+| Optional combined with Exclude/Heading | The first role change wins, including across rows; the conflicting later one produces `PLAN_CONFLICTING_FLAGS`. Choose one role |
+| `FW_LastInQueue` | Recorded only while the sheet is mandatory. It originated as a worker-queue hint; it neither places code last nor changes the JVM's dependency scheduling |
+| `FW_Reuse` | Put on an **operand**, before it is needed by several joiners. It allows later joiners to read rows already consumed by an earlier joiner; it does not restore an independent output block |
+| `FW_ReuseTableOnly` | Retained as legacy metadata. Alone it does **not** enable a second JVM joiner to read consumed rows; use `FW_Reuse` |
+| `FW_Concatenator=text` | Literal text between labels when rendering this sheet's result. Everything after `=` is preserved, including spaces; it adds no generation stage and affects no counts |
+
+Names of referenced sheets belong **inside the directive cell**, in the required argument position. A quoted
+literal belongs only where the grammar explicitly allows one. Thus `FW_Separator(COMMA)` names a sheet whose
+first value might be `,`; `FW_Separator(",")` does not mean a literal comma.
+
+**Exclude and the two reuse flags: their relative positions.** Write each flag in its own cell, after the
+operand sheet name. `A, FW_Exclude, FW_Reuse, FW_ReuseTableOnly` and any permutation of those **three flags**
+after A set the same properties. Exclude controls independent assembly; the reuse flags are independent
+settings, not alternatives and not a "last flag wins" choice. They do not themselves generate any rows.
+
+| Row layout, one comma-separated entry per cell | Meaning in the JVM |
+|---|---|
+| `A, FW_Exclude, FW_Reuse, FW_Combi(1)` | Generate A as an excluded, reusable operand; later joiners may read it |
+| `A, FW_Reuse, FW_Combi(1), FW_Exclude` | Same properties and verb list: flags are extracted before generation, not executed between passes |
+| `A, FW_Exclude, FW_ReuseTableOnly, FW_Combi(1)` | Excluded operand, but **not reusable** after consumption: TableOnly alone is insufficient |
+| `A, FW_Exclude, FW_ReuseTableOnly, FW_Reuse, FW_Combi(1)` | Excluded and reusable; adding TableOnly does not change the JVM's reuse behavior |
+| `A, FW_Exclude, B, FW_Reuse, FW_Combi(1)` | Exclude applies to A; Reuse and the verb apply to B. Never interleave another target name |
+
+All `FW_Seq` rows are parsed before generation starts. A later flags-only row `[A, FW_Reuse]` still configures A;
+its physical position after a joiner row does not mean "enable reuse after that join has run". Prefer one complete
+row per operand so this is visible. Put flags on the **sheet being consumed**, not merely on its consuming joiner.
+Flags may occur between a Group cell and its next verb without becoming stages, provided the target stays the
+same, but putting all flags before the first verb makes the pipeline easiest to read.
+
+This interchangeability does **not** extend to every flag: Optional versus Exclude/Heading keeps the first role
+change in the JVM; LastInQueue is recorded only while the sheet is still mandatory (§8.3.2). Do not put two
+flags into one cell: the ancient parser's suffix tests could recognize only the last one, and the JVM rejects
+the combined token. A flag before any explicit target has the earlier/virtual-target hazards described above.
+
+**Why the ancient code has two reuse flags.** In the supplied Main.java join cleanup (971–1017), deletion of
+operand rows is conditional on `FW_ReuseTableOnly`, while dropping operand tables is conditional on `FW_Reuse`:
+
+| Flags on the operand, independent of Exclude | That ancient SQL cleanup block | JVM later reads |
+|---|---|---|
+| Neither reuse flag | Delete rows, then drop tables | Empty after the first consumer |
+| `FW_Reuse` only | Delete rows; keep the empty tables | Allowed: read the generated row source again |
+| `FW_ReuseTableOnly` only | Skip deleting rows, but still drop tables | Empty after the first consumer |
+| Both | Skip both SQL operations | Allowed, as with Reuse alone |
+
+This table describes that specific historical cleanup block: it also clears the reuse-set entries and cleans
+maps afterwards, so it is not an unlimited-reuse guarantee for the ancient threaded program. In the JVM there
+are no such SQL operations; use `FW_Exclude` plus `FW_Reuse` for a shared operand. Keep TableOnly when preserving
+an old declaration if desired, but do not infer behavior from its name or transfer the old SQL rules to the JVM.
+
+#### 8.3.3 First generator, next generator, and argument scope
+
+At directive index zero, a generator reads the target's original values. An ordinary later generator runs
+**separately on each row produced so far**. Its `size` is that row's length; `all`/`full` enumerates lengths 1
+through that length. After `FW_Group`, the next generator instead takes the existing rows as whole units, so
+`size` counts units. Flags do not occupy directive positions; `FW_Group` and `FW_Separator(...)` do.
+
+For A = `[a,b,c]`, with no deduplication, these explicit two-verb pipelines illustrate why order matters:
+
+| Cells after A | Result |
+|---|---|
+| `FW_Combi(2)`, `FW_Permut()` | `ab, ba, ac, ca, bc, cb`: choose two, then order each pair; 6 rows |
+| `FW_Permut()`, `FW_Combi(2)` | Each of 6 three-element orders yields 3 pairs; 18 rows, with repeated contents |
+| `FW_Combi(2)`, `FW_Combi(1)` | `a,b,a,c,b,c`: 6 rows, not 3 unique values |
+| `FW_Combi(all)`, `FW_Combi(size)` | The 7 non-empty subsets; the second verb keeps each row's own length |
+| `FW_Combi(1)`, `FW_Group`, `FW_Combi(2)` | Combine singleton rows as units: `ab,ac,bc`; 3 rows |
+
+`FW_Combi` chooses without repetition; `FW_CombiR` allows repeated choices; `FW_PermutR(k)` generates ordered
+length-k choices with repetition. Bare / empty-bracket Combi, CombiR and PermutR default to 1. `FW_Permut` orders
+the whole current input and **ignores a numeric size argument**; for k-of-n ordered actions use Combi(k), Permut().
+`PermutationGenerator.TreatDuplicatesAs.IDENTICAL` is an argument of `FW_Permut` only. In the current JVM it is
+honored in the first pass; the ordinary later-pass implementation does not consult that marker. Do not promise
+distinct repeated-value arrangements from a chained marker without checking the rows and library setting.
+
+For `FW_Subsets_MODE(...)`, BEFORE(k) means sizes `< k`, AFTER(k) means `> k`, EXACT(k) means `= k`, RANGE(a,b)
+includes both ends, and GIVEN(k,…) takes listed sizes. **These filters apply in the first pass.** The current
+JVM's ordinary later and grouped subset passes enumerate all subsets, ignoring the mode. Put the size-filtered
+subset stage first. Empty rows need care: a later pass skips an empty input row; permutation has no empty order;
+a separated/grouped pass can drop empty results. Count the actual pipeline with `plan`.
+
+**Automatic promotion is a textual compatibility rule.** With `cf.plan.autoPromoteSingleVerb=true`, a row
+without a joiner gets one extra directive at its **end** if exactly one cell starts with `FW_Combi(`,
+`FW_CombiR(`, `FW_Permut(` or `FW_PermutR(`, or is `FW_Subsets` / starts with `FW_Subsets(`. Bare permutation
+and MODE-suffixed subsets do not qualify. For example, `FW_Combi(2), FW_Permut` becomes
+`FW_Combi(2), FW_Permut, FW_Combi(2)`. Helpers do not prevent promotion. A space between the verb and `(` is
+accepted by the grammar but does not match this promotion test; use canonical spelling and inspect the stage
+list. Two qualifying verbs suppress promotion; changing flags alone does not. For an intentionally single
+pass, set `cf.plan.autoPromoteSingleVerb=false` explicitly and record it with the scenario.
+
+**A row can contain many verbs.** A direct `FW_Seq` row is an ordered pipeline, not a fixed pair or triple of
+operations. It can alternate several generators and helpers, and can include complex joiners. The convenience
+`ScheduleBuilder` has its own three-verb limit (§8.8); that is not a limit of the direct workbook grammar.
+For example, this one row has six directive cells:
+
+```json
+["A", "FW_Combi(1)", "FW_Group", "FW_Combi(2)", "FW_Permut()", "FW_Group", "FW_Combi(2)"]
+```
+
+With A = `[a,b,c]`, its generating stages produce 3 singleton rows, 3 pairs of singleton units, 6 ordered pairs,
+then 15 choices of two whole ordered-pair rows. The final rows contain four labels each. Group affects only its
+following generating pass; later plain verbs work within each current row. This distinction lets a small input
+describe complicated combinations of combinations. Permutations, repetitions, grouping and joins can multiply
+the intermediate work sharply, even when the final output seems modest. Input-size and memory limits still
+apply. Inspect every stage's count and actual rows after extending a chain; do not estimate its cost from the
+number of source cells or assume final covering removes the cost of earlier generation.
+
+#### 8.3.4 Helpers: what must come before and after them?
+
+| Directive | Position and effect |
+|---|---|
+| `FW_Group` | After a generator has produced rows and before the generator that should combine those rows as units. It changes that next ordinary generating pass, then resets; another grouped pass needs another `FW_Group` |
+| `FW_Group FW_ReplaceRE("pattern", "replacement")` | One cell, with Group first and replacements after it in that same cell. Several replacements may follow, in order. A standalone `FW_ReplaceRE` cell is rejected |
+| `FW_Separator(S)` | After the initial generator and before a later generating pass. Inserts the **first value label of S** between resulting elements. Remains in effect for later passes until another Separator changes it |
+| `FW_Cartes(B)` | A generator, not a flag: pairs each current element with each **original value** of B, yielding `[current,b]` |
+| `FW_Cartes_first(B)` | Same inputs, reversed pair order: `[b,current]`. `first` means operand order, not scheduling priority |
+
+A helper at directive index zero does not initialize input rows: `[A, FW_Separator(S), FW_Combi(2)]` and
+`[A, FW_Group, FW_Combi(2)]` operate on an empty intermediate table. A helper after the last generating pass
+cannot retroactively change already generated rows. Check whether promotion appended a pass before calling
+something "last". Use `[A, FW_Combi(2), FW_Separator(S), FW_Permut()]` to obtain `a S b`, `b S a`, etc.
+
+The separator is an inserted **value label**; the concatenator is rendering **text**. If A's result is labels
+`[a,S,b]` and A has `FW_Concatenator=+`, its rendered text is `a+<S's text>+b`. A later verb can also select or
+permute separator labels inserted by an earlier pass. Insert separators at the final intended stage when they
+must remain punctuation. Group and Separator are independent settings for the following pass; do not mistake
+either for a property of the preceding cell.
+
+`FW_Cartes` does not read B's generated permutations or groups, and does not consume B as a join operand. In an
+ungrouped later pass over `[a,b]` with X = `[x,y]`, it makes `[a,x],[a,y],[b,x],[b,y]`, not `[a,b,x]` and `[a,b,y]`.
+If X also has an active independent pipeline, it still participates separately in final assembly. To combine
+whole generated rows, use the joiner below (or Group when combining rows from one target).
+
+Group replacements act on **numeric label-list text**, such as `[[3], [4]]`, before it is parsed back into
+labels; they do not search the source-code text `a` or `b`. Keep the resulting labels valid. A joined replacement
+may use `"[" + X + "]"` to insert X's first value label; it names exactly one sheet, starts and ends with quoted
+literals, and those surrounding literals cannot contain letters, digits or underscores. Repeated patterns keep
+their first position and last replacement. Signed-label allocation can change a hard-coded number or regex;
+recheck the mapping after changing sheets or values. Examine unmatched-pattern and dropped-row diagnostics.
+
+**The Group cell has an inner order and an outer position.** For example, this is one `FW_Seq` spreadsheet row;
+the column letters below identify separate cells, not sheets:
+
+| Cell | Entire cell content |
+|---|---|
+| A2 | `ITEMS` — the target sheet name |
+| B2 | `FW_Exclude` |
+| C2 | `FW_Reuse` |
+| D2 | `FW_ReuseTableOnly` — optional legacy metadata on the JVM |
+| E2 | `FW_Combi(1)` — first build singleton rows |
+| F2 | The **entire multiline Group block below**, in this one cell |
+| G2 | `FW_Combi(2)` — combine two earlier rows as units, then apply F2's rewrites |
+
+F2 contains real line breaks inside the cell:
+
+```text
+FW_Group
+FW_ReplaceRE("3", "4")
+FW_ReplaceRE("4", "5")
+```
+
+The numbers are illustrative **value labels**, not Excel row/column coordinates. With exactly two declared data
+sheets ITEMS = `[a,b]` and X = `[x]`, native preserved labels are a=3, b=4, x=5. The grouped result `[[3], [4]]`
+becomes `[[4], [4]]`, then `[[5], [5]]`: ITEMS generates `xx`, available to a join because ITEMS is excluded
+from independent assembly. Reversing the two replacement lines instead produces `[[4], [5]]`, or `bx`.
+Derive the labels again when changing that workbook. Numeric patterns such as `3` also match inside `13`;
+use token boundaries when that is not intended.
+
+In a JSON workbook, the same F2 content is **one string**, with JSON escapes:
+
+```json
+"FW_Group\nFW_ReplaceRE(\"3\", \"4\")\nFW_ReplaceRE(\"4\", \"5\")"
+```
+
+Keep the Group cell after an initial generator and before its intended next generating pass. These placements
+are different:
+
+- `ITEMS, FW_Combi(1), [Group block], FW_Combi(2)` groups the earlier singleton rows and rewrites the combined
+  result. The replacements do not alter the original data-sheet values or every future use of those labels.
+- `[Group block], ITEMS, …` does not establish ITEMS as the target first. Default virtual-target handling and
+  the final-target rule can give it an empty or unintended pipeline; never author this layout.
+- `ITEMS, [Group block], FW_Combi(2)` has no initial source rows to group.
+- `ITEMS, FW_Combi(1), FW_Combi(2), [Group block]` has no generating pass after Group, so its rewrites are unused.
+  Always inspect promotion before assuming a helper really is last.
+- `ITEMS, FW_Combi(1), FW_Group, FW_ReplaceRE("3", "4"), FW_Combi(2)` puts ReplaceRE into a **separate cell**:
+  the JVM refuses it; the ancient Group handler scanned only its own cell and would not register that replacement.
+- A second Group cell before the next generator **replaces** the pending Group's replacement set in the JVM.
+  Put all replacements for one pass in the same cell. A new Group after a completed pass configures a new pass.
+
+Keep flags, sheet-name cells and generating verbs out of the Group cell. A sheet reference **inside a replacement
+argument** does not change the row target. A standalone sheet-name cell does. Multiple replacements on separate
+lines **within the cell** are the clearest legacy-compatible spelling: the ancient regex required whitespace
+after the argument comma and could greedily merge multiple replacements written on one line. The JVM accepts
+one-line or multiline lists and does not require that comma whitespace; `FW_Group` must still come first,
+separated from its replacements by whitespace.
+
+**`FW_ReplaceRE` arguments — exactly two, with two accepted replacement forms:**
+
+```text
+FW_ReplaceRE("pattern", "replacement")
+FW_ReplaceRE("pattern", "[" + SHEET + "]")
+```
+
+The first argument is a **non-empty Java regular expression**, double-quoted and physically on one line. It
+matches the grouped numeric label-list text, including brackets, commas, spaces and signed numbers. It is not
+a sheet name, a value's source text, or a selection count. The second argument is either one double-quoted
+replacement string (possibly empty), or a concatenation containing exactly one unquoted sheet name:
+
+| Replacement argument | Meaning / acceptance |
+|---|---|
+| `"5"` | Insert the text `5` as a numeric label; no sheet lookup |
+| `""` | Delete each matched substring; the remaining row must still parse as valid labels |
+| `"$1"` | Insert regex capture group 1, if the pattern defines it; `$0` is the whole match |
+| `"" + X + ""` | Insert the first original value's **label** from sheet X, not its text, sheet ordinal, or generated rows |
+| `"[" + X + "]"` | Insert that label surrounded by brackets |
+| `"X"` | Literal replacement text X, **not** a reference; usually makes the numeric row unparseable |
+| `X` or `5` | Rejected: no bare sheet/numeric argument; quote a literal or surround the sheet name with quoted pieces |
+| `"[" + "]"` or `"" + X + Y + ""` | Rejected: a concatenation must contain **exactly one** sheet reference |
+| `"prefix" + X + ""` | Rejected: in the sheet-reference form, surrounding literals cannot contain ASCII letters, digits or `_` |
+
+A joined replacement must start and end with quoted pieces. More quoted pieces are permitted, but exactly one
+unquoted name remains; its grammar is `[A-Za-z0-9_]+`, so a sheet named `My Sheet` cannot be referenced this way.
+An unknown referenced sheet is a planning error; a known sheet with no values produces an unresolved-replacement
+diagnostic and that replacement is omitted. A literal containing `+` stays literal in the JVM; the ancient
+parser treated any `+` as the sheet-reference form, which could misinterpret it.
+
+"Quoted" does not mean regex replacement escaping is disabled: replacement strings use Java `replaceAll`
+rules (`$1`, `${name}` and backslash escapes), not arbitrary Java expressions. A missing capture group can fail
+during generation. There is no third count/flags argument. The FW parser does not decode Java-style string
+escapes: it ends a replacement literal at the next double quote, so an escaped internal quote is not supported.
+Neither a pattern nor a replacement literal may contain a physical line break; put line breaks **between**
+complete ReplaceRE items instead.
+
+For an Excel cell, write `FW_ReplaceRE("\[3\]", "[4]")` to replace the bracketed label `[3]`.
+The same complete cell in a JSON workbook is:
+
+```json
+"FW_Group\nFW_ReplaceRE(\"\\[3\\]\", \"[4]\")"
+```
+
+JSON decodes `\n`, `\"` and `\\` before the FW parser sees the cell; Excel already supplies the cell text.
+After each grouped result, replacements run in written order, the configured separator is applied, and the
+result is parsed back into labels. A syntactically accepted replacement can still yield unknown/reserved labels
+or unparseable text; preview the resulting rows. Repeated regex patterns keep their first position and their
+last replacement, so they do not create two successive rewrite steps.
+
+#### 8.3.5 Joiners: argument positions, earlier rows, and reuse
+
+The complex verb is the **`FW_(...)` family**: it builds new rows out of two generated operand tables, with
+optional framing and relationship/separator values. It can compose reusable code fragments or generated
+subexpressions, then feed its output into another verb or joiner. "Table" here means a JVM row source, not a
+relational database. The empty spelling **`FW_()`** has a separate, restricted role: it is an operand placeholder
+inside a full joiner. It is not a standalone generation verb, a call with default arguments, or an inline
+recursive expression.
+
+Write a joiner as one cell:
+
+```text
+FW_(START,,A,REL,B,,END,SEP,M:N)
+```
+
+Its nine fields are **start sheet, empty reserved field, first operand, relation sheet, second operand, empty
+reserved field, end sheet, separator sheet, multiplicity**. Both operand fields are required. Optional start,
+relation, end and separator fields name sheets whose **first original value** is used, or stay empty. They are
+not literal punctuation. Use uppercase `M` and `N`. The two reserved fields must stay empty in the JVM.
+
+| Argument position | What goes inside the full `FW_(...)` cell |
+|---|---|
+| 1: START | Optional sheet name; its first original value prefixes each joined result |
+| 2 | Empty reserved field; keep the comma that represents it |
+| 3: A | Required generated operand sheet, or `FW_()` / `FW_()G` referencing an earlier joiner target |
+| 4: REL | Optional sheet name; its first original value supplies the relation between operand elements/blocks |
+| 5: B | Required second generated operand sheet, or another `FW_()` / `FW_()G` |
+| 6 | Empty reserved field; keep the comma that represents it |
+| 7: END | Optional sheet name; its first original value suffixes each joined result |
+| 8: SEP | Optional sheet name; its first original value separates repeated relation groups for 1:1, 1:N or M:1 |
+| 9 | Exactly one of `1:1`, `1:N`, `M:1`, `M:M`, `M:N`; this is the only multiplicity argument |
+
+Leaving an optional sheet argument empty means no inserted label at that position. Supplying a sheet with
+several values uses only its first one in START/REL/END/SEP; those fields do not create additional factors.
+In contrast, A and B supply generated rows with potentially many labels. A sheet name in any argument does
+not retarget the enclosing `FW_Seq` row. Do not move these arguments into neighboring Excel cells or remove
+the empty fields: their positions are part of the grammar. The historical dispatcher had grouping slots in
+positions 2 and 6; the JVM requires them empty and expresses nested grouped operands with `FW_()G` instead.
+
+For each allowed pair of generated operand rows A = `[a1,a2]`, B = `[b1,b2]`, let `r` be REL's first value and
+`s` be SEP's first value. START and END wrap the whole output once:
+
+| Multiplicity | Body produced | Row-length requirement |
+|---|---|---|
+| `1:1` | `a1 r b1 s a2 r b2` | Equal operand-row lengths |
+| `1:N` | `a1 r b1 b2 s a2 r b1 b2` | No equal-length requirement |
+| `M:1` | `a1 a2 r b1 s a1 a2 r b2` | No equal-length requirement |
+| `M:M` | `a1 a2 r b1 b2` | Equal operand-row lengths |
+| `M:N` | `a1 a2 r b1 b2` | No equal-length requirement |
+
+These names describe **elements inside each chosen pair of rows**, not relational primary/foreign keys or a
+zip of matching row numbers. The joiner considers operand-row pairs; `1:1` and `M:M` filter pairs by length.
+The separator field is unused for M:M / M:N. A simple explicit-row recipe is:
+
+```json
+[
+  ["A", "FW_Exclude", "FW_Combi(2)", "FW_Combi(2)"],
+  ["B", "FW_Exclude", "FW_Combi(1)", "FW_Combi(1)"],
+  ["OUT", "FW_(,,A,,B,,,,M:N)"]
+]
+```
+
+With A = `[a,b,c]`, B = `[x,y]`, this gives `abx,aby,acx,acy,bcx,bcy` in OUT. A and B are generated operands;
+OUT is the output carrier. In the ancient SQL implementation, joiners read the operands' second `fw2_*` tables,
+which explains the explicit two passes often found in old workbooks. **The JVM reads each operand's final row
+source**, even if it is empty; there is no need to create or duplicate a database table manually.
+
+Joiners consume operand sheets for independent final assembly. Two joiners sharing A need `FW_Reuse` on A;
+if both also share B, put it on B too. A missing Reuse produces an empty later read and
+`GEN_OPERAND_CONSUMED`. `FW_ReuseTableOnly` alone is insufficient. The order of independent consumers is
+deterministic by sheet key, not a promise based on their `FW_Seq` row positions.
+
+Prefer named intermediate targets. For compatibility, an operand `FW_()` refers to the most recent earlier
+joiner's target in the **FW_Seq scan**, not necessarily the previous row or this target's preceding generator.
+With two placeholders, the first takes the most recent target and the second the next older target. Named
+operands do not advance that lookup. `FW_()G` takes that earlier target and flattens all its rows into one operand
+row; it is not an inline nested expression or ordinary per-row grouping. Resolution also marks those referenced
+targets reusable. Moving or inserting earlier joiner cells can therefore change later placeholder meanings.
+Do not put an earlier joiner and a placeholder referring to its target in the same target's pipeline: that can
+form a self-dependency. The planner checks joiner dependency cycles.
+
+For example, after declaring and generating operand sheets A, B, C and D, these are three separate `FW_Seq` rows:
+
+```json
+[
+  ["LEFT", "FW_(,,A,,B,,,,M:N)"],
+  ["RIGHT", "FW_(,,C,,D,,,,M:N)"],
+  ["OUT", "FW_(START,,FW_(),REL,FW_(),,END,SEP,1:1)"]
+]
+```
+
+OUT reads **RIGHT first, LEFT second**, because the placeholders walk earlier joiner targets from newest to
+oldest. START, REL, END and SEP must be declared helper sheets. If A, B, C, D each generate respectively `[a]`,
+`[b]`, `[c]`, `[d]`, and the helpers contain `[`, `=`, `]`, `;`, OUT renders `[c=a;d=b]`. Naming RIGHT and LEFT
+explicitly gives the same operand choice without depending on previous joiner positions. Use `FW_()G` when
+you intentionally need all rows of the referenced target flattened into one operand row; that can greatly
+increase its length and change which `1:1`/`M:M` pairs qualify. For more nesting, introduce another named target
+and another row; do not paste a full `FW_(...)` expression into an operand field.
+
+A joiner is also a generation stage. On a target with an existing pipeline it appends joined rows to the
+current first-stage rows and transfers the result to the next stage; it does not simply apply a join to each
+preceding row. Give each join an explicit intermediate target unless that append behavior is intentional.
+
+#### 8.3.6 Same spelling, different location
+
+- **Data-sheet `FW_Optional` / `FW_RefineCodeExceptQuoted`:** modify the most recent value already read in the
+  same sheet, even if that value is on an earlier row. Write the value first, then its modifier. At the start
+  of a sheet they are errors in the JVM; the ancient mapper could accidentally modify the preceding sheet's
+  last value. These are not `FW_Seq` pipeline verbs.
+- **Data-sheet `FW_EMPTY_STRING`:** creates a value; a blank cell does not. `FW_File=path` also creates one
+  value, containing the file's text; place Refine after it if required.
+- **Legacy `FW_CSVFile=` then `FW_Separator=`:** the old mapper remembered a CSV file for its later separator
+  cell. Both are refused by the JVM. They are unrelated to the supported `FW_Seq` verb `FW_Separator(S)`.
+- **`FW_Arguments` and `FW_RunMeFirstOnce`:** control sheets for runtime arguments and bootstrap code (§10.2),
+  not generator arguments. Put `(2)` inside `FW_Combi(2)`; do not put it in FW_Arguments or the next cell.
+- **`FW_SheetNames`, `FW_CUSTOM_VAR`, `FW_Info`:** decoration, verdict naming, and notes respectively (§8.2).
+  Putting their names into a data row does not invoke their control-sheet behavior.
+
+#### 8.3.7 What was verified, and how to use these rules
+
+The supplied `Multithread2023_noComments/src/com/company/Main.java` was read at its sequence parsing (480–607),
+worker stages and joiners (731–1306), and queue scheduling (1332–1357); `excel/ExcelDataMapper.java` was read at
+its control-sheet dispatch and previous-value directives (49–240). This is a reading of the supplied source
+snapshot, not a claim that every file is unchanged since 2023. That Main dispatcher has no JVM-style automatic
+single-verb promotion or nested-placeholder resolution; those current behaviors must be taken from the JVM,
+not inferred from the old database code.
+
+Current implementation references:
+
+- [SeqPlanner](fw-plan/src/main/java/org/ghyura/cf/plan/SeqPlanner.java): targets, flags, headless rows,
+  overwritten rows, promotion and nested references;
+  [DirectiveParser](fw-plan/src/main/java/org/ghyura/cf/plan/DirectiveParser.java): exact grammar and arguments.
+- [SheetStages](fw-generation/src/main/java/org/ghyura/cf/generation/SheetStages.java) and
+  [RowExpansion](fw-generation/src/main/java/org/ghyura/cf/generation/RowExpansion.java): first/later/grouped
+  passes, replacements, separators, subset and duplicate-marker limitations.
+- [Generation](fw-generation/src/main/java/org/ghyura/cf/generation/Generation.java) and
+  [JoinedRows](fw-generation/src/main/java/org/ghyura/cf/generation/JoinedRows.java): dependency order,
+  consumption, reuse and multiplicities.
+- [ScenarioInterpreter](fw-input/src/main/java/org/ghyura/cf/input/ScenarioInterpreter.java) and
+  [CandidateRenderer](fw-generation/src/main/java/org/ghyura/cf/generation/CandidateRenderer.java): cell scope
+  and final code order. Executable examples are in
+  [SeqPlannerTest](fw-plan/src/test/java/org/ghyura/cf/plan/SeqPlannerTest.java) and
+  [StageSemanticsTest](fw-generation/src/test/java/org/ghyura/cf/generation/StageSemanticsTest.java).
+
+This review used JVM source at `db3a647`. On 2026-10-24, 124 existing checks across ScenarioInterpreterTest,
+DirectiveParserTest, SeqPlannerTest, StageSemanticsTest and AssemblyTest passed, with no failures or skips.
+The ancient application was not executed; this was not a QA-versus-JVM comparison run. A further 16 targeted
+JVM authoring probes matched their expected rows or diagnostics: all six orders of Exclude/Reuse/TableOnly,
+TableOnly without Reuse, replacement order and argument forms, JSON escaping, the refused separate ReplaceRE
+cell, the six-directive chain, and the nested joiner. Candidate code was not executed in these probes.
+
+When authoring, use one explicit target per row, flags next, an initial generator, and helpers immediately before
+the generating pass they configure. Keep join dependencies explicit. After the existing approval gates, validate,
+inspect the planned stages and counts, and preview a few actual candidates before execution. Check both the
+number of rows and their contents: equal counts do not prove equal order, grouping, code placement or reuse.
+Resolve warnings about targets, overwritten rows, empty stages and consumed operands before a large run.
 
 ### 8.4 What a generated-Java test case must contain
 
@@ -795,6 +1240,109 @@ Slot fields: `sheet` (required, not starting with `FW_`), `values` (required), `
   each alias compiled to (`aliases … -> verb`).
 - Non-raw values support option expansion: `"a=${1|2}"` expands to two values.
 - In TOML, top-level keys must come **before** the first `[[slots]]` table.
+
+### 8.8 Two supported authoring paths, both on the JVM
+
+**Choose either path. Both are allowed and supported in this JVM codebase.** The classic path preserves direct
+control over sheets and positional `FW_Seq` cells. The newer path expresses common intentions through slots,
+aliases or the desktop wizard, which produce that same underlying model. Both use the JVM CLI for validation,
+planning, candidate inspection and execution, with the same approval gates. Neither needs the old executable,
+QA edition checkout or a relational database. No "old engine" switch is needed.
+
+| Authoring decision | Classic workbook path | Declarative / guided path on the JVM |
+|---|---|---|
+| Create factors and values | XLSX tabs or the `sheets` object of a JSON/YAML/TOML workbook | `slots` in a JSON/TOML spec, or wizard step 0; the wizard writes a JSON workbook |
+| Choose one value | `["MODE", "FW_Combi(1)"]` in `FW_Seq` | `alias: "choose_one"` on the MODE slot |
+| Choose k actions and order them | `["OPS", "FW_Combi(k)", "FW_Permut()"]` | `alias: "permute(k)"`; it compiles to those two verbs |
+| Make an action optional | `FW_Optional` on its `FW_Seq` row | `alias: "optional_action"`, or a sudden-action entry in the wizard |
+| Supply code around values | `FW_SheetNames` and code-containing data cells | Slot `prefix`/`ending` and `raw: true` values; wizard-generated scaffolding |
+| Add constraints / coverage / goals | Constraint sidecar and configuration (§6, §9) | Spec fields (§8.7), or wizard/session choices; inspect effective settings in either case |
+| Control every generation stage | Write every directive cell in the intended order (§8.3) | Use explicit `verb` where sufficient; use a complete `seq_extra` row or a workbook for a custom chain |
+
+**Classic example — save as `authoring-classic.json`:**
+
+```json
+{
+  "sheets": {
+    "FW_Seq": [
+      ["MODE", "FW_Combi(1)"],
+      ["OPS", "FW_Concatenator=", "FW_Combi(2)", "FW_Permut()"]
+    ],
+    "MODE": [["safe"], ["fast"]],
+    "OPS": [["A"], ["B"], ["C"]]
+  }
+}
+```
+
+In XLSX, make the same three tabs and put each shown array into a spreadsheet row. Keep the data tabs in MODE,
+OPS order. This is classic sheet-based authoring, fully processed by the JVM.
+
+**Declarative example — save as `authoring-spec.json`:**
+
+```json
+{
+  "spec_version": "1",
+  "title": "Two modes and ordered pairs of actions",
+  "slots": [
+    {"sheet": "MODE", "alias": "choose_one", "raw": true, "values": ["safe", "fast"]},
+    {"sheet": "OPS", "alias": "permute(2)", "flags": ["FW_Concatenator="], "raw": true, "values": ["A", "B", "C"]}
+  ]
+}
+```
+
+Here `raw: true` keeps the texts exactly as supplied instead of making `key=value` fragments. The explicit empty
+concatenator records that joining the letters without punctuation is intentional. Slot order gives the data-sheet
+order. `permute(2)` is the authoring alias, whereas the raw directive `FW_Permut(2)` would ignore the 2; these
+spellings are deliberately different.
+
+For this small tryout, save `authoring.properties` beside both files:
+
+```properties
+cf.coverage.strength=0
+cf.coverage.budget=0
+cf.plan.autoPromoteSingleVerb=true
+```
+
+After the agreement/design gates, inspect each with the same JVM jar (`cf` is the notation in §0.3):
+
+```sh
+for scenario in authoring-classic.json authoring-spec.json; do
+  cf validate --scenario "$scenario" --config authoring.properties
+  cf plan --scenario "$scenario" --config authoring.properties
+  cf candidates --scenario "$scenario" --config authoring.properties --limit 12
+done
+```
+
+Each should generate **12 candidates**: two modes × six ordered pairs `AB, BA, AC, CA, BC, CB`. Inspect the
+rendered texts and stage lists. On 2026-10-24, both examples passed JVM validation, planning and candidate
+inspection with exactly these 12 rendered candidates each and no warnings; no candidate code was executed.
+These tiny examples demonstrate authoring and generation; their plain words
+are not executable Java programs. To execute code, use the complete workbook in §11.A, or the complete spec
+in §11.D with its Python add-on configuration. Both use `cf run` after execution approval. To author generated
+Java through a spec, put the HEAD/body/TAIL code from a workbook into ordered slots with `raw: true`, and
+preserve its directives, decorations, constraints and runner configuration.
+
+**What the newer layer does and does not change:**
+
+- A spec compiles to `FW_Seq`; all positional rules in §8.3 still apply. Inspect `validate`'s alias expansion and
+  `plan`'s stages. Do not assume an alias repairs a size, grouping or reuse mistake elsewhere in the model.
+- The current spec compiler emits target, reuse flag (normally `FW_Reuse`), explicit flags, primary verb,
+  alias-generated chain, optional `FW_Separator(...)`, then optional `FW_Group` with replacements. A Group or
+  Separator field therefore needs a later generating pass to affect results; promotion can supply that pass.
+  For exact control, author the whole chain explicitly. A `seq_extra` row for the same target **replaces** its
+  compiled verb list and keeps accumulated flags; it does not append another pass.
+- Spec joiners go in `seq_extra`. Declare their named operands as slots and mark each operand `FW_Exclude` or
+  `FW_Heading`, as the spec reader requires. Named intermediate output targets make the dependencies clearest.
+  A classic workbook gives direct access to the complete positional grammar without this additional spec check.
+- The wizard is another authoring front end, not another execution engine. Its parameter/sequence/sudden-action
+  choices implement §7.2–§7.5. Open the resulting workbook to review or extend its explicit `FW_Seq` rows.
+
+For Java callers embedding authoring tools, the JVM also provides
+[ScheduleBuilder](fw-input/src/main/java/org/ghyura/cf/input/builder/ScheduleBuilder.java), with typed verbs and
+join construction. That convenience builder allows at most two flags and three verbs per ordinary sheet;
+the direct workbook grammar is available for longer pipelines. Its output still passes through the same
+interpreter and planner. These are choices of authoring representation, not promises of byte-identical
+scenario IDs or checkpoints across different source files.
 
 ---
 
