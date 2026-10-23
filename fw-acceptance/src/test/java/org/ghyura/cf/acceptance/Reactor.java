@@ -31,6 +31,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -38,6 +40,7 @@ import java.util.stream.Stream;
 final class Reactor {
 
     private static final Set<String> SKIPPED_DIRECTORIES = Set.of("target", ".git", ".idea", ".mvn");
+    private static final Map<String, CompanionRepositories.Result> COMPANIONS = new HashMap<>();
 
     private Reactor() {
     }
@@ -51,6 +54,25 @@ final class Reactor {
         if (!Files.isRegularFile(root.resolve("pom.xml"))) {
             throw new IllegalStateException("cf.reactor.root does not point at the reactor root: " + root);
         }
+        return root;
+    }
+
+    /** Resolve each optional repository once per build, with an actionable, classified skip if unavailable. */
+    static synchronized Path companion(CompanionRepositories.Kind kind, String required) {
+        Path reactor = root();
+        String explicit = System.getProperty(kind.property);
+        String key = reactor + "|" + kind + "|" + explicit;
+        CompanionRepositories.Result result = COMPANIONS.computeIfAbsent(key, ignored -> {
+            var console = System.console();
+            return CompanionRepositories.locate(reactor, kind, explicit,
+                    console == null ? null : new java.io.InputStreamReader(System.in, console.charset()),
+                    System.err, CompanionRepositories.promptMillis());
+        });
+        org.junit.jupiter.api.Assumptions.assumeTrue(result.root() != null, result.detail());
+        Path root = result.root();
+        org.junit.jupiter.api.Assumptions.assumeTrue(Files.isReadable(root.resolve(required)),
+                "MISSING_AUTHORIZED_BACKEND: optional " + kind.label + " checkout " + root + " lacks readable " + required
+                        + "; select a complete checkout with -D" + kind.property + "=/absolute/path.");
         return root;
     }
 

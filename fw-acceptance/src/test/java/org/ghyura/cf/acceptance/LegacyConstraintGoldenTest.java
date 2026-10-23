@@ -335,9 +335,7 @@ class LegacyConstraintGoldenTest {
         Element bond = golden("bond-golden.xml").getDocumentElement();
         assertEquals("0bc3e5acf6cf8f612a08ce640d236132c448b29b", bond.getAttribute("source-commit"));
         assertTrue(bond.getAttribute("source-sha256").matches("[0-9a-f]{64}"));
-        java.nio.file.Path checkout = Reactor.root().getParent().resolve("Combinatorics-Framework-QA-edition");
-        org.junit.jupiter.api.Assumptions.assumeTrue(java.nio.file.Files.isDirectory(checkout.resolve("Core_trunk")),
-                "the legacy checkout is not beside the project: the golden sources' hashes cannot be rechecked");
+        java.nio.file.Path checkout = Reactor.companion(CompanionRepositories.Kind.QA, "Core_trunk");
         assertEquals(sieve.getAttribute("source-sha256"), sha256(checkout.resolve("generator_trunk/constraints/sieve.py")));
         assertEquals(bond.getAttribute("source-sha256"), sha256(checkout.resolve("Reader_trunk/src/main/java/com/company/OptionalBondFilter.java")));
     }

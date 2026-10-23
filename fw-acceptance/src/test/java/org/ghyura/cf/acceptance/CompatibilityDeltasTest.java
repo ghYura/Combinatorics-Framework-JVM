@@ -25,7 +25,6 @@
 
 package org.ghyura.cf.acceptance;
 
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -111,9 +110,7 @@ class CompatibilityDeltasTest {
 
     @Test
     void everyLegacyEvidenceLineHoldsTheTextItQuotes() throws Exception {
-        Path checkout = Reactor.root().getParent().resolve("Combinatorics-Framework-QA-edition");
-        Assumptions.assumeTrue(Files.isDirectory(checkout.resolve("Core_trunk")),
-                "the legacy checkout is not beside the project: the evidence lines cannot be checked");
+        Path checkout = Reactor.companion(CompanionRepositories.Kind.QA, "Core_trunk");
         List<String> stale = new ArrayList<>();
         int checked = 0;
         for (Element delta : deltas()) {

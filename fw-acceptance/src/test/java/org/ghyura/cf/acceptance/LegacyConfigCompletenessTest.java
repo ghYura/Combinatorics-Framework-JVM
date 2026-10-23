@@ -31,7 +31,6 @@ import org.ghyura.cf.config.LegacySetting;
 import org.ghyura.cf.config.LegacySettings;
 import org.ghyura.cf.model.Diagnostic;
 import org.ghyura.cf.model.ErrorCode;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -85,9 +84,7 @@ class LegacyConfigCompletenessTest {
 
     @BeforeAll
     static void findTheCheckout() {
-        checkout = Reactor.root().getParent().resolve("Combinatorics-Framework-QA-edition");
-        Assumptions.assumeTrue(Files.isDirectory(checkout.resolve("Core_trunk")),
-                "the legacy checkout is not beside the project: the completeness evidence cannot be produced");
+        checkout = Reactor.companion(CompanionRepositories.Kind.QA, "Core_trunk");
     }
 
     private static List<Path> files(String suffix) throws IOException {

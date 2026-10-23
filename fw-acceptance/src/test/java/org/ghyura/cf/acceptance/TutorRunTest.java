@@ -45,7 +45,6 @@ import org.ghyura.cf.model.Observation;
 import org.ghyura.cf.model.Outcome;
 import org.ghyura.cf.model.input.WorkbookData;
 import org.ghyura.cf.model.spec.ScenarioSpec;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -191,8 +190,8 @@ class TutorRunTest {
 
     @Test
     void theExpectedNumbersAreTheLessonsOwn() throws IOException {
-        Path lesson = Reactor.root().getParent().resolve("SUT/combination_thinking_tutor/scenarios.json");
-        Assumptions.assumeTrue(Files.isRegularFile(lesson), "the SUT checkout is not beside the project");
+        Path lesson = Reactor.companion(CompanionRepositories.Kind.SUT, "combination_thinking_tutor/scenarios.json")
+                .resolve("combination_thinking_tutor/scenarios.json");
         // the few numbers needed, by their unique keys; the growth block comes before the expected outcomes
         String text = Files.readString(lesson);
         Map<String, Long> numbers = new HashMap<>();

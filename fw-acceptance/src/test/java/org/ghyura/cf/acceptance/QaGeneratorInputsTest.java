@@ -30,7 +30,6 @@ import org.ghyura.cf.desktop.session.ScenarioLibrary;
 import org.ghyura.cf.desktop.session.Session;
 import org.ghyura.cf.model.Json;
 import org.ghyura.cf.model.Severity;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.w3c.dom.Element;
@@ -55,8 +54,7 @@ class QaGeneratorInputsTest {
     private static final Map<String, String> STALE_LIBRARY_COUNTS = Map.of("combinatorial_tests_sieve3d_external_api", "1200");
 
     private static Path copyTrunk(Path work) throws Exception {
-        Path trunk = Reactor.root().getParent().resolve("Combinatorics-Framework-QA-edition/generator_trunk");
-        Assumptions.assumeTrue(Files.isDirectory(trunk), "the QA edition checkout is not beside the project: its scenario inputs cannot be read");
+        Path trunk = Reactor.companion(CompanionRepositories.Kind.QA, "generator_trunk").resolve("generator_trunk");
         try (var walk = Files.walk(trunk)) {
             for (Path p : walk.toList()) {
                 Path target = work.resolve(trunk.relativize(p).toString());

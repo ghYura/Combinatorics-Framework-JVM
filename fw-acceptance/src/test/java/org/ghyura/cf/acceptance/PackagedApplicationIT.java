@@ -419,6 +419,7 @@ class PackagedApplicationIT {
                 "strace cannot trace here: the syscall evidence cannot be produced",
                 "the legacy checkout is not beside the project: the evidence lines cannot be checked",
                 "the SUT checkout is not beside the project",
+                "MISSING_AUTHORIZED_BACKEND: optional QA/legacy checkout unavailable; use -Dcf.qa.root=/path",
                 "this account can write to a read-only directory (running as root?); the read-only check cannot be enforced",
                 "Analyzer jar/AnalyzeKv build not present",
                 "live e2e only when explicitly enabled",
@@ -427,7 +428,7 @@ class PackagedApplicationIT {
                 "UNSUPPORTED_PLATFORM: declared by the test",
                 "flaky on this machine",
                 " "));
-        assertEquals(List.of("MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND",
+        assertEquals(List.of("MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND", "MISSING_AUTHORIZED_BACKEND",
                 "UNSUPPORTED_PLATFORM", "EXPECTED_OPTIONAL", "EXPECTED_OPTIONAL", "UNSUPPORTED_PLATFORM", "MISSING_AUTHORIZED_BACKEND",
                 "UNSUPPORTED_PLATFORM", "BLOCKING_UNEXPECTED", "BLOCKING_UNEXPECTED"), out.lines().toList());
     }
@@ -2207,10 +2208,8 @@ class PackagedApplicationIT {
      */
     @Test
     void generatorTrunkExamplesRunTheirOwnPythonAsTheLegacyBundleRanThem(@TempDir Path work) throws Exception {
-        Path trunk = Reactor.root().getParent().resolve("Combinatorics-Framework-QA-edition/generator_trunk");
-        org.junit.jupiter.api.Assumptions.assumeTrue(Files.isDirectory(trunk), "the QA edition checkout is not beside the project");
-        Path sut = Reactor.root().getParent().resolve("SUT");
-        org.junit.jupiter.api.Assumptions.assumeTrue(Files.isDirectory(sut.resolve("automation-scheme-studio")), "the SUT checkout is not beside the project");
+        Path trunk = Reactor.companion(CompanionRepositories.Kind.QA, "generator_trunk").resolve("generator_trunk");
+        Path sut = Reactor.companion(CompanionRepositories.Kind.SUT, "automation-scheme-studio");
         Path python = pythonExecutable();
         Path addon = Path.of(System.getProperty("cf.python.jar", "missing")).toAbsolutePath();
         Path copy = work.resolve("QA-edition/generator_trunk");
