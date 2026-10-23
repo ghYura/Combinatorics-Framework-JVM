@@ -7,6 +7,25 @@
 > **Scope:** what the Framework does, and how to drive it from outside through its command line and files. Its internal
 > design is deliberately left out; you do not need it to operate the tool well.
 
+**Start with the timeline.** The Framework explores how settings, actions and unexpected events interact, turns the
+chosen combinations into executable test cases, and reports failed checks and measured results. Model three kinds
+of variation separately:
+
+- **Static context:** account type, payment method, feature flags. Use pairwise or stronger covering when these
+  combinations need reducing.
+- **Action sequences:** what happens first, next and again. Keep every allowed order or repetition with each selected
+  static-context row (§7.5).
+- **Sudden events:** a timeout, duplicate request or price change, including when each happens and when it is absent.
+  Cross these possibilities with the selected context and action sequences.
+
+For example, test a price change before and after adding an item, followed by a repeated payment request, for each
+selected customer context. The check asks whether the final charge and order count are correct. You supply that
+meaning of correctness; the Framework generates the cases and records the evidence. The same workflow can measure
+latency or cost and compare configurations against your goals.
+
+For a first local run, follow §0.4. The complete reference follows it; §21 explains what worked in larger executed
+examples.
+
 ---
 
 ## 0. Read this first
@@ -41,11 +60,12 @@ while they stay in charge.
   environment variables or aliases in the human's shell profile for it.
 - Paths such as `fw-app/target/fw-app.jar` are relative to the Framework checkout (the folder that holds `pom.xml`,
   `LICENSE` and the `fw-*` modules). The companion SUT repository is usually a sibling folder, `../SUT`.
-- This manual was compiled by reading the JVM Edition's sources and documentation (main branch at commit `b0c2d41`,
-  2026-10-20). **Nothing was executed while writing it**, so its examples are unexecuted. Their counts are derived by
-  hand from the documented counting rules. Always run `validate`, `plan` and `candidates` (all read-only) on any
-  scenario before running it, and believe the tool over this document when they disagree. If they disagree, tell the
-  human.
+- This manual was initially compiled from the JVM Edition's sources and documentation (main branch at commit
+  `b0c2d41`, 2026-10-20), without executing the templates. On 2026-10-23, the §11 templates were checked with
+  `validate`, `plan`, `candidates` and local runs; fixtures, measured results and limits are recorded in
+  [the template validation report](docs/AI_DELEGATION_TEMPLATE_VALIDATION.md). Other illustrative counts remain
+  derived unless explicitly marked as measured. Always validate, plan and inspect candidates after adapting a
+  scenario, and believe the tool over this document when they disagree. If they disagree, tell the human.
 - **The AI_delegation button.** In `guif`, the **AI_delegation** button beside **Hints** shows the rules of §0.2 and
   the agreement of §1 as a licence-like dialog. At its bottom are two statements, a box and **OK**:
   - "I respect human work/job";
@@ -64,10 +84,49 @@ while they stay in charge.
     there, it uses the copy inside `fw-app.jar` and writes it out beside the choice, as
     `~/.config/combinatorics-framework/AI_DELEGATION.md`; that is the path it copies.
   - A pasted path does **not** replace the agreement: present §1.2 to the human yourself and get their answers.
-- **§21 is different: it is experience.** On 2026-10-22 the operator actually built and ran a showcase with the
+- **§21 records experience from larger designs.** On 2026-10-22 the operator built and ran a showcase with the
   Framework: Cucumber scenarios over action sequences and sudden events, against an in-JVM system and, through
   Selenium, a web shop. Its numbers are measured, and its files (`showcase-cucumber/` in the checkout) are executed
   examples. Read §21 before your first design.
+
+---
+
+### 0.4 First local run: a checkout with a planted defect
+
+After the agreement and design approvals (§1 and §3), use the self-contained Java example in §11.A. It needs the
+application jar and JDK 25. Its system under test is a small stand-in inside the generated code.
+
+1. Create your workspace and its `runs/` folder. Copy the three named blocks from §11.A into
+   `checkout_demo.json`, `checkout_demo.constraints.json` and `checkout_demo.properties` there.
+2. In the commands below, replace `W` with that workspace's absolute path. Expand `cf` as defined in §0.3; it is
+   notation, not an installed shell command.
+3. Validate the files, inspect the count and read the first three generated cases:
+
+   ```sh
+   W=/absolute/path/to/cf-work/checkout
+   cf validate --scenario "$W/checkout_demo.json" --config "$W/checkout_demo.properties"
+   cf plan --scenario "$W/checkout_demo.json" --config "$W/checkout_demo.properties"
+   cf candidates --scenario "$W/checkout_demo.json" --config "$W/checkout_demo.properties" --limit 3
+   ```
+
+   Expect 72 generated cases and 48 executable cases after the constraint. Planning counts the modeled space;
+   `candidates` shows the constraint's effect.
+4. With execution approved (G3), try three cases, then the complete small scenario:
+
+   ```sh
+   cf run --scenario "$W/checkout_demo.json" --config "$W/checkout_demo.properties" \
+     --set cf.run.stop.candidates=3 --run-id checkout_demo_smoke --checkpoint "$W/runs/smoke.checkpoint"
+   cf run --scenario "$W/checkout_demo.json" --config "$W/checkout_demo.properties" \
+     --checkpoint "$W/runs/checkout_demo_r1.checkpoint"
+   cf triage --input "$W/runs/checkout_demo_r1.checkpoint"
+   cf export --input "$W/runs/checkout_demo_r1.checkpoint" --output "$W/runs/checkout_demo_r1.html" --kind html
+   ```
+
+   The full run should report 44 `PASS` and 4 `DOMAIN_FAIL`, with no harness failures. The four failures are the
+   deliberately planted lost-order defect. Exit code 0 means the run completed; read its verdicts to see the defect.
+   Open the HTML report to review the results. Use new run ids and checkpoint names for later runs.
+5. Replace the stand-in with your system (§11.B), define its checks, then validate and count again before running.
+   For a timeline-focused design, use §7.5 to keep sequences apart and place sudden events at different moments.
 
 ---
 
@@ -146,17 +205,18 @@ a use falls inside the grant, the human decides, or contacts the licensor at the
 
 ### 2.1 In one sentence
 
-It turns "far too many combinations to test" into a **small, countable, executable set of test cases with a stated
-coverage guarantee**, runs them, and reports **which combination broke which named rule** and **which combinations
-perform best**.
+It turns a model of **settings, action sequences and sudden events** into executable test cases with explicit
+constraints and coverage choices, then reports **which tested interactions broke which named checks** and **which
+combinations perform best** against your goals.
 
 ### 2.2 How to explain it to the human in plain words
 
 > "You tell me what can vary in your system: settings, steps and their order, and things that may suddenly happen.
-> The Framework counts every combination exactly before anything runs, removes the ones that cannot happen, and picks
-> a small set that still meets every pair (or triple) of values at least once. Each pick becomes a small program that
-> exercises your system and names the check it failed. Then it ranks results by your goals, such as speed or cost, and
-> points to the smallest failing example."
+> The Framework plans the combinations before anything runs, removes the ones your constraints forbid, and can reduce
+> the static settings while retaining their requested pair or triple coverage. Keep action sequences and sudden
+> events apart from that reduction, so their allowed possibilities run with each selected context. Each case becomes
+> a small program that exercises your system and names the check it failed. Then you can inspect failing examples
+> and rank measured results by goals such as speed or cost."
 
 ### 2.3 The problem it solves
 
@@ -370,10 +430,12 @@ and diagnostics (warnings and errors) to standard error.
 
 - Text reports start with the effective configuration and then the result. Filter them, for example
   `cf run … 2>run.err | tee run.out | grep -E '^ *(state|candidates|stopped|executed|outcomes|verdicts|reconciled|identity) '`.
-- For machine reading, use `--format xml`. Every report is `<cf-report command=… status=… exitCode=… exitName=…>`
+- For machine reading, use `--format xml` for structured command reports. These use `<cf-report command=… status=… exitCode=… exitName=…>`
   with elements such as `<run state=… scenarioDigest=… planDigest=… policyDigest=…>`,
   `<candidates generated excluded unselected executable/>`, `<outcomes><outcome name count/>`,
   `<verdicts><verdict code name count/>`, `<reconciliation consistent=…>` and `<diagnostics>`.
+- `export` writes the requested format to its output file and prints a plain-text confirmation, even with
+  `--format xml`. Read the exported file; do not parse that confirmation as an XML report.
 - Never print whole checkpoints, CSV exports or `.xlsx` files into your context. Use `head`, `grep` or the XML
   summary.
 
@@ -477,9 +539,9 @@ Ask only what you cannot infer, and offer a default for each question.
 | Kind | Example | How it is generated | How covering treats it |
 |---|---|---|---|
 | **Static parameter** | browser engine, account type, currency | one value (or a group) per test case | covered t-wise |
-| **Sequence of actions** | login → search → pay | values in a row, where order matters | covered like a parameter, or kept "apart" so every order runs with each kept row (§7.5) |
+| **Sequence of actions** | login → search → pay | values in a row, where order matters | keep "apart" so every allowed order runs with each kept static-context row (§7.5) |
 | **Sudden action** | timeout, duplicate submit, network drop | `FW_Optional`: happens in one of its ways, or not at all | never covered; joins after selection: `final = kept × Π(nᵢ + 1)` |
-| **Bootstrap** (`FW_RunMeFirstOnce`) | start or check the system, prepare shared data | runs **once per run, before every test case**; not combined | not a factor |
+| **Bootstrap** (`FW_RunMeFirstOnce`) | start or check the system, prepare shared data | Java: **once per run, before the first test case**; Python: before each case (§10.2) | not a factor |
 
 Make each sudden action its own factor, so that sudden actions meet each other in every combination.
 
@@ -819,7 +881,7 @@ A condition is a node, `{"all": [ … ]}`, `{"any": [ … ]}` or `{"not": { … 
 {"id": "steps_always", "polarity": "require", "assert": {"sheet": "steps", "present": true}}
 ```
 
-The last one uses `params`, for example
+The `risk_needs_trust` rule uses `params`, for example
 `"params": {"customer": {"guest": {"trust": 1}, "member": {"trust": 2}}, "payment": {"card": {"risk": 1}, "cod": {"risk": 3}}}`.
 
 ---
@@ -872,8 +934,9 @@ It may throw `SkipSample` (→ `SKIPPED`) or `SutUnavailable` (→ `INFRA_FAIL`)
 
 ## 11. Templates (copy, adapt, then validate)
 
-These templates are unexecuted (§0.3). Each one is built from the grammar and from patterns the Framework's own wizard
-and examples use. Validate before running.
+These templates were validated on 2026-10-23 with small local fixtures (§0.3). A is self-contained; B adapts it to an
+external Java library; C and D use the `pricing.py` fixture below; E checks plugin wiring; F reproduces one failure
+from A. These checks validate the examples, not your own system. Validate again after adapting them.
 
 ### A. A wizard-style generated-Java scenario (recommended starting point)
 
@@ -951,7 +1014,7 @@ cf.coverage.budget=0
 cf.results.attach=failed
 ```
 
-Expected results, derived by hand; confirm them with the tool:
+Expected results, confirmed by the template validation run; confirm them again after adapting the example:
 
 - Data sheets in order: HEAD 1, channel 2, customer 3, steps 4, timeout 5, check 6, TAIL 7. So `FW_EXIT_CODE` in
   `check` becomes **6**, which `FW_CUSTOM_VAR` names `CHECK_FAILED`.
@@ -1037,6 +1100,17 @@ Here `check` is data sheet 5, so a negative total gives verdict 5 (`NEGATIVE_TOT
 cases. The add-on's file name depends on the build: list `fw-python/target/*.jar`, or use `addons/fw-python.jar` in an
 installation.
 
+For a self-contained check, place this deliberately faulty `pricing.py` beside the scenario:
+
+```python
+def price(tier, coupon, qty):
+    # Deliberate bug: a discount exceeds the price of a basic single-item order.
+    return 10 * qty - (15 if tier == "basic" and coupon == "SAVE10" else 0)
+```
+
+With that fixture, the measured result is 11 `PASS` and 1 `DOMAIN_FAIL` named `NEGATIVE_TOTAL`. Replace the fixture
+with your actual pricing system when adapting the example.
+
 ### D. The same as a spec (`bundle.spec/v1`, TOML)
 
 ```toml
@@ -1097,8 +1171,14 @@ code = 2
 msg = "negative total"
 ```
 
-Run it with the Python settings of template C (`--sut python` and the add-on on the class path). `validate` reports
-the spec's title, its slots, what each alias compiled to and which settings it chooses.
+Use the Python properties from template C with `--config`; substitute your actual add-on path. This works for
+`validate`, `plan`, `candidates` and `run`. The `--sut python` shortcut is available on `run`, not on the inspection
+commands. `validate` reports the spec's title, its slots, what each alias compiled to and which settings it chooses.
+
+This spec adds a constraint and pairwise selection to C. With the fixture above and C's properties, the measured
+counts are 12 generated, 2 excluded by the constraint, 3 left out by covering, and 7 executable: 6 `PASS` and
+1 `DOMAIN_FAIL` with verdict 2. This build displays the spec's verdict name as `FWCUSTOMVAR=2 negative total`.
+Explicit coverage settings in your properties can change that selection; read the effective configuration.
 
 ### E. A typed plugin (Java developers)
 
@@ -1148,11 +1228,37 @@ Add `META-INF/services/org.ghyura.cf.spi.SutPlugin` containing `com.example.cfpl
 `cf.execution.classpath`, and run with `--sut shop`. The scenario needs only `FW_Seq` and plain data sheets
 (`tier`, `coupon`). Metric values must be finite. Building is gate G4.
 
+For inspection commands, set `cf.execution.sut=shop` in the properties or with `--set`; `--sut` is a `run` option.
+As written, the placeholder `total = 0` makes every case pass. Validation confirmed compilation, plugin discovery
+and execution with four tier/coupon combinations; checking a real shop requires replacing that placeholder and
+calibrating the oracle with a known failure.
+
 ### F. A one-case reproducer
 
-Copy the scenario, keep **one value per factor** (the failing test case's values), leave optional sheets present or
-absent as in the failure, and keep the oracle. One combination is one test case. Run it under a new run id; its verdict
-names the failing check. Keep reproducers in `repro/` and re-run them after a fix.
+For generated Java or Python, freeze the **complete rendered source** of a failing candidate. Obtain it from
+`candidates --format xml` with a sufficient `--limit`, matching the failed candidate's identity. Put that source into
+one value of a data sheet named `CASE`, with this structure (replace the placeholder with the JSON-escaped source):
+
+```json
+{
+  "sheets": {
+    "FW_Seq": [["CASE", "FW_Combi(1)"]],
+    "FW_CUSTOM_VAR": [["0", "PASS"], ["6", "CHECK_FAILED"]],
+    "CASE": [["<complete rendered source of the failing checkout_demo candidate>"]]
+  }
+}
+```
+
+The verdict map above belongs to A; retain the original map for another scenario. The rendered source already has
+its verdict numbers substituted. Keep the original runner, class path, required bootstrap and arguments, and any
+referenced files. Do not attach the old factor constraints to this single-source scenario. Validate, plan and inspect
+it: expect **exactly one executable candidate**, then run with a new run id and checkpoint. A's mobile, `login+pay`,
+timeout-present case was reproduced this way as one `DOMAIN_FAIL` with verdict 6.
+
+For a typed plugin, preserve the selected values and their order in a reduced value-based scenario instead; inspect
+the selection passed to the plugin. Merely deleting unused values can still leave several permutations, repeated
+selections or optional branches. Confirm the count is one before calling it a one-case reproducer. Keep reproducers
+in `repro/` and re-run them after a fix.
 
 ---
 
