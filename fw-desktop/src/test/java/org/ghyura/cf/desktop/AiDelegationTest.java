@@ -247,16 +247,19 @@ class AiDelegationTest {
 
     /**
      * The licence-like window: the agreement, then the two statements of respect, Remember my choice and do not show this
-     * further, and OK at the bottom; OK can be pressed only while both statements are ticked, and says whether to remember.
+     * further, and OK at the bottom; a fully visible agreement still requires both statements, and says whether to remember.
      */
     @Test
     void theAgreementWindowsOkWaitsForBothStatementsOfRespect(@TempDir Path dir) throws Exception {
         List<Boolean> accepted = new ArrayList<>();
+        var window = edt(() -> {
+            var content = new AiDelegationDialog.Agreement(AiDelegation.agreement(MANUAL), dir.resolve(AiDelegation.MANUAL), accepted::add);
+            content.component().setSize(880, 760);
+            HintLayerTest.layout(content.component());
+            return content;
+        });
         edt(() -> {
-            var window = new AiDelegationDialog.Agreement(AiDelegation.agreement(MANUAL), dir.resolve(AiDelegation.MANUAL), accepted::add);
             var root = window.component();
-            root.setSize(880, 760);
-            HintLayerTest.layout(root);
             String shown = window.text.getDocument().getText(0, window.text.getDocument().getLength());
             assertTrue(shown.contains("No agreement, no operation.") && shown.contains("I am a real human being."), shown);
             assertFalse(shown.contains("**"), "the markdown is shown formatted");
@@ -293,6 +296,78 @@ class AiDelegationTest {
             return null;
         });
         assertEquals(List.of(true), accepted, "only the OK pressed while enabled counts, with Remember ticked");
+    }
+
+    @Test
+    void theAgreementWaitsForTheBottomWithEitherOrderOfScrollingAndTicking(@TempDir Path dir) throws Exception {
+        String agreement = AiDelegation.agreement(MANUAL) + "\n\n" + "Another paragraph to read.\n\n".repeat(40);
+        for (boolean tickFirst : List.of(true, false)) {
+            List<Boolean> accepted = new ArrayList<>();
+            var window = edt(() -> {
+                var content = new AiDelegationDialog.Agreement(agreement, dir.resolve(AiDelegation.MANUAL), accepted::add);
+                content.component().setSize(880, 760);
+                HintLayerTest.layout(content.component());
+                return content;
+            });
+            edt(() -> {
+                var bar = window.scroll.getVerticalScrollBar();
+                assertTrue(bar.getMaximum() > bar.getVisibleAmount(), "the agreement needs scrolling");
+                if (tickFirst) window.pledges.forEach(b -> b.doClick());
+                assertFalse(window.ok.isEnabled(), "ticking both boxes at the top must not accept unread text");
+                window.ok.doClick();
+                bar.setValue(bar.getMaximum() - bar.getVisibleAmount() - 1);
+                return null;
+            });
+            edt(() -> {
+                assertFalse(window.ok.isEnabled(), "one pixel before the bottom is not the bottom");
+                window.scroll.getVerticalScrollBar().setValue(window.scroll.getVerticalScrollBar().getMaximum());
+                return null;
+            });
+            edt(() -> {
+                if (!tickFirst) {
+                    assertFalse(window.ok.isEnabled(), "scrolling alone does not give consent");
+                    window.pledges.get(0).doClick();
+                    assertFalse(window.ok.isEnabled(), "both statements remain required");
+                    window.pledges.get(1).doClick();
+                }
+                assertTrue(window.ok.isEnabled(), "both conditions enable OK in either order");
+                window.scroll.getVerticalScrollBar().setValue(0);
+                return null;
+            });
+            edt(() -> {
+                assertTrue(window.ok.isEnabled(), "reviewing earlier text does not undo reaching the bottom");
+                window.pledges.get(1).doClick();
+                assertFalse(window.ok.isEnabled(), "withdrawing a statement disables OK again");
+                window.ok.doClick();
+                window.pledges.get(1).doClick();
+                window.ok.doClick();
+                return null;
+            });
+            assertEquals(List.of(false), accepted, "only a valid acceptance counts; remembering is optional");
+        }
+    }
+
+    @Test
+    void aShortAgreementCountsAsReadOnlyAfterLayout(@TempDir Path dir) throws Exception {
+        List<Boolean> accepted = new ArrayList<>();
+        var window = edt(() -> {
+            var content = new AiDelegationDialog.Agreement("A short agreement.", dir.resolve(AiDelegation.MANUAL), accepted::add);
+            content.pledges.forEach(b -> b.doClick());
+            return content;
+        });
+        edt(() -> {
+            assertFalse(window.ok.isEnabled(), "zero-size content is not evidence of reaching the bottom");
+            window.component().setSize(880, 760);
+            HintLayerTest.layout(window.component());
+            return null;
+        });
+        edt(() -> {
+            assertTrue(window.text.getHeight() <= window.scroll.getViewport().getExtentSize().height, "the whole text fits");
+            assertTrue(window.ok.isEnabled(), "a fully visible agreement needs no unnecessary scrolling");
+            window.ok.doClick();
+            return null;
+        });
+        assertEquals(List.of(false), accepted);
     }
 
     /** With the choice remembered, a notice says the path is copied; it fades in its last seconds and presses its own OK. */

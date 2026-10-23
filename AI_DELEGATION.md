@@ -52,7 +52,7 @@ while they stay in charge.
   - "I respect long work on this latest version from very beginning as a hand-made pet-project by the author of this
     Combinatorics Framework";
   - a **Remember my choice and do not show this further** box;
-  - OK, which can be pressed only while both statements are ticked.
+  - OK, which can be pressed after reaching the bottom of the agreement and while both statements are ticked.
   - OK copies this file's absolute path to the clipboard, written as the operating system writes it (a file URI or
     forward slashes can be chosen), so the busy human can paste it to their AI assistant.
   - With the box ticked, the dialog is not shown again. Each press copies the path at once, and a notice says it was

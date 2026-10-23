@@ -49,6 +49,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -235,6 +237,33 @@ class GrayGradientTest {
         } finally {
             edt(desktop::close).get(30, TimeUnit.SECONDS);
         }
+    }
+
+    @Test
+    void theBundledAgreementOnGuifsGradientCanBeAcceptedAfterScrolling() throws Exception {
+        String agreement = AiDelegation.agreement(new String(AiDelegation.bundled(), StandardCharsets.UTF_8));
+        List<Boolean> accepted = new ArrayList<>();
+        var window = edt(() -> {
+            var content = new AiDelegationDialog.Agreement(agreement, Path.of(AiDelegation.MANUAL), accepted::add);
+            content.component().setSize(880, 760);
+            HintLayerTest.layout(content.component());
+            return content;
+        });
+        edt(() -> {
+            assertInstanceOf(GrayGradient.EditorPane.class, window.text.getUI());
+            var bar = window.scroll.getVerticalScrollBar();
+            assertTrue(bar.getMaximum() > bar.getVisibleAmount(), "the bundled agreement needs scrolling");
+            window.pledges.forEach(b -> b.doClick());
+            assertFalse(window.ok.isEnabled(), "the real guif agreement starts unread");
+            bar.setValue(bar.getMaximum());
+            return null;
+        });
+        edt(() -> {
+            assertTrue(window.ok.isEnabled(), "guif enables OK at the bottom with both statements ticked");
+            window.ok.doClick();
+            return null;
+        });
+        assertEquals(List.of(false), accepted);
     }
 
     private static Color at(BufferedImage image, JComponent root, JViewport viewport, int x, int y) {

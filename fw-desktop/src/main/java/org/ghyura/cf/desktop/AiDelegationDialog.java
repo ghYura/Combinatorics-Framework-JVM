@@ -70,8 +70,9 @@ import java.util.function.Consumer;
 /**
  * The AI_delegation button beside Hints and what it opens. The first window reads like a licence: the rules an AI assistant
  * follows and the agreement it asks the human to accept, from the AI's manual; at the bottom, the human's two statements of
- * respect (OK can be pressed only once both are ticked), Remember my choice and do not show this further, and OK. After OK
- * the manual's absolute path is on the clipboard, written as the operating system in use writes it, and a second window
+ * respect (OK waits until the end of the agreement has been reached and both are ticked), Remember my choice and do not
+ * show this further, and OK. After OK the manual's absolute path is on the clipboard, written as the operating system in
+ * use writes it, and a second window
  * says so, shows the path and offers its other forms (a file URI, forward slashes). Once the choice is remembered (and the
  * agreement has not changed since), a press copies the path at once and only a notice says so; the notice fades away by
  * itself after ten seconds, as if its OK were pressed, and the path stays on the clipboard. Every element of these
@@ -251,15 +252,19 @@ final class AiDelegationDialog {
 
     /**
      * The licence-like window: what delegation means, the agreement, then the human's statements of respect, Remember my
-     * choice and do not show this further, and OK, which can be pressed only while both statements are ticked.
+     * choice and do not show this further, and OK, which waits until the agreement's end has been reached and both
+     * statements are ticked.
      */
     static final class Agreement {
         final JEditorPane text = new JEditorPane();
+        final JScrollPane scroll = new JScrollPane(text);
         /** The statements of respect, in the order of {@link AiDelegation#PLEDGES}. */
         final List<JCheckBox> pledges = AiDelegation.PLEDGES.stream().map(AiDelegationDialog::box).toList();
         final JCheckBox remember = box(REMEMBER);
         final JButton ok = new JButton("OK");
         private final JPanel root = new JPanel(new BorderLayout(0, 8));
+        private boolean reachedEnd;
+        private boolean readCheckPending;
 
         /** @param accepted told at OK whether to remember the choice */
         Agreement(String agreement, Path manual, Consumer<Boolean> accepted) {
@@ -274,13 +279,12 @@ final class AiDelegationDialog {
                     + "li { margin-bottom: 3px; }</style></head><body>" + MarkdownLite.html(agreement) + "</body></html>");
             text.setCaretPosition(0);
             text.getAccessibleContext().setAccessibleName("The delegation agreement");
-            JScrollPane scroll = new JScrollPane(text);
             scroll.setPreferredSize(new Dimension(820, 420));
             JPanel bottom = new JPanel();
             bottom.setLayout(new BoxLayout(bottom, BoxLayout.Y_AXIS));
             JLabel consent = wrapped("By pressing OK you confirm that you are a real human who directs this work and that you have "
-                    + "read the agreement above. OK can be pressed once both statements below are ticked. Your AI assistant will "
-                    + "still show the agreement to you and ask for your answers before it runs anything. Closing this window "
+                    + "read the agreement above. Reach the bottom of the agreement and tick both statements below to enable OK. "
+                    + "Your AI assistant will still show the agreement to you and ask for your answers before it runs anything. Closing this window "
                     + "copies nothing.");
             consent.setAlignmentX(Component.LEFT_ALIGNMENT);
             bottom.add(consent);
@@ -295,21 +299,42 @@ final class AiDelegationDialog {
             root.add(scroll, BorderLayout.CENTER);
             root.add(bottom, BorderLayout.SOUTH);
             Hints.of(text, "The rules your AI assistant follows and the agreement it will ask you to accept, taken from its "
-                    + "manual, AI_DELEGATION.md.");
-            Hints.of(pledges.get(0), "Tick to state that you respect human work and jobs. OK can be pressed only while both "
-                    + "statements are ticked.");
+                    + "manual, AI_DELEGATION.md. Read to the bottom before accepting.");
+            Hints.of(pledges.get(0), "Tick to state that you respect human work and jobs. OK waits until you reach the bottom "
+                    + "of the agreement and both statements are ticked.");
             Hints.of(pledges.get(1), "Tick to state that you respect the author's long, hand-made work on this Framework. OK can "
-                    + "be pressed only while both statements are ticked.");
+                    + "be pressed after you reach the bottom of the agreement and while both statements are ticked.");
             Hints.of(remember, "Tick to skip this window from now on: the button will copy the path at once and show a short "
                     + "notice instead.");
             Hints.of(ok, "Accepts the agreement and puts the path of the AI's manual on the clipboard, ready to paste into its "
-                    + "chat. It waits until both statements are ticked.");
+                    + "chat. It waits until you reach the bottom of the agreement and both statements are ticked.");
             ok.setEnabled(false);
-            pledges.forEach(p -> p.addItemListener(e -> ok.setEnabled(pledges.stream().allMatch(JCheckBox::isSelected))));
+            pledges.forEach(p -> p.addItemListener(e -> updateOk()));
+            scroll.getViewport().addChangeListener(e -> scheduleReadCheck());
+            scheduleReadCheck();
             ok.addActionListener(e -> {
                 if (ok.isEnabled()) {
                     accepted.accept(remember.isSelected());
                 }
+            });
+        }
+
+        private void updateOk() {
+            ok.setEnabled(reachedEnd && pledges.stream().allMatch(JCheckBox::isSelected));
+        }
+
+        private void scheduleReadCheck() {
+            if (readCheckPending) return;
+            readCheckPending = true;
+            // Check after layout settles: an unlaid-out viewport must not count as reading the whole agreement.
+            SwingUtilities.invokeLater(() -> {
+                readCheckPending = false;
+                Rectangle visible = scroll.getViewport().getViewRect();
+                if (visible.height > 0 && text.getWidth() > 0 && text.getHeight() > 0
+                        && visible.y + visible.height >= text.getHeight()) {
+                    reachedEnd = true;
+                }
+                updateOk();
             });
         }
 
