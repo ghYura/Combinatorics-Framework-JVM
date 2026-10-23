@@ -33,7 +33,7 @@ import java.util.Optional;
  */
 public enum KeyEncodingPolicy {
 
-    /** SIGNED_BYTE when every label fits -127..127, otherwise PACKED_LEGACY16. The default full-parity mode. */
+    /** SIGNED_BYTE when the assigned labels fit -127..127, otherwise PACKED_LEGACY16. */
     AUTO_PRESERVE,
 
     /** Strict compact mode: validation fails before execution for any label outside -127..127 (B05). */

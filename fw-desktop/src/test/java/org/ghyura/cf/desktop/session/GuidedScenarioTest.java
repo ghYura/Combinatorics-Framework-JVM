@@ -338,16 +338,38 @@ class GuidedScenarioTest {
             assertTrue(problems.stream().anyMatch(p -> p.contains(expected)), expected + " in " + problems);
         }
         List<String> many = new ArrayList<>();
-        for (int i = 0; i < 40; i++) many.add("v" + i);
+        for (int i = 0; i < 83; i++) many.add("v" + i);
         GuidedScenario big = GuidedScenario.empty().adding(Factor.of("a", many)).adding(Factor.of("b", many)).adding(Factor.of("c", many));
-        assertEquals(3 + 3 + 120 + 3, big.labels());
-        assertTrue(big.problems().stream().anyMatch(p -> p.startsWith("The scenario uses 129 labels")), big.problems().toString());
-        assertTrue(big.withCheck(false).problems().isEmpty(), "127 labels fit: " + big.withCheck(false).problems());
+        assertEquals(3 + 3 + 249 + 3, big.labels());
+        assertTrue(big.problems().stream().anyMatch(p -> p.startsWith("The scenario uses 258 labels")), big.problems().toString());
+        GuidedScenario fits = big.withCheck(false).removingFactor(2).adding(Factor.of("c", many.subList(0, 82)));
+        assertEquals(255, fits.labels());
+        assertTrue(fits.problems().isEmpty(), "255 labels fit: " + fits.problems());
         FrameworkException refused = assertThrows(FrameworkException.class, () -> big.save(dir.resolve("big.json")));
-        assertTrue(refused.getMessage().contains("129 labels"), refused.getMessage());
+        assertTrue(refused.getMessage().contains("258 labels"), refused.getMessage());
         assertFalse(Files.exists(dir.resolve("big.json")));
         assertTrue(GuidedScenario.empty().adding(Factor.of("f", FOUR)).withRules(List.of(new Rule(Kind.NEVER, "f", "a", "f", "b")))
                 .problems().getFirst().contains("never together anyway"));
+    }
+
+    @Test
+    void aFullByteWizardDesignValidatesAndPreviewsWithNegativeLabels(@TempDir Path dir) {
+        List<String> values = java.util.stream.IntStream.range(0, 248).mapToObj(i -> "v" + i).toList();
+        GuidedScenario design = GuidedScenario.empty().adding(Factor.of("choice", values));
+        assertEquals(255, design.labels());
+        assertTrue(design.problems().isEmpty(), design.problems().toString());
+        Path file = dir.resolve("full-byte.json");
+        design.save(file);
+        Session session = SessionTest.session("cf.keys.encoding=SIGNED_BYTE");
+        var summary = session.validate(file);
+        assertEquals(org.ghyura.cf.model.key.KeyEncoding.SIGNED_BYTE, summary.encoding());
+        assertTrue(summary.firstLabel() < 0);
+        assertEquals(127, summary.highestKey());
+        CandidatePreview preview = session.preview(file, new CandidatePreview.Request(BigInteger.valueOf(1000),
+                BigInteger.ZERO, 3, false, true), Cancellation.NONE);
+        assertEquals(design.generated(), stage(preview, "generated"));
+        assertEquals(design.total(), stage(preview, "executable"));
+        assertEquals(3, preview.page().rows().size());
     }
 
     /** The advice follows the numbers: few run whole; many get pairwise; covering cannot help fewer than three factors. */

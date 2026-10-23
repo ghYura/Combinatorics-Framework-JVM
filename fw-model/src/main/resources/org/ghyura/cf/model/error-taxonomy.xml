@@ -66,7 +66,7 @@
     <code name="KEY_LABEL_RESERVED" severity="ERROR">A key label equals the encoding's reserved sentinel value.</code>
     <code name="KEY_ENCODING_MISMATCH" severity="ERROR">Rows of different key encodings were combined.</code>
     <code name="KEY_CENSUS_OVERFLOW" severity="ERROR">The plan's labels do not fit the requested encoding policy.</code>
-    <code name="KEY_WINDOW_SHIFTED" severity="INFO">cf.keys.logical.labels=legacy-window numbered the values in the legacy cheapest window because S+C exceeds 32767, as the legacy identity strategy did.</code>
+    <code name="KEY_WINDOW_SHIFTED" severity="INFO">Value labels moved into a signed window because positive-only numbering did not fit the selected encoding.</code>
     <code name="KEY_CENSUS_MISMATCH" severity="ERROR">The parse consumed a different number of keys than the census counted.</code>
     <code name="KEY_PARSE_INVALID" severity="ERROR">Text is not a well-formed key list such as [1, -2, 3].</code>
     <code name="KEY_WIRE_MALFORMED" severity="ERROR">A key frame header carries impossible values.</code>

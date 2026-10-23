@@ -159,7 +159,7 @@
   </delta>
   <delta id="D14" decision="F26" area="key-namespaces">
     <legacy>Sheets, values and virtual sheets were numbered from one shared counter (virtual sheets after the last value).</legacy>
-    <now>Byte-migration B06 and B08: data sheets are keys 1..S and virtual sheets S+1.. in the sheet namespace, values S+1..S+C in the value namespace; the census covers both; nothing is renumbered.</now>
+    <now>Data sheets and virtual sheets share a sheet-label namespace; values have a separate namespace. Native placement keeps 1..S+V and S+1..S+C while they fit, then shifts each namespace into the full signed range before widening or refusing (author direction, 2026-10-23). The census counts both. Plan/spec sheet ordinals remain stable int indices; explicit legacy-window retains legacy placement.</now>
     <evidence path="Core_trunk/src/main/java/com/company/excel/DataTypeDispatcher.java" line="136" contains="totalKeys"/>
     <test module="fw-store" class="org.ghyura.cf.store.KeyDictionaryTest" method="virtualSheetsTakeSheetKeysAndCountInTheCensus"/>
   </delta>

@@ -47,9 +47,11 @@ import java.util.Objects;
  *
  * <p>Labels follow the legacy identity numbering the byte-migration contract preserves (B06): data sheet keys
  * are 1..S (a separate namespace, B08) and values are labelled S+1..S+C in sheet order, duplicates included,
- * each with its own label; under cf.keys.logical.labels=legacy-window a scenario whose S+C exceeds 32767 is
+ * each with its own label while that numbering fits. Otherwise each namespace moves into the encoding's full
+ * signed range before widening or refusing. Sheet ordinals in the spec and plan remain stable 1-based int indices;
+ * {@link #sheetLabel(int)} gives their encoded labels. Under cf.keys.logical.labels=legacy-window a scenario whose S+C exceeds 32767 is
  * labelled in the legacy 16-bit tier's cheapest window instead ({@link LabelWindow}, decision F2). Virtual sheets take the sheet keys S+1..S+V in the sheet namespace. The census
- * covers all of them and decides, once, whether one byte per key is enough (B04). Nothing is renumbered.</p>
+ * covers all of them and decides, once, whether one byte per key is enough (B04).</p>
  *
  * <p>Memory ownership: from {@link #build} on, the dictionary owns the scenario. It keeps the
  * {@link ScenarioSpec} for the later stages ({@link #spec()}), and its one lease covers everything reachable
@@ -66,6 +68,7 @@ public final class KeyDictionary implements AutoCloseable {
     private final KeyEncoding encoding;
     private final KeyCensus.Snapshot census;
     private final int firstLabel;
+    private final int firstSheetLabel;
     private final LabelWindow window;
     private final ValueCell[] values;
     private final int[] sheetStart;
@@ -73,13 +76,14 @@ public final class KeyDictionary implements AutoCloseable {
     private boolean closed;
 
     private KeyDictionary(ScenarioSpec spec, int virtualSheets, KeyEncoding encoding, KeyCensus.Snapshot census,
-                          LabelWindow window, ValueCell[] values, int[] sheetStart, MemoryBudget.Lease lease) {
+                          LabelWindow window, int firstSheetLabel, ValueCell[] values, int[] sheetStart, MemoryBudget.Lease lease) {
         this.spec = spec;
         this.virtualSheets = virtualSheets;
         this.encoding = encoding;
         this.census = census;
         this.window = window;
         this.firstLabel = window.firstLabel();
+        this.firstSheetLabel = firstSheetLabel;
         this.values = values;
         this.sheetStart = sheetStart;
         this.lease = lease;
@@ -119,8 +123,19 @@ public final class KeyDictionary implements AutoCloseable {
                     + "key encoding can hold", where, "values", Long.toString(valueCount)));
         }
         LabelWindow window = LabelWindow.place(mode, scope, (int) sheets, virtualSheets, valueCount, where);
+        int firstSheetLabel = 1;
+        if (mode == LabelWindow.Mode.PRESERVE) {
+            long sheetCount = sheets + virtualSheets;
+            KeyEncoding target = policy == KeyEncodingPolicy.PACKED_LEGACY16
+                    || (policy == KeyEncodingPolicy.AUTO_PRESERVE
+                        && Math.max(valueCount, sheetCount) > KeyEncoding.SIGNED_BYTE.capacity())
+                    ? KeyEncoding.PACKED_LEGACY16 : KeyEncoding.SIGNED_BYTE;
+            int first = LabelWindow.fittingFirstLabel(target, window.firstLabel(), valueCount, where);
+            window = new LabelWindow(mode, scope, first, first != window.firstLabel());
+            firstSheetLabel = LabelWindow.fittingFirstLabel(target, 1, sheetCount, where);
+        }
         KeyCensus census = new KeyCensus();
-        census.addRange(1, sheets + virtualSheets);
+        census.addRange(firstSheetLabel, sheets + virtualSheets);
         census.addRange(window.firstLabel(), valueCount);
         KeyEncoding encoding = census.select(policy, where);
 
@@ -136,7 +151,7 @@ public final class KeyDictionary implements AutoCloseable {
                 }
             }
             sheetStart[spec.sheetCount()] = next;
-            return new KeyDictionary(spec, virtualSheets, encoding, census.snapshot(), window, values, sheetStart, lease);
+            return new KeyDictionary(spec, virtualSheets, encoding, census.snapshot(), window, firstSheetLabel, values, sheetStart, lease);
         } catch (RuntimeException | Error e) {
             lease.close();
             throw e;
@@ -148,7 +163,7 @@ public final class KeyDictionary implements AutoCloseable {
      * arrays plus everything reachable from the spec it keeps.
      */
     public static long retainedBytes(ScenarioSpec spec) {
-        long own = Footprint.object(6, Footprint.INT * 2 + 1)                    // this object
+        long own = Footprint.object(6, Footprint.INT * 3 + 1)                    // this object
                 + Footprint.referenceArray(spec.valueCount())                     // values
                 + Footprint.array(Footprint.INT * (spec.sheetCount() + 1L))       // sheetStart
                 + Footprint.object(0, Footprint.LONG + 2 * Footprint.INT)         // census snapshot
@@ -200,10 +215,20 @@ public final class KeyDictionary implements AutoCloseable {
      */
     public String identity() {
         ensureOpen();
-        return spec.contentDigest() + ";encoding=" + encoding.name() + ";" + window.canonical();
+        return spec.contentDigest() + ";encoding=" + encoding.name() + ";" + window.canonical()
+                + (firstSheetLabel == 1 ? "" : ";firstSheet=" + firstSheetLabel);
     }
 
-    /** The label of the first value: S+1 unless the legacy window moved it. */
+    /** Encoded sheet key; plan/spec indices stay 1..S+V and never narrow to a byte. */
+    public int sheetLabel(int ordinal) {
+        ensureOpen();
+        if (ordinal < 1 || ordinal > sheetCount() + virtualSheets) {
+            throw new IllegalArgumentException("no sheet has ordinal " + ordinal);
+        }
+        return firstSheetLabel + ordinal - 1;
+    }
+
+    /** The label of the first value: S+1 unless a signed window moved it. */
     public int firstLabel() {
         return firstLabel;
     }

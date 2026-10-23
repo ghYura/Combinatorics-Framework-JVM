@@ -59,13 +59,13 @@ public final class ConfigKeys {
 
     // ---- key encoding --------------------------------------------------------------------------------------
     public static final ConfigKey<KeyEncodingPolicy> KEYS_ENCODING = add("cf.keys.encoding",
-            "AUTO_PRESERVE picks SIGNED_BYTE when every label fits -127..127 and PACKED_LEGACY16 otherwise; "
+            "AUTO_PRESERVE uses the full signed label window before widening from SIGNED_BYTE to PACKED_LEGACY16; "
                     + "SIGNED_BYTE is strict compact mode; PACKED_LEGACY16 forces two octets per key.",
             raw -> KeyEncodingPolicy.parse(raw.trim()).orElseThrow(() -> new ConfigValueException(
                     "expected one of AUTO_PRESERVE, SIGNED_BYTE, PACKED_LEGACY16, got '" + raw.trim() + "'", false)));
     public static final ConfigKey<RunConfig.LogicalLabels> KEYS_LOGICAL_LABELS = add("cf.keys.logical.labels",
-            "How value labels are numbered. 'preserve' keeps the legacy numbering S+1..S+C and refuses labels the "
-                    + "encoding cannot hold; 'legacy-window' reproduces the legacy identity strategy of the 16-bit tier: the "
+            "How value labels are numbered. 'preserve' keeps S+1..S+C while it fits, then shifts into the full signed "
+                    + "range before widening or refusing; 'legacy-window' reproduces the legacy identity strategy of the 16-bit tier: the "
                     + "same numbering while it fits 32767, otherwise the window of C labels inside -32767..32767 with the "
                     + "fewest characters (decision F2). Relabelling for size (anchor, optimal) is not available.",
             Parsers.choice(RunConfig.LogicalLabels.class, RunConfig.LogicalLabels::token,

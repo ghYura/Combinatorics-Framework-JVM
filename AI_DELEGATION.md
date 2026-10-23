@@ -259,8 +259,11 @@ Framework makes the choice **systematic, countable and repeatable**.
   loader (so static fields are fresh), but they share the JVM's global state: system properties, files, Swing, sockets.
   A timeout asks a sample to stop; it cannot kill a thread that ignores the request. There is no OS sandbox for Java.
   Python test cases run as separate processes and can be sandboxed (§10.2).
-- **Compact keys.** In the recommended compact encoding, a scenario has at most **127 labels**: data sheets plus
-  values plus sheets created by joins. Larger models must be split into several scenarios.
+- **Compact keys.** `SIGNED_BYTE` provides **255 usable labels, -127..127**; -128 is reserved. With native
+  `cf.keys.logical.labels=preserve`, allocation keeps positive numbering while it fits, then shifts into the full
+  signed range before widening or refusing. Values and sheets (including virtual sheets) have separate namespaces,
+  each holding up to 255 labels. The wizard conservatively caps their combined count at 255. Larger namespaces need
+  a split scenario or the wider encoding. Explicit `legacy-window` retains legacy label-placement rules.
 - **One verdict per test case.** The first check that sets the verdict hides later failures, unless you also report
   them as metrics.
 - **Covering is greedy.** Both selection methods are greedy, so neither claims a minimum suite. Covering applies to all
@@ -455,7 +458,7 @@ its value and origin.
 | `cf.coverage.method` | greedy | `set-cover` usually keeps fewer rows. Neither claims a minimum |
 | `cf.coverage.budget` | 0 | When above 0, the strongest t whose selection keeps at most this many mandatory rows; it overrides `strength` |
 | `cf.coverage.hardCap` | 2000000 | Covering refuses larger mandatory products (`ASSEMBLY_COVERAGE_REFUSED`) |
-| `cf.keys.encoding` | AUTO_PRESERVE | **Set `SIGNED_BYTE`.** The default silently widens keys past 127 labels; SIGNED_BYTE fails loudly (`KEY_CENSUS_OVERFLOW`) |
+| `cf.keys.encoding` | AUTO_PRESERVE | **Set `SIGNED_BYTE`.** Native allocation uses -127..127 first; AUTO_PRESERVE widens beyond 255 labels per namespace, while SIGNED_BYTE refuses (`KEY_CENSUS_OVERFLOW`) |
 | `cf.plan.autoPromoteSingleVerb` | true | A row with exactly one bracketed verb applies it twice (§7.3). The two-verb forms in §7.3 count the same either way |
 | `cf.optional.includeAbsent` | true | Each kept row also yields the case where every optional sheet is absent |
 | `cf.render.preserveWhitespace` | false | false: values are cleaned before rendering (comments removed, line breaks joined); always true under Python |
@@ -1399,7 +1402,7 @@ failure rate departs from the run's. Start every debugging conversation from the
 | `PLAN_NO_SEQUENCE` | missing or empty `FW_Seq` | add rows |
 | `PLAN_DIRECTIVE_SYNTAX` | a malformed verb, such as `FW_Combi(two)` or `FW_Subsets_FOO(1)` | use the §7.3 forms |
 | `PLAN_VIRTUAL_SHEET` (warning) | `FW_Seq` names a sheet that does not exist | usually a typo; fix the name |
-| `KEY_CENSUS_OVERFLOW` | more than 127 labels under `SIGNED_BYTE` | split the scenario (§7.7) |
+| `KEY_CENSUS_OVERFLOW` | a namespace needs more than 255 labels under native `SIGNED_BYTE` allocation | split the scenario (§7.7); check explicit legacy placement settings |
 | `CONSTRAINT_UNKNOWN_SHEET` / `CONSTRAINT_UNMATERIALIZED_SHEET` | a rule names a sheet that does not exist or is no column of the test cases | correct the name; constrain only real columns |
 | `CONSTRAINT_INERT` (warning) | a value no cell has (often whitespace or quotes differ) | copy the exact cell text |
 | `CONSTRAINT_AMBIGUOUS` | a companion sidecar exists and `--constraints` names another | use one of them |
@@ -1527,7 +1530,7 @@ Oracle: <checks in severity order; verdict codes and names; how it was calibrate
 | Checkpoint | The run's saved state and results, for export, triage and resume |
 | Witness | The smallest failing test case of a finding |
 | Pareto front | Results not beaten on every goal by any other |
-| Label | A key number for each sheet and value; at most 127 in compact encoding |
+| Label | A key number in -127..127 for compact encoding; 255 usable numbers per namespace, with -128 reserved |
 | Runner / SUT plugin | What executes test cases: generated Java, Python, or a typed Java plugin |
 | Bootstrap | `FW_RunMeFirstOnce`, run once before all test cases (Java) |
 

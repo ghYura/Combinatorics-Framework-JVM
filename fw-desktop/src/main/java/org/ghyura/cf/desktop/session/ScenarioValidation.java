@@ -341,9 +341,9 @@ public final class ScenarioValidation {
                 labelMode(config), windowScope(config), budget)) {
             LabelWindow window = dictionary.labelWindow();
             if (window.shifted()) {
-                findings.add(Diagnostic.info(ErrorCode.KEY_WINDOW_SHIFTED, "the " + spec.valueCount() + " values do not fit the legacy "
-                        + "numbering S+1..S+C below 32768, so cf.keys.logical.labels=legacy-window labels them "
-                        + window.firstLabel() + ".." + window.lastLabel(spec.valueCount()) + ", the window the legacy identity strategy chose",
+                findings.add(Diagnostic.info(ErrorCode.KEY_WINDOW_SHIFTED, "the " + spec.valueCount() + " values use labels "
+                        + window.firstLabel() + ".." + window.lastLabel(spec.valueCount()) + " under " + dictionary.encoding()
+                        + "; the " + config.logicalLabels().token() + " label window moved beyond positive-only numbering",
                         SourceLocation.of(spec.source()), "firstLabel", Integer.toString(window.firstLabel())));
             }
             Summary summary = new Summary(file, WorkbookFormats.formatOf(path.getFileName().toString()), spec, plan, dictionary.encoding(),

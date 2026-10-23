@@ -191,31 +191,48 @@ class KeyDictionaryTest {
     // ---- the census and the encoding --------------------------------------------------------------------------
 
     @Test
-    void oneByteIsChosenExactlyWhileEveryLabelIsAtMost127() {
-        // S = 1 sheet, so its values are labelled 2..S+C: 126 values reach 127, 127 values reach 128
+    void theFullSignedByteRangeIsUsedBeforeWideningOrRefusing() {
+        // Preserve 2..127 for 126 values; larger inputs use the rest of the signed window before widening.
         try (KeyDictionary fits = build(sized(1, 126), 0, KeyEncodingPolicy.AUTO_PRESERVE)) {
             assertEquals(KeyEncoding.SIGNED_BYTE, fits.encoding());
             assertEquals(127, fits.census().max());
             assertEquals(1, fits.census().min());
         }
-        try (KeyDictionary tooBig = build(sized(1, 127), 0, KeyEncodingPolicy.AUTO_PRESERVE)) {
-            assertEquals(KeyEncoding.PACKED_LEGACY16, tooBig.encoding(), "AUTO_PRESERVE keeps the labels and widens the keys");
-            assertEquals(128, tooBig.census().max());
+        for (KeyEncodingPolicy policy : List.of(KeyEncodingPolicy.AUTO_PRESERVE, KeyEncodingPolicy.SIGNED_BYTE)) {
+            try (KeyDictionary full = build(sized(1, 255), 0, policy)) {
+                assertEquals(KeyEncoding.SIGNED_BYTE, full.encoding());
+                assertEquals(-127, full.firstLabel());
+                assertEquals(127, full.lastLabel());
+                assertEquals(255, full.rowOf(1).payloadLength());
+                for (int label = -127; label <= 127; label++) {
+                    assertEquals("v", full.value(label).text());
+                    assertEquals(1, full.sheetOfLabel(label));
+                }
+                assertFalse(full.contains(-128));
+            }
         }
-        FrameworkException strict = assertThrows(FrameworkException.class, () -> build(sized(1, 127), 0, KeyEncodingPolicy.SIGNED_BYTE));
+        try (KeyDictionary widened = build(sized(1, 256), 0, KeyEncodingPolicy.AUTO_PRESERVE)) {
+            assertEquals(KeyEncoding.PACKED_LEGACY16, widened.encoding());
+        }
+        FrameworkException strict = assertThrows(FrameworkException.class, () -> build(sized(1, 256), 0, KeyEncodingPolicy.SIGNED_BYTE));
         assertEquals(ErrorCode.KEY_CENSUS_OVERFLOW, strict.code());
-        assertEquals("128", strict.primary().attributes().get("max"));
+        assertEquals("255", strict.primary().attributes().get("capacity"));
         assertEquals(KeyEncoding.PACKED_LEGACY16, build(sized(1, 5), 0, KeyEncodingPolicy.PACKED_LEGACY16).encoding());
     }
 
     @Test
-    void thePackedEncodingStopsAtLabel32767() {
+    void thePackedEncodingAlsoUsesItsNegativeRangeBeforeRefusing() {
         try (KeyDictionary last = build(sized(1, 32_766), 0, KeyEncodingPolicy.AUTO_PRESERVE)) {
             assertEquals(KeyEncoding.PACKED_LEGACY16, last.encoding());
             assertEquals(32_767, last.census().max());
         }
+        try (KeyDictionary full = build(sized(1, 65_535), 0, KeyEncodingPolicy.PACKED_LEGACY16)) {
+            assertEquals(-32_767, full.firstLabel());
+            assertEquals(32_767, full.lastLabel());
+            assertEquals("v", full.value(-128).text(), "-128 is ordinary data in the wider encoding");
+        }
         for (KeyEncodingPolicy policy : KeyEncodingPolicy.values()) {
-            FrameworkException e = assertThrows(FrameworkException.class, () -> build(sized(1, 32_767), 0, policy), policy.name());
+            FrameworkException e = assertThrows(FrameworkException.class, () -> build(sized(1, 65_536), 0, policy), policy.name());
             assertEquals(ErrorCode.KEY_CENSUS_OVERFLOW, e.code(), policy.name());
         }
     }
@@ -228,10 +245,14 @@ class KeyDictionaryTest {
             assertEquals(KeyEncoding.SIGNED_BYTE, one.encoding());
             assertEquals(125, one.virtualSheetCount());
         }
-        try (KeyDictionary two = build(sized(2, 0), 126, KeyEncodingPolicy.AUTO_PRESERVE)) {
-            assertEquals(128, two.census().max());
-            assertEquals(KeyEncoding.PACKED_LEGACY16, two.encoding());
-            assertEquals(128, two.census().count(), "every sheet key is one label");
+        try (KeyDictionary full = build(sized(2, 0), 253, KeyEncodingPolicy.SIGNED_BYTE)) {
+            assertEquals(-127, full.sheetLabel(1));
+            assertEquals(127, full.sheetLabel(255));
+            assertEquals(KeyEncoding.SIGNED_BYTE, full.encoding());
+            assertEquals(255, full.census().count(), "data and virtual sheets share one sheet namespace");
+        }
+        try (KeyDictionary wide = build(sized(2, 0), 254, KeyEncodingPolicy.AUTO_PRESERVE)) {
+            assertEquals(KeyEncoding.PACKED_LEGACY16, wide.encoding());
         }
     }
 
@@ -253,12 +274,12 @@ class KeyDictionaryTest {
             assertArrayEquals(new int[]{2, 3}, row.labels());
             assertEquals("02 03", hex(row.payload()));
         }
-        try (KeyDictionary wide = build(sized(1, 127), 0, KeyEncodingPolicy.AUTO_PRESERVE)) {
+        try (KeyDictionary wide = build(sized(1, 256), 0, KeyEncodingPolicy.AUTO_PRESERVE)) {
             KeyRow row = wide.rowOf(1);
             assertEquals(KeyEncoding.PACKED_LEGACY16, row.encoding());
-            assertEquals(127, row.size());
+            assertEquals(256, row.size());
             assertEquals("00 02 00 03", hex(row.payload()).substring(0, 11));
-            assertEquals("00 80", hex(row.payload()).substring(hex(row.payload()).length() - 5), "label 128 is two big-endian octets");
+            assertEquals("01 01", hex(row.payload()).substring(hex(row.payload()).length() - 5), "label 257 is two big-endian octets");
         }
     }
 
@@ -392,7 +413,7 @@ class KeyDictionaryTest {
     @Test
     void aCensusFailureHappensBeforeAnythingIsReserved() {
         MemoryBudget budget = new MemoryBudget(BIG);
-        assertThrows(FrameworkException.class, () -> KeyDictionary.build(sized(1, 127), 0, KeyEncodingPolicy.SIGNED_BYTE, budget));
+        assertThrows(FrameworkException.class, () -> KeyDictionary.build(sized(1, 256), 0, KeyEncodingPolicy.SIGNED_BYTE, budget));
         assertEquals(0, budget.reservedBytes());
     }
 

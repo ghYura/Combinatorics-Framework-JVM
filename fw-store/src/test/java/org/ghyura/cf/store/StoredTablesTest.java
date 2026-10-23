@@ -58,6 +58,22 @@ class StoredTablesTest {
     }
 
     @Test
+    void theFullSignedByteDomainFitsOneBytePerLabelUnderAnExactPageBudget() {
+        long page = RowBlocks.PAGE_OVERHEAD + 20L * RowBlocks.FIRST_PAGE_ROWS + RowBlocks.FIRST_PAGE_BYTES;
+        MemoryBudget budget = new MemoryBudget(page);
+        int[] labels = java.util.stream.IntStream.rangeClosed(-127, 127).toArray();
+        KeyRow keys = KeyRow.of(KeyEncoding.SIGNED_BYTE, labels);
+        assertEquals(255, keys.payloadLength());
+        try (RowBlocks table = new RowBlocks("signed byte boundary", KeyEncoding.SIGNED_BYTE, budget)) {
+            table.append(BigInteger.ONE, BigInteger.ZERO, keys);
+            assertEquals(keys, table.at(BigInteger.ZERO).keys());
+            assertEquals(255, table.uniformLength());
+            assertEquals(page, budget.reservedBytes());
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
     void rowsComeBackByRankAndThroughTheCursorAcrossPages() {
         MemoryBudget budget = new MemoryBudget(1L << 26);
         try (RowBlocks table = new RowBlocks("test table", ENCODING, budget)) {

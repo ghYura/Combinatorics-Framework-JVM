@@ -87,8 +87,7 @@ public enum ErrorCode {
     KEY_ENCODING_MISMATCH(Category.KEY, Severity.ERROR, "Rows of different key encodings were combined."),
     KEY_CENSUS_OVERFLOW(Category.KEY, Severity.ERROR, "The plan's labels do not fit the requested encoding policy."),
     KEY_WINDOW_SHIFTED(Category.KEY, Severity.INFO,
-            "cf.keys.logical.labels=legacy-window numbered the values in the legacy cheapest window because S+C exceeds "
-                    + "32767, as the legacy identity strategy did."),
+            "Value labels moved into a signed window because positive-only numbering did not fit the selected encoding."),
     KEY_CENSUS_MISMATCH(Category.KEY, Severity.ERROR, "The parse consumed a different number of keys than the census counted."),
     KEY_PARSE_INVALID(Category.KEY, Severity.ERROR, "Text is not a well-formed key list such as [1, -2, 3]."),
     KEY_WIRE_MALFORMED(Category.KEY, Severity.ERROR, "A key frame header carries impossible values."),

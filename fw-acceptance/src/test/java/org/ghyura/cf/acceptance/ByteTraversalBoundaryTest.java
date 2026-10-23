@@ -51,13 +51,14 @@ class ByteTraversalBoundaryTest {
         return ScenarioLoader.load(file).spec();
     }
 
-    private void strictRefusesBeforeAllocating(ScenarioSpec spec, SeqPlan plan, int maximum) {
-        if (maximum <= 127) return;
+    private void strictRefusesBeforeAllocating(ScenarioSpec spec, SeqPlan plan) {
+        long maximum = Math.max(spec.valueCount(), spec.sheetCount() + plan.virtualSheetCount());
+        if (maximum <= 255) return;
         MemoryBudget budget = new MemoryBudget(64L << 20);
         FrameworkException failure = assertThrows(FrameworkException.class,
                 () -> KeyDictionary.build(spec, (int) plan.virtualSheetCount(), KeyEncodingPolicy.SIGNED_BYTE, budget));
         assertEquals(ErrorCode.KEY_CENSUS_OVERFLOW, failure.primary().code());
-        assertEquals(Integer.toString(maximum), failure.primary().attributes().get("max"));
+        assertEquals("255", failure.primary().attributes().get("capacity"));
         assertEquals(0, budget.reservedBytes());
     }
 
@@ -71,13 +72,15 @@ class ByteTraversalBoundaryTest {
             sheets.put("FW_Seq", List.of(List.of("A", "FW_Combi(1)")));
             ScenarioSpec spec = load(dir, sheets);
             SeqPlan plan = SeqPlanner.plan(spec, PLAN).plan();
-            strictRefusesBeforeAllocating(spec, plan, count + 1);
+            strictRefusesBeforeAllocating(spec, plan);
             MemoryBudget budget = new MemoryBudget(64L << 20);
             try (KeyDictionary dictionary = KeyDictionary.build(spec, 0, KeyEncodingPolicy.AUTO_PRESERVE, budget);
                  Generation.Result generated = Generation.run(plan, dictionary, GenerationOptions.defaults(), budget, Cancellation.NONE);
                  Assembly assembly = Assembly.of(plan, generated.result(), dictionary, GenerationOptions.defaults(), AssemblyOptions.defaults(), RENDER, 1L, budget, Cancellation.NONE);
                  CandidateRenderer renderer = CandidateRenderer.of(assembly, plan, dictionary, RENDER, budget)) {
-                KeyEncoding expected = count <= 126 ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16;
+                KeyEncoding expected = count <= 255 ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16;
+                int first = count <= 126 || count > 255 ? 2 : 128 - count;
+                assertEquals(first, dictionary.firstLabel());
                 assertEquals(expected, dictionary.encoding());
                 assertEquals(BigInteger.valueOf(count), assembly.generated());
                 var cursor = assembly.candidates(Cancellation.NONE);
@@ -88,9 +91,10 @@ class ByteTraversalBoundaryTest {
                     assertEquals(BigInteger.valueOf(i), candidate.ordinal());
                     assertTrue(ids.add(candidate.id().hex()), "no identity alias at " + i);
                     assertEquals(expected, candidate.keys(0).encoding());
-                    assertArrayEquals(new int[]{i + 2}, KeyWire.decode(KeyWire.encode(candidate.keys(0))).labels());
+                    assertArrayEquals(new int[]{first + i}, KeyWire.decode(KeyWire.encode(candidate.keys(0))).labels());
+                    assertEquals(expected.bytesPerKey(), candidate.keys(0).payloadLength());
                     String expectedText = Integer.toString(Byte.MIN_VALUE - 1 + i);
-                    assertEquals(expectedText, dictionary.value(i + 2).text());
+                    assertEquals(expectedText, dictionary.value(first + i).text());
                     assertEquals(expectedText, renderer.renderText(candidate));
                     assertEquals(i == 0 ? SelectionState.BASELINE_REFERENCE : SelectionState.PRESENT, candidate.states().getFirst());
                 }
@@ -115,18 +119,20 @@ class ByteTraversalBoundaryTest {
             sheets.put("FW_Seq", seq);
             ScenarioSpec spec = load(dir, sheets);
             SeqPlan plan = SeqPlanner.plan(spec, PLAN).plan();
-            strictRefusesBeforeAllocating(spec, plan, 2 * count);
+            strictRefusesBeforeAllocating(spec, plan);
             MemoryBudget budget = new MemoryBudget(64L << 20);
             try (KeyDictionary dictionary = KeyDictionary.build(spec, 0, KeyEncodingPolicy.AUTO_PRESERVE, budget);
                  Generation.Result generated = Generation.run(plan, dictionary, GenerationOptions.defaults(), budget, Cancellation.NONE);
                  Assembly assembly = Assembly.of(plan, generated.result(), dictionary, GenerationOptions.defaults(), AssemblyOptions.defaults(), RENDER, 1L, budget, Cancellation.NONE);
                  CandidateRenderer renderer = CandidateRenderer.of(assembly, plan, dictionary, RENDER, budget)) {
-                assertEquals(count <= 63 ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16, dictionary.encoding());
+                assertEquals(count <= 255 ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16, dictionary.encoding());
                 assertEquals(BigInteger.ONE, assembly.generated());
                 Candidate candidate = assembly.candidates(Cancellation.NONE).next();
                 assertEquals(count, candidate.rows().size());
                 for (int i = 0; i < count; i++) {
-                    int sheet = i + 1, label = count + sheet;
+                    int sheet = i + 1;
+                    int first = count <= 63 || count > 255 ? count + 1 : 128 - count;
+                    int label = first + i;
                     assertEquals(sheet, spec.sheets().get(i).key());
                     assertEquals(sheet, dictionary.sheetOfLabel(label));
                     assertArrayEquals(new int[]{label}, dictionary.rowOf(sheet).labels());
@@ -140,8 +146,8 @@ class ByteTraversalBoundaryTest {
     }
 
     @Test
-    void virtualSheetsForceWideningBeforeTraversalEvenWhenEveryCellLabelFitsOneByte(@TempDir Path dir) throws Exception {
-        for (int virtual : new int[]{126, 127, 255, 256}) {
+    void virtualSheetsUseTheNegativeRangeBeforeWideningOrTraversal(@TempDir Path dir) throws Exception {
+        for (int virtual : new int[]{126, 127, 254, 255, 256}) {
             Map<String, Object> sheets = new LinkedHashMap<>();
             sheets.put("A", List.of(List.of("kept")));
             List<Object> seq = new ArrayList<>();
@@ -151,14 +157,15 @@ class ByteTraversalBoundaryTest {
             ScenarioSpec spec = load(dir, sheets);
             SeqPlan plan = SeqPlanner.plan(spec, PLAN).plan();
             assertEquals(virtual, plan.virtualSheetCount());
-            strictRefusesBeforeAllocating(spec, plan, virtual + 1);
+            strictRefusesBeforeAllocating(spec, plan);
             MemoryBudget budget = new MemoryBudget(64L << 20);
             try (KeyDictionary dictionary = KeyDictionary.build(spec, virtual, KeyEncodingPolicy.AUTO_PRESERVE, budget);
                  Generation.Result generated = Generation.run(plan, dictionary, GenerationOptions.defaults(), budget, Cancellation.NONE);
                  Assembly assembly = Assembly.of(plan, generated.result(), dictionary, GenerationOptions.defaults(), AssemblyOptions.defaults(), RENDER, 1L, budget, Cancellation.NONE);
                  CandidateRenderer renderer = CandidateRenderer.of(assembly, plan, dictionary, RENDER, budget)) {
-                assertEquals(virtual == 126 ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16, dictionary.encoding());
-                assertEquals(virtual + 1, dictionary.census().max());
+                assertEquals(virtual <= 254 ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16, dictionary.encoding());
+                assertEquals(virtual <= 254 ? 127 : virtual + 1, dictionary.census().max());
+                assertEquals(virtual <= 126 || virtual > 254 ? 1 : 127 - virtual, dictionary.sheetLabel(1));
                 assertEquals(BigInteger.ONE, assembly.generated());
                 Candidate candidate = assembly.candidates(Cancellation.NONE).next();
                 assertEquals(1, candidate.rows().size(), "empty virtual sheets have role NONE and add no candidate columns");

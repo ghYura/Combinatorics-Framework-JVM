@@ -142,15 +142,15 @@ class BenchmarkTest {
 
     @Test
     void aStageTheKeysOrABudgetRefuseIsSkippedWithItsReasonAndTheOthersAreStillMeasured() throws IOException {
-        // 40 009 is prime: exactly n candidates as a product is 1 x 40 009 values, more labels than the 16-bit key tier holds
-        Benchmark.Report report = Benchmark.run("40009", List.of("generator", "analyzer"), false,
+        // 65 537 is prime: 1 x 65 537 values exceed even the full signed window of the two-octet tier.
+        Benchmark.Report report = Benchmark.run("65537", List.of("generator", "analyzer"), false,
                 extra -> ConfigResolver.resolve(null, Map.of(), extra));
         Benchmark.Stage generator = report.stages().getFirst();
-        assertTrue(generator.skipped() && generator.skipReason().startsWith("KEY_CENSUS_OVERFLOW: key census under policy AUTO_PRESERVE: "
-                + "labels 1..40012 do not fit PACKED_LEGACY16"), generator.toString());
+        assertTrue(generator.skipped() && generator.skipReason().startsWith("KEY_CENSUS_OVERFLOW:")
+                && generator.skipReason().contains("65535"), generator.toString());
         Benchmark.Stage analyzer = report.stages().get(1);
-        assertTrue(!analyzer.skipped() && analyzer.rows() == 40009, analyzer.toString());
-        assertTrue(Benchmark.table(report).contains("\n  generator         (skipped: KEY_CENSUS_OVERFLOW: key census under po)\n"),
+        assertTrue(!analyzer.skipped() && analyzer.rows() == 65537, analyzer.toString());
+        assertTrue(Benchmark.table(report).contains("\n  generator         (skipped: KEY_CENSUS_OVERFLOW:"),
                 Benchmark.table(report));
         assertTrue(Benchmark.json(report).contains("\"measured_stages\": [\n      \"analyzer\"\n    ],\n    \"skipped_stages\": [\n      {\n"
                 + "        \"stage\": \"generator\",\n        \"reason\": \"KEY_CENSUS_OVERFLOW: "), Benchmark.json(report));

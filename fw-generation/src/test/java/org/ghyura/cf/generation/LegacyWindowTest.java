@@ -51,6 +51,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class LegacyWindowTest {
 
+    @Test
+    void nativeCompactNegativeKeysSurviveGroupingReplacementAndRendering() {
+        String[] padding = new String[253];
+        java.util.Arrays.fill(padding, "padding");
+        Scenario s = Scenario.of().sheet("A", "removed", "kept").sheet("PAD", padding)
+                .seq("A", "FW_Combi(1)", "FW_Group FW_ReplaceRE(\"\\[-127\\], \", \"\")", "FW_Combi(2)")
+                .options(Scenario.UNPROMOTED).names("A", "<", ">");
+        ScenarioSpec spec = s.spec();
+        SeqPlan plan = SeqPlanner.plan(spec, Scenario.UNPROMOTED).plan();
+        MemoryBudget budget = new MemoryBudget(64L << 20);
+        try (KeyDictionary dictionary = KeyDictionary.build(spec, 0, KeyEncodingPolicy.SIGNED_BYTE, budget);
+             Generation.Result result = Generation.run(plan, dictionary, GenerationOptions.defaults(), budget, Cancellation.NONE);
+             Assembly assembly = Assembly.of(plan, result.result(), dictionary, GenerationOptions.defaults(), AssemblyOptions.defaults(),
+                     RenderOptions.defaults(), 1L, budget, Cancellation.NONE);
+             CandidateRenderer renderer = CandidateRenderer.of(assembly, plan, dictionary, RenderOptions.defaults(), budget)) {
+            assertEquals(-127, dictionary.firstLabel());
+            assertEquals(BigInteger.ONE, assembly.generated());
+            Candidate candidate = assembly.candidates(Cancellation.NONE).next();
+            assertEquals(KeyEncoding.SIGNED_BYTE, candidate.keys(0).encoding());
+            assertEquals(List.of(-126), java.util.Arrays.stream(candidate.labels(0)).boxed().toList());
+            assertEquals("<kept", renderer.renderText(candidate));
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
     /** PAD fills the window up to -128, A then holds labels -128 and -127, BIG the rest: 40000 values, S = 3. */
     private static Scenario big(String... aDirectives) {
         return bigWithValues(new String[]{"minus128", "minus127"}, aDirectives);

@@ -219,7 +219,7 @@ class CorpusPlanTest {
     }
 
     @Test
-    void theDictionaryOfEveryRealWorkbookLabelsValuesFromSPlusOneAndPicksTheEncodingAByteCanHold() throws Exception {
+    void theDictionaryOfEveryRealWorkbookUsesTheSignedRangeBeforeWidening() throws Exception {
         int needTwoBytes = 0;
         for (CorpusSurvey.Entry entry : CorpusSurvey.entries()) {
             String file = entry.file();
@@ -227,18 +227,20 @@ class CorpusPlanTest {
             Pipeline pipeline = run(file);
             int s = survey.dataSheets();
             int c = survey.dataCells();
-            boolean oneByte = s + c <= 127;
+            boolean oneByte = Math.max(s, c) <= 255;
+            int limit = oneByte ? 127 : 32767;
+            int first = c == 0 || s + c <= limit ? s + 1 : limit - c + 1;
             needTwoBytes += oneByte ? 0 : 1;
             try (KeyDictionary dictionary = KeyDictionary.build(pipeline.spec(), (int) pipeline.plan().virtualSheetCount(),
                     KeyEncodingPolicy.AUTO_PRESERVE, new MemoryBudget(1L << 30))) {
                 assertEquals(oneByte ? KeyEncoding.SIGNED_BYTE : KeyEncoding.PACKED_LEGACY16, dictionary.encoding(), file + " " + s + "+" + c);
-                assertEquals(s + 1, dictionary.firstLabel(), file);
-                assertEquals(s + c, c == 0 ? s + c : dictionary.lastLabel(), file);
-                assertEquals(Math.max(s, s + c), dictionary.census().max(), file);
-                assertEquals(1, dictionary.census().min(), file);
+                assertEquals(first, dictionary.firstLabel(), file);
+                assertEquals(first + c - 1, dictionary.lastLabel(), file);
+                assertEquals(Math.max(s, first + c - 1), dictionary.census().max(), file);
+                assertEquals(Math.min(1, first), dictionary.census().min(), file);
                 assertEquals(s + c, dictionary.census().count(), file + " every sheet key and every value label is counted once");
 
-                int label = s + 1;
+                int label = first;
                 int sheetKey = 0;
                 for (Map.Entry<String, List<String>> data : survey.values.entrySet()) {
                     sheetKey++;
@@ -255,7 +257,7 @@ class CorpusPlanTest {
                     assertEquals(dictionary.encoding(), row.encoding(), file);
                     assertTrue(java.util.Arrays.equals(labels, row.labels()), file + " / " + data.getKey() + " round trip through the encoding");
                 }
-                assertEquals(s + c + 1, label, file);
+                assertEquals(first + c, label, file);
             }
             if (!oneByte) {
                 FrameworkException strict = assertThrows(FrameworkException.class, () -> KeyDictionary.build(pipeline.spec(), 0,
@@ -266,7 +268,7 @@ class CorpusPlanTest {
             }
             KeyDictionary.build(pipeline.spec(), 0, KeyEncodingPolicy.PACKED_LEGACY16, new MemoryBudget(1L << 30)).close();
         }
-        assertEquals(2, needTwoBytes, "two of the real workbooks have labels above 127: the generator example (601) and the classes spec (135)");
+        assertEquals(1, needTwoBytes, "only the generator example exceeds 255 values; the classes spec now fits one byte");
     }
 
     @Test

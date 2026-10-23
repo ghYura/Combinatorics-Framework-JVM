@@ -33,8 +33,9 @@ import org.ghyura.cf.model.SourceLocation;
 import java.util.Objects;
 
 /**
- * Where the value labels of a scenario start (architect decision F2). {@link Mode#PRESERVE} keeps the legacy
- * numbering S+1..S+C; {@link Mode#LEGACY_WINDOW} reproduces the legacy identity strategy of the 16-bit tier
+ * Where the value labels of a scenario start. {@link Mode#PRESERVE} starts at the legacy numbering S+1..S+C;
+ * the dictionary uses {@link #fittingFirstLabel} to exhaust its selected signed domain before widening or refusing.
+ * {@link Mode#LEGACY_WINDOW} reproduces the legacy identity strategy of the 16-bit tier
  * (DataTypeDispatcher.plan with Tier.SHORT): the same numbering while S+C fits 32767, otherwise the window of C
  * consecutive labels inside -32767..32767 that is cheapest to write (fewest characters, a minus sign counting one),
  * the highest such window on ties ({@code uniformBestBase} scans bases from the highest down and keeps the first strict
@@ -61,6 +62,23 @@ public record LabelWindow(Mode mode, Scope scope, int firstLabel, boolean shifte
     public LabelWindow {
         Objects.requireNonNull(mode, "mode");
         Objects.requireNonNull(scope, "scope");
+    }
+
+    /** Keep the preferred numbering when it fits; otherwise use the full signed domain before refusing. */
+    public static int fittingFirstLabel(KeyEncoding encoding, int preferred, long count, SourceLocation where) {
+        if (count < 0) throw new IllegalArgumentException("negative label count: " + count);
+        if (count > encoding.capacity()) {
+            throw new FrameworkException(Diagnostic.error(ErrorCode.KEY_CENSUS_OVERFLOW,
+                    count + " labels exceed the " + encoding.capacity() + " usable labels of " + encoding
+                            + " (" + encoding.minLabel() + ".." + encoding.maxLabel() + "; "
+                            + encoding.reservedLabel() + " is reserved)", where,
+                    "labelCount", Long.toString(count), "capacity", Integer.toString(encoding.capacity())));
+        }
+        if (count == 0 || (preferred >= encoding.minLabel() && (long) preferred + count - 1 <= encoding.maxLabel())) {
+            return preferred;
+        }
+        // An affine shift preserves value order, including FW_Group's signed ordering; no byte cast can wrap.
+        return (int) (encoding.maxLabel() - count + 1);
     }
 
     /**

@@ -306,17 +306,17 @@ class ValidateScenarioTest {
 
     @Test
     void oneByteKeysAreChosenWhileTheLabelsFitAndStrictModeRefusesTheRest(@TempDir Path dir) throws IOException {
-        // one sheet, so the values are labelled 2..S+C: 126 values reach label 127, 127 values reach 128
-        Path fits = write(dir, "fits.json", scenarioWithValues(126));
-        Path over = write(dir, "over.json", scenarioWithValues(127));
+        // The whole usable byte window fits 255 values; a 256th value requires wider keys.
+        Path fits = write(dir, "fits.json", scenarioWithValues(255));
+        Path over = write(dir, "over.json", scenarioWithValues(256));
         assertTrue(field(run("validate", "--scenario", fits.toString()).out(), "key encoding").startsWith("SIGNED_BYTE (policy AUTO_PRESERVE, highest label 127)"));
         Result wide = run("validate", "--scenario", over.toString());
         assertEquals(0, wide.code(), wide.err());
-        assertTrue(field(wide.out(), "key encoding").startsWith("PACKED_LEGACY16 (policy AUTO_PRESERVE, highest label 128)"), wide.out());
+        assertTrue(field(wide.out(), "key encoding").startsWith("PACKED_LEGACY16 (policy AUTO_PRESERVE, highest label 257)"), wide.out());
 
         Result strict = run("validate", "--scenario", over.toString(), "--set", "cf.keys.encoding=SIGNED_BYTE");
         assertEquals(3, strict.code());
-        assertTrue(strict.err().contains("KEY_CENSUS_OVERFLOW") && strict.err().contains("128"), strict.err());
+        assertTrue(strict.err().contains("KEY_CENSUS_OVERFLOW") && strict.err().contains("255"), strict.err());
         assertEquals(0, run("validate", "--scenario", fits.toString(), "--set", "cf.keys.encoding=SIGNED_BYTE").code());
         assertTrue(field(run("validate", "--scenario", fits.toString(), "--set", "cf.keys.encoding=PACKED_LEGACY16").out(), "key encoding")
                 .startsWith("PACKED_LEGACY16 (policy PACKED_LEGACY16"));

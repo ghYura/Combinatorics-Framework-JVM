@@ -75,7 +75,7 @@ import java.util.stream.Stream;
  * parameter's sheet adds a line that sets it, each sequence's a line that does its actions in order, each sudden action's a
  * line that makes it happen (the values stay plain, the FW_SheetNames prefix and ending make them code, so rules name them
  * as written), an optional check sets the verdict, and TAIL prints the values and the verdict as the metrics line. Beside
- * it go the companion constraints file with the rules and a properties file with the selection. A design uses at most 127
+ * it go the companion constraints file with the rules and a properties file with the selection. A design uses at most 255
  * labels (sheets plus values), so its keys fit one signed byte. Immutable: every change makes another design.</p>
  *
  * @param budget    the most mandatory rows {@link Selection#BUDGET} keeps
@@ -90,7 +90,7 @@ public record GuidedScenario(String name, List<Factor> factors, List<Rule> rules
                              boolean check, boolean allOrders, Bootstrap bootstrap) {
 
     /** The most labels (sheets plus values) a scenario uses, so that its keys fit one signed byte. */
-    public static final int MAX_LABELS = Byte.MAX_VALUE;
+    public static final int MAX_LABELS = org.ghyura.cf.model.key.KeyEncoding.SIGNED_BYTE.capacity();
     /** The name a new design has. */
     public static final String FIRST_NAME = "first_scenario";
     /** Combinations few enough to run every one of them. */

@@ -279,6 +279,32 @@ class PythonPluginTest {
         assertTrue(blocked.getFirst().message().contains("could not start the interpreter"), blocked.toString());
     }
 
+    @Test
+    void bwrapPolicyKeepsTheHostReadOnlyAndOnlySharesNetworkingWhenRequested(@TempDir Path temp) {
+        Path candidate = temp.resolve("candidate");
+        List<String> command = List.of("python3", "-c", "FW_VAR = 0");
+        List<String> closed = Sandbox.of("bwrap").wrap(command, temp, Optional.of(candidate), Map.of(), "test");
+        assertEquals("bwrap", closed.getFirst());
+        assertTrue(java.util.Collections.indexOfSubList(closed, List.of("--ro-bind", "/", "/")) > 0);
+        assertTrue(closed.contains("--unshare-all"));
+        assertFalse(closed.contains("--share-net"));
+        assertTrue(java.util.Collections.indexOfSubList(closed, List.of("--tmpfs", "/tmp")) > 0);
+        assertTrue(java.util.Collections.indexOfSubList(closed, List.of("--bind", candidate.toString(), candidate.toString())) > 0);
+        assertEquals(command, closed.subList(closed.size() - command.size(), closed.size()));
+        assertTrue(Sandbox.of("bwrap-network").wrap(command, temp, Optional.of(candidate), Map.of(), "test").contains("--share-net"));
+        assertTrue(Sandbox.of("bwrap").failedToStart(1, "bwrap: Creating new namespace failed: Operation not permitted"));
+    }
+
+    @Test
+    void anUnavailableSandboxedInterpreterNeverRunsTheCandidateWithoutTheSandbox(@TempDir Path temp) {
+        Path marker = temp.resolve("must-not-exist");
+        PythonPlugin p = plugin(List.of(), Optional.empty(), "FW_VAR", Map.of("cf.python.sandbox", "bwrap",
+                "cf.python.executable", temp.resolve("absent-interpreter").toString(), "cf.python.workdir", temp.toString()));
+        assertThrows(SutUnavailable.class, () -> evaluate(p,
+                "open(" + pyString(marker.toString()) + ", 'w').write('ran')\nFW_VAR = 0\n", new Context()));
+        assertFalse(Files.exists(marker));
+    }
+
     private static String pyList(List<String> names) {
         StringBuilder b = new StringBuilder("[");
         for (String n : names) {

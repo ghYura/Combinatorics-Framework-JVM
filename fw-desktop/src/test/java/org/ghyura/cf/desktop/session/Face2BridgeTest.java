@@ -113,6 +113,16 @@ class Face2BridgeTest {
         var closed = exchange(bridge, "", "GET", ""); bridge.handle(closed); assertEquals(410, closed.status);
     }
 
+    @Test void theRealHttpHandlerServesThePackagedPageWithoutASocket(@TempDir Path dir) throws Exception {
+        try (var bridge = new Face2Bridge(session(), scenario(dir), SieveDocument.empty(), values(), Set.of(), 100,
+                next -> CompletableFuture.completedFuture(null))) {
+            var page = exchange(bridge, "", "GET", "");
+            bridge.handle(page);
+            assertEquals(200, page.status);
+            assertTrue(page.text().contains("id=\"quick-add\""));
+        }
+    }
+
     @Test void liveLoopbackServesThePackagedPage(@TempDir Path dir) throws Exception {
         try (var bridge = new Face2Bridge(session(), scenario(dir), SieveDocument.empty(), values(), Set.of(), 100,
                 next -> CompletableFuture.completedFuture(null))) {
