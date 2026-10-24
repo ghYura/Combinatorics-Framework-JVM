@@ -104,6 +104,7 @@ final class AiDelegation {
 
     private final Path store;
     private final List<Path> folders;
+    private final String installation;
     private final Supplier<byte[]> carried;
     private final Properties choice = new Properties();
 
@@ -119,6 +120,7 @@ final class AiDelegation {
     AiDelegation(Path store, List<Path> folders, Supplier<byte[]> bundled) {
         this.store = store;
         this.folders = List.copyOf(folders);
+        this.installation = folders.isEmpty() ? "" : folders.getFirst().toAbsolutePath().normalize().toString();
         this.carried = bundled;
         if (store != null) {
             load();
@@ -263,7 +265,8 @@ final class AiDelegation {
 
     /** The SHA-256 of the agreement's text and the statements before OK, which a remembered choice is bound to. */
     static String fingerprint(String agreement) {
-        String signed = agreement + "\n\n" + String.join("\n", PLEDGES);
+        // Older choices did not certify scrolling to the end. Ask again once under the current acceptance rules.
+        String signed = "read-to-end-and-pledges-v1\n" + agreement + "\n\n" + String.join("\n", PLEDGES);
         try {
             return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(signed.getBytes(StandardCharsets.UTF_8)));
         } catch (NoSuchAlgorithmException e) {
@@ -290,9 +293,10 @@ final class AiDelegation {
         return "true".equals(choice.getProperty("remember"));
     }
 
-    /** Whether the agreement must be shown: nothing remembered, or the remembered agreement's text has changed since. */
+    /** A fresh checkout must ask even if another installation saved a choice in the shared desktop settings. */
     synchronized boolean mustAsk(String agreement) {
-        return !(remembered() && fingerprint(agreement).equals(choice.getProperty("agreement.sha256")));
+        return !(remembered() && installation.equals(choice.getProperty("installation"))
+                && fingerprint(agreement).equals(choice.getProperty("agreement.sha256")));
     }
 
     /** OK on the agreement: with remember, it is not shown again until its text changes; without, nothing is written. */
@@ -300,6 +304,7 @@ final class AiDelegation {
         if (remember) {
             choice.setProperty("remember", "true");
             choice.setProperty("agreement.sha256", fingerprint(agreement));
+            choice.setProperty("installation", installation);
             choice.setProperty("accepted", Instant.now().toString());
             save();
         } else if (remembered()) {

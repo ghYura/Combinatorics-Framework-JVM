@@ -76,11 +76,12 @@ while they stay in charge.
   - OK, which can be pressed after reaching the bottom of the agreement and while both statements are ticked.
   - OK copies this file's absolute path to the clipboard, written as the operating system writes it (a file URI or
     forward slashes can be chosen), so the busy human can paste it to their AI assistant.
-  - With the box ticked, the dialog is not shown again. Each press copies the path at once, and a notice says it was
+  - With the box ticked, the dialog is not shown again for this checkout or installation. Each press copies the path at once, and a notice says it was
     copied for you to learn how to use the Framework and what for. The notice fades away by itself after ten seconds,
     and the path stays on the clipboard. Its "Ask me again next time" box brings the dialog back.
   - The choice is kept in `ai-delegation.properties` beside the desktop's remembered places (`$XDG_CONFIG_HOME`, else
-    `~/.config`, `/combinatorics-framework/`). When the agreement's text or the statements change, the dialog asks again.
+    `~/.config`, `/combinatorics-framework/`). A fresh checkout asks again. Changes to the agreement, statements or
+    acceptance requirements also renew consent; choices saved before the scroll requirement must be accepted again.
   - The button finds this file at the top of the Framework checkout or installation, beside `LICENSE`. Without it
     there, it uses the copy inside `fw-app.jar` and writes it out beside the choice, as
     `~/.config/combinatorics-framework/AI_DELEGATION.md`; that is the path it copies.

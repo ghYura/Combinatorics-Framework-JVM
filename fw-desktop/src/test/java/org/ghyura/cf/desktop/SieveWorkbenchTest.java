@@ -303,6 +303,9 @@ class SieveWorkbenchTest {
         SieveWorkbench view = edt(() -> new SieveWorkbench(() -> session, () -> file, new Navigator(trail, () -> file)));
         try {
             edt(() -> {
+                JTable emptyMatrix = find(view.component(), JTable.class,
+                        t -> t.getColumnCount() > 0 && "Choose a row sheet".equals(t.getColumnName(0)));
+                assertNotNull(emptyMatrix, "an unopened matrix gives a useful prompt instead of null");
                 for (String text : List.of("Add attribute", "Add value", "Apply data", "Discard data draft"))
                     assertFalse(find(view.component(), JButton.class, b -> text.equals(b.getText())).isEnabled(), text + " before a scenario is opened");
                 return null;

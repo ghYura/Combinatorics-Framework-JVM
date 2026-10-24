@@ -82,7 +82,7 @@ final class AuthoringView {
     private final DefaultListModel<String> sheetNames = new DefaultListModel<>();
     private final JList<String> sheets = Hints.of(new JList<>(sheetNames), "The scenario's sheets. Each sheet is a list of values; the sheet FW_Seq says how they are combined. Pick a sheet to edit its values.");
     private final SheetTableModel grid = new SheetTableModel();
-    private final JTable table = Hints.of(new JTable(grid), "The values of the selected sheet, one per row. Click a cell and type, or fill it from the templates on the right.");
+    private final JTable table = Hints.of(new GrayGradient.SheetTable(grid), "The values of the selected sheet, one per row. Click a cell and type, or fill it from the templates on the right.");
     private final JScrollPane gridPane = TableTitles.titled(table, "Cells of the selected sheet");
     private final JLabel fileLabel = new JLabel("untitled");
     private final JTextArea output = Hints.of(new JTextArea(6, 40), "What the last check of the scenario found: problems to fix, and a summary. Filled after you press Validate.");
@@ -623,6 +623,7 @@ final class AuthoringView {
 
     void insertRow(int row) {
         if (grid.sheet() >= 0) {
+            stopEditing();
             document.insertRow(grid.sheet(), row);
             grid.show(document, grid.sheet());
         }
@@ -630,6 +631,7 @@ final class AuthoringView {
 
     void removeRow(int row) {
         if (grid.sheet() >= 0) {
+            stopEditing();
             document.removeRow(grid.sheet(), row);
             grid.show(document, grid.sheet());
         }

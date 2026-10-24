@@ -130,7 +130,8 @@ public final class FlatDesktopLauncher {
             });
             var screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
             frame.setSize(Math.min(1200, screen.width), Math.min(820, screen.height));
-            frame.setLocationByPlatform(true);
+            frame.setLocation(screen.x + (screen.width - frame.getWidth()) / 2,
+                    screen.y + (screen.height - frame.getHeight()) / 2);
             frame.setVisible(true);
             return frame;
         } catch (RuntimeException | Error failure) {

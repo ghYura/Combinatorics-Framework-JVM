@@ -203,7 +203,65 @@ class GrayGradientTest {
         });
     }
 
-    /** Every output of the FlatLaf desktop is on the gradient; its inputs are not. */
+    @Test
+    void theSheetGridKeepsBothStripesThroughRowChangesColumnResizingAndEditing() throws Exception {
+        edt(() -> {
+            var document = org.ghyura.cf.desktop.session.ScenarioDocument.create();
+            int sheet = document.sheetNames().indexOf("FW_Seq");
+            assertTrue(sheet >= 0);
+            document.setCell(sheet, 0, 0, "ITEMS");
+            document.setCell(sheet, 0, 1, "FW_Combi(2)");
+            document.setCell(sheet, 1, 0, "OTHER");
+            SheetTableModel model = new SheetTableModel();
+            model.show(document, sheet);
+            JTable table = new GrayGradient.SheetTable(model);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            JScrollPane pane = new JScrollPane(table);
+            pane.setSize(440, 260);
+            HintLayerTest.layout(pane);
+            assertSheetStripes(pane, table);
+            document.insertRow(sheet, 0);
+            model.show(document, sheet);
+            HintLayerTest.layout(pane);
+            assertEquals("ITEMS", table.getValueAt(1, 0));
+            assertSheetStripes(pane, table);
+            document.removeRow(sheet, 0);
+            model.show(document, sheet);
+            table.getColumnModel().getColumn(0).setPreferredWidth(160);
+            table.getColumnModel().getColumn(0).setWidth(160);
+            HintLayerTest.layout(pane);
+            assertSheetStripes(pane, table);
+            assertTrue(table.editCellAt(1, 1));
+            var editor = (javax.swing.JTextField) table.getEditorComponent();
+            assertSheetGray(editor.getBackground());
+            editor.setText("FW_Permut()");
+            assertTrue(table.getCellEditor().stopCellEditing());
+            assertEquals("FW_Permut()", document.cell(sheet, 1, 1));
+            assertSheetStripes(pane, table);
+            table.changeSelection(0, 1, false, false);
+            var selected = table.prepareRenderer(table.getCellRenderer(0, 1), 0, 1);
+            assertEquals(table.getSelectionBackground(), selected.getBackground(), "selection remains recognizable");
+            return null;
+        });
+    }
+
+    private static void assertSheetStripes(JScrollPane pane, JTable table) {
+        BufferedImage image = HintLayerTest.paint(pane);
+        var first = table.getCellRect(0, 0, false);
+        var column = table.getCellRect(0, 1, false);
+        var row = table.getCellRect(1, 0, false);
+        Color base = at(image, pane, table, first.x + first.width - 6, first.y + first.height / 2);
+        Color lighter = at(image, pane, table, column.x + column.width - 6, column.y + column.height / 2);
+        Color darker = at(image, pane, table, row.x + row.width - 6, row.y + row.height / 2);
+        for (Color color : List.of(base, lighter, darker)) assertSheetGray(color);
+        assertTrue(lighter.getRed() > base.getRed(), "alternate columns are slightly lighter");
+        assertTrue(base.getRed() > darker.getRed() + 12, "alternate rows remain distinct");
+        JViewport viewport = pane.getViewport();
+        Color below = at(image, pane, viewport, 10, viewport.getHeight() - 3);
+        assertTrue(base.getRed() > below.getRed() + 6, "the gradient continues below the sheet");
+    }
+
+    /** Every output and the authoring grid of the FlatLaf desktop is on the gradient. */
     @Test
     void everyOutputOfGuifIsOnTheGradient() throws Exception {
         Session session = Session.resolve(null, Map.of(), List.of());
@@ -231,7 +289,7 @@ class GrayGradientTest {
                 assertEquals(List.of(), plain, "read-only texts that are not on the gradient");
                 assertTrue(texts >= 15, "read-only texts found: " + texts);
                 assertTrue(tables >= 10, "read-only tables found: " + tables);
-                assertTrue(inputs >= 1, "the sheet editor of step 2 is an input, not an output");
+                assertTrue(inputs >= 1, "other editable tables keep their normal backgrounds");
                 return null;
             });
         } finally {
@@ -266,7 +324,12 @@ class GrayGradientTest {
         assertEquals(List.of(false), accepted);
     }
 
-    private static Color at(BufferedImage image, JComponent root, JViewport viewport, int x, int y) {
+    private static void assertSheetGray(Color color) {
+        assertTrue(color.getRed() == color.getGreen() && color.getGreen() == color.getBlue()
+                && color.getRed() >= 200, "a light gray sheet background: " + color);
+    }
+
+    private static Color at(BufferedImage image, JComponent root, Component viewport, int x, int y) {
         Point p = SwingUtilities.convertPoint(viewport, x, y, root);
         return new Color(image.getRGB(p.x, p.y));
     }

@@ -162,9 +162,9 @@ final class Credits {
         dialog.getRootPane().setDefaultButton(page.close);
         dialog.getRootPane().registerKeyboardAction(e -> dialog.dispose(), KeyStroke.getKeyStroke("ESCAPE"),
                 JComponent.WHEN_IN_FOCUSED_WINDOW);
-        // tall enough for the whole page, never taller than the screen
+        // Match the current desktop, including after the user resizes or maximizes it.
         var screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        dialog.setSize(Math.min(660, screen.width), Math.min(800, screen.height));
+        dialog.setSize(Math.min(660, screen.width), owner == null ? Math.min(800, screen.height) : owner.getHeight());
         dialog.setLocationRelativeTo(owner);
         dialog.setVisible(true);
     }

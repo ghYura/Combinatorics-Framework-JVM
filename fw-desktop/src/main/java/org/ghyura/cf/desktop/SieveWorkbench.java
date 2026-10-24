@@ -126,6 +126,7 @@ final class SieveWorkbench {
         JButton browser = Hints.of(button(fileBar, "Face 2 (Sieve) ↗", this::launchFace2), "Open the Face 2 web editor in your browser; "
                 + "its Submit button saves the rules for this scenario.");
         browser.setName("Open Face 2 in browser");
+        shineWhenReady(browser);
         browser.setToolTipText("Open the original QA Face 2 web editor in your browser. Submit validates and saves its rules for this scenario.");
         JPanel workBar = new JPanel(new FlowLayout(FlowLayout.LEADING, 4, 2));
         Hints.of(button(workBar, "Undo", this::undo), "Take back the last change to the rules or the layout.");
@@ -263,6 +264,43 @@ final class SieveWorkbench {
     private void binding(String key, String name, Runnable run) {
         root.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(key), name);
         root.getActionMap().put(name, new AbstractAction() { public void actionPerformed(ActionEvent e) { if (!busy && !closed) run.run(); } });
+    }
+
+    /** A quiet border pulse only while the available action is actually visible; no hidden-window timer work. */
+    private static void shineWhenReady(JButton button) {
+        javax.swing.border.Border normal = button.getBorder();
+        button.setBorder(new javax.swing.border.AbstractBorder() {
+            @Override public Insets getBorderInsets(Component c, Insets insets) {
+                Insets base = normal.getBorderInsets(c);
+                insets.set(base.top, base.left, base.bottom, base.right);
+                return insets;
+            }
+            @Override public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+                normal.paintBorder(c, g, x, y, width, height);
+                if (!button.isEnabled()) return;
+                double phase = (System.nanoTime() % 3_000_000_000L) / 3_000_000_000.0 * Math.PI * 2;
+                int alpha = 35 + (int) (40 * (1 + Math.sin(phase)));
+                Graphics2D shine = (Graphics2D) g.create();
+                try {
+                    shine.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    shine.setPaint(new GradientPaint(x, y, new Color(100, 100, 100, alpha),
+                            x + width, y + height, new Color(255, 255, 255, alpha)));
+                    shine.setStroke(new BasicStroke(1.5f));
+                    shine.drawRoundRect(x + 2, y + 2, Math.max(0, width - 5), Math.max(0, height - 5), 8, 8);
+                } finally { shine.dispose(); }
+            }
+        });
+        javax.swing.Timer pulse = new javax.swing.Timer(60, e -> button.repaint());
+        pulse.setCoalesce(true);
+        Runnable follow = () -> {
+            if (button.isEnabled() && button.isShowing()) pulse.start(); else pulse.stop();
+            button.repaint();
+        };
+        button.addPropertyChangeListener("enabled", e -> follow.run());
+        button.addHierarchyListener(e -> {
+            if ((e.getChangeFlags() & java.awt.event.HierarchyEvent.SHOWING_CHANGED) != 0) follow.run();
+        });
+        follow.run();
     }
     private boolean ready() { if (opened == null) { output.setText("Press Open step 3 scenario first."); return false; } return !busy && !closed; }
     private boolean cleanDrafts() {
@@ -513,7 +551,7 @@ final class SieveWorkbench {
         }
         public int getRowCount() { return rows.size(); }
         public int getColumnCount() { return cols.size() + 1; }
-        public String getColumnName(int col) { return col == 0 ? String.valueOf(sheetA.getSelectedItem()) : cols.get(col - 1); }
+        public String getColumnName(int col) { return col == 0 ? Objects.toString(sheetA.getSelectedItem(), "Choose a row sheet") : cols.get(col - 1); }
         public Object getValueAt(int row, int col) { return col == 0 ? rows.get(row) : first[row][col - 1] < 0 ? "" : "F:" + forbids[row][col - 1] + " R:" + requires[row][col - 1]; }
     }
 

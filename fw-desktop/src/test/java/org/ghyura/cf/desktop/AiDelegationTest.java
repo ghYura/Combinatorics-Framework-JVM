@@ -232,6 +232,24 @@ class AiDelegationTest {
     }
 
     @Test
+    void aFreshCheckoutAndAnOlderUnscopedChoiceMustShowTheAgreement(@TempDir Path dir) throws Exception {
+        Path store = dir.resolve(AiDelegation.STORE);
+        String agreement = AiDelegation.agreement(MANUAL);
+        List<Path> original = List.of(dir.resolve("original"));
+        AiDelegation first = new AiDelegation(store, original);
+        assertTrue(first.mustAsk(agreement));
+        first.chose(agreement, true);
+        assertFalse(new AiDelegation(store, original).mustAsk(agreement), "same checkout keeps an accepted choice");
+        assertTrue(new AiDelegation(store, List.of(dir.resolve("fresh-checkout"))).mustAsk(agreement),
+                "a fresh checkout cannot inherit the shared settings' acceptance");
+        Properties older = new Properties();
+        try (var in = Files.newBufferedReader(store)) { older.load(in); }
+        older.remove("installation");
+        try (var out = Files.newBufferedWriter(store)) { older.store(out, "older acceptance"); }
+        assertTrue(new AiDelegation(store, original).mustAsk(agreement), "older unscoped consent must be renewed");
+    }
+
+    @Test
     void thePathIsFirstWrittenAsTheOperatingSystemWritesIt(@TempDir Path dir) {
         Path manual = dir.resolve("with space").resolve(AiDelegation.MANUAL);
         Map<PathFormat, String> forms = AiDelegation.forms(manual);

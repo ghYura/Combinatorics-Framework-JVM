@@ -37,9 +37,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -51,8 +54,8 @@ import java.util.Map;
 /**
  * The author's request for guif: every output shows on a grayscale gradient, light at the top of what is visible and
  * darker at its bottom. Outputs are the read-only texts (each step's output, the code preview, details, problem lists)
- * and the tables none of whose cells can be edited; text that can be edited, tables that can be edited and anything
- * whose code chose its own background keep the plain background. The gradient belongs to the visible area of the
+ * and the tables none of whose cells can be edited. The authoring sheet grid also opts in, with row and column stripes;
+ * other inputs and anything whose code chose its own background keep the plain background. The gradient belongs to the visible area of the
  * enclosing scroll pane, not to the content, so it stays in place while the content scrolls; a table's odd rows keep
  * their tint, its even rows and the empty space below its last row show the gradient. A table's gradient ends lighter
  * ({@link #TABLE_BOTTOM}) than a text's, so its even rows stay lighter than the tinted odd rows at every height and the
@@ -84,7 +87,7 @@ public final class GrayGradient {
                 "EditorPaneUI", EditorPane.class.getName(), "TableUI", Table.class.getName());
     }
 
-    /** Whether c is an output that shows the gradient: read-only text, or a read-only table, on the theme's background. */
+    /** Read-only outputs and the authoring sheet grid use the gradient on the theme's background. */
     static boolean output(JComponent c) {
         if (!(c.getBackground() instanceof UIResource)) {
             return false;   // a colour the code chose means something
@@ -92,7 +95,7 @@ public final class GrayGradient {
         if (c instanceof JTextComponent text) {
             return !text.isEditable();
         }
-        return c instanceof JTable table && readOnly(table.getModel());
+        return c instanceof JTable table && (table instanceof SheetTable || readOnly(table.getModel()));
     }
 
     /** Whether no column of the model can be edited (asked of its first row; a model that cannot answer counts as read-only). */
@@ -115,11 +118,15 @@ public final class GrayGradient {
         if (visible.isEmpty()) {
             return;
         }
+        fill(g, visible, span(c), c instanceof JTable ? TABLE_BOTTOM : BOTTOM);
+    }
+
+    private static Rectangle span(JComponent c) {
         Rectangle span = new Rectangle(0, 0, c.getWidth(), c.getHeight());
         if (SwingUtilities.getAncestorOfClass(JViewport.class, c) instanceof JViewport viewport) {
             span = SwingUtilities.convertRectangle(viewport, new Rectangle(0, 0, viewport.getWidth(), viewport.getHeight()), c);
         }
-        fill(g, visible, span, c instanceof JTable ? TABLE_BOTTOM : BOTTOM);
+        return span;
     }
 
     /** Paints a table's gradient over a whole viewport (its own coordinates): the space below the table's last row. */
@@ -129,9 +136,13 @@ public final class GrayGradient {
     }
 
     private static void fill(Graphics g, Rectangle area, Rectangle span, Color bottom) {
+        fill(g, area, span, TOP, bottom);
+    }
+
+    private static void fill(Graphics g, Rectangle area, Rectangle span, Color top, Color bottom) {
         Graphics2D g2 = (Graphics2D) g.create();
         try {
-            g2.setPaint(new GradientPaint(0, span.y, TOP, 0, span.y + Math.max(1, span.height), bottom));
+            g2.setPaint(new GradientPaint(0, span.y, top, 0, span.y + Math.max(1, span.height), bottom));
             g2.fill(area);
         } finally {
             g2.dispose();
@@ -151,6 +162,66 @@ public final class GrayGradient {
         if (SwingUtilities.getAncestorOfClass(JViewport.class, c) instanceof JViewport viewport
                 && viewport.getScrollMode() != JViewport.SIMPLE_SCROLL_MODE) {
             viewport.setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+        }
+    }
+
+    /** The editable sheet grid: stripes follow current row/column positions, including after edits and resizing. */
+    static final class SheetTable extends JTable {
+        private static final long serialVersionUID = 1L;
+
+        SheetTable(TableModel model) {
+            super(model);
+            setDefaultRenderer(Object.class, new SheetCell());
+        }
+
+        @Override public Component prepareEditor(TableCellEditor editor, int row, int column) {
+            Component field = super.prepareEditor(editor, row, column);
+            if (getUI() instanceof Table) {
+                Rectangle cell = getCellRect(row, column, false), visible = span(this);
+                double fraction = Math.max(0, Math.min(1, (cell.getCenterY() - visible.y) / Math.max(1, visible.height)));
+                int level = (int) Math.round(TOP.getRed() + fraction * (TABLE_BOTTOM.getRed() - TOP.getRed()));
+                field.setBackground(gray(level + shade(row, column)));
+            }
+            return field;
+        }
+    }
+
+    private static int shade(int row, int column) {
+        return (row % 2 == 0 ? 0 : -20) + (column % 2 == 0 ? 0 : 4);
+    }
+
+    private static Color gray(int level) {
+        int value = Math.max(0, Math.min(255, level));
+        return new Color(value, value, value);
+    }
+
+    private static final class SheetCell extends DefaultTableCellRenderer {
+        private static final long serialVersionUID = 1L;
+        private JTable table;
+        private int row, column;
+        private boolean selected;
+
+        @Override public Component getTableCellRendererComponent(JTable table, Object value, boolean selected,
+                                                                 boolean focus, int row, int column) {
+            this.table = table;
+            this.row = row;
+            this.column = column;
+            this.selected = selected;
+            return super.getTableCellRendererComponent(table, value, selected, focus, row, column);
+        }
+
+        @Override protected void paintComponent(Graphics g) {
+            if (selected || !(table.getUI() instanceof Table)) {
+                super.paintComponent(g);
+                return;
+            }
+            Rectangle cell = table.getCellRect(row, column, false), visible = span(table);
+            visible.translate(-cell.x, -cell.y);
+            int shade = shade(row, column);
+            fill(g, new Rectangle(0, 0, getWidth(), getHeight()), visible,
+                    gray(GrayGradient.TOP.getRed() + shade), gray(TABLE_BOTTOM.getRed() + shade));
+            setOpaque(false);
+            try { super.paintComponent(g); } finally { setOpaque(true); }
         }
     }
 
