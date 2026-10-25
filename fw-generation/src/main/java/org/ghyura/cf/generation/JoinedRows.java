@@ -221,6 +221,10 @@ final class JoinedRows implements RowSource, AutoCloseable {
         return k;
     }
 
+    List<RowSource> inputs() {
+        return List.of(outer, inner);
+    }
+
     @Override
     public BigInteger size() {
         return size;

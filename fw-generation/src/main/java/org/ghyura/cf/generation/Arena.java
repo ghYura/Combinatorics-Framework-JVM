@@ -27,7 +27,13 @@
 package org.ghyura.cf.generation;
 
 import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Set;
+import org.ghyura.cf.model.row.RowSource;
 
 /**
  * Everything a generation run reserved from its memory budget (stored tables, indexes): kept until the run's result
@@ -46,6 +52,29 @@ final class Arena implements AutoCloseable {
     void release(AutoCloseable resource) {
         if (owned.remove(resource)) {
             closeQuietly(resource, null);
+        }
+    }
+
+    /** Drop obsolete row resources while keeping every dependency of the live tables. */
+    void retainRows(Collection<RowSource> roots) {
+        Set<RowSource> live = Collections.newSetFromMap(new IdentityHashMap<>());
+        ArrayDeque<RowSource> pending = new ArrayDeque<>(roots);
+        while (!pending.isEmpty()) {
+            RowSource row = pending.removeLast();
+            if (live.add(row)) {
+                pending.addAll(RowSources.inputs(row));
+            }
+        }
+        RuntimeException failure = null;
+        for (int i = owned.size() - 1; i >= 0; i--) {
+            AutoCloseable resource = owned.get(i);
+            if (resource instanceof RowSource row && !live.contains(row)) {
+                owned.remove(i);
+                failure = closeQuietly(resource, failure);
+            }
+        }
+        if (failure != null) {
+            throw failure;
         }
     }
 

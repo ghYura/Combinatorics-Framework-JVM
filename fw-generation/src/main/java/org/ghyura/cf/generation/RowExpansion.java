@@ -182,6 +182,18 @@ final class RowExpansion {
         return directive.normalized();
     }
 
+    /** Selecting the entire row preserves content uniqueness, including a fixed separator's injective insertion. */
+    boolean preservesDistinctRows(int length) {
+        if (!(directive instanceof Directive.Combinatoric c) || c.verb() != Directive.Verb.COMBI) {
+            return false;
+        }
+        return switch (c.count().kind()) {
+            case SIZE -> true;
+            case EXACT -> length > 0 && Math.max(1, c.count().value()) == length;
+            case DEFAULT, ALL -> length == 1;
+        };
+    }
+
     /** The number of keys of every result of a source row of {@code length} labels, or -1 when they differ. */
     int outputLength(int length) {
         int keys = switch (directive) {

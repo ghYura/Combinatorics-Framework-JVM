@@ -180,6 +180,66 @@ class StoredTablesTest {
     }
 
     @Test
+    void contentScratchIsAdmittedAlongsideTheStoredPayloadAndReleasedWithTheIndex() {
+        KeyRow wide = KeyRow.of(KeyEncoding.SIGNED_BYTE, new int[50_000]);
+        MemoryBudget small = new MemoryBudget(60_000);
+        try (RowBlocks table = new RowBlocks("wide distinct row", KeyEncoding.SIGNED_BYTE, small)) {
+            table.indexContent();
+            FrameworkException failure = assertThrows(FrameworkException.class,
+                    () -> table.appendIfAbsent(BigInteger.ONE, BigInteger.ZERO, wide));
+            assertEquals(ErrorCode.RESOURCE_LIMIT, failure.primary().code());
+            assertEquals(0, table.count(), "a refusal cannot insert a partial row");
+        }
+        assertEquals(0, small.reservedBytes());
+
+        MemoryBudget enough = new MemoryBudget(120_000);
+        try (RowBlocks table = new RowBlocks("wide distinct row", KeyEncoding.SIGNED_BYTE, enough)) {
+            table.indexContent();
+            assertTrue(table.appendIfAbsent(BigInteger.ONE, BigInteger.ZERO, wide));
+            assertTrue(enough.reservedBytes() >= 100_000, "payload and scratch must both be admitted");
+            long withIndex = enough.reservedBytes();
+            table.dropContentIndex();
+            assertTrue(withIndex - enough.reservedBytes() >= 50_000);
+            assertEquals(wide, table.at(BigInteger.ZERO).keys());
+            assertEquals(table.reservedBytes(), enough.reservedBytes());
+        }
+        assertEquals(0, enough.reservedBytes());
+    }
+
+    @Test
+    void refusedIndexGrowthDoesNotInsertAnUnindexedRow() {
+        long page = RowBlocks.PAGE_OVERHEAD + 20L * RowBlocks.FIRST_PAGE_ROWS + RowBlocks.FIRST_PAGE_BYTES;
+        long oldIndex = RowBlocks.INDEX_OVERHEAD + 8L * 32;
+        long newIndex = RowBlocks.INDEX_OVERHEAD + 8L * 64;
+        MemoryBudget budget = new MemoryBudget(page + oldIndex + RowBlocks.SCRATCH_OVERHEAD + 4 + newIndex - 1);
+        try (RowBlocks table = new RowBlocks("index growth", ENCODING, budget)) {
+            table.indexContent();
+            for (int i = 1; i <= 16; i++) assertTrue(table.appendIfAbsent(big(i), BigInteger.ZERO, keys(i, 1)));
+            FrameworkException failure = assertThrows(FrameworkException.class,
+                    () -> table.appendIfAbsent(big(17), BigInteger.ZERO, keys(17, 1)));
+            assertEquals(ErrorCode.RESOURCE_LIMIT, failure.primary().code());
+            assertEquals(16, table.count());
+            assertFalse(table.appendIfAbsent(big(18), BigInteger.ZERO, keys(1, 1)), "existing content stays indexed");
+            assertEquals(keys(16, 1), table.at(big(15)).keys());
+            assertTrue(table.contentDistinct());
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
+    void duplicateLookupRejectsAnotherEncodingEvenWhenItsOctetsMatch() {
+        MemoryBudget budget = new MemoryBudget(1L << 20);
+        try (RowBlocks table = new RowBlocks("encoding", KeyEncoding.SIGNED_BYTE, budget)) {
+            table.indexContent();
+            table.appendIfAbsent(BigInteger.ONE, BigInteger.ZERO, KeyRow.of(KeyEncoding.SIGNED_BYTE, 0, 1));
+            assertThrows(IllegalArgumentException.class, () -> table.appendIfAbsent(big(2), BigInteger.ZERO,
+                    KeyRow.of(KeyEncoding.PACKED_LEGACY16, 1)));
+            assertEquals(1, table.count());
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
     void idsBeyondTheLegacyBigintRangeAreRefusedAndIdsThatDoNotAscendAreNoticed() {
         MemoryBudget budget = new MemoryBudget(1L << 20);
         try (RowBlocks table = new RowBlocks("ids", ENCODING, budget)) {

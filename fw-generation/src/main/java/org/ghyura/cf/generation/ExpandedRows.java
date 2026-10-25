@@ -63,10 +63,10 @@ final class ExpandedRows implements RowSource, AutoCloseable {
     private final BigInteger size;
     private final int uniformLength;
     private final SortedMap<Integer, BigInteger> lengths;
-    private final String formula;
+    private final String operationFormula;
 
     private ExpandedRows(RowSource source, RowExpansion expansion, KeyEncoding encoding, BigInteger idBase, BigInteger perRow,
-                         PrefixCounts totals, BigInteger size, int uniformLength, SortedMap<Integer, BigInteger> lengths, String formula) {
+                         PrefixCounts totals, BigInteger size, int uniformLength, SortedMap<Integer, BigInteger> lengths, String operationFormula) {
         this.source = source;
         this.expansion = expansion;
         this.encoding = encoding;
@@ -76,7 +76,7 @@ final class ExpandedRows implements RowSource, AutoCloseable {
         this.size = size;
         this.uniformLength = uniformLength;
         this.lengths = lengths;
-        this.formula = formula;
+        this.operationFormula = operationFormula;
     }
 
     /**
@@ -93,7 +93,7 @@ final class ExpandedRows implements RowSource, AutoCloseable {
             BigInteger count = perRow == null ? BigInteger.ZERO : perRow;
             int keys = length >= 0 ? expansion.outputLength(length) : -1;
             boolean rows = perRow != null && source.size().signum() > 0;
-            String formula = rows ? grouped(source.formula()) + " × " + expansion.formulaForLength(length) : "0";
+            String formula = rows ? expansion.formulaForLength(length) : "0";
             return new ExpandedRows(source, expansion, encoding, idBase, count, null, source.size().multiply(count), keys, null, formula);
         }
         PrefixCounts totals = new PrefixCounts(purpose, budget);
@@ -137,7 +137,11 @@ final class ExpandedRows implements RowSource, AutoCloseable {
         }
         return new ExpandedRows(source, expansion, encoding, idBase, null, totals, totals.total(), keys == -2 ? 0 : keys,
                 knownLengths ? lengths : null,
-                "Σ " + expansion.describe() + " over the " + source.size() + " rows of " + grouped(source.formula()));
+                "Σ " + expansion.describe() + " over the " + source.size() + " rows of ");
+    }
+
+    RowSource source() {
+        return source;
     }
 
     /** A formula as a factor: parenthesized when it is a sum. */
@@ -163,7 +167,9 @@ final class ExpandedRows implements RowSource, AutoCloseable {
 
     @Override
     public String formula() {
-        return formula;
+        if (source.size().signum() == 0) return "0";
+        String input = grouped(source.formula());
+        return perRow == null ? operationFormula + input : input + " × " + operationFormula;
     }
 
     @Override

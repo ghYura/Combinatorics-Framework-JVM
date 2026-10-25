@@ -33,6 +33,8 @@ import org.ghyura.cf.config.RunConfig;
 import org.ghyura.cf.model.Diagnostic;
 import org.ghyura.cf.model.ErrorCode;
 import org.ghyura.cf.model.FrameworkException;
+import org.ghyura.cf.model.key.KeyEncoding;
+import org.ghyura.cf.model.key.KeyRow;
 import org.ghyura.cf.model.row.Row;
 import org.ghyura.cf.model.row.RowCursor;
 import org.ghyura.cf.model.row.RowSource;
@@ -44,6 +46,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -204,6 +207,112 @@ class BoundedGenerationTest {
     }
 
     // ---- cancellation ---------------------------------------------------------------------------------------------
+
+    @Test
+    void identityChainsKeepTheirRowsLazyAndDoNotCopyProvenUniqueAssemblyFactors() {
+        String[] verbs = new String[128];
+        Arrays.fill(verbs, "FW_Combi(1)");
+        Scenario s = values(3, verbs);
+        MemoryBudget budget = new MemoryBudget(KeyDictionary.retainedBytes(s.spec()) + 16_384);
+        try (Scenario.Run run = s.run(new GenerationOptions(LegacyLibrary.PARALLEL, true), budget, Cancellation.NONE)) {
+            assertEquals(List.of("v0", "v1", "v2"), run.rows("A"));
+            assertEquals(big(379), run.table("A").at(BigInteger.ZERO).id(), "all authored stages still advance IDs");
+            assertEquals(big(376), run.table("A").at(BigInteger.ZERO).parent());
+            assertEquals(run.dictionary().reservedBytes(), budget.reservedBytes());
+            long peak = budget.highWaterBytes();
+            RunConfig config = ConfigResolver.resolve(null, Map.of(), List.of(
+                    new ConfigResolver.Override("cf.assembly.distinct", "true", "--set"))).config();
+            try (Assembly assembly = run.assemble(AssemblyOptions.of(config), RenderOptions.of(config))) {
+                assertEquals(big(3), assembly.generated());
+                assertEquals(peak, budget.highWaterBytes(), "proven uniqueness needs no temporary row copy or index");
+            }
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
+    void materializationReleasesObsoleteStagesWithoutChangingFirstOccurrenceIds() {
+        String[] verbs = new String[64];
+        Arrays.fill(verbs, "FW_Permut()");
+        Scenario s = values(3, verbs);
+        MemoryBudget budget = new MemoryBudget(KeyDictionary.retainedBytes(s.spec()) + 16_384);
+        try (Scenario.Run run = s.run(new GenerationOptions(LegacyLibrary.PARALLEL, true), budget, Cancellation.NONE)) {
+            assertEquals(big(6), run.table("A").size());
+            assertEquals(6, run.rows("A").stream().distinct().count());
+            assertEquals(big(36L * 62 + 1), run.table("A").at(BigInteger.ZERO).id());
+            assertEquals(big(36L * 61 + 1), run.table("A").at(BigInteger.ZERO).parent());
+            assertEquals(5_632, run.table("A").reservedBytes());
+            assertEquals(run.dictionary().reservedBytes() + 5_632, budget.reservedBytes(),
+                    "only the final stored stage remains");
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
+    void groupedDuplicatesAreDiscardedWhileProducedButTheirIdsStillAdvance() {
+        Scenario s = values(3, "FW_Combi(1)", "FW_Group FW_ReplaceRE(\"[234]\", \"2\")",
+                "FW_PermutR(8)", "FW_Combi(size)");
+        MemoryBudget budget = new MemoryBudget(KeyDictionary.retainedBytes(s.spec()) + 16_384);
+        try (Scenario.Run run = s.run(new GenerationOptions(LegacyLibrary.PARALLEL, true), budget, Cancellation.NONE)) {
+            assertEquals(List.of("v0 v0 v0 v0 v0 v0 v0 v0"), run.rows("A"));
+            Row row = run.table("A").at(BigInteger.ZERO);
+            assertEquals(big(6562), row.id(), "the Group emitted 3^8 raw rows before the last authored stage");
+            assertEquals(BigInteger.ONE, row.parent(), "the first duplicate occurrence remains the parent");
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
+    void pruningKeepsSharedOperandsAndTheirComputedDependenciesReadable() {
+        Scenario s = Scenario.of().sheet("A", "a", "b", "c").sheet("B", "x", "y")
+                .seq("A", "FW_Reuse", "FW_Permut()", "FW_Permut()", "FW_Permut()")
+                .seq("B", "FW_Reuse", "FW_Combi(1)")
+                .seq("J", "FW_(,,A,,B,,,,M:N)", "FW_Group", "FW_Combi(1)")
+                .seq("K", "FW_(,,A,,B,,,,M:N)").options(Scenario.UNPROMOTED);
+        MemoryBudget budget = new MemoryBudget(1L << 20);
+        try (Scenario.Run run = s.run(new GenerationOptions(LegacyLibrary.PARALLEL, true), budget, Cancellation.NONE)) {
+            assertEquals(big(6), run.table("A").size());
+            assertEquals(big(12), run.table("J").size());
+            assertEquals(big(12), run.table("K").size());
+            assertEquals(run.rows("J").stream().sorted().toList(), run.rows("K").stream().sorted().toList());
+            assertEquals(6, run.rows("A").size(), "completed operands remain part of the generation result");
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    @Test
+    void expansionDoesNotCopyItsAncestorsFormulaDuringConstruction() {
+        AtomicInteger formulas = new AtomicInteger();
+        RowSource source = new RowSource() {
+            @Override public BigInteger size() { return big(3); }
+            @Override public Row at(BigInteger rank) {
+                return new Row(rank.add(BigInteger.ONE), BigInteger.ZERO, KeyRow.of(KeyEncoding.SIGNED_BYTE, rank.intValue() + 1));
+            }
+            @Override public int uniformLength() { return 1; }
+            @Override public String formula() { formulas.incrementAndGet(); return "S + T"; }
+            @Override public boolean idsAscending() { return true; }
+            @Override public boolean stored() { return false; }
+            @Override public long reservedBytes() { return 0; }
+        };
+        RowExpansion expansion = new RowExpansion(values(3, "FW_Combi(1)").plan().sheet("A").orElseThrow()
+                .directives().getFirst(), LegacyLibrary.PARALLEL, null, null);
+        MemoryBudget budget = new MemoryBudget(1024);
+        try (ExpandedRows first = ExpandedRows.of(source, expansion, KeyEncoding.SIGNED_BYTE, BigInteger.ZERO,
+                budget, "first", Cancellation.NONE);
+             ExpandedRows second = ExpandedRows.of(first, expansion, KeyEncoding.SIGNED_BYTE, big(3),
+                     budget, "second", Cancellation.NONE)) {
+            assertEquals(0, formulas.get(), "constructing descendants must not expand/copy ancestor formula strings");
+            String step = expansion.formulaForLength(1);
+            assertEquals("((S + T) × " + step + ") × " + step, second.formula());
+            assertEquals(1, formulas.get());
+            assertEquals(big(6), second.at(big(2)).id());
+        }
+        assertEquals(0, budget.reservedBytes());
+    }
+
+    private static BigInteger big(long value) {
+        return BigInteger.valueOf(value);
+    }
 
     @Test
     void cancellationStopsTheGenerationWithRunCancelledAndReleasesEveryReservation() {

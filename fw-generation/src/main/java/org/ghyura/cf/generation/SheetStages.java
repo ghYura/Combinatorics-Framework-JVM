@@ -97,6 +97,9 @@ final class SheetStages {
         List<Diagnostic> diagnostics();
 
         Arena arena();
+
+        /** Retain active local tables and every completed sheet still exposed by the generation. */
+        void retain(RowSource... active);
     }
 
     private static final Pattern BRACKETS = Pattern.compile("[{}\\[\\]]");
@@ -112,6 +115,7 @@ final class SheetStages {
     private BigInteger fwIds = BigInteger.ZERO;
     private BigInteger fw2Ids = BigInteger.ZERO;
     private boolean combi2;
+    private boolean materialized;
     private Map<String, String> group;
     private Directive.Group groupDirective;
     private Integer separator;
@@ -137,6 +141,7 @@ final class SheetStages {
         List<Directive> directives = sheet.directives();
         for (int i = 0; i < directives.size(); i++) {
             context.cancellation().throwIfCancelled();
+            materialized = false;
             Directive directive = directives.get(i);
             boolean generating = true;
             switch (directive) {
@@ -171,6 +176,7 @@ final class SheetStages {
             if (generating && context.options().distinctTables()) {
                 distinctActive();
             }
+            markDistinctActive();
             if (combi2 && i > 0 && i < directives.size() - 1) {
                 fw = RowSources.withoutParents(fw2);
                 fwDistinct = fw2Distinct;
@@ -178,6 +184,7 @@ final class SheetStages {
                 fw2Distinct = true;
                 combi2 = false;
             }
+            if (materialized) context.retain(fw, fw2);
         }
         if (unparseable > 0) {
             boolean drop = context.options().replace().unparseable() == RunConfig.ReplaceUnparseable.DROP;
@@ -190,7 +197,18 @@ final class SheetStages {
         if (context.options().distinctTables()) {
             distinctActive();
         }
-        return combi2 ? fw2 : fw;
+        markDistinctActive();
+        RowSource result = combi2 ? fw2 : fw;
+        context.retain(result);
+        return result;
+    }
+
+    private void markDistinctActive() {
+        if (combi2) {
+            if (fw2Distinct) fw2 = RowSources.knownDistinct(fw2);
+        } else if (fwDistinct) {
+            fw = RowSources.knownDistinct(fw);
+        }
     }
 
     private String purpose(String what) {
@@ -344,7 +362,8 @@ final class SheetStages {
         RowExpansion expansion = new RowExpansion(directive, context.options().library(), other, separator);
         ExpandedRows rows = context.arena().own(ExpandedRows.of(source, expansion, context.encoding(), fw2Ids, context.budget(),
                 purpose("the running totals of '" + directive.source() + "'"), context.cancellation()));
-        fw2Distinct = fw2.size().signum() == 0 && rows.size().compareTo(BigInteger.ONE) <= 0;
+        fw2Distinct = fw2.size().signum() == 0 && (rows.size().compareTo(BigInteger.ONE) <= 0
+                || fwDistinct && expansion.preservesDistinctRows(source.uniformLength()));
         fw2 = RowSources.concat(fw2, rows);
         fw2Ids = fw2Ids.add(rows.size());
     }
@@ -377,8 +396,10 @@ final class SheetStages {
         }
         RowBlocks out = context.arena().own(new RowBlocks(purpose("the grouped pass '" + directive.source() + "'"),
                 context.encoding(), context.budget()));
+        materialized = true;
         MemoryBudget.Lease unitsLease = context.budget().reserve(64 + UNIT_OVERHEAD * n + octets, purpose("the FW_Group units"));
         try {
+            if (context.options().distinctTables()) out.indexContent();
             KeyRow[] units = new KeyRow[n];
             try (RowCursor rows = source.open(context.cancellation())) {
                 for (int i = 0; i < n; i++) {
@@ -432,15 +453,21 @@ final class SheetStages {
                         int[] labels = rewrite(text.append(']').toString(), directive);
                         if (labels != null && labels.length > 0) {
                             fw2Ids = fw2Ids.add(BigInteger.ONE);
-                            out.append(fw2Ids, BigInteger.ZERO, KeyRow.of(context.encoding(), labels));
+                            KeyRow keys = KeyRow.of(context.encoding(), labels);
+                            if (context.options().distinctTables()) {
+                                out.appendIfAbsent(fw2Ids, BigInteger.ZERO, keys);
+                            } else {
+                                out.append(fw2Ids, BigInteger.ZERO, keys);
+                            }
                         }
                     }
                 }
             }
         } finally {
             unitsLease.close();
+            out.dropContentIndex();
         }
-        fw2Distinct = fw2.size().signum() == 0 && out.count() <= 1;
+        fw2Distinct = fw2.size().signum() == 0 && out.contentDistinct();
         fw2 = RowSources.concat(fw2, out);
     }
 
@@ -665,6 +692,7 @@ final class SheetStages {
         }
         RowBlocks one = context.arena().own(new RowBlocks(purpose("the grouped operand " + operand.sheet()), context.encoding(),
                 context.budget()));
+        materialized = true;
         MemoryBudget.Lease scratch = context.budget().reserve(64 + octets, purpose("joining the grouped operand " + operand.sheet()));
         try {
             byte[] all = new byte[Math.toIntExact(octets)];
@@ -719,9 +747,7 @@ final class SheetStages {
             }
         }
         out.dropContentIndex();
-        if (table instanceof RowBlocks stored) {
-            context.arena().release(stored);
-        }
+        materialized = true;
         return out;
     }
 

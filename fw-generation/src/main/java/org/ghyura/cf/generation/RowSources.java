@@ -31,6 +31,7 @@ import org.ghyura.cf.model.row.Row;
 import org.ghyura.cf.model.row.RowCursor;
 import org.ghyura.cf.model.row.RowSource;
 import org.ghyura.cf.spi.Cancellation;
+import org.ghyura.cf.store.RowBlocks;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -44,6 +45,52 @@ import java.util.TreeMap;
 final class RowSources {
 
     private RowSources() {
+    }
+
+    /** Dependencies borrowed by a computed view; ownership stays with the generation arena. */
+    static List<RowSource> inputs(RowSource source) {
+        return switch (source) {
+            case ExpandedRows rows -> List.of(rows.source());
+            case JoinedRows rows -> rows.inputs();
+            case IdOrder rows -> List.of(rows.source());
+            case Concat rows -> rows.parts;
+            case NoParents rows -> List.of(rows.source);
+            case KnownDistinct rows -> List.of(rows.source());
+            default -> List.of();
+        };
+    }
+
+    /** A proof, not a scan; false also means that uniqueness is unknown. */
+    static boolean distinct(RowSource source) {
+        if (source.size().compareTo(BigInteger.ONE) <= 0) return true;
+        while (true) {
+            switch (source) {
+                case KnownDistinct ignored -> { return true; }
+                case RowBlocks rows -> { return rows.contentDistinct(); }
+                case NoParents rows -> source = rows.source;
+                case IdOrder rows -> source = rows.source();
+                default -> { return false; }
+            }
+        }
+    }
+
+    static RowSource knownDistinct(RowSource source) {
+        return distinct(source) ? source : new KnownDistinct(source);
+    }
+
+    /** Carries a proven property without changing row order, IDs, parents or storage ownership. */
+    private record KnownDistinct(RowSource source) implements RowSource {
+        @Override public BigInteger size() { return source.size(); }
+        @Override public Row at(BigInteger rank) { return source.at(rank); }
+        @Override public RowCursor open(BigInteger from, BigInteger to, Cancellation cancellation) {
+            return source.open(from, to, cancellation);
+        }
+        @Override public int uniformLength() { return source.uniformLength(); }
+        @Override public SortedMap<Integer, BigInteger> lengths() { return source.lengths(); }
+        @Override public String formula() { return source.formula(); }
+        @Override public boolean idsAscending() { return source.idsAscending(); }
+        @Override public boolean stored() { return source.stored(); }
+        @Override public long reservedBytes() { return source.reservedBytes(); }
     }
 
     /** {@code first} followed by {@code second}, each row keeping its id (the legacy INSERT ... SELECT appended rows). */

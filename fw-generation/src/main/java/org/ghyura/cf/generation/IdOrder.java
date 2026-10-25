@@ -89,17 +89,22 @@ final class IdOrder implements RowSource, AutoCloseable {
                 }
             }
             sort(order, ids, new long[n]);
-            LongColumn column = arena.own(new LongColumn(purpose + " (id order)", budget));
+            LongColumn column = new LongColumn(purpose + " (id order)", budget);
+            IdOrder result = arena.own(new IdOrder(source, column));
             for (int i = 0; i < n; i++) {
                 // equal ids sort by rank, so the last of a run of equal ids is the row the map kept
                 if (i == n - 1 || ids[(int) order[i + 1]] != ids[(int) order[i]]) {
                     column.add(order[i]);
                 }
             }
-            return new IdOrder(source, column);
+            return result;
         } finally {
             scratch.close();
         }
+    }
+
+    RowSource source() {
+        return source;
     }
 
     /** A stable merge sort of ranks by id (ties stay in rank order). */

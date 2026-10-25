@@ -75,7 +75,7 @@ final class Factor {
      */
     static Factor distinct(String sheet, int key, boolean optional, SourceLocation where, String concatenator, RowSource rows,
                            MemoryBudget budget, Cancellation cancellation, Arena arena) {
-        if (rows.size().compareTo(BigInteger.ONE) <= 0) {
+        if (RowSources.distinct(rows)) {
             return of(sheet, key, optional, where, concatenator, rows);
         }
         String purpose = "the first occurrences of sheet " + sheet + " for the de-duplicated candidates";

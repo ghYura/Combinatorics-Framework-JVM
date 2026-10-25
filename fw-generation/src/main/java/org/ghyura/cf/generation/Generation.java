@@ -223,6 +223,13 @@ public final class Generation {
         }
 
         @Override
+        public void retain(RowSource... active) {
+            List<RowSource> roots = new ArrayList<>(tables.values());
+            for (RowSource source : active) roots.add(source);
+            arena.retainRows(roots);
+        }
+
+        @Override
         public KeyEncoding encoding() {
             return dictionary.encoding();
         }

@@ -67,8 +67,9 @@ public final class RowBlocks implements RowSource, AutoCloseable {
     static final int MAX_PAGE_BYTES = 64 * 1024;
     /** The page object, the headers of its four arrays and its slot in the page list: an upper bound. */
     static final long PAGE_OVERHEAD = 256;
-    /** The index array's header and the scratch buffer's header: an upper bound. */
+    /** The index array's header and bookkeeping: an upper bound. */
     static final long INDEX_OVERHEAD = 64;
+    static final long SCRATCH_OVERHEAD = 32;
 
     private final String purpose;
     private final KeyEncoding encoding;
@@ -82,11 +83,13 @@ public final class RowBlocks implements RowSource, AutoCloseable {
     private final SortedMap<Integer, long[]> lengthCounts = new TreeMap<>();
     private long lastId;
     private boolean ascending = true;
+    private boolean contentDistinct = true;
     private boolean closed;
 
     // the content index: open addressing over row indexes plus one, 0 marking a free slot
     private long[] slots;
     private MemoryBudget.Lease slotLease;
+    private MemoryBudget.Lease scratchLease;
     private byte[] scratch = new byte[0];
 
     public RowBlocks(String purpose, KeyEncoding encoding, MemoryBudget budget) {
@@ -133,6 +136,7 @@ public final class RowBlocks implements RowSource, AutoCloseable {
         page.ends[page.rows] = page.used;
         page.rows++;
         count++;
+        contentDistinct = count <= 1;
         int keyCount = keys.size();
         uniformLength = uniformLength == -2 ? keyCount : uniformLength == keyCount ? keyCount : -1;
         lengthCounts.computeIfAbsent(keyCount, k -> new long[1])[0]++;
@@ -188,10 +192,12 @@ public final class RowBlocks implements RowSource, AutoCloseable {
         if (slots == null) {
             throw new IllegalStateException("indexContent() first");
         }
-        int length = keys.payloadLength();
-        if (scratch.length < length) {
-            scratch = new byte[Math.max(length, scratch.length * 2)];
+        Objects.requireNonNull(keys, "keys");
+        if (keys.encoding() != encoding) {
+            throw new IllegalArgumentException("a " + keys.encoding() + " row in a " + encoding + " table");
         }
+        int length = keys.payloadLength();
+        ensureScratch(length);
         keys.copyPayloadTo(scratch, 0);
         int hash = hash(scratch, 0, length);
         int mask = slots.length - 1;
@@ -203,19 +209,58 @@ public final class RowBlocks implements RowSource, AutoCloseable {
             slot = (slot + 1) & mask;
         }
         if ((count + 1) * 2 > slots.length) {
-            append(id, parent, keys);
-            rehash(capacityFor(count));
-        } else {
-            append(id, parent, keys);
-            slots[slot] = count;
+            // Grow before appending: refusal must not leave an unindexed row in the table.
+            rehash(capacityFor(count + 1));
+            mask = slots.length - 1;
+            slot = hash & mask;
+            while (slots[slot] != 0) {
+                slot = (slot + 1) & mask;
+            }
         }
+        boolean wasDistinct = contentDistinct;
+        append(id, parent, keys);
+        contentDistinct = wasDistinct;
+        slots[slot] = count;
         return true;
+    }
+
+    /** True only when all appended rows are known to have different content. */
+    public boolean contentDistinct() {
+        return contentDistinct;
+    }
+
+    private void ensureScratch(int length) {
+        if (scratch.length >= length) {
+            return;
+        }
+        int capacity = (int) Math.min(Integer.MAX_VALUE, Math.max((long) length, 2L * scratch.length));
+        // Both buffers are alive while a replacement is allocated.
+        MemoryBudget.Lease lease = budget.reserve(SCRATCH_OVERHEAD + capacity, purpose + " (content scratch)");
+        byte[] fresh;
+        try {
+            fresh = new byte[capacity];
+        } catch (RuntimeException | Error e) {
+            lease.close();
+            throw e;
+        }
+        if (scratchLease != null) {
+            reserved -= scratchLease.bytes();
+            scratchLease.close();
+        }
+        scratch = fresh;
+        scratchLease = lease;
+        reserved += lease.bytes();
     }
 
     /** Stops indexing content and returns the index's reservation. */
     public void dropContentIndex() {
         slots = null;
         scratch = new byte[0];
+        if (scratchLease != null) {
+            reserved -= scratchLease.bytes();
+            scratchLease.close();
+            scratchLease = null;
+        }
         if (slotLease != null) {
             reserved -= slotLease.bytes();
             slotLease.close();
