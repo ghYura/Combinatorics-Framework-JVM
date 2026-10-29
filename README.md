@@ -1,16 +1,16 @@
-# Combinatorics Framework — JVM Edition
+# Combinatorics Framework - JVM Edition
 
 **Model the interactions. Generate the cases. Keep the evidence.**
 
 Software defects often appear not in one input or operation, but in the interaction between settings, action order, retries, and interruptions. A payment request may work once and fail after a timeout. A coupon may work for a registered customer and fail for a guest. Each component can pass its isolated test while the combined behavior remains wrong.
 
-**Combinatorics Framework — JVM Edition** is a test-design, generation, execution, and analysis workbench for making those interactions explicit. You describe what varies, specify which combinations are possible, define what correctness means, and inspect the planned experiment before executing it. The Framework turns that model into concrete test candidates and records outcomes and measurements for review.
+**Combinatorics Framework - JVM Edition** is a test-design, generation, execution, and analysis workbench for making those interactions explicit. You describe what varies, specify which combinations are possible, define what correctness means, and inspect the planned experiment before executing it. The Framework turns that model into concrete test candidates and records outcomes and measurements for review.
 
 [**Download the latest release**](https://github.com/ghYura/Combinatorics-Framework-JVM/releases) · [**Open the operating and authoring manual**](https://github.com/ghYura/Combinatorics-Framework-JVM/blob/main/AI_DELEGATION.md) · [**Read the license**](https://github.com/ghYura/Combinatorics-Framework-JVM/blob/main/LICENSE)
 
 ## What it is for
 
-Use the Framework when the test space is becoming hard to reason about by hand—for example:
+Use the Framework when the test space is becoming hard to reason about by hand - for example:
 
 - combinations of customer types, payment methods, channels, feature flags, and policies;
 - workflows where order and repetition matter, such as submit → timeout → retry → confirmation;
@@ -24,9 +24,9 @@ For one simple calculation or a small, clear unit test, an ordinary test may be 
 
 The Framework's central design idea is to keep different kinds of variation distinct:
 
-1. **Static context** — settings such as account type, payment method, platform, or feature flag. Covering selection can reduce a large static space while retaining the requested interaction strength, such as pairwise coverage.
-2. **Action sequences** — what happens first, next, and again. Order and repetition can expose defects that a parameter table cannot represent.
-3. **Sudden or optional events** — a timeout, duplicate request, callback, cancellation, or price change, including when it occurs and the case where it is absent.
+1. **Static context**  -  settings such as account type, payment method, platform, or feature flag. Covering selection can reduce a large static space while retaining the requested interaction strength, such as pairwise coverage.
+2. **Action sequences**  -  what happens first, next, and again. Order and repetition can expose defects that a parameter table cannot represent.
+3. **Sudden or optional events**  -  a timeout, duplicate request, callback, cancellation, or price change, including when it occurs and the case where it is absent.
 
 The plan combines these parts deliberately. Do not assume that pairwise coverage of static settings also covers every action order or event timing.
 
@@ -45,7 +45,7 @@ The command line and desktop application use the same JVM edition. The framework
 
 ## A small authoring example
 
-Suppose every candidate must choose one of two modes (`safe`, `fast`) and two different actions from `A`, `B`, and `C`, with the actions in a chosen order. There are six ordered pairs—`AB`, `BA`, `AC`, `CA`, `BC`, and `CB`—so the model should produce 12 candidates.
+Suppose every candidate must choose one of two modes (`safe`, `fast`) and two different actions from `A`, `B`, and `C`, with the actions in a chosen order. There are six ordered pairs - `AB`, `BA`, `AC`, `CA`, `BC`, and `CB` - so the model should produce 12 candidates.
 
 Save the following as `authoring-spec.json`:
 
@@ -106,19 +106,19 @@ Those results show that the example harness can expose the fault it was designed
 
 ## Results you can inspect
 
-The Framework supports named verdicts, measurements, saved run checkpoints, exports, and triage that groups failures with representative witnesses. Its analysis tools can compare multiple goals, including Pareto-front analysis—for example, keeping both a lower-cost configuration and a more accurate one visible until you decide how to trade them off.
+The Framework supports named verdicts, measurements, saved run checkpoints, exports, and triage that groups failures with representative witnesses. Its analysis tools can compare multiple goals, including Pareto-front analysis - for example, keeping both a lower-cost configuration and a more accurate one visible until you decide how to trade them off.
 
 Treat results as evidence bounded by the model and environment:
 
 - Pairwise selection concerns pairs of **modeled static values**; it does not guarantee discovery of every higher-order defect, sequence bug, or timing problem.
 - A generated case without a meaningful assertion is only activity. Define and calibrate the oracle, including checks for negative behavior where appropriate.
-- Keep valid inputs that the application should reject as negative tests. Use constraints to remove combinations that are genuinely impossible or meaningless—not merely inconvenient.
+- Keep valid inputs that the application should reject as negative tests. Use constraints to remove combinations that are genuinely impossible or meaningless - not merely inconvenient.
 - A triage witness is a useful starting point for debugging, not a guarantee of the mathematically smallest reproducer. Associations between values and failures are leads to investigate, not proof of causation.
 - External services, changing dependencies, uncontrolled state, and nondeterministic behavior can affect results. Record relevant versions and reset state between cases where needed.
 
 ## AI-assisted testing, with a human in control
 
-An AI assistant can help draft a scenario, suggest missing interactions, implement an adapter, write checks, or interpret a report. The model and saved evidence then give another engineer—or a later assistant session—something concrete to inspect instead of relying on a chat transcript.
+An AI assistant can help draft a scenario, suggest missing interactions, implement an adapter, write checks, or interpret a report. The model and saved evidence then give another engineer - or a later assistant session - something concrete to inspect instead of relying on a chat transcript.
 
 The project's [`AI_DELEGATION.md`](https://github.com/ghYura/Combinatorics-Framework-JVM/blob/main/AI_DELEGATION.md) is the operating manual for AI-assisted use. It defines a human-supervised workflow: agree on the task and workspace, review the problem and design before authoring proceeds, inspect the planned cases, obtain approval before execution, run a smoke test before a full run, and obtain separate approval for steps outside the workspace such as building, installing, using the network, or changing the system under test. The human QA engineer owns the acceptance criteria and the final interpretation. The manual also explicitly says its operating material must not be used as AI training data.
 
@@ -126,7 +126,7 @@ The project's [`AI_DELEGATION.md`](https://github.com/ghYura/Combinatorics-Frame
 
 ## Requirements
 
-- **JDK 25**, including the Java compiler—not just a JRE. Generated Java cases are compiled in memory.
+- **JDK 25**, including the Java compiler - not just a JRE. Generated Java cases are compiled in memory.
 - The release package's `fw-app.jar` for command-line use; a display is required for the desktop application.
 - **Optional:** Python 3 and the `fw-python` add-on when executing Python candidates.
 - **Build from source only:** Maven 3.9+ is required to build the application.
@@ -139,7 +139,7 @@ This is an early public release maintained by one maintainer. Before relying on 
 
 ## License and use terms
 
-The project is source available under the **Business Source License 1.1 with an Additional Use Grant**. The grant permits an individual human—such as a QA engineer, tester, or student—to use one concurrently active installation for their own learning, research, and professional practice, including work performed as part of their own employment or studies.
+The project is source available under the **Business Source License 1.1 with an Additional Use Grant**. The grant permits an individual human - such as a QA engineer, tester, or student - to use one concurrently active installation for their own learning, research, and professional practice, including work performed as part of their own employment or studies.
 
 The individual grant does **not** cover shared organizational infrastructure, incorporating the Framework into a product or service, providing services to third parties, or operation by an automated or AI system without a real human QA engineer directing that use. The license specifies a change to **AGPL-3.0-only** on its stated change date (2030-08-08 for the current license parameters). These are brief signposts, not a substitute for reading [`LICENSE`](https://github.com/ghYura/Combinatorics-Framework-JVM/blob/main/LICENSE) and checking whether your intended use is covered.
 
